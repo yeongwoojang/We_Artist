@@ -1,0 +1,529 @@
+From 8fdd790a21f20aa38582b9173d1f7790bdb1b183 Mon Sep 17 00:00:00 2001
+From: yeongwoojang <sbtmxhs@gmail.com>
+Date: Wed, 24 Mar 2021 19:40:06 +0900
+Subject: [PATCH] =?UTF-8?q?=EC=A0=9C=EB=B0=9C=EB=90=98=EB=9D=BC?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .gitignore                                    |  80 +++++++++
+ pom.xml                                       | 158 ++++++++++++++++++
+ src/main/java/com/we/art/HomeController.java  |  39 +++++
+ src/main/resources/log4j.xml                  |  41 +++++
+ .../spring/appServlet/servlet-context.xml     |  28 ++++
+ .../webapp/WEB-INF/spring/root-context.xml    |   8 +
+ src/main/webapp/WEB-INF/views/home.jsp        |  14 ++
+ src/main/webapp/WEB-INF/web.xml               |  33 ++++
+ src/test/resources/log4j.xml                  |  41 +++++
+ 9 files changed, 442 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 pom.xml
+ create mode 100644 src/main/java/com/we/art/HomeController.java
+ create mode 100644 src/main/resources/log4j.xml
+ create mode 100644 src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
+ create mode 100644 src/main/webapp/WEB-INF/spring/root-context.xml
+ create mode 100644 src/main/webapp/WEB-INF/views/home.jsp
+ create mode 100644 src/main/webapp/WEB-INF/web.xml
+ create mode 100644 src/test/resources/log4j.xml
+
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..0025461
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,80 @@
++  
++# Created by https://www.toptal.com/developers/gitignore/api/java-web,eclipse
++# Edit at https://www.toptal.com/developers/gitignore?templates=java-web,eclipse
++
++### Eclipse ###
++.metadata
++bin/
++tmp/
++*.tmp
++*.bak
++*.swp
++*~.nib
++local.properties
++.settings/
++.loadpath
++.recommenders
++.project
++.classpath
++
++# Compiled class file
++*.class
++
++# External tool builders
++.externalToolBuilders/
++
++# Locally stored "Eclipse launch configurations"
++*.launch
++
++# PyDev specific (Python IDE for Eclipse)
++*.pydevproject
++
++# CDT-specific (C/C++ Development Tooling)
++.cproject
++
++# CDT- autotools
++.autotools
++
++# Java annotation processor (APT)
++.factorypath
++
++# PDT-specific (PHP Development Tools)
++.buildpath
++
++# sbteclipse plugin
++.target
++
++# Tern plugin
++.tern-project
++
++# TeXlipse plugin
++.texlipse
++
++# STS (Spring Tool Suite)
++.springBeans
++
++# Code Recommenders
++.recommenders/
++
++# Annotation Processing
++.apt_generated/
++.apt_generated_test/
++
++# Scala IDE specific (Scala & Java development for Eclipse)
++.cache-main
++.scala_dependencies
++.worksheet
++
++# Uncomment this line if you wish to ignore the project description file.
++# Typically, this file would be tracked if it contains build/dependency configurations:
++#.project
++
++### Eclipse Patch ###
++# Spring Boot Tooling
++.sts4-cache/
++
++### Java-Web ###
++## ignoring target file
++target/
++
++# End of https://www.toptal.com/developers/gitignore/api/java-web,eclipse
+\ No newline at end of file
+diff --git a/pom.xml b/pom.xml
+new file mode 100644
+index 0000000..fa59a9e
+--- /dev/null
++++ b/pom.xml
+@@ -0,0 +1,158 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
++	<modelVersion>4.0.0</modelVersion>
++	<groupId>com.we</groupId>
++	<artifactId>art</artifactId>
++	<name>WeArtist</name>
++	<packaging>war</packaging>
++	<version>1.0.0-BUILD-SNAPSHOT</version>
++	<properties>
++		<java-version>1.6</java-version>
++		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
++		<org.aspectj-version>1.6.10</org.aspectj-version>
++		<org.slf4j-version>1.6.6</org.slf4j-version>
++	</properties>
++	<dependencies>
++		<!-- Spring -->
++		<dependency>
++			<groupId>org.springframework</groupId>
++			<artifactId>spring-context</artifactId>
++			<version>${org.springframework-version}</version>
++			<exclusions>
++				<!-- Exclude Commons Logging in favor of SLF4j -->
++				<exclusion>
++					<groupId>commons-logging</groupId>
++					<artifactId>commons-logging</artifactId>
++				 </exclusion>
++			</exclusions>
++		</dependency>
++		<dependency>
++			<groupId>org.springframework</groupId>
++			<artifactId>spring-webmvc</artifactId>
++			<version>${org.springframework-version}</version>
++		</dependency>
++				
++		<!-- AspectJ -->
++		<dependency>
++			<groupId>org.aspectj</groupId>
++			<artifactId>aspectjrt</artifactId>
++			<version>${org.aspectj-version}</version>
++		</dependency>	
++		
++		<!-- Logging -->
++		<dependency>
++			<groupId>org.slf4j</groupId>
++			<artifactId>slf4j-api</artifactId>
++			<version>${org.slf4j-version}</version>
++		</dependency>
++		<dependency>
++			<groupId>org.slf4j</groupId>
++			<artifactId>jcl-over-slf4j</artifactId>
++			<version>${org.slf4j-version}</version>
++			<scope>runtime</scope>
++		</dependency>
++		<dependency>
++			<groupId>org.slf4j</groupId>
++			<artifactId>slf4j-log4j12</artifactId>
++			<version>${org.slf4j-version}</version>
++			<scope>runtime</scope>
++		</dependency>
++		<dependency>
++			<groupId>log4j</groupId>
++			<artifactId>log4j</artifactId>
++			<version>1.2.15</version>
++			<exclusions>
++				<exclusion>
++					<groupId>javax.mail</groupId>
++					<artifactId>mail</artifactId>
++				</exclusion>
++				<exclusion>
++					<groupId>javax.jms</groupId>
++					<artifactId>jms</artifactId>
++				</exclusion>
++				<exclusion>
++					<groupId>com.sun.jdmk</groupId>
++					<artifactId>jmxtools</artifactId>
++				</exclusion>
++				<exclusion>
++					<groupId>com.sun.jmx</groupId>
++					<artifactId>jmxri</artifactId>
++				</exclusion>
++			</exclusions>
++			<scope>runtime</scope>
++		</dependency>
++
++		<!-- @Inject -->
++		<dependency>
++			<groupId>javax.inject</groupId>
++			<artifactId>javax.inject</artifactId>
++			<version>1</version>
++		</dependency>
++				
++		<!-- Servlet -->
++		<dependency>
++			<groupId>javax.servlet</groupId>
++			<artifactId>servlet-api</artifactId>
++			<version>2.5</version>
++			<scope>provided</scope>
++		</dependency>
++		<dependency>
++			<groupId>javax.servlet.jsp</groupId>
++			<artifactId>jsp-api</artifactId>
++			<version>2.1</version>
++			<scope>provided</scope>
++		</dependency>
++		<dependency>
++			<groupId>javax.servlet</groupId>
++			<artifactId>jstl</artifactId>
++			<version>1.2</version>
++		</dependency>
++	
++		<!-- Test -->
++		<dependency>
++			<groupId>junit</groupId>
++			<artifactId>junit</artifactId>
++			<version>4.7</version>
++			<scope>test</scope>
++		</dependency>        
++	</dependencies>
++    <build>
++        <plugins>
++            <plugin>
++                <artifactId>maven-eclipse-plugin</artifactId>
++                <version>2.9</version>
++                <configuration>
++                    <additionalProjectnatures>
++                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
++                    </additionalProjectnatures>
++                    <additionalBuildcommands>
++                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
++                    </additionalBuildcommands>
++                    <downloadSources>true</downloadSources>
++                    <downloadJavadocs>true</downloadJavadocs>
++                </configuration>
++            </plugin>
++            <plugin>
++                <groupId>org.apache.maven.plugins</groupId>
++                <artifactId>maven-compiler-plugin</artifactId>
++                <version>2.5.1</version>
++                <configuration>
++                    <source>1.6</source>
++                    <target>1.6</target>
++                    <compilerArgument>-Xlint:all</compilerArgument>
++                    <showWarnings>true</showWarnings>
++                    <showDeprecation>true</showDeprecation>
++                </configuration>
++            </plugin>
++            <plugin>
++                <groupId>org.codehaus.mojo</groupId>
++                <artifactId>exec-maven-plugin</artifactId>
++                <version>1.2.1</version>
++                <configuration>
++                    <mainClass>org.test.int1.Main</mainClass>
++                </configuration>
++            </plugin>
++        </plugins>
++    </build>
++</project>
+diff --git a/src/main/java/com/we/art/HomeController.java b/src/main/java/com/we/art/HomeController.java
+new file mode 100644
+index 0000000..45f2ee0
+--- /dev/null
++++ b/src/main/java/com/we/art/HomeController.java
+@@ -0,0 +1,39 @@
++package com.we.art;
++
++import java.text.DateFormat;
++import java.util.Date;
++import java.util.Locale;
++
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import org.springframework.stereotype.Controller;
++import org.springframework.ui.Model;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RequestMethod;
++
++/**
++ * Handles requests for the application home page.
++ */
++@Controller
++public class HomeController {
++	
++	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
++	
++	/**
++	 * Simply selects the home view to render by returning its name.
++	 */
++	@RequestMapping(value = "/", method = RequestMethod.GET)
++	public String home(Locale locale, Model model) {
++		logger.info("Welcome home! The client locale is {}.", locale);
++		
++		Date date = new Date();
++		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
++		
++		String formattedDate = dateFormat.format(date);
++		
++		model.addAttribute("serverTime", formattedDate );
++		
++		return "home";
++	}
++	
++}
+diff --git a/src/main/resources/log4j.xml b/src/main/resources/log4j.xml
+new file mode 100644
+index 0000000..bfdcdf3
+--- /dev/null
++++ b/src/main/resources/log4j.xml
+@@ -0,0 +1,41 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
++<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
++
++	<!-- Appenders -->
++	<appender name="console" class="org.apache.log4j.ConsoleAppender">
++		<param name="Target" value="System.out" />
++		<layout class="org.apache.log4j.PatternLayout">
++			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
++		</layout>
++	</appender>
++	
++	<!-- Application Loggers -->
++	<logger name="com.we.art">
++		<level value="info" />
++	</logger>
++	
++	<!-- 3rdparty Loggers -->
++	<logger name="org.springframework.core">
++		<level value="info" />
++	</logger>
++	
++	<logger name="org.springframework.beans">
++		<level value="info" />
++	</logger>
++	
++	<logger name="org.springframework.context">
++		<level value="info" />
++	</logger>
++
++	<logger name="org.springframework.web">
++		<level value="info" />
++	</logger>
++
++	<!-- Root Logger -->
++	<root>
++		<priority value="warn" />
++		<appender-ref ref="console" />
++	</root>
++	
++</log4j:configuration>
+diff --git a/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml b/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
+new file mode 100644
+index 0000000..7f490fa
+--- /dev/null
++++ b/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
+@@ -0,0 +1,28 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<beans:beans xmlns="http://www.springframework.org/schema/mvc"
++	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++	xmlns:beans="http://www.springframework.org/schema/beans"
++	xmlns:context="http://www.springframework.org/schema/context"
++	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
++		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
++		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
++
++	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
++	
++	<!-- Enables the Spring MVC @Controller programming model -->
++	<annotation-driven />
++
++	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
++	<resources mapping="/resources/**" location="/resources/" />
++
++	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
++	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
++		<beans:property name="prefix" value="/WEB-INF/views/" />
++		<beans:property name="suffix" value=".jsp" />
++	</beans:bean>
++	
++	<context:component-scan base-package="com.we.art" />
++	
++	
++	
++</beans:beans>
+diff --git a/src/main/webapp/WEB-INF/spring/root-context.xml b/src/main/webapp/WEB-INF/spring/root-context.xml
+new file mode 100644
+index 0000000..e071144
+--- /dev/null
++++ b/src/main/webapp/WEB-INF/spring/root-context.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<beans xmlns="http://www.springframework.org/schema/beans"
++	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
++	
++	<!-- Root Context: defines shared resources visible to all other web components -->
++		
++</beans>
+diff --git a/src/main/webapp/WEB-INF/views/home.jsp b/src/main/webapp/WEB-INF/views/home.jsp
+new file mode 100644
+index 0000000..4783383
+--- /dev/null
++++ b/src/main/webapp/WEB-INF/views/home.jsp
+@@ -0,0 +1,14 @@
++<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
++<%@ page session="false" %>
++<html>
++<head>
++	<title>Home</title>
++</head>
++<body>
++<h1>
++	Hello world!  
++</h1>
++
++<P>  The time on the server is ${serverTime}. </P>
++</body>
++</html>
+diff --git a/src/main/webapp/WEB-INF/web.xml b/src/main/webapp/WEB-INF/web.xml
+new file mode 100644
+index 0000000..c9975d5
+--- /dev/null
++++ b/src/main/webapp/WEB-INF/web.xml
+@@ -0,0 +1,33 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
++	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
++
++	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
++	<context-param>
++		<param-name>contextConfigLocation</param-name>
++		<param-value>/WEB-INF/spring/root-context.xml</param-value>
++	</context-param>
++	
++	<!-- Creates the Spring Container shared by all Servlets and Filters -->
++	<listener>
++		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
++	</listener>
++
++	<!-- Processes application requests -->
++	<servlet>
++		<servlet-name>appServlet</servlet-name>
++		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
++		<init-param>
++			<param-name>contextConfigLocation</param-name>
++			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
++		</init-param>
++		<load-on-startup>1</load-on-startup>
++	</servlet>
++		
++	<servlet-mapping>
++		<servlet-name>appServlet</servlet-name>
++		<url-pattern>/</url-pattern>
++	</servlet-mapping>
++
++</web-app>
+diff --git a/src/test/resources/log4j.xml b/src/test/resources/log4j.xml
+new file mode 100644
+index 0000000..9df8c3a
+--- /dev/null
++++ b/src/test/resources/log4j.xml
+@@ -0,0 +1,41 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
++<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
++
++	<!-- Appenders -->
++	<appender name="console" class="org.apache.log4j.ConsoleAppender">
++		<param name="Target" value="System.out" />
++		<layout class="org.apache.log4j.PatternLayout">
++			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
++		</layout>
++	</appender>
++	
++	<!-- Application Loggers -->
++	<logger name="com.we.art">
++		<level value="info" />
++	</logger>
++	
++	<!-- 3rdparty Loggers -->
++	<logger name="org.springframework.core">
++		<level value="info" />
++	</logger>	
++	
++	<logger name="org.springframework.beans">
++		<level value="info" />
++	</logger>
++	
++	<logger name="org.springframework.context">
++		<level value="info" />
++	</logger>
++
++	<logger name="org.springframework.web">
++		<level value="info" />
++	</logger>
++
++	<!-- Root Logger -->
++	<root>
++		<priority value="info" />
++		<appender-ref ref="console" />
++	</root>
++	
++</log4j:configuration>
+-- 
+2.28.0.windows.1
+
