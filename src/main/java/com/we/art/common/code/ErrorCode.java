@@ -1,32 +1,32 @@
 package com.we.art.common.code;
 
 public enum ErrorCode {
-	SM01("È¸¿øÁ¤º¸¸¦ Á¶È¸ÇÏ´Â µµÁß ¿¡·¯°¡ ¹ß»ýÇÏ¿´½À´Ï´Ù.","/member/login"),
-	IM01("È¸¿øÁ¤º¸¸¦ ÀÔ·ÂÇÏ´Â Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù.","/member/join"),
-	UM01("È¸¿øÁ¤º¸ ¼öÁ¤ Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù."),
-	DM01("È¸¿øÁ¤º¸ »èÁ¦ Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù."),
-	IB01("°Ô½Ã±Û µî·Ï Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù."),
-	IF01("ÆÄÀÏÁ¤º¸ µî·Ï Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù."),
-	MAIL01("¸ÞÀÏ ¹ß¼Û Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù."),
-	AUTH01("ÇØ´ç ÆäÀÌÁö¿¡ Á¢±Ù ÇÏ½Ç ¼ö ¾ø½À´Ï´Ù."),
-	AUTH02("ÀÌ¹Ì ÀÎÁõÀÌ ¸¸·áµÈ ¸µÅ©ÀÔ´Ï´Ù."),
-	AUTH03("°Ô½Ã±ÛÀº ·Î±×ÀÎ ÈÄ ÀÛ¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù."),
-	API01("APIÅë½Å µµÁß ¿¡·¯°¡ ¹ß»ýÇÏ¿´½À´Ï´Ù."),
-	CD_404("Á¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù."),
-	FILE01("ÆÄÀÏ ¾÷·ÎµåÁß ¿¹¿Ü°¡ ¹ß»ýÇÏ¿´½À´Ï´Ù.");
+	SM01("íšŒì›ì •ë³´ë¥¼ ì¡°íšŒí•˜ëŠ” ë„ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.","/member/login"),
+	IM01("íšŒì›ì •ë³´ë¥¼ ìž…ë ¥í•˜ëŠ” ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.","/member/join"),
+	UM01("íšŒì›ì •ë³´ ìˆ˜ì • ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."),
+	DM01("íšŒì›ì •ë³´ ì‚­ì œ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."),
+	IB01("ê²Œì‹œê¸€ ë“±ë¡ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."),
+	IF01("íŒŒì¼ì •ë³´ ë“±ë¡ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."),
+	MAIL01("ë©”ì¼ ë°œì†¡ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."),
+	AUTH01("í•´ë‹¹ íŽ˜ì´ì§€ì— ì ‘ê·¼ í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."),
+	AUTH02("ì´ë¯¸ ì¸ì¦ì´ ë§Œë£Œëœ ë§í¬ìž…ë‹ˆë‹¤."),
+	AUTH03("ê²Œì‹œê¸€ì€ ë¡œê·¸ì¸ í›„ ìž‘ì„±í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤."),
+	API01("APIí†µì‹  ë„ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤."),
+	CD_404("ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œìž…ë‹ˆë‹¤."),
+	FILE01("íŒŒì¼ ì—…ë¡œë“œì¤‘ ì˜ˆì™¸ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 	
 	
-	//result.jsp¸¦ »ç¿ëÇØ ¶ç¿ï ¾È³»¹®±¸
+	//result.jspë¥¼ ì‚¬ìš©í•´ ë„ìš¸ ì•ˆë‚´ë¬¸êµ¬
 	private String errMsg;
-	//result.jsp¸¦ »ç¿ëÇØ ÀÌµ¿½ÃÅ³ °æ·Î
+	//result.jspë¥¼ ì‚¬ìš©í•´ ì´ë™ì‹œí‚¬ ê²½ë¡œ
 	private String url = "/index";
 	
-	//index·Î ÀÌµ¿½ÃÅ³ °æ¿ì
+	//indexë¡œ ì´ë™ì‹œí‚¬ ê²½ìš°
 	ErrorCode(String errMsg){
 		this.errMsg = errMsg;
 	}
 	
-	//indexÀÇ ÀÌ¿ÜÀÇ ÁöÁ¤ ÆäÀÌÁö·Î ÀÌµ¿½ÃÅ³ °æ¿ì
+	//indexì˜ ì´ì™¸ì˜ ì§€ì • íŽ˜ì´ì§€ë¡œ ì´ë™ì‹œí‚¬ ê²½ìš°
 	ErrorCode(String errMsg, String url){
 		this.errMsg = errMsg;
 		this.url = url;
