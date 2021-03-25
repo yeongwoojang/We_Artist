@@ -243,11 +243,46 @@
 			<version>19.7.0.0</version>
 		</dependency>
 
+		<!-- 채팅 dependency -->
 		<!-- Spring webSocket(영우) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 			<version>5.3.5</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- messaging -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>5.3.4</version>
+		</dependency>
+		<!-- stomp -->
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-stomp</artifactId>
+			<version>5.3.2.RELEASE</version>
+		</dependency>
+
+
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!--java.lang에 있는 클래스처럼 기능적으로 필요한 유틸리티들을 모아놓은 dependency -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.11</version>
 		</dependency>
 
 
