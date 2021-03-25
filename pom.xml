@@ -243,6 +243,14 @@
 			<version>19.7.0.0</version>
 		</dependency>
 
+		<!-- Spring webSocket(영우) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>5.3.5</version>
+		</dependency>
+
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

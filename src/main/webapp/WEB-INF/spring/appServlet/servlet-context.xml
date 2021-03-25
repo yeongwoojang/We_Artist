@@ -5,6 +5,7 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
