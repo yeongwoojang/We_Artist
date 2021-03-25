@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>version1</h1>
+	<h2>김선민만세</h2>
 	<c:choose>
 		<c:when test="${empty sessionScope.user}">
 			<h2><a href="/member/join">회원가입</a></h2>
