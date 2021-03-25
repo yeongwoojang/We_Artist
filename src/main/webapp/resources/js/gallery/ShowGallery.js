@@ -1,4 +1,4 @@
-import {GLTFLoader} from './GLTFLoader.js';
+import {GLTFLoader} from '/resources/js/gallery/GLTFLoader.js';
 
 //3d오브젝트를 렌더링할 HTML Element요소
 let middle = document.querySelector('.middle');
