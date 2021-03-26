@@ -79,10 +79,34 @@ gltfLoader.load(url, (gltf) => {
 	root.add(frontLight);
 	root.add(backLight);
 	root.add(camera);
+	document.addEventListener('click',onDocumentMouseDown);
 });
 
 let onDocumentMouseDown = (event) => {
-	console.dir('click.');
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+    console.log('Click.' + mouse.x + ' : ' + mouse.y);
+
+    let vector = new THREE.Vector3(mouse.x , mouse.y , 1);
+    let ray = new THREE.Raycaster();
+    ray.setFromCamera( mouse, camera );
+    let intersects = ray.intersectObjects( targetList);
+    console.dir(intersects);
+    if(intersects.length > 0){
+        console.log('Hit @' + toString(intersects[0].point) + '\n'+ intersects[0].object.name);
+        //camera.position.x = intersects[0].point.x;
+        //camera.position.z = intersects[0].point.z;
+        
+        
+        targetList.forEach((e) => {
+            if(e.name === intersects[0].object.name){
+                let aa = e;
+                e.geometry.center();
+                console.dir(aa);
+
+            }
+        })
+    }
 }
 
 //화면 랜더링

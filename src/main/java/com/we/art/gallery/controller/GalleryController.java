@@ -11,4 +11,9 @@ public class GalleryController {
 		return "gallery/gallery";
 	}
 	
+	@GetMapping("headtest")
+	public String headtest() {
+		return "gallery/headTest";
+	}
+	
 }
