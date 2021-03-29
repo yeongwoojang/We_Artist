@@ -95,13 +95,11 @@ let onDocumentMouseDown = (event) => {
         targetList.forEach((e) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
-				let test = e.clone();
-				test.name = 'test';
-				test.position.set(0,0,0);
-				e.add(test);
-                console.dir(test);
                 console.dir(e);
-
+				document.querySelector('#divTest').className = 'd-block position-absolute';
+				document.querySelector('#divTest').dataAos = 'zoom-in';
+				document.querySelector('#divTest').dataAosDelay = '100';
+				document.querySelector('#imgID').innerText = e.name;
             }
         })
     }
