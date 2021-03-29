@@ -97,12 +97,18 @@ let onDocumentMouseDown = (event) => {
             if(e.name === intersects[0].object.name){
                 console.dir(e);
 				document.querySelector('#divTest').className = 'd-block position-absolute';
-				document.querySelector('#divTest').dataAos = 'zoom-in';
-				document.querySelector('#divTest').dataAosDelay = '100';
-				document.querySelector('#imgID').innerText = e.name;
+				document.querySelector('#imgID').innerText = e.material.name;
+				document.querySelector('#imgInfo').src = '/resources/landscape_gallery_by_stoneysteiner/textures/'+e.material.name+'_baseColor.jpeg';
+				document.removeEventListener('click',onDocumentMouseDown);
+				document.querySelector('#btn_back').addEventListener('click',back);
             }
         })
     }
+}
+
+let back = () => {
+	document.querySelector('#divTest').className = 'd-none';
+	document.addEventListener('click', onDocumentMouseDown,false);
 }
 
 // 화면 사이즈에 맞춰서 다시 랜더링 해준다

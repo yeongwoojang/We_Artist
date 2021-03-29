@@ -4,8 +4,9 @@
 	<section id="hero">
 	    <div class="hero-container middle" data-aos="zoom-in" data-aos-delay="100">
 	    	<div class="d-none" id="divTest">
-	    		<h1>TEST!!!!!!!!!!!!</h1>
 	    		<h1 id="imgID"></h1>
+	    		<img alt="" src="" id="imgInfo"style="width: 500px; height: 400px;">
+	    		<button id="btn_back">Back</button>
 	    	</div>
 	    </div>
 	 </section>
