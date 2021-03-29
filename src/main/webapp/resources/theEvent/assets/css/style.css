@@ -133,19 +133,20 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #header {
   height: 90px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  transition: all 0.5s;
+  position: block;
+  transition: all 2s;
   z-index: 997;
   background: rgba(6, 12, 34, 0.98);
 }
 /* 스크롤이 가능하고 메인 세션이 있다면 사용*/
-/* #header.header-scrolled, #header.header-inner {
-  background: rgba(6, 12, 34, 0.98);
-  height: 70px;
-} */
+#header.header-scrolled, #header.header-inner {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  background: rgba(6, 12, 34, 0.7);
+  height: 90px;
+}
 
 #header #logo h1 {
   font-size: 36px;
@@ -678,7 +679,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   bottom: 0;
   left: 0;
-  top: 90px;
+  top: 0;
   right: 0;
   display: flex;
   justify-content: center;
@@ -690,7 +691,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 991px) {
   #hero .hero-container {
-    top: 70px;
+    
   }
 }
 

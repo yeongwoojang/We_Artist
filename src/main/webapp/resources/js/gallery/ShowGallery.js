@@ -75,7 +75,7 @@ let init = () => {
         root.add(camera);
     });
 
-    document.addEventListener('click', onDocumentMouseDown,false);
+    document.addEventListener('click', onDocumentMouseDown);
 	window.addEventListener('resize',onWindowResize);
 
 }
@@ -96,9 +96,14 @@ let onDocumentMouseDown = (event) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
                 console.dir(e);
-				document.querySelector('#divTest').className = 'd-block position-absolute';
-				document.querySelector('#imgID').innerText = e.material.name;
-				document.querySelector('#imgInfo').src = '/resources/landscape_gallery_by_stoneysteiner/textures/'+e.material.name+'_baseColor.jpeg';
+				let src = '/resources/landscape_gallery_by_stoneysteiner/textures/'+e.material.name+'_baseColor.jpeg';
+				srcToBlob(src,'#imgInfo');
+				if(document.querySelector('#imgInfo').src){
+					document.querySelector('#divTest').className = 'd-block position-absolute text-white';	
+				}
+				//document.querySelector('#imgID').innerText = e.material.name;
+				//document.querySelector('#imgInfo').src = '/resources/landscape_gallery_by_stoneysteiner/textures/'+e.material.name+'_baseColor.jpeg';
+				
 				document.removeEventListener('click',onDocumentMouseDown);
 				document.querySelector('#btn_back').addEventListener('click',back);
             }
@@ -106,9 +111,11 @@ let onDocumentMouseDown = (event) => {
     }
 }
 
+// 상세페이지 닫을시 다음 요소들을 초기화 해준다.
 let back = () => {
+	document.querySelector('#imgInfo').src = '';
 	document.querySelector('#divTest').className = 'd-none';
-	document.addEventListener('click', onDocumentMouseDown,false);
+	document.addEventListener('click', onDocumentMouseDown);
 }
 
 // 화면 사이즈에 맞춰서 다시 랜더링 해준다

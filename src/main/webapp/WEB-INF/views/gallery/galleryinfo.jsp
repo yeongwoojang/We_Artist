@@ -4,7 +4,9 @@
 
 <section id="speakers">
 	<input type="file" id="upload">
+	<button onclick="imgToBlob('#preview','#preview2')">전환</button>
 	<img alt="" src="" id="preview" style="width: 300px; height: 300px;">
+	<img alt="" src="" id="preview2" style="width: 300px; height: 300px;">
 </section>
 
 <script type="text/javascript" src="/resources/js/gallery/load-image.all.min.js"></script>
