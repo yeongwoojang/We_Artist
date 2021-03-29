@@ -3,6 +3,10 @@
 <%@ include file="/WEB-INF/views/include/topMenuHead.jsp"%>
 	<section id="hero">
 	    <div class="hero-container middle" data-aos="zoom-in" data-aos-delay="100">
+	    	<div class="d-none" id="divTest">
+	    		<h1>TEST!!!!!!!!!!!!</h1>
+	    		<h1 id="imgID"></h1>
+	    	</div>
 	    </div>
 	 </section>
 	  <!-- End Hero Section -->
