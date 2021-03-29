@@ -9,6 +9,10 @@
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<title>We Artist!</title>
 	
+	<c:set var="context" value="${pageContext.request.contextPath}"/>
+	<script type="text/javascript" src="/resources/js/common/urlEncoder.js"></script>
+	<script type="text/javascript" src="/resources/js/common/asyncPageError.js"></script>
+	
 	<!-- Google Fonts -->
   	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 	<!-- Vendor CSS Files -->
