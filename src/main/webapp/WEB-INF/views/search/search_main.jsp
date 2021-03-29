@@ -16,7 +16,6 @@
 <link href="/resources/Rapid/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet"/>
  
-    
 
 <link href="/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <style>
@@ -24,10 +23,10 @@
 </style>
 </head>
 <body>
-
+<main id="main">
 <section id="portfolio" class="portfolio section-bg">
       <div class="container aos-init aos-animate" data-aos="fade-up">
-      	<div class="input-group border rounded-pill  p-1">
+      	<div class="input-group border rounded-pill  p-2">
  		 <span class="input-group-text bg-transparent border border-0"><i class="fas fa-search"></i></span>
  			 <input type="text" class="form-control border border-0 shadow-none" style="outline:none">
 		</div>
@@ -42,7 +41,7 @@
             </ul>
           </div>
         </div>
-		
+
         <div class="row portfolio-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="200" style="position: relative; height: 1267.89px;">
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app" style="position: absolute; left: 0px; top: 0px;">
@@ -175,6 +174,7 @@
 
       </div>
     </section>
+    </main>
     <script src="/resources/Rapid/assets/vendor/aos/aos.js"></script>
     <script src="/resources/Rapid/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/resources/Rapid/assets/vendor/glightbox/js/glightbox.min.js"></script>
