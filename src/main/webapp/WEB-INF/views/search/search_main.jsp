@@ -19,28 +19,26 @@
     
 
 <link href="/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<style>
+
+</style>
 </head>
 <body>
 
 <section id="portfolio" class="portfolio section-bg">
       <div class="container aos-init aos-animate" data-aos="fade-up">
-		<form class=" form-inline float-right mb-2 mt-2">
-			<div class="input-group input-group-lg">
-				<input type="text" class="form-control bg-light border small" id="inp_word" autocomplete="off">
-					<div class="input-group-append">
-						<button class="btn btn-secondary btn-lg" type="button">
-							<i class="fas fa-search"></i>
-						</button>
-                   </div>
-			</div>
-		</form>
+      	<div class="input-group border rounded-pill  p-1">
+ 		 <span class="input-group-text bg-transparent border border-0"><i class="fas fa-search"></i></span>
+ 			 <input type="text" class="form-control border border-0 shadow-none" style="outline:none">
+		</div>
+
         <div class="row aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12">
             <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
+              <li data-filter="*" class="filter-active fs-4">All</li>
+              <li data-filter=".filter-app" class="fs-4">App</li>
+              <li data-filter=".filter-card" class="fs-4">Card</li>
+              <li data-filter=".filter-web" class="fs-4">Web</li>
             </ul>
           </div>
         </div>
