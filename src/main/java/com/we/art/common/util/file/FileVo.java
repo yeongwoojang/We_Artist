@@ -5,7 +5,7 @@ import com.we.art.common.code.ConfigCode;
 import lombok.Data;
 
 @Data
-public class FIleVo {
+public class FileVo {
 	
 	private String fIdx;
 	private String fOrigin;
