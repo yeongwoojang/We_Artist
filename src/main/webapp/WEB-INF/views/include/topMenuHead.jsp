@@ -34,7 +34,7 @@
 	<!-- Template Main JS File -->
 	<script src="/resources/theEvent/assets/js/main.js"></script>
 </head>
-<body>
+<body class="mt-5">
 	
 	<!-- ======= Header ======= -->
   	<header id="header" class="d-flex align-items-center ">

@@ -14,13 +14,26 @@
 <link href="/resources/Rapid/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/Rapid/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 <link href="/resources/Rapid/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet"/>
+ 
+    
+
 <link href="/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 </head>
 <body>
 
 <section id="portfolio" class="portfolio section-bg">
       <div class="container aos-init aos-animate" data-aos="fade-up">
-		<button type="button" class="btn"></button>
+		<form class=" form-inline float-right mb-2 mt-2">
+			<div class="input-group input-group-lg">
+				<input type="text" class="form-control bg-light border small" id="inp_word" autocomplete="off">
+					<div class="input-group-append">
+						<button class="btn btn-secondary btn-lg" type="button">
+							<i class="fas fa-search"></i>
+						</button>
+                   </div>
+			</div>
+		</form>
         <div class="row aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12">
             <ul id="portfolio-flters">
@@ -31,10 +44,7 @@
             </ul>
           </div>
         </div>
-        <div class="input-group input-group-lg">
-  			<span class="input-group-text"><i class="fas fa-search"></i></span>
-  			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-		</div>
+		
         <div class="row portfolio-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="200" style="position: relative; height: 1267.89px;">
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app" style="position: absolute; left: 0px; top: 0px;">
