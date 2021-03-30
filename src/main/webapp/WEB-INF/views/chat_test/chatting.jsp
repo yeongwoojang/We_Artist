@@ -7,38 +7,35 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/dist/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<link href="/resources/assets/css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script> <!-- socjJs CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> <!-- STOMP CDN -->
+
+<link href="/resources/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-
-	<textarea name="msg" id="msgi" rows="2" class="form-control col-sm-8"></textarea>
-
-
+	<input type="text" id="msg-box">
+	<button type="button" class="btn-primary" onclick="sendMessage();"></button>
 <script>
-$(function() {
-	let messageInput = $('textarea[name="msg"]');
-	let roomNo = "${roomNo}";
-	let member = $('.content').data('member');
-	let sock = new SockJS(
-			"${pageContext.request.contextPath}/endpoint");
-	client = Stomp.over(sock);
-	function sendmsg() {
-		let message = messageInput.val();
-		//alert("메시지"+message);
-		if (message == "") {
-			return false;
-		}
-		//insertChat();
-		client.send('/app/hello/' + roomNo, {}, JSON
-				.stringify({
-					chatContent : message,
-					memberId : "${loginMember.memberId}",
-					srNo : "${roomNo}"
-				}));
-		messageInput.val('');
-	}	
+let stompClient = null;
+window.onload = function(){
+	let socket = new SockJS("room1");
+	stompClient = Stomp.over(socket);
+	stompClient.connect({},function(frame){
+		stompClient.subscribe("/queue/info",function(response){
+			console.log(JSON.parse(response.body));
+		});
+		console.log("소켓 연결 성공",frame);
+	});
+}
+
+	let sendMessage= function(){
+		let message = document.getElementById("msg-box").value;
+		stompClient.send("/info",{},JSON.stringify({'message' : message}));
+	}
+
+// 	stompClient.disconnect();
+	
+
 </script>
 </body>
 </html>

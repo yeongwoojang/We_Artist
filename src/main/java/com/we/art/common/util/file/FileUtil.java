@@ -22,16 +22,16 @@ import com.we.art.common.code.ConfigCode;
 */
 public class FileUtil {
 	
-	public List<FIleVo> fileUpload(List<MultipartFile> files) throws IOException, Exception{
+	public List<FileVo> fileUpload(List<MultipartFile> files) throws IOException, Exception{
 		
-		List<FIleVo> fileDatas = new ArrayList<FIleVo>();
+		List<FileVo> fileDatas = new ArrayList<FileVo>();
 		String fSavePath = getSavePath();
 		if(files.size() >= 1 && files.get(0).getOriginalFilename() != null) {
 			for(MultipartFile multipartFile : files) {
 				String fRename = UUID.randomUUID().toString();
 				String fOrigin = multipartFile.getOriginalFilename();
 				
-				FIleVo fileVo = new FIleVo();
+				FileVo fileVo = new FileVo();
 				fileVo.setFOrigin(fOrigin);
 				fileVo.setFRename(fRename);
 				fileVo.setFSavePath(fSavePath);
@@ -50,7 +50,7 @@ public class FileUtil {
 				+"/"+ cal.get(Calendar.DAY_OF_MONTH) + "/";
 	}
 	
-	private void saveFile(MultipartFile multipartFile, FIleVo fileVo) throws Exception, IOException {
+	private void saveFile(MultipartFile multipartFile, FileVo fileVo) throws Exception, IOException {
 		File file = new File(fileVo.getFullPath() + fileVo.getFRename());
 		if(!file.exists()) {
 			new File(fileVo.getFullPath()).mkdirs();

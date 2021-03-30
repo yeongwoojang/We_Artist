@@ -6,6 +6,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+import com.we.art.common.interceptor.HttpHandShakeInterceptor;
+
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
@@ -14,12 +16,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("/subscribe");
-		registry.setApplicationDestinationPrefixes("/app");
+		System.out.println();
+		registry.enableSimpleBroker("/queue");
+		registry.setApplicationDestinationPrefixes("/");
 	}
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		  registry.addEndpoint("/endpoint").withSockJS();
+		  registry.addEndpoint("room1").withSockJS();
 	}
 }
