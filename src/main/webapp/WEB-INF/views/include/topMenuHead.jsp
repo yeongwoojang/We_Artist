@@ -22,6 +22,7 @@
   	<link href="/resources/theEvent/assets/vendor/glightbox/css/glightbox.css" rel="stylesheet">
   	<link href="/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   	
+  	<link href="/resources/common/css/common.css" rel="stylesheet">
   	<!-- Template Main CSS File -->
   	<link href="/resources/theEvent/assets/css/style.css" rel="stylesheet">
   	
@@ -35,15 +36,14 @@
 	<script src="/resources/theEvent/assets/js/main.js"></script>
 	<!-- fontAwsome -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet"/>
-	<style>
-       html,body {
-		width:100%;        
+<style>
+	html,body{
+		width:100%;
 		height:100%;
-      }
-    </style>
+	}
+</style>
 </head>
 <body>
-	
 	<!-- ======= Header ======= -->
   	<header id="header" class="d-flex align-items-center">
     	<div class="container-fluid d-flex align-items-center justify-content-around">
@@ -86,7 +86,5 @@
 	        <i class="bi bi-list mobile-nav-toggle"></i>
 	      </nav>
 	      <!-- .navbar -->
-	      
-
     	</div>
   	</header>
