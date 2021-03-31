@@ -19,37 +19,21 @@ upload.addEventListener('change',(e)=>{
 	//sendImg(limg);
 });*/
 
-let srcToBlob = (src,outputSelector) => {
-	let inputObj = src;//document.querySelector(inputSelector).src;
-	let outputObj = document.querySelector(outputSelector);
+let srcToBlob = (src,outputBox,viewBox) => {
+	let inputObj = src;
+	let outputObj = document.querySelector(outputBox);
 	
-	loadImage(inputObj,(img,data)=>{
+	loadImage(inputObj,(img)=>{
 		img.toBlob((blob)=>{
 			let rotateFile = new File([blob],'나의이름은',{type : 'JPEG'});
 			let reader = new FileReader();
-            reader.onload = (e)=>{
-				outputObj.src = e.target.result;	
+			reader.onload = (e) => {
+				outputObj.src = e.target.result;
+				document.querySelector(viewBox).className = 'd-flex position-absolute';
             }
             reader.readAsDataURL(rotateFile);
-		},'JPEG')
-		
+		},'JPEG')		
 	},{orientation : 4});
 }
 
-let srcToBlob2 = (src,outputSelector) => {
-	let inputObj = src;
-	let outputObj = document.querySelector(outputSelector);
-	
-	loadImage(inputObj,(img,data)=>{
-		img.toBlob((blob)=>{
-			let rotateFile = new File([blob],'나의이름은',{type : 'JPEG'});
-			let reader = new FileReader();
-            reader.onload = (e)=>{
-				outputObj.src = e.target.result;	
-            }
-            reader.readAsDataURL(rotateFile);
-		},'JPEG')
-		
-	},{orientation : 4});
-}
 

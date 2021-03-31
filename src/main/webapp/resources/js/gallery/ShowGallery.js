@@ -52,6 +52,9 @@ let init = () => {
     const backLight = new THREE.DirectionalLight(color, intensity);
     backLight.position.set(0, ypos, -5);
 
+	const light = new THREE.PointLight(color,intensity);
+	light.position.set(0,1,0);
+
     let target;
     const gltfLoader = new GLTFLoader();
     const url = './resources/landscape_gallery_by_stoneysteiner/scene.gltf';
@@ -72,6 +75,7 @@ let init = () => {
 	    root.add(leftLight);
 	    root.add(frontLight);
 	    root.add(backLight);
+		//root.add(light); 바닥 텍스쳐 사용시 사용할듯함
         root.add(camera);
     });
 
@@ -95,15 +99,8 @@ let onDocumentMouseDown = (event) => {
         targetList.forEach((e) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
-                console.dir(e);
 				let src = '/resources/landscape_gallery_by_stoneysteiner/textures/'+e.material.name+'_baseColor.jpeg';
-				srcToBlob(src,'#imgInfo');
-				if(document.querySelector('#imgInfo').src){
-					document.querySelector('#divTest').className = 'd-block position-absolute text-white';	
-				}
-				//document.querySelector('#imgID').innerText = e.material.name;
-				//document.querySelector('#imgInfo').src = '/resources/landscape_gallery_by_stoneysteiner/textures/'+e.material.name+'_baseColor.jpeg';
-				
+				srcToBlob(src,'#imgInfo','#divTest');			
 				document.removeEventListener('click',onDocumentMouseDown);
 				document.querySelector('#btn_back').addEventListener('click',back);
             }
