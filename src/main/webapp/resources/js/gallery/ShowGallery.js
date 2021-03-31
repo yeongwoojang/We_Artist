@@ -3,6 +3,7 @@ import {GLTFLoader} from '/resources/js/gallery/GLTFLoader.js';
 // 기본사용한는 전역변수
 let scene, camera, renderer, controls, stats;
 let container = document.querySelector('.middle');
+const gltfPath = 'landscape_gallery_by_stoneysteiner';
 
 let targetList = []; // 클릭할 객체 -> 액자안에 그림 배열
 let mouse = { x:0, y:0}; // 마우스 클릭시 x,y축을 저장
@@ -99,7 +100,7 @@ let onDocumentMouseDown = (event) => {
         targetList.forEach((e) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
-				let src = '/resources/landscape_gallery_by_stoneysteiner/textures/'+e.material.name+'_baseColor.jpeg';
+				let src = '/resources/'+ gltfPath +'/textures/'+e.material.name+'_baseColor.jpeg';
 				srcToBlob(src,'#imgInfo','#divTest');			
 				document.removeEventListener('click',onDocumentMouseDown);
 				document.querySelector('#btn_back').addEventListener('click',back);

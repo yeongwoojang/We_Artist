@@ -11,15 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.we.art.common.code.ConfigCode;
 
-/*
-	private String fIdx;
-	private String fOrigin;
-	private String fRename;
-	private String fDate;
-	private String userId;
-	private String fSavePath;
-	private int isDel;  
-*/
 public class FileUtil {
 	
 	public List<FileVo> fileUpload(List<MultipartFile> files) throws IOException, Exception{
@@ -28,6 +19,7 @@ public class FileUtil {
 		String fSavePath = getSavePath();
 		if(files.size() >= 1 && files.get(0).getOriginalFilename() != null) {
 			for(MultipartFile multipartFile : files) {
+				
 				String fRename = UUID.randomUUID().toString();
 				String fOrigin = multipartFile.getOriginalFilename();
 				

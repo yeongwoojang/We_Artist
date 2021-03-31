@@ -30,7 +30,7 @@ public class UserValidator implements Validator{
 		Pattern pattern = Pattern.compile("^(?!.*[ㄱ-힣])(?=.*\\W)(?=.*\\d)(?=.*[a-zA-Z])(?=.{8,})");
 		User persistInfo = (User) target;
 		
-		if(userRepository.se)
+		//if(userRepository.se)
 		
 		
 	}
