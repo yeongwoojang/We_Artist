@@ -7,6 +7,7 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.support.SimpAnnotationMethodMessageHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.we.art.user.model.vo.User;
 
@@ -23,7 +24,7 @@ public class MessageController {
 	@SendTo("/queue/info")
 	public String info(String message,SimpMessageHeaderAccessor messageHeaderAccessor) {
 		User talker = (User) messageHeaderAccessor.getSessionAttributes().get("session");
-		System.out.println(message);
+		System.out.println("메세지 내용 :"+ message);
 		return message;
 	}
 

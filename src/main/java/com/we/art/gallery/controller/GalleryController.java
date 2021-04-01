@@ -28,10 +28,19 @@ public class GalleryController {
 		return "gallery/galleryinfo";
 	}
 	
+	// 갤러리에 필요한 이미지정보를 받아온다
 	@PostMapping(value = "sendimage", headers = ("content-type=multipart/*"))
 	@ResponseBody
 	public String uploadGallery(@RequestParam("test") List<MultipartFile> files) {
+		
+		//후에 유저 아이디로 받아올 예정이다
+		
 		System.out.println(files);
+		
+		
+		
+		
+		/*
 		File file = new File(ConfigCode.GALLERY_PATH.desc + files.get(0).getName() + '.' + files.get(0).getContentType());
 		if(!file.exists()) {
 			new File(ConfigCode.GALLERY_PATH.desc).mkdirs();
@@ -42,6 +51,7 @@ public class GalleryController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		return "ok";
 	}
 	
