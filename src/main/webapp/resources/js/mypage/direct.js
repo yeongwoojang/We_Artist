@@ -2,7 +2,7 @@ let stompClient = null; //stomp객체
 let userId = null;
 window.onload = function(){ //페이지의 모든 요소들이 로드되면 호출
 	userId = document.getElementById("userId").innerHTML;
-	let socket = new SockJS("/chat/direct/room1"); //sockJS객체 생성 endPoint : "room1"
+	let socket = new SockJS("/git/room1"); //sockJS객체 생성 endPoint : "room1"
 	stompClient = Stomp.over(socket); //stomp객체에 sockJs객체 연경
 	stompClient.connect({},function(frame){ // 
 		stompClient.subscribe("/queue/info",function(response){ //채널 구독
