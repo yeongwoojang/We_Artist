@@ -1,12 +1,13 @@
 package com.we.art.common.code;
 
 public enum ConfigCode {
-    //·±Äª¿ë
+    //ï¿½ï¿½Äªï¿½ï¿½
 //    DOMAIN("https://www.bookmanager.ga"),
-    //°³¹ß¿ë
+    //ï¿½ï¿½ï¿½ß¿ï¿½
     DOMAIN("http://localhost:9898"),
     EMAIL("hphphp23@naver.com"),
-    UPLOAD_PATH("C:\\code\\resources\\upload");
+    UPLOAD_PATH("C:\\code\\resources\\upload"),
+	GALLERY_PATH("C:\\code\\resources\\gallery");
     public  String desc;
 
     ConfigCode(String desc){

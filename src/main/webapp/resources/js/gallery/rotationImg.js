@@ -19,37 +19,44 @@ upload.addEventListener('change',(e)=>{
 	//sendImg(limg);
 });*/
 
-let srcToBlob = (src,outputSelector) => {
-	let inputObj = src;//document.querySelector(inputSelector).src;
-	let outputObj = document.querySelector(outputSelector);
+let fileList = [];
+
+let srcToBlob = (src,outputBox,viewBox) => {
+	let inputObj = src;
+	let outputObj = document.querySelector(outputBox);
 	
-	loadImage(inputObj,(img,data)=>{
+	loadImage(inputObj,(img)=>{
+		console.dir(img);
 		img.toBlob((blob)=>{
-			let rotateFile = new File([blob],'나의이름은',{type : 'JPEG'});
+			let rotateFile = new File([blob],'gellary',{type : 'JPEG'});
+			console.dir(rotateFile);
 			let reader = new FileReader();
-            reader.onload = (e)=>{
-				outputObj.src = e.target.result;	
+			reader.onload = (e) => {
+				fileList.push(rotateFile);
+				outputObj.src = e.target.result;
+				document.querySelector(viewBox).className = 'd-flex position-absolute';
+				console.dir(fileList);
             }
             reader.readAsDataURL(rotateFile);
-		},'JPEG')
-		
+		},'JPEG')		
 	},{orientation : 4});
 }
 
-let srcToBlob2 = (src,outputSelector) => {
-	let inputObj = src;
-	let outputObj = document.querySelector(outputSelector);
+let sendImageTest = () => {
 	
-	loadImage(inputObj,(img,data)=>{
-		img.toBlob((blob)=>{
-			let rotateFile = new File([blob],'나의이름은',{type : 'JPEG'});
-			let reader = new FileReader();
-            reader.onload = (e)=>{
-				outputObj.src = e.target.result;	
-            }
-            reader.readAsDataURL(rotateFile);
-		},'JPEG')
-		
-	},{orientation : 4});
+	let formData = new FormData();
+	for(let i=0; i<fileList.length; i++){
+		console.dir(fileList[i]);
+		formData.append('test',fileList[i]);
+	}
+	
+	console.dir(formData);
+	fetch('/sendimage',{
+		method : 'POST',
+		body : formData
+	})
+	.then(res => res.text)
+	.then(res => {alert(res)});
+	
 }
 

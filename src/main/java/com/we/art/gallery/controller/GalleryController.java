@@ -1,5 +1,10 @@
 package com.we.art.gallery.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.we.art.common.code.ConfigCode;
 
 @Controller
 public class GalleryController {
@@ -21,10 +28,20 @@ public class GalleryController {
 		return "gallery/galleryinfo";
 	}
 	
-	@PostMapping("galleryupload")
+	@PostMapping(value = "sendimage", headers = ("content-type=multipart/*"))
 	@ResponseBody
-	public String uploadGallery(@RequestBody MultipartFile file) {
-		System.out.println(file.getOriginalFilename());
+	public String uploadGallery(@RequestParam("test") List<MultipartFile> files) {
+		System.out.println(files);
+		File file = new File(ConfigCode.GALLERY_PATH.desc + files.get(0).getName() + '.' + files.get(0).getContentType());
+		if(!file.exists()) {
+			new File(ConfigCode.GALLERY_PATH.desc).mkdirs();
+		}
+		try {
+			files.get(0).transferTo(file);
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "ok";
 	}
 	

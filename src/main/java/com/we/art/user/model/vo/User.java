@@ -11,5 +11,5 @@ public class User {
 	private String phone;
 	private String nickName;
 	private int fIdx;
-	private String LoginMethod;
+	private String loginMethod;
 }
