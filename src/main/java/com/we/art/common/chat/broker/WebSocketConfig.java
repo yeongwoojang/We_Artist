@@ -16,13 +16,15 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		System.out.println();
+		
 		registry.enableSimpleBroker("/queue");
 		registry.setApplicationDestinationPrefixes("/");
 	}
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		  registry.addEndpoint("/git/room1").withSockJS();
+		System.out.println("시발");
+		System.out.println(registry);
+		  registry.addEndpoint("/chat/room1").withSockJS();
 	}
 }

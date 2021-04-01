@@ -34,7 +34,7 @@
 					<p>김동찬</p>
 					<p>김지연</p>
 					<p>장영우</p>
-					
+					<p>${context}</p>				
 				</div>
 			</div>
 			<div class="card col-7">
