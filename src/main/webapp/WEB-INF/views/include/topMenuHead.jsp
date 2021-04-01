@@ -10,30 +10,30 @@
 	<title>We Artist!</title>
 	
 	<c:set var="context" value="${pageContext.request.contextPath}"/>
-	<script type="text/javascript" src="/resources/js/common/urlEncoder.js"></script>
-	<script type="text/javascript" src="/resources/js/common/asyncPageError.js"></script>
+	<script type="text/javascript" src="${context}/resources/js/common/urlEncoder.js"></script>
+	<script type="text/javascript" src="${context}/resources/js/common/asyncPageError.js"></script>
 	
 	<!-- Google Fonts -->
   	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 	<!-- Vendor CSS Files -->
-  	<link href="/resources/theEvent/assets/vendor/aos/aos.css" rel="stylesheet">
-  	<link href="/resources/theEvent/assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-  	<link href="/resources/theEvent/assets/vendor/bootstrap/css/bootstrap-icons.css" rel="stylesheet">
-  	<link href="/resources/theEvent/assets/vendor/glightbox/css/glightbox.css" rel="stylesheet">
-  	<link href="/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  	<link href="${context}/resources/theEvent/assets/vendor/aos/aos.css" rel="stylesheet">
+  	<link href="${context}/resources/theEvent/assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  	<link href="${context}/resources/theEvent/assets/vendor/bootstrap/css/bootstrap-icons.css" rel="stylesheet">
+  	<link href="${context}/resources/theEvent/assets/vendor/glightbox/css/glightbox.css" rel="stylesheet">
+  	<link href="${context}/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   	
-  	<link href="/resources/common/css/common.css" rel="stylesheet">
+  	<link href="${context}/resources/common/css/common.css" rel="stylesheet">
   	<!-- Template Main CSS File -->
-  	<link href="/resources/theEvent/assets/css/style.css" rel="stylesheet">
+  	<link href="${context}/resources/theEvent/assets/css/style.css" rel="stylesheet">
   	
   	<!-- Vendor JS Files -->
-	<script src="/resources/theEvent/assets/vendor/aos/aos.js"></script>
-	<script src="/resources/theEvent/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-	<script src="/resources/theEvent/assets/vendor/glightbox/js/glightbox.js"></script>
-	<script src="/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.js"></script>
+	<script src="${context}/resources/theEvent/assets/vendor/aos/aos.js"></script>
+	<script src="${context}/resources/theEvent/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+	<script src="${context}/resources/theEvent/assets/vendor/glightbox/js/glightbox.js"></script>
+	<script src="${context}/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.js"></script>
 	
 	<!-- Template Main JS File -->
-	<script src="/resources/theEvent/assets/js/main.js"></script>
+	<script src="${context}/resources/theEvent/assets/js/main.js"></script>
 	<!-- fontAwsome -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet"/>
 <style>

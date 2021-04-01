@@ -21,10 +21,10 @@
 	  <!-- End Hero Section -->
 	
 	<script src="https://threejs.org/build/three.min.js"></script>
-	<script src="/resources/js/gallery/OrbitControls.js"></script>
-	<script src="/resources/js/gallery/GLTFLoader.js"></script>
-	<script src="/resources/js/gallery/load-image.all.min.js"></script>
-	<script src="/resources/js/gallery/rotationImg.js"></script>
-	<script type='module' src="/resources/js/gallery/ShowGallery.js"></script>
+	<script src="${context}/resources/js/gallery/OrbitControls.js"></script>
+	<script src="${context}/resources/js/gallery/GLTFLoader.js"></script>
+	<script src="${context}/resources/js/gallery/load-image.all.min.js"></script>
+	<script src="${context}/resources/js/gallery/rotationImg.js"></script>
+	<script type='module' src="${context}/resources/js/gallery/ShowGallery.js"></script>
 </body>
 </html>
