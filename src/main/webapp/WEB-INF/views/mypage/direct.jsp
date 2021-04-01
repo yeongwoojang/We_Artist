@@ -34,11 +34,11 @@
 					<p>김동찬</p>
 					<p>김지연</p>
 					<p>장영우</p>
-					
+					<p>${context}</p>				
 				</div>
 			</div>
 			<div class="card col-7">
-				<div id="chat_box" class="card-body" style="width:30vw height:100%; overflow:auto;"></div>
+				<div id="chat_box" class="card-body d-flex flex-column" style="width:30vw height:100%; overflow:auto;"></div>
 				<div class="card-footer">
 					<div class="input-group border rounded-pill p-2 bg-white">
  			 			<input id="msg_box" type="text" class="form-control border border-0 bg-white shadow-none" placeholder="메시지를 입력하세요" style="outline:none" onkeydown="JavaScript:sendMessage();">
