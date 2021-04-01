@@ -18,13 +18,13 @@ window.onload = function(){ //페이지의 모든 요소들이 로드되면 호�
 			if (msg.length >= 20) {
 				borderBox.style.width = "30%";
 			} else {
-				borderBox.style.display = 'inline-block'
 			}
 			borderBox.style.borderRadius = "20px";
 			let br = document.createElement("br");
 			let messageBox = document.createElement("div");
 			
 			borderBox.style.background = "#FFFFFF";
+			borderBox.className = "float-start align-self-start"
 			messageBox.style.textAlign = "left"
 			chatBox.appendChild(br);
 			messageBox.innerHTML = msg;
@@ -56,10 +56,9 @@ function sendMessage() {
 			let br = document.createElement("br");
 			let messageBox = document.createElement("div");
 			borderBox.style.background = "#DCDCDC"
-				borderBox.className = "float-end"
+				borderBox.className = "float-end align-self-end"
 				messageBox.style.textAlign = "left"
 				chatBox.appendChild(br);
-
 			messageBox.innerHTML = msg;
 			borderBox.appendChild(messageBox);
 			chatBox.appendChild(borderBox);
