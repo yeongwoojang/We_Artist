@@ -69,8 +69,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int selectUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return 0;
+		return userRepository.selectUserByEmail(email);
 	}
 
 }

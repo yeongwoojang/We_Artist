@@ -11,14 +11,20 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.we.art.common.code.ConfigCode;
+import com.we.art.common.code.ErrorCode;
+import com.we.art.common.exception.ToAlertException;
 import com.we.art.user.model.service.UserService;
 import com.we.art.user.model.vo.User;
 import com.we.art.user.validator.UserValidator;
 
+@RequestMapping("user")
 @Controller
 public class UserController {
 	
@@ -41,9 +47,16 @@ public class UserController {
 		return "user/join";
 	}
 	
-	@PostMapping("joinimpl")
-	public String joinImpl(User persistInfo,HttpSession session,
-			Model model) {
+	@PostMapping("joinimpl/{authPath}")
+	public String joinImpl(@PathVariable("authPath") String urlPath
+			,HttpSession session
+			,@SessionAttribute("authPath") String sessionPath
+			,@SessionAttribute("persistInfo") User persistInfo
+			,Model model) {
+		
+		if(!urlPath.equals(sessionPath)) {
+			throw new ToAlertException(ErrorCode.AUTH02);
+		}
 		
 		
 		persistInfo.setLoginMethod("public");
@@ -56,7 +69,7 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("idCheck")
+	@GetMapping("idcheck")
 	@ResponseBody
 	public String idCheck(String userId) {
 		if(userService.selectUserById(userId) != null) {
