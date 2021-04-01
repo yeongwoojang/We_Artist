@@ -4,6 +4,7 @@ import com.we.art.common.code.ConfigCode;
 
 import lombok.Data;
 
+
 @Data
 public class FileVo {
 	

@@ -22,6 +22,7 @@
   	<link href="/resources/theEvent/assets/vendor/glightbox/css/glightbox.css" rel="stylesheet">
   	<link href="/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   	
+  	<link href="/resources/common/css/common.css" rel="stylesheet">
   	<!-- Template Main CSS File -->
   	<link href="/resources/theEvent/assets/css/style.css" rel="stylesheet">
   	
@@ -33,14 +34,21 @@
 	
 	<!-- Template Main JS File -->
 	<script src="/resources/theEvent/assets/js/main.js"></script>
+	<!-- fontAwsome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet"/>
+<style>
+	html,body{
+		width:100%;
+		height:100%;
+	}
+</style>
 </head>
 <body>
-	
 	<!-- ======= Header ======= -->
-  	<header id="header" class="d-flex align-items-center ">
-    	<div class="container-fluid container-xxl d-flex align-items-center">
+  	<header id="header" class="d-flex align-items-center">
+    	<div class="container-fluid d-flex align-items-center justify-content-around">
 
-	      <div id="logo" class="me-auto">
+	      <div id="logo">
 	        <!-- Uncomment below if you prefer to use a text logo -->
 	        <!-- <h1><a href="index.html">The<span>Event</span></a></h1>-->
 	        <a href="index.html" class="scrollto fs-2 text-white" style="font-family: 'Open Sans', sans-serif; text-decoration:none;">We Artist</a>
@@ -51,6 +59,9 @@
 	          <li><a class="nav-link scrollto active fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
 	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
 	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
+	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
+	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
+	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
 	          <!--
 	          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
 	          <ul>
@@ -75,7 +86,5 @@
 	        <i class="bi bi-list mobile-nav-toggle"></i>
 	      </nav>
 	      <!-- .navbar -->
-	      
-
     	</div>
-  	</header><!-- End Header -->
+  	</header>
