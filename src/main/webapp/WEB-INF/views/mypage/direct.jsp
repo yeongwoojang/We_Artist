@@ -11,13 +11,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> <!-- STOMP CDN -->
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-<link href="/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<link href="${context}/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
+<link href="${context}/resources/Rapid/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="${context}/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
+<link href="${context}/resources/Rapid/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/Rapid/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="${context}/resources/Rapid/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="${context}/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 
 
@@ -47,6 +47,6 @@
 			</div>
 		</div>
 	</section>
-	<script src="/resources/js/mypage/direct.js"></script>
+	<script src="${context}/resources/js/mypage/direct.js"></script>
 </body>
 </html>
