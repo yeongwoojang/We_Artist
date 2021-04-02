@@ -23,7 +23,7 @@ let sendImageTest = () => {
 	let formData = new FormData();
 	for(let i=0; i<fileList.length; i++){
 		console.dir(fileList[i]);
-		formData.append('test',fileList[i]);
+		formData.append('test',fileList[i]); 
 	}
 	
 	console.dir(formData);
