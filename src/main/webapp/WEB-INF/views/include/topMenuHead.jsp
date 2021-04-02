@@ -47,21 +47,20 @@
 	<!-- ======= Header ======= -->
   	<header id="header" class="d-flex align-items-center">
     	<div class="container-fluid d-flex align-items-center justify-content-around">
-
 	      <div id="logo">
 	        <!-- Uncomment below if you prefer to use a text logo -->
 	        <!-- <h1><a href="index.html">The<span>Event</span></a></h1>-->
-	        <a href="index.html" class="scrollto fs-2 text-white" style="font-family: 'Open Sans', sans-serif; text-decoration:none;">We Artist</a>
+	        <a href="${context}/index" class="scrollto fs-2 text-white" style="text-decoration:none;">We Artist</a>
 	      </div>
 <!-- <img src="/resources/theEvent/assets/img/logo.png" alt="" title=""> -->
+		
 	      <nav id="navbar" class="navbar order-last order-lg-0">
 	        <ul>
-	          <li><a class="nav-link scrollto active fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
-	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
-	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
-	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
+	          <li><a class="nav-link scrollto fs-3"href="#">Home</a></li>
+	          <li><a class="nav-link scrollto fs-3" href="#">Gallery</a></li>
+	          <li><a class="nav-link scrollto fs-3" href="#">MyPage</a></li>
+	          <li><a class="nav-link scrollto fs-4" href="#">로그인</a></li>
+	          <li><a class="nav-link scrollto fs-4" href="${context}/join">회원가입</a></li>
 	          <!--
 	          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
 	          <ul>

@@ -7,24 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script> <!-- socjJs CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script> <!-- socjJS CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> <!-- STOMP CDN -->
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
-<link href="${context}/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="${context}/resources/Rapid/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-<link href="${context}/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="${context}/resources/Rapid/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="${context}/resources/Rapid/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="${context}/resources/Rapid/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="${context}/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-
-
 </head>
 <body class="bg-light">
-	
-	<section class="p-3 d-flex align-items-center justify-content-center" style="height:90vh;">
+	<section class="d-flex align-items-center justify-content-center" style="height:90vh;">
 		<div class="d-flex container" style="height:80vh;">
 			<div class="card col-4">
 				<div id="userId" class="card-header p-2 bg-white">${userId}</div> <!--유저 아이디 올 곳 -->
@@ -48,5 +37,6 @@
 		</div>
 	</section>
 	<script src="${context}/resources/js/mypage/direct.js"></script>
+	
 </body>
 </html>

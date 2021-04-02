@@ -8,19 +8,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-<link href="/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="/resources/Rapid/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="${context}/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
+<link href="${context}/resources/Rapid/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<%-- <link href="${context}/resources/Rapid/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --%>
+<link href="${context}/resources/Rapid/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<%-- <link href="${context}/resources/Rapid/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"> --%>
 
  
 
-<link href="/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-<style>
+<link href="${context}/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-</style>
 </head>
 <body>
 <section id="portfolio" class="portfolio section-bg">
@@ -173,13 +170,13 @@
 
       </div>
     </section>
-    <script src="/resources/Rapid/assets/vendor/aos/aos.js"></script>
-    <script src="/resources/Rapid/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/resources/Rapid/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="/resources/Rapid/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="/resources/Rapid/assets/vendor/php-email-form/validate.js"></script>
-    <script src="/resources/Rapid/assets/vendor/purecounter/purecounter.js"></script>
-    <script src="/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="/resources/Rapid/assets/js/main.js"></script>
+    <script src="${context}/resources/Rapid/assets/vendor/aos/aos.js"></script>
+ <script src="${context}/resources/Rapid/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="${context}/resources/Rapid/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="${context}/resources/Rapid/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="${context}/resources/Rapid/assets/vendor/php-email-form/validate.js"></script>
+    <script src="${context}/resources/Rapid/assets/vendor/purecounter/purecounter.js"></script>
+    <script src="${context}/resources/Rapid/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="${context}/resources/Rapid/assets/js/main.js"></script>
 </body>
 </html>
