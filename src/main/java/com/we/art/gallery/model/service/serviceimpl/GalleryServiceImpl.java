@@ -14,6 +14,7 @@ public class GalleryServiceImpl implements GalleryService{
 	private final GalleryRepository galleryRepository;
 	
 	public GalleryServiceImpl(GalleryRepository galleryRepository) {
+		
 		this.galleryRepository = galleryRepository;
 	}
 	
