@@ -4,9 +4,9 @@ let srcToBlob = (src,outputBox,viewBox) => {
 	let inputObj = src;
 	let outputObj = document.querySelector(outputBox);
 	
-	loadImage(inputObj,(img)=>{
+	loadImage(inputObj,(img,data)=>{
 		img.toBlob((blob)=>{
-			let rotateFile = new File([blob],'gellary',{type : 'JPEG'});
+			let rotateFile = new File([blob],data.name,{type : 'JPEG'});
 			let reader = new FileReader();
 			reader.onload = (e) => {
 				fileList.push(rotateFile);

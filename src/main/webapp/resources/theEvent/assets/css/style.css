@@ -134,7 +134,7 @@ h1, h2, h3, h4, h5, h6 {
 #header {
   height: 10vh;
   position: block;
-  transition: all 2s;
+  transition: 2s;
   z-index: 997;
   background: rgba(6, 12, 34, 0.98);
 }

@@ -56,10 +56,10 @@
 <!-- <img src="/resources/theEvent/assets/img/logo.png" alt="" title=""> -->
 	      <nav id="navbar" class="navbar order-last order-lg-0">
 	        <ul>
-	          <li><a class="nav-link scrollto active fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
-	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
-	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
-	          <li><a class="nav-link scrollto fs-3" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
+	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
+	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
+	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
+	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
 	          <!--

@@ -1,5 +1,6 @@
 package com.we.art.gallery.model.service.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.we.art.gallery.model.repository.GalleryRepository;
 import com.we.art.gallery.model.service.GalleryService;
+import com.we.art.gallery.model.vo.Gallery;
 
 @Service
 public class GalleryServiceImpl implements GalleryService{
@@ -20,6 +22,7 @@ public class GalleryServiceImpl implements GalleryService{
 	
 	@Override
 	public int insertGalleryInfo(List<MultipartFile> files, String userId) {
+		List<Gallery> potoList = new ArrayList<Gallery>();
 		
 		return 0;
 	}
