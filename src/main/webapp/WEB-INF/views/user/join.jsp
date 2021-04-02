@@ -6,7 +6,7 @@
         <h2>계정 만들기</h2>
     </div>
     <div class="row justify-content-center">
-        <form class="needs-validation col-sm-6" action="user/mailauth" method="post">
+        <form class="needs-validation col-sm-6" id="frm_join" action="${context}/user/mailauth" method="post">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input id="userId" type="text" class="form-control"
@@ -31,8 +31,8 @@
 
             <div class="form-group">
                 <label for="password">패스워드</label>
-                <input id="password" type="password" class="form-control" name="password"
-                       aria-describedby="passwordHelp" required minlength="6" maxlength="8">
+                <input id="pw" type="password" class="form-control" name="password"
+                       aria-describedby="passwordHelp" required minlength="8" maxlength="16">
                 <small id="passwordHelp" class="form-text text-muted">
                     6자 이상 8자 이내로 입력하세요. 영문자, 숫자, 특수기호를 사용할 수 있으며 공백은 사용할 수 없습니다.
                 </small>
@@ -70,6 +70,6 @@
 
 
 </div>
-
+<script src="/resources/js/user/join.js"></script>
 </body>
 </html>
