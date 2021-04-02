@@ -10,7 +10,7 @@
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input id="userId" type="text" class="form-control"
-                       placeholder="ID" aria-describedby="nicknameHelp" name="userId" required minlength="2" maxlength="8">
+                       placeholder="ID" aria-describedby="nicknameHelp" name="userId" required minlength="4" maxlength="16">
                 <button class="btn btn-primary" type="button" onclick="idCheck()">check</button>
                 <span class="text-danger" id="id_check"></span>
                 <small id="userIdHelp" class="form-text text-muted">
@@ -34,7 +34,7 @@
                 <input id="pw" type="password" class="form-control" name="password"
                        aria-describedby="passwordHelp" required minlength="8" maxlength="16">
                 <small id="passwordHelp" class="form-text text-muted">
-                    6자 이상 8자 이내로 입력하세요. 영문자, 숫자, 특수기호를 사용할 수 있으며 공백은 사용할 수 없습니다.
+                    8자 이상 16자 이내로 입력하세요. 영문자, 숫자, 특수기호를 사용할 수 있으며 공백은 사용할 수 없습니다.
                 </small>
                 <small class="invalid-feedback">패스워드를 입력하세요.</small>
             </div>

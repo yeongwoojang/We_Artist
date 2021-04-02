@@ -47,7 +47,7 @@ public class UserController {
 		return "user/join";
 	}
 	
-	@PostMapping("joinimpl/{authPath}")
+	@GetMapping("joinimpl/{authPath}")
 	public String joinImpl(@PathVariable("authPath") String urlPath
 			,HttpSession session
 			,@SessionAttribute("authPath") String sessionPath
@@ -61,7 +61,7 @@ public class UserController {
 		
 		persistInfo.setLoginMethod("public");
 		userService.insertUser(persistInfo);
-		//session.removeAttribute("psersistInfo");
+		session.removeAttribute("psersistInfo");
 		
 		model.addAttribute("alertMsg","회원가입이 완료되었습니다.");
 		model.addAttribute("url", ConfigCode.DOMAIN + "/index");
