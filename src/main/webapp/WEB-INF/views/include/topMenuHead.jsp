@@ -67,7 +67,6 @@
 	          <li><a class="nav-link scrollto fs-3"href="#">Home</a></li>
 	          <li><a class="nav-link scrollto fs-3" href="#">Gallery</a></li>
 	          <li><a class="nav-link scrollto fs-3" href="#">MyPage</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="#">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="${context}/join">회원가입</a></li>
 >>>>>>> ef3009132f2e65d13aacb8ae07e875456318bef2
 	          <!--
