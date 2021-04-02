@@ -56,19 +56,13 @@
 		
 	      <nav id="navbar" class="navbar order-last order-lg-0">
 	        <ul>
-<<<<<<< HEAD
 	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
-=======
-	          <li><a class="nav-link scrollto fs-3"href="#">Home</a></li>
-	          <li><a class="nav-link scrollto fs-3" href="#">Gallery</a></li>
-	          <li><a class="nav-link scrollto fs-3" href="#">MyPage</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="${context}/join">회원가입</a></li>
->>>>>>> ef3009132f2e65d13aacb8ae07e875456318bef2
+
 	          <!--
 	          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
 	          <ul>
