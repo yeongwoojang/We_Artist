@@ -18,6 +18,7 @@ window.onload = function(){ //페이지의 모든 요소들이 로드되면 호�
 			if (msg.length >= 20) {
 				borderBox.style.width = "30%";
 			} else {
+				
 			}
 			borderBox.style.borderRadius = "20px";
 			let br = document.createElement("br");
