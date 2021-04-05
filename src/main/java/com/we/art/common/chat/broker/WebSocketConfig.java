@@ -1,5 +1,7 @@
 package com.we.art.common.chat.broker;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -23,8 +25,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		System.out.println("시발");
-		System.out.println(registry);
-		  registry.addEndpoint("/chat/room1").withSockJS();
+		  registry.addEndpoint("/chat/room1").addInterceptors(new HttpHandShakeInterceptor()).withSockJS();
 	}
 }

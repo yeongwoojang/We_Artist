@@ -22,7 +22,8 @@
 					<p>김선민</p>
 					<p>김동찬</p>
 					<p>김지연</p>
-					<p>장영우</p>
+					<button type="button" id="test1" onclick="test('김지연');">김지연</button>
+					<button type="button" id="test2" onclick="test('장영우');">장영우</button>
 					<p>${context}</p>				
 				</div>
 			</div>
