@@ -3,5 +3,18 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.we.art.gallery.model.repository.GalleryRepository">
-
+	
+	<insert id="insertGalleryInfo">
+		<foreach collection="galleryList" item="list">
+			insert into tb_gallery(user_id,f_idx,rotation_path,gar_idx)
+			<foreach collection="list" item="item">
+				values(
+				#{item.userId},
+				#{item.fIdx},
+				#{item.rotationPath},
+				#{garIdx})
+			</foreach>
+		</foreach>
+	</insert>
+	
 </mapper>

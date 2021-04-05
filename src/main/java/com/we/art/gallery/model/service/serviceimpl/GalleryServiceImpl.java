@@ -22,7 +22,7 @@ public class GalleryServiceImpl implements GalleryService{
 	
 	@Override
 	public int insertGalleryInfo(List<MultipartFile> files, String userId) {
-		List<Gallery> potoList = new ArrayList<Gallery>();
+		List<Gallery> galleryList = new ArrayList<Gallery>();
 		
 		return 0;
 	}
