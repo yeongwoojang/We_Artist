@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/topMenuHead.jsp"%>
-	<button onclick="sendImageTest()">click</button>
 	<section id="hero">
 	    <div class="hero-container middle" data-aos="zoom-in" data-aos-delay="100">
 	    	<div class="d-none" id="divTest" style="background-color: rgba(0,0,0,0.8)">
