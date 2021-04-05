@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script> <!-- socjJS CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> <!-- STOMP CDN -->
+
+
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
 <link href="${context}/resources/Rapid/assets/vendor/aos/aos.css" rel="stylesheet">
 <link href="${context}/resources/Rapid/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -169,7 +175,20 @@
         </div>
 
       </div>
+     <button type="button" class="btn btn-primary" id="liveToastBtn" onclick="tShow();">Show live toast</button>
+
+      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+  	  	<div id="liveToast" class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+    		<div class="toast-header bg-light d-flex justify-content-end">
+      			<button id="btn_toast_close"type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    		</div>
+    	<div class="toast-body">
+      		메세지가 도착했습니다.
+    	</div>
+  		</div>
+	</div>
     </section>
+    <script src="${context}/resources/js/search/search_main.js"></script>
     <script src="${context}/resources/Rapid/assets/vendor/aos/aos.js"></script>
  <script src="${context}/resources/Rapid/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="${context}/resources/Rapid/assets/vendor/glightbox/js/glightbox.min.js"></script>

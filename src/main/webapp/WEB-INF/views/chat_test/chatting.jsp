@@ -1,39 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script> <!-- socjJs CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> <!-- STOMP CDN -->
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </head>
 <body>
-	<input type="text" id="msg-box">
-	<button type="button" class="btn-primary" onclick="sendMessage();"></button>
-<script>
-let stompClient = null;
-window.onload = function(){
-	let socket = new SockJS("room1");
-	stompClient = Stomp.over(socket);
-	stompClient.connect({},function(frame){
-		stompClient.subscribe("/queue/info",function(response){
-			console.log(JSON.parse(response.body));
-		});
-		console.log("소켓 연결 성공",frame);
-	});
+	<button type="button" class="btn btn-primary" onClick="tShow()"id="liveToastBtn">Show live toast</button>
+
+<div id="toast"class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded me-2" alt="...">
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+function tShow(){
+	document.getElementById("liveToast").className ="toast show";
 }
-
-	let sendMessage= function(){
-		let message = document.getElementById("msg-box").value;
-		stompClient.send("/info",{},JSON.stringify({'message' : message}));
-	}
-
-// 	stompClient.disconnect();
-	
 
 </script>
 </body>

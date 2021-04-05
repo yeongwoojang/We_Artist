@@ -54,7 +54,7 @@
 	      </div>
 <!-- <img src="/resources/theEvent/assets/img/logo.png" alt="" title=""> -->
 		
-	      <nav id="navbar" class="navbar order-last order-lg-0">
+	      <nav id="navbar" class="navbar order-last order-lg-0 d-flex justify-content-end" style="width:70%;">
 	        <ul>
 	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
@@ -62,7 +62,6 @@
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
-
 	          <!--
 	          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
 	          <ul>
@@ -87,5 +86,8 @@
 	        <i class="bi bi-list mobile-nav-toggle"></i>
 	      </nav>
 	      <!-- .navbar -->
+	      <div>
+	      	 <a class="nav-link scrollto fs-4" href="#"><i class="far fa-envelope text-light"></i></a>
+	      </div>
     	</div>
   	</header>
