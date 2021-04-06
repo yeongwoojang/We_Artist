@@ -1,7 +1,7 @@
 import {GLTFLoader} from '/resources/js/gallery/GLTFLoader.js';
 
 // 기본사용한는 전역변수
-let scene, camera, renderer, controls, stats;
+let scene, camera, renderer, controls,textureLoader;
 let container = document.querySelector('.middle');
 const gltfPath = 'landscape_gallery_by_stoneysteiner';
 
@@ -55,6 +55,9 @@ let init = () => {
 
 	const light = new THREE.PointLight(color,intensity);
 	light.position.set(0,1,0);
+	
+	textureLoader = new THREE.TextureLoader();
+	
 
     let target;
     const gltfLoader = new GLTFLoader();
@@ -69,6 +72,9 @@ let init = () => {
         // Cube003의 children은 액자인지 그림만인지... 하튼 객체 찾아냄
         target = root.getObjectByName('Cube003');
         for(let item of target.children){
+			
+			item.material.map = textureLoader.load('/download');
+			console.dir(item.material.map);
             targetList.push(item);
         }
         // 상하좌우 조명설치
@@ -101,7 +107,9 @@ let onDocumentMouseDown = (event) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
 				let src = '/resources/'+ gltfPath +'/textures/'+e.material.name+'_baseColor.jpeg';
-				srcToBlob(src,'#imgInfo','#divTest');			
+				//srcToBlob(src,'#imgInfo','#divTest');
+				document.querySelector('#imgInfo').src = 'download';	
+				document.querySelector("#divTest").className = 'd-flex position-absolute';
 				document.removeEventListener('click',onDocumentMouseDown);
 				document.querySelector('#btn_back').addEventListener('click',back);
             }

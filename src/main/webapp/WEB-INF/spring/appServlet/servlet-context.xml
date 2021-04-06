@@ -14,6 +14,7 @@
 		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+<resources location="/images/**" mapping="C:/CODE/"/>
 <!--트랜잭션 설정을 위해 tx와 aop 라는 두가지 네임스페이스를 사용한다.
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
