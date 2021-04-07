@@ -32,7 +32,7 @@
 					</form>
 				</div>
             </div>
-        <form class="needs-validation"  action="" method="post" novalidate>
+        <form class="needs-validation"  action="${context}/user/update" method="post" novalidate>
         	
             <div class="form-group row">
                 <label class="col-sm-6 col-form-label">Email</label>
@@ -52,7 +52,7 @@
             <div class="form-group row">
                 <label for="inputPassword3" class="col-sm-6 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" aria-describedby="passwordHelp" minlength="6" maxlength="8" required>
+                    <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" aria-describedby="passwordHelp" minlength="8" maxlength="16" required>
                     <small id="passwordHelp" class="form-text text-muted">회원 정보 변경을 위해서 새로운 8자 이상 16자 이내의 패스워드나, 기존의 패스워드를 입력하셔야 합니다.</small>
                     <small class="invalid-feedback">패스워드를 8자 이상 16자 이내로 입력하세요.</small>
                 </div>

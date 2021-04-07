@@ -61,7 +61,7 @@ public class UserController {
 
 		persistInfo.setLoginMethod("public");
 		userService.insertUser(persistInfo);
-		session.removeAttribute("psersistInfo");
+		session.removeAttribute("persistInfo");
 
 		model.addAttribute("alertMsg", "회원가입이 완료되었습니다.");
 		model.addAttribute("url", ConfigCode.DOMAIN + "/index");
@@ -101,9 +101,10 @@ public class UserController {
 	}
 	
 	@PostMapping("update")
-	public String updateProfile(@Valid User persistInfo, Errors errors
+	public String updateProfile(@ModelAttribute User persistInfo, Errors errors
 			, HttpSession session) {
 		
+		System.out.println(persistInfo);
 		if (errors.hasErrors()) {
 			return "user/profile";
 		}
