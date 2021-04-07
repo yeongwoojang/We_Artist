@@ -81,6 +81,8 @@ public class UserServiceImpl implements UserService {
 		return userInfo;
 	}
 
-	
-	
+	public int updateUser(User persistInfo) {
+		persistInfo.setPassword(encoder.encode(persistInfo.getPassword()));
+		return userRepository.updateUser(persistInfo);
+	}
 }

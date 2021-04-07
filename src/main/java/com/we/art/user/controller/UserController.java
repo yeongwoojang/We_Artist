@@ -99,6 +99,19 @@ public class UserController {
 	public String ShowProfile() {
 		return "user/profile";
 	}
+	
+	@PostMapping("update")
+	public String updateProfile(@Valid User persistInfo, Errors errors
+			, HttpSession session) {
+		
+		if (errors.hasErrors()) {
+			return "user/profile";
+		}
+		
+		session.setAttribute("persistInfo", persistInfo);
+		userService.updateUser(persistInfo);
+		return "/index/index";
+	}
 
 	@GetMapping("login")
 	public String login() {

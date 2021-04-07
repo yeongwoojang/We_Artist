@@ -27,6 +27,9 @@
 </head>
 <body>
 <section id="portfolio" class="portfolio section-bg">
+	<div>
+		<p id="curUser">${userId}</p>
+	</div>
       <div class="container aos-init aos-animate" data-aos="fade-up">
       	<div class="input-group border rounded-pill  p-2">
  		 <span class="input-group-text bg-transparent border border-0"><i class="fas fa-search"></i></span>
