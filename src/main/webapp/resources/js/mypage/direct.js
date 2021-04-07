@@ -3,17 +3,10 @@ let userId = null;
 let user = null;
 let testUser = null;
 let isSubscribe = false;
-window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
-	userId = document.getElementById("userId").innerHTML; //현재 세션에있는 유저 아이디
-	let socket = new SockJS("/chat/room1"); //sockJS객체 생성 endPoint : "room1"
-	stompClient = Stomp.over(socket); //stomp객체에 sockJs객체 연경
-	stompClient.connect({}, function(frame) { // 
-//		stompClient.subscribe("/queue/" + testUser, function(response) { //테스트유저에는 본인의 아이디가 들어가야한다.
-//
-//		});
-		console.log("소켓 연결 성공", frame);
-	});
-}
+/*window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
+	connectSocket();
+
+}*/
 
 //메세지 전송 함수
 function sendMessage() {
@@ -25,11 +18,13 @@ function sendMessage() {
 			borderBox.style.padding = "10px";
 			borderBox.style.marginBottom = "10px";
 			borderBox.style.border = "1px solid #DCDCDC"
+
 			if (msg.length >= 20) {
 				borderBox.style.width = "30%";
 			} else {
 				borderBox.style.display = 'inline-block'
 			}
+
 			borderBox.style.borderRadius = "20px";
 			let br = document.createElement("br");
 			let messageBox = document.createElement("div");
