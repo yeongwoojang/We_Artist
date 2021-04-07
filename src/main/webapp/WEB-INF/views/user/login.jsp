@@ -13,7 +13,7 @@
                         <div class="input-group-text">
                         <span class="fas fa-exclamation">
                         </span>
-                    </div>
+                    </div> 
                 </div>
     </div>
     <div class="input-group mb-3">
