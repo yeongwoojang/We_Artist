@@ -27,7 +27,7 @@
 					<form action="" id="form" name="form"
 						method="post" enctype="multipart/form-data" autocomplete="off">
 						<label for="ex_file">프로필 사진 바꾸기</label> 
-						<input type="file" id="ex_file" name="filename" required />
+						<input src="/resources/img/boyoung.jpg" type="file" id="ex_file" name="filename" required />
 						<button type="submit" class="btn btn-primary">업로드</button>
 					</form>
 				</div>
