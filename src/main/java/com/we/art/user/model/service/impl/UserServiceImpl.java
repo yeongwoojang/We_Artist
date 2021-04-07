@@ -72,4 +72,17 @@ public class UserServiceImpl implements UserService {
 		return userRepository.selectUserByEmail(email);
 	}
 
+	@Override
+	public User selectUserForLogin(User user) {
+		User userInfo = userRepository.selectUserById(user.getUserId());
+		if(userInfo == null || !encoder.matches(user.getPassword(), userInfo.getPassword())) {
+			return null;
+		}
+		return userInfo;
+	}
+
+	public int updateUser(User persistInfo) {
+		persistInfo.setPassword(encoder.encode(persistInfo.getPassword()));
+		return userRepository.updateUser(persistInfo);
+	}
 }
