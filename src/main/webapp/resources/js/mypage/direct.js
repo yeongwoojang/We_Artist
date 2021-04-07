@@ -1,13 +1,8 @@
 let stompClient = null; //stomp객체
 let userId = null;
 let user = null;
-let testUser = null;
+let selectUser = null;
 let isSubscribe = false;
-/*window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
-	connectSocket();
-
-}*/
-
 //메세지 전송 함수
 function sendMessage() {
 	if (event.keyCode == 13) {
@@ -37,15 +32,13 @@ function sendMessage() {
 			chatBox.appendChild(borderBox);
 			document.getElementById("msg_box").value = "";
 
-			stompClient.send("/message", {}, JSON.stringify({ 'message': msg, 'fromUser': userId, 'toUser': testUser }));
+			stompClient.send("/message", {}, JSON.stringify({ 'message': msg, 'fromUser': userId, 'toUser': selectUser }));
 		}
 	}
 }
 
-function test(val) {
-	if (!isSubscribe) {
-		testUser = val
-		stompClient.subscribe("/queue/" + testUser, function(response) { //채널 구독
+function subscribeChannel(selectedUser) {
+		stompClient.subscribe("/queue/" + selectedUser, function(response) { //채널 구독
 			let msgInfo = JSON.parse(response.body);
 			user = msgInfo.user
 			let msg = msgInfo.message
@@ -75,6 +68,9 @@ function test(val) {
 			}
 			console.log("구독중")
 		});
-	}
+}
 
+function subscribeUser(selectedUser){
+	selectUser = selectedUser //팔로우 목록중 한명을 클릭했을 시 선택한 유저의 ID를 'selectUser' 변수에 담는다.
+	subscribeChannel(selectUser);
 }
