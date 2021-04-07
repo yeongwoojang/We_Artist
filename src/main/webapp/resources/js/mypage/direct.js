@@ -8,7 +8,9 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 	let socket = new SockJS("/chat/room1"); //sockJS객체 생성 endPoint : "room1"
 	stompClient = Stomp.over(socket); //stomp객체에 sockJs객체 연경
 	stompClient.connect({}, function(frame) { // 
-
+//		stompClient.subscribe("/queue/" + testUser, function(response) { //테스트유저에는 본인의 아이디가 들어가야한다.
+//
+//		});
 		console.log("소켓 연결 성공", frame);
 	});
 }
