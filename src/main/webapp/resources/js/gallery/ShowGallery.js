@@ -54,7 +54,7 @@ let init = () => {
     backLight.position.set(0, ypos, -5);
 
 	const light = new THREE.PointLight(color,intensity);
-	light.position.set(0,1,0);
+	light.position.set(0,0.1,0);
 	
 	textureLoader = new THREE.TextureLoader();
 	
@@ -73,7 +73,7 @@ let init = () => {
         target = root.getObjectByName('Cube003');
         for(let item of target.children){
 			
-			item.material.map = textureLoader.load('/download');
+			item.material.map = textureLoader.load('/load');
 			console.dir(item.material.map);
             targetList.push(item);
         }
@@ -82,7 +82,7 @@ let init = () => {
 	    root.add(leftLight);
 	    root.add(frontLight);
 	    root.add(backLight);
-		//root.add(light); 바닥 텍스쳐 사용시 사용할듯함
+		//root.add(light); //바닥 텍스쳐 사용시 사용할듯함
         root.add(camera);
     });
 
@@ -106,9 +106,9 @@ let onDocumentMouseDown = (event) => {
         targetList.forEach((e) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
-				let src = '/resources/'+ gltfPath +'/textures/'+e.material.name+'_baseColor.jpeg';
+				//let src = '/resources/'+ gltfPath +'/textures/'+e.material.name+'_baseColor.jpeg';
 				//srcToBlob(src,'#imgInfo','#divTest');
-				document.querySelector('#imgInfo').src = 'download';	
+				document.querySelector('#imgInfo').src = 'load';	
 				document.querySelector("#divTest").className = 'd-flex position-absolute';
 				document.removeEventListener('click',onDocumentMouseDown);
 				document.querySelector('#btn_back').addEventListener('click',back);
