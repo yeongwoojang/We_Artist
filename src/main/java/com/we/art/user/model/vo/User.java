@@ -12,4 +12,5 @@ public class User {
 	private String nickName;
 	private int fIdx;
 	private String loginMethod;
+	
 }

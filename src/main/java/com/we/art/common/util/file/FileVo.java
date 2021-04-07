@@ -19,5 +19,4 @@ public class FileVo {
 	public String getFullPath() {
 		return ConfigCode.UPLOAD_PATH + fSavePath;
 	}
-	
 }
