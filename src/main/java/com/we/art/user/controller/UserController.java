@@ -124,7 +124,7 @@ public class UserController {
 		String result = null;
 		User userInfo = userService.selectUserForLogin(user); //입력받은 값으 DB를 조회하여 결과를 userInfo에 저
 		if (userInfo != null) { //만약에 userInfo가 null이 아니면 (DB에 입력받은 Id가 다면)
-			session.setAttribute("userId", userInfo.getUserId()); //세션에 그 유저 아이디를 저
+			session.setAttribute("userInfo", userInfo); //세션에 그 유저 아이디를 저
 			model.addAttribute("url",ConfigCode.DOMAIN+"/search/main");	//이동할 경로를 설정 
 		}
 		
