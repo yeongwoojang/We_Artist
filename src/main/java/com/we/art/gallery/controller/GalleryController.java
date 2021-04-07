@@ -67,8 +67,8 @@ public class GalleryController {
 		return "gallery/headTest";
 	}
 	
-	@GetMapping("download")
-	public ResponseEntity<byte[]> downloadFile(HttpServletResponse response) {
+	@GetMapping("load")
+	public ResponseEntity<byte[]> loadImage(HttpServletResponse response) {
 		
 		InputStream in = null;
 		ResponseEntity<byte[]> entity = null; 
