@@ -9,5 +9,9 @@ public interface UserService {
 
 	int insertUser(User persitInfo);
 	void authenticateEmail(User persistInfo, String authPath);
+	User selectUserForLogin(User user);
 
+	int updateUser(User persistInfo);
 }
+
+

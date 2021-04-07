@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="/WEB-INF/views/include/common_socket.jsp"%> <!-- Socket 연결 모듈 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,14 @@
 	<c:set var="context" value="${pageContext.request.contextPath}"/>
 	<script type="text/javascript" src="${context}/resources/js/common/urlEncoder.js"></script>
 	<script type="text/javascript" src="${context}/resources/js/common/asyncPageError.js"></script>
+	
+	
+	<!-- Socket CDN추가 -->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script> <!-- socjJS CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> <!-- STOMP CDN -->
+	
+	
 	
 	<!-- Google Fonts -->
   	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
@@ -91,3 +100,14 @@
 	      </div>
     	</div>
   	</header>
+  			<!-- Toast창  -->
+  	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+		<div id="liveToast" class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+    		<div class="toast-header bg-light d-flex justify-content-end">
+      			<button id="btn_toast_close"type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    		</div>
+    	<div class="toast-body">
+      		메세지가 도착했습니다.
+    	</div>
+  		</div>
+	</div>

@@ -15,8 +15,6 @@ public class ChatController {
 
 	@GetMapping("direct")
 	public String direct(@SessionAttribute("userId") String userId,HttpSession session) {
-//		int randomUserId = (int)(Math.random()*100)+1;
-//		session.setAttribute("userId","장영우");
 		System.out.println("저장된 유저아이디 : "+ userId);
 		return "mypage/direct";
 	}

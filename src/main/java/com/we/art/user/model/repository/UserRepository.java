@@ -3,6 +3,7 @@ package com.we.art.user.model.repository;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.we.art.user.model.vo.User;
 
@@ -20,4 +21,10 @@ public interface UserRepository {
 			+ " values(#{userId},#{password},#{email},#{name},#{phone},#{nickName},#{loginMethod})")
 	int insertUser(User persistInfo);
 
+	//아이디와 패스워드를 받아서 유저테이블에 일치하는 유저 정보가 있는지 확인한다.
+	@Select("SELECT *FROM TB_USER WHERE USER_ID = #{userId} && PASSWORD = #{password}")
+	User selectUserForLogin(User user);
+	
+	@Update("update tb_user set password=#{password}, name=#{name}, phone=#{phone}, nickname=#{nickName} where  user_id = #{userId}")
+	int updateUser(User persistInfo);
 }
