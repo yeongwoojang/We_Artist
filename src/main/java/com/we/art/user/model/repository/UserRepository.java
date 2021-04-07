@@ -3,6 +3,7 @@ package com.we.art.user.model.repository;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.we.art.user.model.vo.User;
 
@@ -19,5 +20,7 @@ public interface UserRepository {
 	@Insert("insert into tb_user(user_id,password,email,name,phone,nickname,login_method)"
 			+ " values(#{userId},#{password},#{email},#{name},#{phone},#{nickName},#{loginMethod})")
 	int insertUser(User persistInfo);
-
+	
+	@Update("update tb_user set password=#{password}, name=#{name}, phone=#{phone}, nickname=#{nickName} where  user_id = #{userId}")
+	int updateUser(User persistInfo);
 }
