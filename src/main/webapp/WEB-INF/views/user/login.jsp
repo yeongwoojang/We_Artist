@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/topMenuHead.jsp"%>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>로그인</h2>
+    </div>
+    <div class="row justify-content-center">
+        <form class="needs-validation col-sm-6" id="frm_join" action="${context}/user/loginimpl" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" name="userId" class="form-control" placeholder="아아디">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                        <span class="fas fa-exclamation">
+                        </span>
+                    </div> 
+                </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="password" name="password" class="form-control" placeholder="비밀번호">
+        <div class="input-group-append">
+            <div class="input-group-text">
+ <span class="fas fa-lock">
+</span>
+            </div>
+        </div>
+    </div>
+<div class="form-group">
+					<label class="font-weight-bold text-white"> 
+						<input type="checkbox" id="remember_us" name="remember_userId" ${checked}>
+					</label> 아이디 기억하기
+					<div class="interval_height a_none">
+						<a href="${pageContext.request.contextPath}/user/userSearch">&nbsp; 아이디 / 비밀번호 찾기</a>
+					</div>
+					</div>
+
+
+ <!-- /.col -->
+        <div class="col-4">
+            <button type="btn-login" class="btn btn-primary btn-block" >로그인</button>
+        </div> <!-- /.col -->
+    </form>
+       
+</div>
+</div>
+<script src="/resources/js/user/login.js"></script>
+
+
+</body>
+</html>
