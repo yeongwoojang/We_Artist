@@ -105,13 +105,11 @@ public class UserController {
 			, HttpSession session) {
 		
 		System.out.println(persistInfo);
-		if (errors.hasErrors()) {
-			return "user/profile";
-		}
+		System.out.println(session);
 		
-		session.setAttribute("persistInfo", persistInfo);
+		
 		userService.updateUser(persistInfo);
-		return "/index/index";
+		return "index/index";
 	}
 
 	@GetMapping("login")

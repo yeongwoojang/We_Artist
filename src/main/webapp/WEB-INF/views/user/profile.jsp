@@ -32,7 +32,7 @@
 					</form>
 				</div>
             </div>
-        <form class="needs-validation"  action="${context}/user/update" method="post" novalidate>
+        <form class="needs-validation" id="frm-profile" action="${context}/user/update" method="post" novalidate>
         	
             <div class="form-group row">
                 <label class="col-sm-6 col-form-label">Email</label>
