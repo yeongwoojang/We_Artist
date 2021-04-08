@@ -32,10 +32,10 @@ public class MessageController {
 //	@SendTo("/queue/info") //구독경로설정(이 경로를 구독하고 있는 사용자들에게 메시지를 뿌린다.)
 	public void info(Map<String,String> message,SimpMessageHeaderAccessor messageHeaderAccessor) {
 		HttpSession session = (HttpSession) messageHeaderAccessor.getSessionAttributes().get("session");
-		String id = (String) session.getAttribute("userId"); //현재 세션에 있는 유저
-		System.out.println(id+"가 보낸 메세지 내용 :"+ message);
-		String toUser = message.get("toUser");
-		simpMessagingTemplate.convertAndSend("/queue/"+ toUser,message);
+		User userInfo = (User) session.getAttribute("userInfo"); //현재 세션에 있는 유저
+		System.out.println(userInfo.getUserId()+"가 보낸 메세지 내용 :"+ message);
+		String msgTo = message.get("msgTo");
+		simpMessagingTemplate.convertAndSend("/queue/"+ msgTo,message);
 //		return message;
 	}
 
