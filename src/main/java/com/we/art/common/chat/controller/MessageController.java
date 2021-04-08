@@ -35,7 +35,9 @@ public class MessageController {
 		User userInfo = (User) session.getAttribute("userInfo"); //현재 세션에 있는 유저
 		System.out.println(userInfo.getUserId()+"가 보낸 메세지 내용 :"+ message);
 		String msgTo = message.get("msgTo");
-		simpMessagingTemplate.convertAndSend("/queue/"+ msgTo,message);
+		String roomId = message.get("roomId");
+		System.out.println("RoomId : "+roomId);
+		simpMessagingTemplate.convertAndSend("/queue/"+ roomId,message);
 //		return message;
 	}
 

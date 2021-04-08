@@ -8,5 +8,6 @@ public interface ChatService {
 
 	public int insertChatRoom(ChatRoom charRoom);
 	public List<String> selectFollowingList(String userId);
-	
+	public ChatRoom selectRoomId(ChatRoom chatRoom);
+	public List<ChatRoom> selectMyChatRoomList(String userId);
 }

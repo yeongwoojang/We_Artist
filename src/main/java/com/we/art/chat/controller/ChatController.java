@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.we.art.chat.model.service.ChatService;
 import com.we.art.chat.model.vo.ChatContent;
+import com.we.art.chat.model.vo.ChatRoom;
 import com.we.art.user.model.vo.User;
 
 @Controller
@@ -23,32 +25,48 @@ import com.we.art.user.model.vo.User;
 public class ChatController {
 
 	private final ChatService chatService;
-	
-	
+
 	public ChatController(ChatService chatService) {
 		this.chatService = chatService;
 	}
 
-
 	@GetMapping("direct")
-	public String direct(@SessionAttribute("userInfo") User userInfo,HttpSession session,Model model) {
+	public String direct(@SessionAttribute("userInfo") User userInfo, HttpSession session, Model model) {
 		System.out.println("유저세션 : ");
 		List<String> followingList = chatService.selectFollowingList(userInfo.getUserId());
 		System.out.println(followingList.toString());
-		model.addAttribute("followingList",followingList);
+		model.addAttribute("followingList", followingList);
 		return "mypage/direct";
 	}
-	
+
 	@PostMapping("subscribeimpl")
 	@ResponseBody
-	public String subscribeImpl(
-			@SessionAttribute("userInfo") User userInfo,
-			@RequestBody ChatContent chatContent,
-			HttpSession session,
-			Model model
-			) {
-		model.addAttribute("chatContent",chatContent);
+	public String subscribeImpl(@SessionAttribute("userInfo") User userInfo, @RequestBody ChatContent chatContent,
+			HttpSession session, Model model) {
+		model.addAttribute("chatContent", chatContent);
 		return "success";
 	}
-	
+
+	@PostMapping("enterchatroomimpl")
+	@ResponseBody
+	public String enterChatRoom(@RequestBody ChatRoom chatRoom) {
+		ChatRoom currentChatRoom = chatService.selectRoomId(chatRoom);
+		if(currentChatRoom!=null) {
+			System.out.println("있다.");
+			return currentChatRoom.getChatRoomNo();
+		}else {
+			System.out.println("없다.");
+			int res = chatService.insertChatRoom(chatRoom);
+			if(res!=0) {
+				currentChatRoom = chatService.selectRoomId(chatRoom);
+				if(currentChatRoom!=null) {
+					return currentChatRoom.getChatRoomNo();
+				}else {
+					return "failed";
+				}
+			}else {
+				return "failed";
+			}
+		}
+	}
 }
