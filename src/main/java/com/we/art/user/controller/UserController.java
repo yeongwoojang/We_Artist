@@ -131,9 +131,9 @@ public class UserController {
 	public String loginImpl(@ModelAttribute User user, HttpSession session,Model model) {
 		System.out.println(user);
 		String result = null;
-		User userInfo = userService.selectUserForLogin(user); //입력받은 값으 DB를 조회하여 결과를 userInfo에 저
+		User userInfo = userService.selectUserForLogin(user); //입력받은 값으 DB를 조회하여 결과를 userInfo에 저장
 		if (userInfo != null) { //만약에 userInfo가 null이 아니면 (DB에 입력받은 Id가 다면)
-			session.setAttribute("userInfo", userInfo); //세션에 그 유저 아이디를 저
+			session.setAttribute("userInfo", userInfo); //세션에 그 유저 아이디를 저장
 			model.addAttribute("url",ConfigCode.DOMAIN+"/search/main");	//이동할 경로를 설정 
 			
 			//장영우가 추가한 부분 (유저의 채팅방 리스트를 로그인하자마자 얻어야 함.)
@@ -147,12 +147,19 @@ public class UserController {
 		}
 		
 		else { //만약에 userInfo가 null이라  (DB에 입력받은 Id가 없다면)
-			model.addAttribute("alertMsg" , "로그인 실패하였습니다.");//result.jsp에 alert안에 들어갈 문자열 지
+			model.addAttribute("alertMsg" , "로그인 실패하였습니다.");//result.jsp에 alert안에 들어갈 문자열 지장
 			model.addAttribute("url",ConfigCode.DOMAIN+"/user/login"); //이동할 경로를 설정 
 		}
 		
-		return "common/result"; //model에 담긴 값을 result.jsp로 전
+		return "common/result"; //model에 담긴 값을 result.jsp로 전달
 
 	}
+	
+	//김지연 비밀번호 찾기
+	@GetMapping("findId") 
+	public String findId() {
+		return "user/findId";
+	}
+	
 
 }

@@ -3,8 +3,10 @@
 <%@ include file="/WEB-INF/views/include/topMenuHead.jsp"%>
 
 <section id="speakers">
-	<video id="localVideo" autoplay muted playsinline></video>
-	<video id="remoteVideo" autoplay playsinline></video>
+	<input type="file" id="upload">
+	<button onclick="imgToBlob('#preview','#preview2')">전환</button>
+	<img alt="" src="" id="preview" style="width: 300px; height: 300px;">
+	<img alt="" src="" id="preview2" style="width: 300px; height: 300px;">
 </section>
 
 <button onclick="createOffer()">Create</button>
