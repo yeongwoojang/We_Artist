@@ -9,6 +9,12 @@
 	<img alt="" src="" id="preview2" style="width: 300px; height: 300px;">
 </section>
 
+<button onclick="createOffer()">Create</button>
+<br>
+<input type="text" id="messageInput"/>
+<button onclick="sendMessage()">Send</button>
+
+<script type="text/javascript" src="/resources/js/live/liveClient.js"></script>
 <script type="text/javascript" src="/resources/js/gallery/load-image.all.min.js"></script>
 <script type="text/javascript" src="/resources/js/gallery/rotationImg.js"></script>
 </body>

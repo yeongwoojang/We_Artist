@@ -8,12 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script> socjJS CDN -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> STOMP CDN -->
-
-
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
 <link href="${context}/resources/rapid/assets/vendor/aos/aos.css" rel="stylesheet">
 <link href="${context}/resources/rapid/assets/img/apple-touch-icon.png" rel="apple-touch-icon">

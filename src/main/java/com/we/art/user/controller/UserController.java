@@ -1,5 +1,7 @@
 package com.we.art.user.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.we.art.chat.model.service.ChatService;
+import com.we.art.chat.model.vo.ChatRoom;
 import com.we.art.common.code.ConfigCode;
 import com.we.art.common.code.ErrorCode;
 import com.we.art.common.exception.ToAlertException;
@@ -32,10 +36,14 @@ import com.we.art.user.validator.UserValidator;
 public class UserController {
 
 	private final UserService userService;
+	private final ChatService chatService;
 	private final UserValidator userValidator;
 
-	public UserController(UserService userService, UserValidator userValidator) {
+	
+
+	public UserController(UserService userService, ChatService chatService, UserValidator userValidator) {
 		this.userService = userService;
+		this.chatService = chatService;
 		this.userValidator = userValidator;
 	}
 
@@ -61,7 +69,7 @@ public class UserController {
 
 		persistInfo.setLoginMethod("public");
 		userService.insertUser(persistInfo);
-		session.removeAttribute("psersistInfo");
+		session.removeAttribute("persistInfo");
 
 		model.addAttribute("alertMsg", "회원가입이 완료되었습니다.");
 		model.addAttribute("url", ConfigCode.DOMAIN + "/index");
@@ -101,16 +109,15 @@ public class UserController {
 	}
 	
 	@PostMapping("update")
-	public String updateProfile(@Valid User persistInfo, Errors errors
+	public String updateProfile(@ModelAttribute User persistInfo, Errors errors
 			, HttpSession session) {
 		
-		if (errors.hasErrors()) {
-			return "user/profile";
-		}
+		System.out.println(persistInfo);
+		System.out.println(session);
 		
-		session.setAttribute("persistInfo", persistInfo);
+		
 		userService.updateUser(persistInfo);
-		return "/index/index";
+		return "index/index";
 	}
 
 	@GetMapping("login")
@@ -126,6 +133,15 @@ public class UserController {
 		if (userInfo != null) { //만약에 userInfo가 null이 아니면 (DB에 입력받은 Id가 다면)
 			session.setAttribute("userInfo", userInfo); //세션에 그 유저 아이디를 저장
 			model.addAttribute("url",ConfigCode.DOMAIN+"/search/main");	//이동할 경로를 설정 
+			
+			//장영우가 추가한 부분 (유저의 채팅방 리스트를 로그인하자마자 얻어야 함.)
+			List<ChatRoom> myChatRoomList = new ArrayList<ChatRoom>();
+			myChatRoomList = chatService.selectMyChatRoomList(userInfo.getUserId());
+			if(myChatRoomList.size()!=0) {
+				session.setAttribute("myChatRoomList",myChatRoomList);
+				System.out.println(myChatRoomList);
+			}
+			//장영우가 추가한 부분 여기까지.
 		}
 		
 		else { //만약에 userInfo가 null이라  (DB에 입력받은 Id가 없다면)
