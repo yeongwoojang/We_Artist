@@ -154,5 +154,12 @@ public class UserController {
 		return "common/result"; //model에 담긴 값을 result.jsp로 전달
 
 	}
+	
+	//김지연 비밀번호 찾기
+	@GetMapping("findId") 
+	public String findId() {
+		return "user/findId";
+	}
+	
 
 }
