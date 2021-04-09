@@ -113,7 +113,7 @@ public class UserController {
 			, HttpSession session) {
 		
 		System.out.println(persistInfo);
-		System.out.println(session);
+		System.out.println(session.getAttribute("userInfo"));
 		
 		
 		userService.updateUser(persistInfo);
