@@ -15,7 +15,7 @@
  
         <!-- enable csrf protection -->
  
-        <csrf disabled="false"/>
+        <csrf disabled="true"/>
     </http>
     <authentication-manager>
         <!-- <authentication-provider>

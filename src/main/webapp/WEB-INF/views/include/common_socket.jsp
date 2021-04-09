@@ -7,8 +7,9 @@ let stompClient = null;
 let myChatRoomList = null;
 window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
 	myChatRoomList = new Array(); //내가 속한 채팅방 리스트
+	let chatRoom;
 	<c:forEach items='${myChatRoomList}' var='item'>
-		let chatRoom = new Object();
+		chatRoom = new Object();
 		chatRoom.chatRoomNo = "${item.chatRoomNo}"
 		chatRoom.firstUser = "${item.firstUser}";
 		chatRoom.seconduser = "${item.secondUser}";
