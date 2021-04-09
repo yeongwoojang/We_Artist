@@ -42,8 +42,10 @@ function subscribeChannel(currentRoomId) {
 			let msgInfo = JSON.parse(response.body);
 			let msg = msgInfo.message
 			console.log("메세지 : " + msg)
+			console.log("msgFrom : "+ msgInfo.msgFrom);
+			console.log("currentUserId : "+ currentUserId);
 			//currentUserId : common_socket.jsp 파일에 있는 현재 로그인한 유저의 아이디를 담고있는 변수 
-			if (msgInfo.fromUser != currentUserId) {
+			if (msgInfo.msgFrom != currentUserId) {
 				let chatBox = document.getElementById("chat_box");
 				let borderBox = document.createElement("div");
 				borderBox.style.padding = "10px";
@@ -71,8 +73,7 @@ function subscribeChannel(currentRoomId) {
 		});
 }
 
-function createRoomId(selectedUser,currentRoomId){
-	
+function createRoomId(selectedUser){
 	selectUser = selectedUser //팔로우 목록중 한명을 클릭했을 시 선택한 유저의 ID를 'selectUser' 변수에 담는다.
 	enterChatRoomImpl(currentUserId,selectUser); //입장한 채팅방의 번호를 가져온다.
 //	let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
