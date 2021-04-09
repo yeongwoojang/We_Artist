@@ -61,14 +61,7 @@ let connectSocket = function(){
 					}	
 					
 					
-					console.log(tempMsgFrom+" , "+ msgFrom)
-// 					if(tempMsgFrom != msgFrom){
-// 						let chatBox = document.getElementById("chat_box");
-// 						chatBox.innerHTML = "";
-// 					}
-						
 					let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
-						console.log("현재방 : "+currentRoomId);
 					if(msgFrom!= currentUserId && chatIndex==null && roomId == currentRoomId) {
 						let chatBox = document.getElementById("chat_box");
 						let borderBox = document.createElement("div");

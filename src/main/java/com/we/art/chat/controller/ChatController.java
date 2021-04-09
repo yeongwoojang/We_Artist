@@ -1,5 +1,6 @@
 package com.we.art.chat.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,4 +70,36 @@ public class ChatController {
 			}
 		}
 	}
+	
+	@PostMapping("insertchatcontentimpl")
+	@ResponseBody
+	public String insertChatContentImpl(@RequestBody ChatContent chatContent) {
+		int res = chatService.insertChatContent(chatContent);
+		if(res!=0) {
+			return "success";
+		}else {
+			return "failed";
+		}
+	}
+	
+	@PostMapping("selectchatcontentlistimpl")
+	@ResponseBody
+	public List<ChatContent> selectChatContentListImpl(@RequestBody ChatRoom chatRoom){
+		List<ChatContent> chatContentList = new ArrayList<ChatContent>();
+		chatContentList = chatService.selectChatContentList(chatRoom);
+		return chatContentList;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.we.art.chat.model.vo.ChatContent;
 import com.we.art.chat.model.vo.ChatRoom;
 
 @Mapper
@@ -31,4 +32,14 @@ public interface ChatRepository {
 	@Select("SELECT *FROM TB_CHAT_ROOM WHERE FIRST_USER = #{userId} OR SECOND_USER = #{userId}")	
 	List<ChatRoom> selectMyChatRoomList(String userId);
 	
+	@Insert("INSERT INTO TB_CHAT_CONTENT(CHAT_NO,CHAT_ROOM_NO,MSG,MSG_TIME,MSG_TO,MSG_FROM)"
+			+" VALUES('CHATNO'||SC_CHAT_IDX.NEXTVAL,#{chatRoomNo},#{msg},#{msgTime},#{msgTo},#{msgFrom})")
+	int insertChatContent(ChatContent chatContent);
+	
+	@Select("SELECT *FROM TB_CHAT_CONTENT"
+			+ " WHERE CHAT_ROOM_NO = (SELECT CHAT_ROOM_NO"
+			+ " FROM TB_CHAT_ROOM"
+			+ " WHERE (FIRST_USER = #{firstUser} AND SECOND_USER = #{secondUser})"
+			+ " OR (FIRST_USER = #{secondUser} AND SECOND_USER = #{firstUser}))")
+	List<ChatContent> selectChatContentList(ChatRoom chatRoom);
 }

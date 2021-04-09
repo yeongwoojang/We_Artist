@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.we.art.chat.model.repository.ChatRepository;
 import com.we.art.chat.model.service.ChatService;
+import com.we.art.chat.model.vo.ChatContent;
 import com.we.art.chat.model.vo.ChatRoom;
 
 @Service
@@ -42,6 +43,19 @@ public class ChatServiceImpl implements ChatService{
 		return chatRepository.selectMyChatRoomList(userId);
 	}
 
+
+	@Override
+	public int insertChatContent(ChatContent chatContent) {
+		return chatRepository.insertChatContent(chatContent);
+	}
+
+
+	@Override
+	public List<ChatContent> selectChatContentList(ChatRoom chatRoom) {
+		return chatRepository.selectChatContentList(chatRoom);
+	}
+
+	
 	
 	
 }

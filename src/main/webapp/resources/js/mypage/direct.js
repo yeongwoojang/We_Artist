@@ -31,46 +31,11 @@ function sendMessage() {
 			chatBox.appendChild(borderBox);
 			document.getElementById("msg_box").value = "";
 			console.log('메세지 전송')
-			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgTo': selectUser }));
+			let msgTime = getCurrentTime();
+			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgTo': selectUser,'msgTime' : msgTime }));
+			insertChatContentImpl(currentRoomId,msg,currentUserId,selectUser,msgTime);
 		}
 	}
-}
-
-function subscribeChannel(currentRoomId) {
-	console.log(currentRoomId)
-		stompClient.subscribe("/queue/" + currentRoomId, function(response) { //채널 구독
-			let msgInfo = JSON.parse(response.body);
-			let msg = msgInfo.message
-			console.log("메세지 : " + msg)
-			console.log("msgFrom : "+ msgInfo.msgFrom);
-			console.log("currentUserId : "+ currentUserId);
-			//currentUserId : common_socket.jsp 파일에 있는 현재 로그인한 유저의 아이디를 담고있는 변수 
-			if (msgInfo.msgFrom != currentUserId) {
-				let chatBox = document.getElementById("chat_box");
-				let borderBox = document.createElement("div");
-				borderBox.style.padding = "10px";
-				borderBox.style.marginBottom = "10px";
-				borderBox.style.border = "1px solid #DCDCDC"
-				console.log("메세지 띄우자")
-				if (msg.length >= 20) {
-					borderBox.style.width = "30%";
-				} else {
-
-				}
-				borderBox.style.borderRadius = "20px";
-				let br = document.createElement("br");
-				let messageBox = document.createElement("div");
-
-				borderBox.style.background = "#FFFFFF";
-				borderBox.className = "float-start align-self-start"
-				messageBox.style.textAlign = "left"
-				chatBox.appendChild(br);
-				messageBox.innerHTML = msg;
-				borderBox.appendChild(messageBox);
-				chatBox.appendChild(borderBox);
-			}
-			console.log("구독중")
-		});
 }
 
 function createRoomId(selectedUser){
@@ -112,15 +77,79 @@ function enterChatRoomImpl(currentUserId,selectUser){
 				chatIndex.parentNode.removeChild(chatIndex); //유저를 선택하면 chatIndex 제거
 			}
 			sendMessageBox.style.visibility="visible" // 메세지를 입력하는 box를 보이게한다.
-//			subscribeChannel(currentRoomId); // 선택한 유저를 구독
 			let chatBox = document.getElementById("chat_box");
 			chatBox.innerHTML = "";
 			console.log(text);
+			selectChatContentListImpl(currentRoomId,currentUserId,selectUser);
 		}else{
 			//TODO 채팅방 만들기를 실패했을 시
 		}
 	})
 }
+
+function insertChatContentImpl(roomId,msg,msgFrom,msgTo,msgTime){
+	const url = '/chat/insertchatcontentimpl';
+	let paramObj = new Object();
+	paramObj.chatRoomNo = roomId;
+	paramObj.msg = msg;
+	paramObj.msgFrom = msgFrom;
+	paramObj.msgTo = msgTo;
+	paramObj.msgTime = msgTime;
+	
+	let headerObj = new Headers();
+	headerObj.append('content-type',"application/json");
+	fetch(url,{
+		method:"POST",
+		headers:headerObj,
+		body:JSON.stringify(paramObj)
+	})
+	.then(response =>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		if(text=='fail'){
+			
+		}else{
+			console.log("통신 성공")
+		}
+	})
+}
+
+function selectChatContentListImpl(chatRoomNo,firstUser,secondUser){
+	const url = '/chat/selectchatcontentlistimpl';
+	let paramObj = new Object();
+	paramObj.chatRoomNo = chatRoomNo;
+	paramObj.firstUser = firstUser;
+	paramObj.secondUser = secondUser;
+	
+	let headerObj = new Headers();
+	headerObj.append('content-type','application/json');
+	fetch(url,{
+		method : "POST",
+		headers : headerObj,
+		body : JSON.stringify(paramObj)
+	})
+	.then(response =>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		if(text=='failed'){
+			
+		}else{
+			console.dir(text);
+		}
+	})
+}
+
+
+
+
+
+
+
+
 
 
 
