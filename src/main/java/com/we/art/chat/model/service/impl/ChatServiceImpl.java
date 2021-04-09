@@ -30,6 +30,18 @@ public class ChatServiceImpl implements ChatService{
 		return chatRepository.selectFollowingList(userId);
 	}
 
+
+	@Override
+	public ChatRoom selectRoomId(ChatRoom chatRoom) {
+		return chatRepository.selectRoomId(chatRoom);
+	}
+
+
+	@Override
+	public List<ChatRoom> selectMyChatRoomList(String userId) {
+		return chatRepository.selectMyChatRoomList(userId);
+	}
+
 	
 	
 }
