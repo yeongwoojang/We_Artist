@@ -16,5 +16,4 @@
 			</foreach>
 		</foreach>
 	</insert>
-	
 </mapper>
