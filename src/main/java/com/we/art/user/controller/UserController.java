@@ -117,6 +117,8 @@ public class UserController {
 		
 		
 		userService.updateUser(persistInfo);
+		User userInfo = userService.selectUserById(persistInfo.getUserId());
+		session.setAttribute("userInfo", userInfo);
 		return "index/index";
 	}
 
