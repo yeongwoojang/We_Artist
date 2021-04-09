@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <script>
 let currentUserId;
 let stompClient = null;
 let myChatRoomList = null;
+let tempMsgFrom = null;
 window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
 	myChatRoomList = new Array(); //내가 속한 채팅방 리스트
 	let chatRoom;
@@ -37,7 +38,7 @@ let connectSocket = function(){
 					let msg = msgInfo.message;
 					let msgFrom = msgInfo.msgFrom;
 					let msgTo = msgInfo.msgTo;
-					console.log("팔로우창 띄우자")
+					let roomId = msgInfo.roomId;
 //		 			subscribeImpl(msg,msgFrom,msgTo); //받은 메시지를 Controller에 전달
 					
 					let chatRoomCard = document.querySelectorAll(".chat_room_card"); //팔로잉하고 있는 유저들의 item항목을 담고있는 div태그 리스트
@@ -57,7 +58,41 @@ let connectSocket = function(){
 							lastMessage[i].innerHTML = msg
 							lastMessageTime[i].innerHTML = getCurrentTime();
 						}
-					}		
+					}	
+					
+					
+					console.log(tempMsgFrom+" , "+ msgFrom)
+// 					if(tempMsgFrom != msgFrom){
+// 						let chatBox = document.getElementById("chat_box");
+// 						chatBox.innerHTML = "";
+// 					}
+						
+					let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
+						console.log("현재방 : "+currentRoomId);
+					if(msgFrom!= currentUserId && chatIndex==null && roomId == currentRoomId) {
+						let chatBox = document.getElementById("chat_box");
+						let borderBox = document.createElement("div");
+						borderBox.style.padding = "10px";
+						borderBox.style.marginBottom = "10px";
+						borderBox.style.border = "1px solid #DCDCDC"
+						console.log("메세지 띄우자")
+						if (msg.length >= 20) {
+							borderBox.style.width = "30%";
+						}
+						
+						borderBox.style.borderRadius = "20px";
+						let br = document.createElement("br");
+						let messageBox = document.createElement("div");
+
+						borderBox.style.background = "#FFFFFF";
+						borderBox.className = "float-start align-self-start"
+						messageBox.style.textAlign = "left"
+						chatBox.appendChild(br);
+						messageBox.innerHTML = msg;
+						borderBox.appendChild(messageBox);
+						chatBox.appendChild(borderBox);
+					}
+					
 				}else{
 					document.getElementById("liveToast").className ="toast show";
 					setTimeout(function() {

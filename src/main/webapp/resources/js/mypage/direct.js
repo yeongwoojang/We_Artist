@@ -108,9 +108,13 @@ function enterChatRoomImpl(currentUserId,selectUser){
 			currentRoomId = text;
 			let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
 			let sendMessageBox = document.getElementById("send_message_box"); //메시지를입력하는 box
-			chatIndex.parentNode.removeChild(chatIndex); //유저를 선택하면 chatIndex 제거
+			if(chatIndex!=null){
+				chatIndex.parentNode.removeChild(chatIndex); //유저를 선택하면 chatIndex 제거
+			}
 			sendMessageBox.style.visibility="visible" // 메세지를 입력하는 box를 보이게한다.
-			subscribeChannel(currentRoomId); // 선택한 유저를 구독
+//			subscribeChannel(currentRoomId); // 선택한 유저를 구독
+			let chatBox = document.getElementById("chat_box");
+			chatBox.innerHTML = "";
 			console.log(text);
 		}else{
 			//TODO 채팅방 만들기를 실패했을 시
