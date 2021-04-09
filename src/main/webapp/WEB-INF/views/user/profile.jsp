@@ -37,7 +37,7 @@
             <div class="form-group row">
                 <label class="col-sm-6 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" value="${sessionScope.userInfo.email }" readonly>
+                    <input class="form-control" name="email" type="text" value="${sessionScope.userInfo.email }" readonly>
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
             <div class="form-group row">
                 <label for="inputNickname" class="col-sm-6 col-form-label">Nickname</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nickname" id="inputNickname" value="${sessionScope.userInfo.nickName }">
+                    <input type="text" class="form-control" name="nickName" id="inputNickname" value="${sessionScope.userInfo.nickName }">
                 </div>
             </div>
 
