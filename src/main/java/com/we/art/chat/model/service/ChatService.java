@@ -13,4 +13,5 @@ public interface ChatService {
 	public List<ChatRoom> selectMyChatRoomList(String userId);
 	public int insertChatContent(ChatContent chatContent);
 	public List<ChatContent> selectChatContentList(ChatRoom chatRoom);
+	public List<ChatContent> selectLastMessageList(List<ChatRoom> myChatRoomList);
 }

@@ -36,7 +36,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insertUser(User persistInfo) {
-		persistInfo.setPassword(encoder.encode(persistInfo.getPassword()));
+//		persistInfo.setPassword(encoder.encode(persistInfo.getPassword())); //회원가입좀 하겠습니다 - 장영우
+		persistInfo.setPassword(persistInfo.getPassword());
 		return userRepository.insertUser(persistInfo);
 	}
 
@@ -75,7 +76,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User selectUserForLogin(User user) {
 		User userInfo = userRepository.selectUserById(user.getUserId());
-		if(userInfo == null || !encoder.matches(user.getPassword(), userInfo.getPassword())) {
+		//회원가입좀 하겠습니다 - 장영우
+//		if(userInfo == null || !encoder.matches(user.getPassword(), userInfo.getPassword())) {
+//			return null;
+//		} 
+		if(userInfo ==null) {
 			return null;
 		}
 		return userInfo;

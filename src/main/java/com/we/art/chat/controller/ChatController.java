@@ -32,11 +32,13 @@ public class ChatController {
 	}
 
 	@GetMapping("direct")
-	public String direct(@SessionAttribute("userInfo") User userInfo, HttpSession session, Model model) {
-		System.out.println("유저세션 : ");
+	public String direct(@SessionAttribute("userInfo") User userInfo, @SessionAttribute("myChatRoomList") List<ChatRoom> myChatRoomList,HttpSession session, Model model) {
 		List<String> followingList = chatService.selectFollowingList(userInfo.getUserId());
-		System.out.println(followingList.toString());
+		List<ChatContent> lastMessageList = chatService.selectLastMessageList(myChatRoomList);
+		System.out.println(followingList);
+		System.out.println("lastMessageList : " +lastMessageList);
 		model.addAttribute("followingList", followingList);
+		model.addAttribute("lastMessageList",lastMessageList);
 		return "mypage/direct";
 	}
 
