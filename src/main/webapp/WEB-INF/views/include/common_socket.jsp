@@ -142,7 +142,6 @@ function getCurrentTime(){
 	return year+"년 "+month+"월 "+date+"일 "+hours+"시 "+minutes+"분"
 }
 
-
 //팔로잉 요청 수락용 푸시Socket
 function connectPushSocket(){
 	let socket = new SockJS("/chat/room2"); //sockJS객체 생성 endPoint : "room2"
