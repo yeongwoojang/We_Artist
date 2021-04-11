@@ -139,10 +139,10 @@ public class UserController {
 			//장영우가 추가한 부분 (유저의 채팅방 리스트를 로그인하자마자 얻어야 함.)
 			List<ChatRoom> myChatRoomList = new ArrayList<ChatRoom>();
 			myChatRoomList = chatService.selectMyChatRoomList(userInfo.getUserId());
-			if(myChatRoomList.size()!=0) {
+//			if(myChatRoomList.size()!=0) {
 				session.setAttribute("myChatRoomList",myChatRoomList);
 				System.out.println(myChatRoomList);
-			}
+//			}
 			//장영우가 추가한 부분 여기까지.
 		}
 		

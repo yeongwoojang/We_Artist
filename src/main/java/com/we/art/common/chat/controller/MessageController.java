@@ -40,5 +40,16 @@ public class MessageController {
 		simpMessagingTemplate.convertAndSend("/queue/"+ roomId,message);
 //		return message;
 	}
+	
+	@MessageMapping("push")
+	public void commonPusdh(Map<String,String> message, SimpMessageHeaderAccessor messageHeaderAccessor) {
+		HttpSession session = (HttpSession) messageHeaderAccessor.getSessionAttributes().get("session");
+		User userInfo = (User) session.getAttribute("userInfo"); //현재 세션에 있는 유저
+		System.out.println(userInfo.getUserId()+"가 보낸 메세지 내용 :"+ message);
+		String fromId = message.get("fromId");
+		String toId = message.get("toId");
+		System.out.println("fromId : "+fromId +"그리고 toId : "+ toId);
+		simpMessagingTemplate.convertAndSend("/queue/"+toId,message);
+	}
 
 }

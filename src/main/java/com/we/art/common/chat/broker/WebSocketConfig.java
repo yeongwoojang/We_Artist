@@ -26,5 +26,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		  registry.addEndpoint("/chat/room1").addInterceptors(new HttpHandShakeInterceptor()).withSockJS();
+		  registry.addEndpoint("/chat/room2").addInterceptors(new HttpHandShakeInterceptor()).withSockJS();
 	}
 }

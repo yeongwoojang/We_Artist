@@ -33,8 +33,15 @@ public class ChatController {
 
 	@GetMapping("direct")
 	public String direct(@SessionAttribute("userInfo") User userInfo, @SessionAttribute("myChatRoomList") List<ChatRoom> myChatRoomList,HttpSession session, Model model) {
-		List<String> followingList = chatService.selectFollowingList(userInfo.getUserId());
-		List<ChatContent> lastMessageList = chatService.selectLastMessageList(myChatRoomList);
+		List<String> followingList = new ArrayList<>();
+		followingList = chatService.selectFollowingList(userInfo.getUserId());
+		List<ChatContent> lastMessageList = new ArrayList<>();
+		if(followingList.size()!=0) {
+			followingList = chatService.selectFollowingList(userInfo.getUserId());
+		}
+		if(myChatRoomList.size()!=0) {
+			lastMessageList = chatService.selectLastMessageList(myChatRoomList);
+		}
 		System.out.println(followingList);
 		System.out.println("lastMessageList : " +lastMessageList);
 		model.addAttribute("followingList", followingList);
@@ -90,6 +97,16 @@ public class ChatController {
 		List<ChatContent> chatContentList = new ArrayList<ChatContent>();
 		chatContentList = chatService.selectChatContentList(chatRoom);
 		return chatContentList;
+	}
+	
+	@GetMapping("selectmychatroomlistimpl")
+	@ResponseBody
+	public List<ChatRoom> selectMyChatRoomListimpl(@SessionAttribute("userInfo") User userInfo,HttpSession session) {
+		List<ChatRoom> myChatRoomList = new ArrayList<ChatRoom>();
+		myChatRoomList = chatService.selectMyChatRoomList(userInfo.getUserId());
+		session.setAttribute("myChatRoomList", myChatRoomList);
+		System.out.println("MYCHATROOMLIST : "+ myChatRoomList);
+		return myChatRoomList;
 	}
 }
 
