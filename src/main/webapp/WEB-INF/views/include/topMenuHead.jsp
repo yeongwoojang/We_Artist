@@ -69,7 +69,7 @@
 	          <li><a class="nav-link scrollto fs-4" href="${context}/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="${context}/user/profile" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
+	          <li><a class="nav-link scrollto fs-4" href="${context}/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="${context}/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
 
 	<!--           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
