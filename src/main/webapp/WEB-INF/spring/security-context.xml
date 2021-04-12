@@ -11,10 +11,10 @@
  
     <http auto-config='true' use-expressions="true">
  
+ 		<!-- 설정된 경로에 권한을 검사하는 태크 -->
         <!--<intercept-url pattern="/" requires-channel="https" access="permitAll" />  -->
  
-        <!-- enable csrf protection -->
- 
+        <!-- csrf 처리할껀지 체크 -->
         <csrf disabled="true"/>
     </http>
     <authentication-manager>

@@ -20,14 +20,18 @@ let sendMessage = () => {
 
 const constraints = {
 	video : true,
-	audio : false
+	audio : false,
+	width : 600,
+	height : 500
 }
 
-navigator.mediaDevices.getUserMedia(constraints)
+//navigator.mediaDevices.getUserMedia(constraints)   // getUserMedia 사용시 해당 디바이스의 카메라를 사용한다
+navigator.mediaDevices.getDisplayMedia(constraints)  // getDisplayMedia 사용시 해당 원하는 화면을 사용할 수 있다.
 .then((stream) => {
 	peerConnection.addStream(stream);
 	localStream = stream;
 	localVideo.srcObject = stream;
+	console.dir(stream);
 })
 .catch((error) => {
 	
@@ -70,12 +74,12 @@ let initialize = () => {
 			},
 			{
 		      'urls': 'turn:3.19.138.148:3478?transport=udp',
-		      'credential': 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+		      'credential': 'sunmin',
 		      'username': 'sunmin:sunmin'
 		    },
 		    {
 		      'urls': 'turn:3.19.138.148:3478?transport=tcp',
-		      'credential': 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+		      'credential': 'sunmin',
 		      'username': 'sunmin:sunmin'
 		    }
 		]
