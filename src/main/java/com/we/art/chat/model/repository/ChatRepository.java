@@ -42,4 +42,6 @@ public interface ChatRepository {
 			+ " WHERE (FIRST_USER = #{firstUser} AND SECOND_USER = #{secondUser})"
 			+ " OR (FIRST_USER = #{secondUser} AND SECOND_USER = #{firstUser}))")
 	List<ChatContent> selectChatContentList(ChatRoom chatRoom);
+	
+	List<ChatContent> selectLastMessageList(@Param("myChatRoomList")List<ChatRoom> myChatRoomList);
 }

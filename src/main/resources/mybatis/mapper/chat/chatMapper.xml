@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.we.art.chat.model.repository.ChatRepository">
+
+	<select id="selectLastMessageList" parameterType="map" resultType="chatContent">
+	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME
+	FROM(
+    	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME,
+    	ROW_NUMBER() OVER(PARTITION BY CHAT_ROOM_NO ORDER BY CHAT_NO DESC) as RowIdx
+    	FROM TB_CHAT_CONTENT WHERE CHAT_ROOM_NO IN
+    	<foreach collection="myChatRoomList" item="list" open="(" close=")" separator=",">
+    	 #{list.chatRoomNo}
+    	 </foreach>
+	)
+	WHERE RowIdx =1
+	</select>
+	
+</mapper>
+<!-- 	<select id="selectLastMessageList" parameterType="map" resultType="chatContent"> -->
+<!-- 	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME -->
+<!-- 	FROM( -->
+<!--     	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME, -->
+<!--     	ROW_NUMBER() OVER(PARTITION BY CHAT_ROOM_NO ORDER BY CHAT_NO DESC) as RowIdx -->
+<!--     	FROM TB_CHAT_CONTENT WHERE MSG_TO = #{userId} -->
+<!-- 	) -->
+<!-- 	WHERE RowIdx =1 -->
+<!-- 	</select> -->

@@ -19,10 +19,20 @@
 				<div id="userId" class="card-header p-2 bg-white">${userInfo.userId}님의 팔로우 목록</div> <!--유저 아이디 올 곳 -->
 				<div class="card-body d-flex flex-column" style="width:100%;height:70vh; overflow:auto;">
 					<c:forEach var ="name" items ="${followingList}" varStatus="status">
+						<c:set var="loop_flag" value="false" />
 						<div class="chat_room_card card p-3 position-relative mb-2">
 							<a href="#" class="following_user text-dark mb-3" onclick="createRoomId('${name}')"><c:out value="${name}"></c:out></a>
-							<div class="last_message text-secondary"></div>
+							<c:forEach var="chatContent" items="${lastMessageList}" varStatus="sts">
+								<c:if test="${chatContent.msgFrom == name || chatContent.msgTo ==name}">
+									<div class="last_message text-secondary"><c:out value="${chatContent.msg}"></c:out></div>
+									<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px;"><c:out value="${chatContent.msgTime}"></c:out></p>
+									<c:set var="loop_flag" value="true" />
+								</c:if>
+						   </c:forEach>
+						    <c:if test="${not loop_flag }">
+						   <div class="last_message text-secondary"></div>
 							<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px;"></p>
+							</c:if>
 						</div>
 					</c:forEach>
 				</div>

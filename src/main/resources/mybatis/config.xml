@@ -10,12 +10,12 @@
 	</settings>
 	<typeAliases>
 	<!--typeAlias 들어올 곳  -->
-		<!-- <typeAlias type="com.kh.toy.member.model.vo.Member"	alias="member" /> -->
+		<typeAlias type="com.we.art.chat.model.vo.ChatContent"	alias="chatContent" />
 	</typeAliases>
 	
 	
 	<mappers>
 	<!-- mapper 들어올 곳 -->
-		<!-- <mapper resource="mybatis/mapper/.../... "/> -->
+		<mapper resource="mybatis/mapper/chat/chatMapper.xml"/>
 	</mappers>
 </configuration>

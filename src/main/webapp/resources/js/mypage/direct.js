@@ -7,30 +7,7 @@ function sendMessage() {
 	if (event.keyCode == 13) {
 		let msg = document.getElementById("msg_box").value;
 		if (msg != "") {
-			let chatBox = document.getElementById("chat_box");
-			let borderBox = document.createElement("div");
-			borderBox.style.padding = "10px";
-			borderBox.style.marginBottom = "10px";
-			borderBox.style.border = "1px solid #DCDCDC"
-
-			if (msg.length >= 20) {
-				borderBox.style.width = "30%";
-			} else {
-				borderBox.style.display = 'inline-block'
-			}
-
-			borderBox.style.borderRadius = "20px";
-			let br = document.createElement("br");
-			let messageBox = document.createElement("div");
-			borderBox.style.background = "#DCDCDC"
-			borderBox.className = "float-end align-self-end"
-			messageBox.style.textAlign = "left"
-			chatBox.appendChild(br);
-			messageBox.innerHTML = msg;
-			borderBox.appendChild(messageBox);
-			chatBox.appendChild(borderBox);
-			document.getElementById("msg_box").value = "";
-			console.log('메세지 전송')
+			drawMyChatting(msg);
 			let msgTime = getCurrentTime();
 			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgTo': selectUser,'msgTime' : msgTime }));
 			insertChatContentImpl(currentRoomId,msg,currentUserId,selectUser,msgTime);
@@ -139,12 +116,73 @@ function selectChatContentListImpl(chatRoomNo,firstUser,secondUser){
 			
 		}else{
 			console.dir(text);
+			let chatContentList = JSON.parse(text);
+			for(let i = 0; i<chatContentList.length; i++){
+				if(chatContentList[i].msgFrom==currentUserId){
+					drawMyChatting(chatContentList[i].msg);
+					console.log(chatContentList[i].msg)
+				}else{
+					drawYourChatting(chatContentList[i].msg);
+					console.log(chatContentList[i].msg)
+				}
+				
+			}
 		}
 	})
 }
 
 
+function drawMyChatting(msg){
+		let chatBox = document.getElementById("chat_box");
+			let borderBox = document.createElement("div");
+			borderBox.style.padding = "10px";
+			borderBox.style.marginBottom = "10px";
+			borderBox.style.border = "1px solid #DCDCDC"
 
+			if (msg.length >= 20) {
+				borderBox.style.width = "30%";
+			} else {
+				borderBox.style.display = 'inline-block'
+			}
+
+			borderBox.style.borderRadius = "20px";
+			let br = document.createElement("br");
+			let messageBox = document.createElement("div");
+			borderBox.style.background = "#DCDCDC"
+			borderBox.className = "float-end align-self-end"
+			messageBox.style.textAlign = "left"
+			chatBox.appendChild(br);
+			messageBox.innerHTML = msg;
+			borderBox.appendChild(messageBox);
+			chatBox.appendChild(borderBox);
+			document.getElementById("msg_box").value = "";
+			console.log('메세지 전송')
+}
+
+function drawYourChatting(msg){
+		let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
+		let chatBox = document.getElementById("chat_box");
+		let borderBox = document.createElement("div");
+		borderBox.style.padding = "10px";
+		borderBox.style.marginBottom = "10px";
+		borderBox.style.border = "1px solid #DCDCDC"
+		console.log("메세지 띄우자")
+		if (msg.length >= 20) {
+			borderBox.style.width = "30%";
+		}
+			
+		borderBox.style.borderRadius = "20px";
+		let br = document.createElement("br");
+		let messageBox = document.createElement("div");
+
+		borderBox.style.background = "#FFFFFF";
+		borderBox.className = "float-start align-self-start"
+		messageBox.style.textAlign = "left"
+		chatBox.appendChild(br);
+		messageBox.innerHTML = msg;
+		borderBox.appendChild(messageBox);
+		chatBox.appendChild(borderBox);
+}
 
 
 
