@@ -44,7 +44,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>my-secure-app</web-resource-name>
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/galleryinfo</url-pattern>
         </web-resource-collection>
  
         <user-data-constraint>
