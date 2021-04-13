@@ -29,7 +29,7 @@ public class BoardController {
 			@SessionAttribute(name="userInfo", required = false)User user) {
 		
 		// board객체에 업로드한 회원의 아이디를 넣는다.
-		String userId = "test1";
+		String userId = "test01";
 		//String userId = user.getUserId();
 		
 		board.setUserId(userId);
@@ -40,7 +40,7 @@ public class BoardController {
 	
 	@GetMapping("filetest")
 	public String test() {
-		for(Map<String, Object> data:boardService.selectBoardByUserId("test1")) {
+		for(Map<String, Object> data:boardService.selectBoardByUserId("test01")) {
 			System.out.println("-----------------------------------------------------");
 			System.out.println(data.get("board"));
 			System.out.println(data.get("files"));

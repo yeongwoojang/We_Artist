@@ -9,5 +9,6 @@
 		파일 : <input type="file" name="files" multiple/> <br>
 		<button>전송</button>
 	</form>
+	<img src="/images/2021/4/13/fe6b12fc-c68d-4070-919c-9afae585d381" alt="" />
 </body>
 </html>
