@@ -30,5 +30,6 @@ public interface BoardRepository {
 	List<Board> selectBoardByUserId(String userId);
 	
 	List<FileVo> selectFileByBdNo(String bdNo);
-	
+
+	Board selectBoardByBdNo(String bdNo); //장영우 추가
 }
