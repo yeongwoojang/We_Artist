@@ -9,8 +9,18 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script> <!-- socjJS CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> <!-- STOMP CDN -->
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
+  <script type="text/javascript">
+  function overlap(id){
+	  console.log(id);
+	  let div = document.getElementById(id);
+	  let icon = document.createElement("i")
+	  icon.setAttribute("class","fas fa-copy position-absolute top-0 end-0 m-3 fs-3 text-white");
+	  div.appendChild(icon)
+	  console.dir(div);
+  }
+  </script>
 </head>
 
 <body id="body">
@@ -49,31 +59,30 @@
           <h2>Hotels</h2>
           <p>Her are some nearby hotels</p>
         </div>
-		<c:forEach var="i" begin="0" end="${fn:length(personalBoardInfoList)/3}" step="1">
+        <c:set var="loop_flag" value="false" />
 		 	<div class="row aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-		 		<c:forEach var ="boardInfo" items ="${personalBoardInfoList}" varStatus="status">
+		 		<c:forEach var ="boardInfo" items ="${personalBoardInfoList}" varStatus="sts">
 		 			<c:forEach var ="file" items ="${boardInfo.files}" varStatus="status">
+		 			<c:if test="${status.index==0}">
 					<div class="col-lg-4 col-md-6">
             			<div class="hotel">
-             				<div class="hotel-img">
-               					<a href=<c:url value='/images/${file.fSavePath}/${file.fRename}'/> class="glightbox" data-gall="venue-gallery">
-                				<img src=<c:url value='/images/${file.fSavePath}/${file.fRename}'/> alt="" class="img-fluid">
+             				<div class="hotel-img position-relative" id="${boardInfo.board.bdNo}">
+               					<a href='#' data-bs-toggle="modal" data-bs-target="#exampleModal">
+                				<img src=<c:url value='/images/${file.fSavePath}/${file.fRename}'/> alt="" class="img-fluid" >
               					</a>
               				</div>
-                			<h3 class="mt-3"><a href="#"><c:out value = "${file}"/></a></h3>
+                			<h3 class="mt-3"><a href="#"><c:out value = "${file.fRename}"/></a></h3>
               				<p>게시물 설명</p>
            			 	</div>
           			</div>	
+          			<c:if test="${fn:length(boardInfo.files)>1}">
+          				<script>overlap("${boardInfo.board.bdNo}");</script>
+          			</c:if>
+          			</c:if>
 		 			</c:forEach>
 		 		</c:forEach>
-		 	</div>
-		</c:forEach>	
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-
+		 		</div>
+		</div>
 <!-- 		  <div class="row aos-init aos-animate" data-aos="fade-up" data-aos-delay="100"> -->
 <!--           <div class="col-lg-4 col-md-6"> -->
 <!--             <div class="hotel"> -->
@@ -385,39 +394,39 @@
   
   <!-- Modal --> 
 <div class="modal fade position-fixed top-50 start-50 translate-middle" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog  modal-lg" id="myModal">
     <div class="modal-content">
     	<div class="modal-header">
-        	<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        	<h5 class="modal-title" id="exampleModalLabel">게시물 이름</h5>
        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       	</div>
       	<div class="modal-body">
-       		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+       		<div id="carouselExampleControls" class="carousel carousel-dark slide d-flex " data-bs-ride="carousel">
   				<div class="carousel-inner">
     				<div class="carousel-item active">
-      				<img src="/resources/theEvent/assets/img/venue-gallery/1.jpg" class="d-block w-100" alt="...">
-    			</div>
-    		<div class="carousel-item">
-      			<img src="/resources/theEvent/assets/img/venue-gallery/1.jpg" class="d-block w-100" alt="...">
-    		</div>
-   			<div class="carousel-item">
-      			<img src="/resources/theEvent/assets/img/venue-gallery/1.jpg" class="d-block w-100" alt="...">
-    		</div>
-  		</div>
-  			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    			<span class="visually-hidden">Previous</span>
-  			</button>
-  			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-    			<span class="visually-hidden">Next</span>
-  			</button>
-		</div>
-		<div>
-			adsadfsdf
-		</div>
-      </div>
-    </div>
+      					<img src="/resources/theEvent/assets/img/venue-gallery/1.jpg" class="d-block w-100" alt="..."style="width:100%;height:100%; object-fit: cover;">
+    				</div>
+    				<div class="carousel-item">
+      					<img src="/resources/theEvent/assets/img/venue-gallery/1.jpg" class="d-block w-100" alt="..."style="width:100%;height:100%; object-fit: cover;">
+    				</div>
+   					<div class="carousel-item">
+      					<img src="/resources/theEvent/assets/img/venue-gallery/1.jpg" class="d-block w-100" alt="..."style="width:100%;height:100%; object-fit: cover;">
+    				</div>
+  					</div>
+  					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    					<span class="carousel-control-prev-icon primary" aria-hidden="true"></span>
+    					<span class="visually-hidden">Previous</span>
+  					</button>
+  					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    					<span class="visually-hidden">Next</span>
+  					</button>
+				</div>
+      		</div>
+      		<div>
+            	<p>게시물 설명</p>
+      		</div>
+  	  </div>
   </div>
 </div>
 <!-- 	  	<div data-aos-easing="ease-in-out" class="card position-fixed top-50 start-50 translate-middle gscrollbar-fixer glightbox-open" data-aos-delay="0" data-aos-duration="1000"> -->
@@ -437,9 +446,6 @@
   <script src="${context}/resources/theEvent/assets/js/main.js"></script>
   
   
-  <script type="text/javascript">
-  	function onOff(){
-  	}
-  </script>
+
 </body>
 </html>
