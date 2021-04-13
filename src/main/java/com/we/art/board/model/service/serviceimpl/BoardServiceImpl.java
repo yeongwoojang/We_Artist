@@ -1,6 +1,9 @@
 package com.we.art.board.model.service.serviceimpl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +44,22 @@ public class BoardServiceImpl implements BoardService{
 		} catch (Exception e) {
 			throw new ToAlertException(ErrorCode.IB01,e);
 		}
+	}
+
+	@Override
+	public List<Map<String, Object>> selectBoardByUserId(String userId) {
+		
+		List<Map<String, Object>> commandList = new ArrayList<Map<String,Object>>();
+		List<Board> boardList = boardRepository.selectBoardByUserId(userId);
+		
+		for(Board board : boardList) {
+			Map<String, Object> commandMap = new HashMap<String, Object>();
+			commandMap.put("board", board);
+			commandMap.put("files", boardRepository.selectFileByBdNo(board.getBdNo()));
+			commandList.add(commandMap);
+		}
+		
+		return boardList.isEmpty() ? null : commandList;
 	}
 	
 }
