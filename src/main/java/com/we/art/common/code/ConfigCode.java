@@ -6,8 +6,8 @@ public enum ConfigCode {
     //���߿�
     DOMAIN("http://localhost:9898"),
     EMAIL("hphphp23@naver.com"),
-    UPLOAD_PATH("C:\\code\\resources\\upload"),
-	GALLERY_PATH("C:\\code\\resources\\gallery");
+    UPLOAD_PATH("C:\\code\\resources\\upload\\"),
+	GALLERY_PATH("C:\\code\\resources\\gallery\\");
     public  String desc;
 
     ConfigCode(String desc){

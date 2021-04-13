@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="/WEB-INF/views/include/common_socket.jsp"%> <!-- Socket 연결 모듈 -->
 <!DOCTYPE html>
@@ -41,10 +42,14 @@
 	<script src="${context}/resources/theEvent/assets/vendor/glightbox/js/glightbox.js"></script>
 	<script src="${context}/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.js"></script>
 	
+	
 	<!-- Template Main JS File -->
 	<script src="${context}/resources/theEvent/assets/js/main.js"></script>
 	<!-- fontAwsome -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet"/>
+	
+	<!-- 검색 자동완성 js파일 -->
+	<script src="${context}/resources/js/common/autoSearch.js"></script>
 <style>
 	html,body{
 		width:100%;
@@ -71,7 +76,13 @@
 	          <li><a class="nav-link scrollto fs-4" href="${context}/user/profile" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="${context}/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-4" href="${context}/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
-
+	          <li>
+	          <div class="input-group border rounded-pill p-2">
+	    			<span class="input-group-text bg-transparent border border-0"><i class="fas fa-search text-muted"></i></span>
+ 					<input type="text" id="inp_search_user"class="form-control border border-0 shadow-none bg-transparent text-muted" placeholder="유저를 검색하세요"style="outline:none">
+			  </div>
+			</li>
+		
 	<!--           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
 	          <ul>
 	            <li><a href="#">Drop Down 1</a></li>
@@ -95,11 +106,11 @@
 	        <i class="bi bi-list mobile-nav-toggle"></i>
 	      </nav>
 	      <!-- .navbar -->
-	      <div>
-	      	 <a class="nav-link scrollto fs-4" href="#"><i class="far fa-envelope text-light"></i></a>
-	      </div>
+	    	
     	</div>
+    		
   	</header>
+  	<div id="auto_search"class="navbar-nav position-fixed top-10 end-0 card me-5" style="width:20vw; z-index:999; visibility:hidden;"></div>
   			<!-- Toast창  -->
   	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
 		<div id="liveToast" class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.we.art.communication.model.service.CommunicationService;
@@ -33,6 +34,13 @@ public class CommunicationController {
 		return "communication/alluser";
 	}
 
+	@GetMapping("alluserlist")
+	@ResponseBody
+	public List<User> fetchAllUserList() {
+		List<User> allUserList = communicationService.selectAllUser();
+		return allUserList;
+	}
+	
 	@PostMapping("followingimpl")
 	public String followingImpl(@SessionAttribute("userInfo")User userInfo, @ModelAttribute Following following, Model model) {
 		

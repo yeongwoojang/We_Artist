@@ -8,6 +8,7 @@ let stompPushClient = null;
 let myChatRoomList = null;
 let tempMsgFrom = null;
 window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
+	getAlluser();
 	myChatRoomList = new Array(); //내가 속한 채팅방 리스트
 	let chatRoom;
 	<c:forEach items='${myChatRoomList}' var='item'>
