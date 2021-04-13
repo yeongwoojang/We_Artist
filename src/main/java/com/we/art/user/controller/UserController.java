@@ -28,6 +28,7 @@ import com.we.art.common.code.ConfigCode;
 import com.we.art.common.code.ErrorCode;
 import com.we.art.common.exception.ToAlertException;
 import com.we.art.user.model.service.UserService;
+import com.we.art.user.model.service.impl.UserServiceImpl;
 import com.we.art.user.model.vo.User;
 import com.we.art.user.validator.UserValidator;
 
@@ -155,10 +156,19 @@ public class UserController {
 
 	}
 	
-	//김지연 비밀번호 찾기
+	//김지연 시작
+	//비밀번호 찾기
 	@GetMapping("findId") 
 	public String findId() {
 		return "user/findId";
+	}
+	
+	//비밀번호 찾기 요청
+	@PostMapping("findId")
+	public String findPw(@RequestBody User user) throws Exception {
+		System.out.println("폼에서 받아온 E-mail 값 : " + user);
+		
+		return findPw(user);
 	}
 	
 

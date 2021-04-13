@@ -12,6 +12,8 @@ public interface UserService {
 	User selectUserForLogin(User user);
 
 	int updateUser(User persistInfo);
+	
+	
 }
 
 
