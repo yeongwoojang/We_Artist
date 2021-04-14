@@ -24,6 +24,8 @@
 	
 	
 	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
   	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 	<!-- Vendor CSS Files -->
   	<link href="${context}/resources/theEvent/assets/vendor/aos/aos.css" rel="stylesheet">
@@ -51,10 +53,10 @@
 	<!-- 검색 자동완성 js파일 -->
 	<script src="${context}/resources/js/common/autoSearch.js"></script>
 <style>
-	html,body{
-		width:100%;
-		height:100%;
-	}
+/* 	html,body{ */
+/* 		width:100%; */
+/* 		height:100%; */
+/* 	} */
 </style>
 </head>
 <body>
@@ -71,15 +73,16 @@
 	      <nav id="navbar" class="navbar order-last order-lg-0 d-flex justify-content-end" style="width:70%;">
 	        <ul>
 	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="${context}/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="${context}/user/profile" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="${context}/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
-	          <li><a class="nav-link scrollto fs-4" href="${context}/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="${context}/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="${context}/user/profile" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="${context}/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="${context}/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
 	          <li>
 	          <div class="input-group border rounded-pill p-2">
-	    			<span class="input-group-text bg-transparent border border-0"><i class="fas fa-search text-muted"></i></span>
- 					<input type="text" id="inp_search_user"class="form-control border border-0 shadow-none bg-transparent text-muted" placeholder="유저를 검색하세요"style="outline:none">
+	    			<span class="input-group-text bg-transparent border border-0 px-1"><i class="fas fa-search text-muted" style="font-size:1vw;"></i></span>
+ 					<input type="text" id="inp_search_user" class="form-control border border-0 shadow-none bg-transparent text-muted p-0" placeholder="유저를 검색하세요" 
+ 					style="outline:none; font-size:1vw;">
 			  </div>
 			</li>
 		
