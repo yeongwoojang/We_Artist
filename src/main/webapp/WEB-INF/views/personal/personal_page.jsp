@@ -15,7 +15,7 @@
   function overlap(id){
 	  console.log(id);
 	  let div = document.getElementById(id);
-	  let icon = document.createElement("i")
+	  let icon = document.createElement("i");
 	  icon.setAttribute("class","fas fa-copy position-absolute top-0 end-0 m-3 fs-3 text-white");
 	  div.appendChild(icon)
 	  console.dir(div);
@@ -72,6 +72,7 @@
               				</div>
                 			<h3 class="mt-3"><a href="#">${boardInfo.board.bdTitle}</a></h3>
               				<p>${boardInfo.board.bdContent}</p>
+              				<p>${boardInfo.board.bdNo}</p>
            			 	</div>
           			</div>	
           			<c:if test="${fn:length(boardInfo.files)>1}">
@@ -98,7 +99,9 @@
       	<div class="modal-body">
        		<div id="carouselExampleControls" class="carousel carousel-dark slide d-flex " data-bs-ride="carousel">
        			<div class="carousel-inner">
+       				
   				</div>
+  				
   					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
     					<span class="carousel-control-prev-icon primary" aria-hidden="true"></span>
     					<span class="visually-hidden">Previous</span>
@@ -123,13 +126,25 @@
   <script src="${context}/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="${context}/resources/theEvent/assets/js/main.js"></script>
   <script>
-  	let list = new Array();
+  
+  
+  var myModalEl = document.getElementById('exampleModal')
+  myModalEl.addEventListener('hidden.bs.modal', function (event) {
+	  console.log("hidden Modal")
+	  let carouselInner = document.querySelector(".carousel-inner");
+	  while(carouselInner.hasChildNodes()){
+		  carouselInner.removeChild(carouselInner.firstChild);
+	  }
+  });
+  
   	let selectedBoard;
+  	let boardInfo;
+  	let fileList;
+  	
 	function showModal(bdNo,boardInfo){
 		fetchSelectBoard(bdNo);
 		
 	}
-	
 	function fetchSelectBoard(bdNo){
 		const url = '/fetchselectedboard?bdNo='+bdNo;
 		fetch(url,{
@@ -142,29 +157,30 @@
 			selectedBoard = JSON.parse(text);
 			let carouselInner = document.querySelector(".carousel-inner");
 			let boardContent = document.getElementById("board_content");
-			let carouselItem = document.createElement("div")
-			let img = document.createElement("img");
+			
 			boardContent.innerHTML = selectedBoard.board.bdContent;
-			<c:forEach var ="boardInfo" items="${personalBoardInfoList}" varStatus="sts">
-       			<c:forEach var ="file" items ="${boardInfo.files}" varStatus="status">
-       				img.src = "<c:url value='/images/${file.fSavePath}/${file.fRename}'/>";
-       				img.setAttribute("class","d-block w-100")
-       				img.style="width:100%;height:100%; object-fit: cover;"
-       			<c:choose>
-       				<c:when test="${sts.index==0 and status.index==0}">
-	       				carouselItem.setAttribute("class","carousel-item active")
-	       				carouselItem.appendChild(img);
-       				</c:when>
-	       			<c:otherwise>
-	       				carouselItem.setAttribute("class","carousel-item")
-	       				carouselItem.appendChild(img);
-	       			</c:otherwise>
-       			</c:choose>
-       			carouselInner.appendChild(carouselItem);
-       			</c:forEach>
-       		</c:forEach>
-       		console.dir(carouselInner)
-       		$('#exampleModal').modal("show");
+			boardInfo = selectedBoard.board; //선택한 게시물 정보
+			fileList = selectedBoard.files; //선택한 게시물에 속해있는 파일 리스트 정보
+			for(let i = 0; i<fileList.length; i++){
+					let carouselItem = document.createElement("div")
+					let img = document.createElement("img");
+					img.setAttribute("class","d-block w-100");
+					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
+					console.log("/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename);
+					img.style="width:100%;height:100%;object-fit:cover;";
+				if(i==0){
+					console.log('이건 0')
+					carouselItem.setAttribute("class","carousel-item active");
+				}else{
+					carouselItem.setAttribute("class","carousel-item");
+					console.log('이건 0이아님')
+				}
+	       			carouselItem.appendChild(img);
+	       			carouselInner.appendChild(carouselItem);
+	       			console.dir(carouselInner.childNodes);
+			}
+			
+			$('#exampleModal').modal("show");
 		});
 	}
   </script>

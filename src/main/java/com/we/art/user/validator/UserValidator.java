@@ -34,6 +34,10 @@ public class UserValidator implements Validator{
 			errors.rejectValue("userId", "error.userId", "이미 존재하는 아이디입니다.");
 		}
 		
+		if(userRepository.selectUserByNick(persistInfo.getNickName()) != null) {
+			errors.rejectValue("nickName", "error.nickName", "이미 존재하는 닉네임입니다.");
+		}
+		
 		if(!pattern.matcher(persistInfo.getPassword()).find()) {
 			errors.rejectValue("password", "error.password", "비밀번호는 숫자, 영문자, 특수문자 조합의 8글자 이상인 문자열입니다.");
 		}

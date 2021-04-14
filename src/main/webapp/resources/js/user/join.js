@@ -24,6 +24,31 @@
       }
    }
    
+   let nicknameCheckFlg = true;
+   
+   let nicknameCheck = () => {
+      let nickName = document.getElementById("nickName");
+      if(nickName.value){
+         fetch("/user/nicknamecheck?nickName=" + nickName.value,{
+            method:"GET"
+         })
+         .then(response => response.text())
+         .then(text =>{
+            if(text == 'success'){
+               nicknameCheckFlg = true;
+               nickname_check.innerHTML = '사용 가능한 닉네임 입니다.';
+            }else{
+               nicknameCheckFlg = false;
+               nickname_check.innerHTML = '사용 불가능한 닉네임 입니다.';
+               nickName.value="";
+            }
+         })
+         
+      }else{
+         alert("닉네임을 입력하지 않으셨습니다.");
+      }
+   }
+   
   document.querySelector('#frm_join').addEventListener('submit',(e)=>{
 	   let password = pw.value;
 	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
@@ -31,7 +56,13 @@
 	   if(!idCheckFlg){
 		   e.preventDefault();
 		   alert("아이디 중복검사를 하지 않으셨습니다.");
-		   id.focus()
+		   userId.focus()
+	   }
+	   
+	   if(!nicknameCheckFlg){
+		   e.preventDefault();
+		   alert("닉네임 중복검사를 하지 않으셨습니다.");
+		   nickName.focus()
 	   }
 	   
 	   if(!(regExp.test(password))){

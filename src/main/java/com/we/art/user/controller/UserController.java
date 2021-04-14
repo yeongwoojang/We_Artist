@@ -85,6 +85,15 @@ public class UserController {
 		}
 		return "success";
 	}
+	
+	@GetMapping("nicknamecheck")
+	@ResponseBody
+	public String nicknameCheck(String nickName) {
+		if(userService.selectUserByNick(nickName) != null) {
+			return "fail";
+		}
+		return "success";
+	}
 
 	@PostMapping("mailauth")
 	public String authenticateEmail(@Valid User persistInfo, Errors errors, HttpSession session, Model model) {
