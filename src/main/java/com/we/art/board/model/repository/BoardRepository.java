@@ -1,5 +1,7 @@
 package com.we.art.board.model.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,4 +27,9 @@ public interface BoardRepository {
 			+ " values('b'||sc_bd_idx.currval, 'l'||sc_like_idx.nextval, #{userId})")
 	int insertLike(String userId);
 	
+	List<Board> selectBoardByUserId(String userId);
+	
+	List<FileVo> selectFileByBdNo(String bdNo);
+
+	Board selectBoardByBdNo(String bdNo); //장영우 추가
 }

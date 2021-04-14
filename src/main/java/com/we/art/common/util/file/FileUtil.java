@@ -24,9 +24,9 @@ public class FileUtil {
 				String fOrigin = multipartFile.getOriginalFilename();
 				
 				FileVo fileVo = new FileVo();
-				fileVo.setFOrigin(fOrigin);
-				fileVo.setFRename(fRename);
-				fileVo.setFSavePath(fSavePath);
+				fileVo.setfOrigin(fOrigin);
+				fileVo.setfRename(fRename);
+				fileVo.setfSavePath(fSavePath);
 				fileDatas.add(fileVo);
 				
 				saveFile(multipartFile,fileVo);
@@ -43,7 +43,7 @@ public class FileUtil {
 	}
 	
 	private void saveFile(MultipartFile multipartFile, FileVo fileVo) throws Exception, IOException {
-		File file = new File(fileVo.getFullPath() + fileVo.getFRename());
+		File file = new File(fileVo.getFullPath() + fileVo.getfRename());
 		if(!file.exists()) {
 			new File(fileVo.getFullPath()).mkdirs();
 		}
