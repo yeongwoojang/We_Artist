@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
 	public User selectUserById(String userId) {
 		return userRepository.selectUserById(userId);
 	}
+	
+	@Override
+	public User selectUserByNick(String nickName) {
+		return userRepository.selectUserByNick(nickName);
+	}
 
 
 	
@@ -90,4 +95,6 @@ public class UserServiceImpl implements UserService {
 		persistInfo.setPassword(encoder.encode(persistInfo.getPassword()));
 		return userRepository.updateUser(persistInfo);
 	}
+
+	
 }

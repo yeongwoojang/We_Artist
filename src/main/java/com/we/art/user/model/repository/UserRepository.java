@@ -13,6 +13,9 @@ public interface UserRepository {
 	//아이디로 회원을 조회해서 나온 결과를 Member 객체에 매핑
 	@Select("SELECT * FROM tb_user WHERE user_id = #{userId}")
 	User selectUserById(String userId);
+	
+	@Select("select * from tb_user where nickname = #{nickName}")
+	User selectUserByNick(String nickName);
 	   
 	@Select("select count(*) from tb_user where email = #{email}")
 	int selectUserByEmail(String email);
