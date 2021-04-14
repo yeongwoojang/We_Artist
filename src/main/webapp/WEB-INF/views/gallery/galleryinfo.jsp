@@ -12,7 +12,7 @@
 <input type="text" id="messageInput"/>
 <button onclick="sendMessage()">Send</button>
 <hr />
-<section>
+<section class="position-relative">
 	<div class="card w-50 mx-auto">
 		<div class="card-header">
 			Gallery Setting
@@ -103,7 +103,20 @@
 			</div>
 		</div>
 	</div>
-      
+    <div class="card w-50 mx-auto position-absolute top-50 start-50 translate-middle d-none" id="BoardList">
+		<div class="card-header">
+			Upload
+		</div>
+		<div class="row">
+			<c:forEach items="${userBoardData}" var="boardData">			
+					<c:forEach items="${boardData.files}" var="boardFile" varStatus="status">				
+						<div class="col-3 mb-1" onclick='alert("${boardData}")'>
+							<img src="/images/${boardFile.fSavePath}${boardFile.fRename}" alt="" class="img-fluid"/>
+						</div>
+					</c:forEach>
+			</c:forEach>
+		</div>
+	</div>
 </section>
 
 <script type="text/javascript" src="/resources/js/live/liveClient.js"></script>
