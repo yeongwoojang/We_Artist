@@ -7,12 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.we.art.communication.model.service.CommunicationService;
 import com.we.art.communication.model.vo.Following;
+import com.we.art.communication.model.vo.History;
 import com.we.art.user.model.vo.User;
 
 @Controller
@@ -20,17 +22,15 @@ import com.we.art.user.model.vo.User;
 public class CommunicationController {
 
 	private final CommunicationService communicationService;
-	
-	
+
 	public CommunicationController(CommunicationService communicationService) {
 		this.communicationService = communicationService;
 	}
 
-
 	@GetMapping("alluser")
-	public String allUser(@SessionAttribute("userInfo")User userInfo, Model model) {
+	public String allUser(@SessionAttribute("userInfo") User userInfo, Model model) {
 		List<User> allUserList = communicationService.selectAllUser();
-		model.addAttribute("allUserList",allUserList);
+		model.addAttribute("allUserList", allUserList);
 		return "communication/alluser";
 	}
 
@@ -40,25 +40,44 @@ public class CommunicationController {
 		List<User> allUserList = communicationService.selectAllUser();
 		return allUserList;
 	}
-	
+
 	@PostMapping("followingimpl")
-	public String followingImpl(@SessionAttribute("userInfo")User userInfo, @ModelAttribute Following following, Model model) {
-		
-		return " ";
+	@ResponseBody
+	public String followingImpl(@SessionAttribute("userInfo") User userInfo, @RequestBody Following following,
+			Model model) {
+		int res = communicationService.insertFollowing(following);
+		if (res != 0) {
+			History history = new History();
+			history.setFromId(following.getFromId());
+			history.setToId(following.getToId());
+
+			if (communicationService.insertHistory(history) != 0) {
+				return "success";
+			} else {
+				return "failed";
+			}
+
+		} else {
+			return "failed";
+		}
 	}
-	
-	
-	
+
+	@PostMapping("unfollowingimpl")
+	@ResponseBody
+	public String unfollowingImpl(@SessionAttribute("userInfo") User userInfo, @RequestBody Following following,
+			Model model) {
+		int res = communicationService.deleteFollowing(following);
+		if (res != 0) {
+			History history = new History();
+			history.setFromId(following.getFromId());
+			history.setToId(following.getToId());
+			if (communicationService.deleteHistory(history) != 0) {
+				return "success";
+			} else {
+				return "failed";
+			}
+		} else {
+			return "failed";
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

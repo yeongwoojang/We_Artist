@@ -170,5 +170,4 @@ public class UserController {
 		return "user/findId";
 	}
 	
-
 }
