@@ -14,16 +14,26 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.we.art.board.model.service.BoardService;
 import com.we.art.common.code.ConfigCode;
+import com.we.art.user.model.vo.User;
 
 @Controller
 public class GalleryController {
+	
+	private final BoardService boardService;
+	
+	public GalleryController(BoardService boardService) {
+		this.boardService = boardService;
+	}
 	
 	@GetMapping("gallery")
 	public String ShowGallery() {
@@ -31,7 +41,11 @@ public class GalleryController {
 	}
 	
 	@GetMapping("galleryinfo")
-	public String setGallery() {
+	public String setGallery(@SessionAttribute(name="userInfo", required = false)User user,Model model) {
+		String userId = "test01";
+		//String userId = user.getUserId();
+		
+		model.addAttribute("userBoardData", boardService.selectBoardByUserId(userId));
 		return "gallery/galleryinfo";
 	}
 	
