@@ -79,7 +79,7 @@
 	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="/user/profile" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/user/profile?userId=${sessionScope.userInfo.userId }" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
 <!-- 	          <li> -->

@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.we.art.board.model.vo.Board;
 import com.we.art.chat.model.service.ChatService;
 import com.we.art.chat.model.vo.ChatRoom;
 import com.we.art.common.code.ConfigCode;
@@ -113,7 +116,10 @@ public class UserController {
 	}
 
 	@GetMapping("profile")
-	public String ShowProfile() {
+	public String ShowProfile(String userId, Model model) {
+		User user = userService.selectUserById(userId);
+		String fIdx = user.getfIdx();
+		model.addAllAttributes(userService.selectProPicByFIdx(fIdx));
 		return "user/profile";
 	}
 	
@@ -129,6 +135,20 @@ public class UserController {
 		User userInfo = userService.selectUserById(persistInfo.getUserId());
 		session.setAttribute("userInfo", userInfo);
 		return "index/index";
+	}
+	
+	@PostMapping("proPic")
+	public String uploadProPic(@RequestParam List<MultipartFile> files,
+			@SessionAttribute("persistInfo")User persistInfo) {
+		
+		String userId = persistInfo.getUserId();
+		userService.insertProPic(userId, files);
+		userService.updateProPic(userId);
+		
+		
+		
+		
+		return "user/profile";
 	}
 
 	@GetMapping("login")
