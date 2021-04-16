@@ -23,9 +23,9 @@
 			USER_ID = #{item.userId}, 
 			F_IDX = #{item.fIdx}, 
 			BD_NO = #{item.bdNo}, 
-			PATH = #{item.path}, 
+			PATH = #{item.path} 
 			<where>
-				IMG_ORDER = #{item.imgOrder} and USER_ID = #{item.userId}
+				IMG_ORDER = #{item.imgOrder} and user_id = #{item.userId}
 			</where>
 		</foreach>
 	</update>

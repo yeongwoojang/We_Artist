@@ -73,7 +73,6 @@ public class GalleryController {
 	}
 	
 	@GetMapping("load")
-	
 	public ResponseEntity<byte[]> loadImage(HttpServletResponse response) {
 		
 		InputStream in = null;

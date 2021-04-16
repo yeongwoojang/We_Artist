@@ -141,9 +141,9 @@ public class UserServiceImpl implements UserService {
 		      
 		      // 임시비밀번호 암호화 해서 변수
 		      //String rePassword = encoder.encode(tempPw);
-		      String rePassword = tempPw;	//나중에 위에 쓸때주석하셈
-
-		      userRepository.changePassword(rePassword, email);
+		      String password = tempPw;	//나중에 위에 쓸때주석하셈
+		      System.out.println(password);
+		      userRepository.changePassword(password, email);
 			
 			result = "Success";
 			
