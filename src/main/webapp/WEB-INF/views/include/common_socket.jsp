@@ -89,10 +89,9 @@ let connectSocket = function(){
 					}
 					
 				}else{
-					document.querySelector(".toast-body").innerHTML = '메세지가 도착했습니다.';
-					document.getElementById("liveToast").className ="toast show";
+					document.getElementById("liveMessageToast").className ="toast show";
 					setTimeout(function() {
-			 			document.getElementById("liveToast").className ="toast hide";
+			 			document.getElementById("liveMessageToast").className ="toast hide";
 						}, 5000);
 					}	
 			});
@@ -153,10 +152,14 @@ function connectPushSocket(){
 			let pushInfo = JSON.parse(response.body)
 			let fromId = pushInfo.fromId;
 			let toId = pushInfo.toId;
-			document.querySelector(".toast-body").innerHTML = '팔로잉 요청이 있습니다.';
-			document.getElementById("liveToast").className ="toast show";
+			let nickName = pushInfo.nickName;
+			let followingMessage = document.getElementById("followingMessage");
+			followingMessage.innerHTML = nickName+"님이 당신을 팔로우했습니다.";
+			followingMessage.href ="/personal/personal?nickName="+nickName
+			followingMessage.className ="text-primary"
+			document.getElementById("liveFollowingToast").className ="toast show";
 					setTimeout(function() {
-			 			document.getElementById("liveToast").className ="toast hide";
+			 			document.getElementById("liveFollowingToast").className ="toast hide";
 						}, 5000);
 			console.log("푸시소켓 응답")
 			createNewRoom(fromId,toId);
@@ -217,4 +220,5 @@ function reSetMyChatRoomList(){
 			}
 		});
 }
+
 </script>

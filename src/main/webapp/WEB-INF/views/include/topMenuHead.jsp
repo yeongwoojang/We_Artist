@@ -61,30 +61,31 @@
 </head>
 <body>
 	<!-- ======= Header ======= -->
-  	<header id="header" class="d-flex align-items-center">
-    	<div class="container-fluid d-flex align-items-center justify-content-around">
-	      <div id="logo">
+<header id="header" class="d-flex align-items-center">
+    	<div class="container-fluid d-flex align-items-center justify-content-between">
+	      <div class="container text-center" id="logo">
 	        <!-- Uncomment below if you prefer to use a text logo -->
 	        <!-- <h1><a href="index.html">The<span>Event</span></a></h1>-->
-	        <a href="${context}/index" class="scrollto fs-2 text-white" style="text-decoration:none;">We Artist</a>
+	        <a href="/index" class="scrollto fs-2 text-white" style="text-decoration:none;">We Artist</a>
 	      </div>
 <!-- <img src="/resources/theEvent/assets/img/logo.png" alt="" title=""> -->
-		
-	      <nav id="navbar" class="navbar order-last order-lg-0 d-flex justify-content-end" style="width:70%;">
-	        <ul>
-	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="${context}/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="${context}/user/profile" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="${context}/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="${context}/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
-	          <li>
-	          <div class="input-group border rounded-pill p-2">
+		<div class="container input-group border rounded-pill p-2" style="width:25vw;">
 	    			<span class="input-group-text bg-transparent border border-0 px-1"><i class="fas fa-search text-muted" style="font-size:1vw;"></i></span>
- 					<input type="text" id="inp_search_user" class="form-control border border-0 shadow-none bg-transparent text-muted p-0" placeholder="유저를 검색하세요" 
- 					style="outline:none; font-size:1vw;">
+ 					<input type="text" id="inp_search_user" class="form-control border border-0 shadow-none bg-transparent text-muted p-0" placeholder="유저를 검색하세요" style="outline:none; font-size:1vw;">
 			  </div>
-			</li>
+	      <nav id="navbar" class="container navbar order-last order-lg-0 d-flex justify-content-center">
+	        <ul>
+	        
+	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/user/profile" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
+<!-- 	          <li> -->
+	          
+<!-- 			</li> -->
+			 <li style="cursor: pointer;"><i id="notification_icon" class="fas fa-bell fs-5 text-white"></i></li>
 		
 	<!--           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
 	          <ul>
@@ -109,19 +110,32 @@
 	        <i class="bi bi-list mobile-nav-toggle"></i>
 	      </nav>
 	      <!-- .navbar -->
-	    	
     	</div>
     		
   	</header>
-  	<div id="auto_search"class="navbar-nav position-fixed top-10 end-0 card me-5" style="width:20vw; z-index:999; visibility:hidden;"></div>
-  			<!-- Toast창  -->
+  	<div id="auto_search"class="navbar-nav position-fixed start-50 translate-middle-x border border-1" style="width:15vw; z-index:999; visibility:hidden;"></div>
+  	
+  	
+  	<!-- Toast창  -->
   	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
-		<div id="liveToast" class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+		<div id="liveMessageToast" class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
     		<div class="toast-header bg-light d-flex justify-content-end">
       			<button id="btn_toast_close"type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     		</div>
     	<div class="toast-body">
       		메세지가 도착했습니다.
+    	</div>
+  		</div>
+	</div>
+	
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+		<div id="liveFollowingToast" class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+    		<div class="toast-header bg-light d-flex justify-content-between">
+    			<i class="fas fa-bell fs-5 text-dark"></i>
+      			<button id="btn_toast_close"type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    		</div>
+    	<div class="toast-body">
+      		<a id="followingMessage" onclick="">팔로잉 요청이있습니다.</a>
     	</div>
   		</div>
 	</div>
