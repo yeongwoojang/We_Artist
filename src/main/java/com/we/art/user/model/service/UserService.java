@@ -13,6 +13,18 @@ public interface UserService {
 	User selectUserForLogin(User user);
 
 	int updateUser(User persistInfo);
+	
+	//김지연 비밀번호 찾기 시작
+
+	String findPassword(String email);
+	
+	//끝
+	
+	
+	
 }
+
+
+
 
 

@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,28 +52,20 @@ public class GalleryController {
 		String userId = "test01";
 		//String userId = user.getUserId();
 		System.out.println("galleryTest : " + galleryService.selectGalleryInfoByUserId(userId));
-		List<Gallery> dataList = galleryService.selectGalleryInfoByUserId(userId);
-		List<Gallery> commandList = new ArrayList<Gallery>();
-		
-		for(int i=0; i<12; i++) {
-			commandList.add(dataList.size() < i+1 ? null : dataList.get(i));
-		}
-		System.out.println(commandList.size());
-		model.addAttribute("userGalleryData", commandList);
+		model.addAttribute("userGalleryData", galleryService.selectGalleryInfoByUserId(userId));
 		model.addAttribute("userBoardData", boardService.selectBoardByUserId(userId));
 		return "gallery/galleryinfo";
 	}
 	
 	// 갤러리에 필요한 이미지정보를 받아온다
 	@PostMapping("galleryupload")
-	@ResponseBody
 	public String uploadGallery(@RequestBody List<Gallery> gallerList) {		
-		System.out.println(gallerList);
+		System.out.println("controller : " + gallerList);
 		String userId = gallerList.get(0).getUserId();
 		
 		galleryService.insertAllGalleryInfo(gallerList, userId);
 		
-		return "ok";
+		return "redirect:/galleryinfo";
 	}
 	
 	@GetMapping("headtest")
@@ -80,21 +73,12 @@ public class GalleryController {
 		return "gallery/headTest";
 	}
 	
-	@GetMapping("load")
-	
-	public ResponseEntity<byte[]> loadImage(HttpServletResponse response) {
+	@GetMapping("load/{urlPath}")
+	public String loadImage(@PathVariable("urlPath")String imgOrder) {
 		
-		InputStream in = null;
-		ResponseEntity<byte[]> entity = null; 
+		String userId = "test01";
 		
-		try {
-			in = new FileInputStream("C://CODE/test.png");
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in) ,HttpStatus.OK);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return entity;
+		return galleryService.selectGalleryInforByImgOrder(imgOrder, userId);
 	}
 }
 

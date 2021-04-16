@@ -5,16 +5,28 @@
 <mapper namespace="com.we.art.gallery.model.repository.GalleryRepository">
 	
 	<insert id="insertAllGalleryInfo">
-		insert all
-		<foreach collection="galleryList" item="list" close="select * from dual">
+		<foreach collection="list" item="item" open="insert all" close="select * from dual" separator=" ">
 			into tb_gallery(USER_ID, F_IDX, BD_NO, PATH, IMG_ORDER)
 			values(
-				#{list.userId},
-				#{list.fIdx},
-				#{list.bdNo},
-				#{list.path},
-				#{list.imgOrder}
+				#{item.userId},
+				#{item.fIdx},
+				#{item.bdNo},
+				#{item.path},
+				#{item.imgOrder}
 			)
 		</foreach>
 	</insert>
+	
+	<update id="updateAllGalleryInfo">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END ;">
+			update tb_gallery set
+			USER_ID = #{item.userId}, 
+			F_IDX = #{item.fIdx}, 
+			BD_NO = #{item.bdNo}, 
+			PATH = #{item.path} 
+			<where>
+				IMG_ORDER = #{item.imgOrder} and user_id = #{item.userId}
+			</where>
+		</foreach>
+	</update>
 </mapper>

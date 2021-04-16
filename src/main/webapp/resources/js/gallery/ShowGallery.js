@@ -108,7 +108,7 @@ let onDocumentMouseDown = (event) => {
             if(e.name === intersects[0].object.name){
 				//let src = '/resources/'+ gltfPath +'/textures/'+e.material.name+'_baseColor.jpeg';
 				//srcToBlob(src,'#imgInfo','#divTest');
-				document.querySelector('#imgInfo').src = 'load';	
+				document.querySelector('#imgInfo').src = 'load'+e.name.substring(9);	
 				document.querySelector("#divTest").className = 'd-flex position-absolute';
 				document.removeEventListener('click',onDocumentMouseDown);
 				document.querySelector('#btn_back').addEventListener('click',back);
