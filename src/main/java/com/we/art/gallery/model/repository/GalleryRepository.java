@@ -16,4 +16,7 @@ public interface GalleryRepository {
 	
 	@Select("select * from tb_gallery where user_id = #{userId}")
 	List<Gallery> selectGalleryInfoByUserId(String userId);
+	
+	@Select("select path from tb_gallery where img_order = #{imgOrder} and user_id = #{userId}")
+	String selectGalleryInforByImgOrder(String imgOrder,String userId);
 }
