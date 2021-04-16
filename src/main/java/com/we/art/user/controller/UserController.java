@@ -187,7 +187,7 @@ public class UserController {
 			public String findImpl(@ModelAttribute User user, String email, HttpSession session,Model model) {
 				System.out.println(user);
 				String result = userService.findPassword(email);;
-				if (result != null) { //만약에 userInfo가 null이 아니면 (DB에 입력받은 이메일이 다면)
+				if (result.equals("Success")) { //만약에 userInfo가 null이 아니면 (DB에 입력받은 이메일이 다면)
 					model.addAttribute("url",ConfigCode.DOMAIN+"/user/login");	//이동할 경로를 설정 
 					model.addAttribute("alertMsg" , "이메일이 발송되었습니다.");
 					
