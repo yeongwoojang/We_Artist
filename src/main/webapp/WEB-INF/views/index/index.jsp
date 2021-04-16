@@ -1,24 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/views/include/topMenuHead.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<!--  -->
 <body>
-	<h1>version1</h1>
-	<h2>김선민만세</h2>
-	<c:choose>
-		<c:when test="${empty sessionScope.user}">
-			<h2><a href="/member/join">회원가입</a></h2>
-			<h2><a href="/member/login">로그인</a></h2>
-		</c:when>
-		<c:otherwise>
-			<h2><a href="/member/mypage">마이페이지</a></h2>
-			<h2><a href="/member/logout">로그아웃</a></h2>
-		</c:otherwise>
-	</c:choose>
+<head>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+      <h1 class="mb-4 pb-0">Welcome to <br><span>We Artist</span>!</h1>
+      <p class="mb-4 pb-0">Manage your portfolio easily and FREE</p>
+      <a href="/gallery/gallery" class="glightbox play-btn mb-4"></a>
+      <a href="/user/login" class="about-btn scrollto">Create a Portfolio <i class="far fa-grin-hearts"></i></a>
+    </div>
+  </section><!-- End Hero Section -->
+
+  
+  
+  <!-- footer section -->
+  <%@include file ="/WEB-INF/views/include/footer.jsp" %>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
 </body>
 </html>
