@@ -10,7 +10,9 @@ import com.we.art.gallery.model.vo.Gallery;
 @Mapper
 public interface GalleryRepository {
 	
-	int insertAllGalleryInfo(List<Gallery> gallerList);
+	int insertAllGalleryInfo(List<Gallery> galleryList);
+	
+	int updateAllGalleryInfo(List<Gallery> galleryList);
 	
 	@Select("select * from tb_gallery where user_id = #{userId}")
 	List<Gallery> selectGalleryInfoByUserId(String userId);

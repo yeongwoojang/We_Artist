@@ -1,6 +1,7 @@
 package com.we.art.gallery.model.service.serviceimpl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,8 +22,32 @@ public class GalleryServiceImpl implements GalleryService{
 	}
 	
 	@Override
-	public int insertAllGalleryInfo(List<Gallery> gallerList, String userId) {
-		return galleryRepository.insertAllGalleryInfo(gallerList);
+	public int insertAllGalleryInfo(List<Gallery> galleryList, String userId) {
+		int res = 0;
+		List<Gallery> dataList = galleryRepository.selectGalleryInfoByUserId(userId);
+		List<Gallery> updateList = new ArrayList<Gallery>();
+		List<Gallery> insertList = new ArrayList<Gallery>();
+		
+		for(Gallery oldData : dataList) {
+			for(Gallery newData : galleryList) {
+				if(oldData.getImgOrder().equals(newData.getImgOrder())) {
+					updateList.add(newData);
+					System.out.println(updateList);
+				}else {
+					insertList.add(newData);
+				}
+			}
+		}
+		
+		if(!insertList.isEmpty()) {
+			res += galleryRepository.insertAllGalleryInfo(insertList);
+		}
+		
+		if(!updateList.isEmpty()) {
+			res += galleryRepository.updateAllGalleryInfo(updateList);
+		}
+		
+		return res;
 	}
 
 	@Override
@@ -33,8 +58,19 @@ public class GalleryServiceImpl implements GalleryService{
 
 	@Override
 	public List<Gallery> selectGalleryInfoByUserId(String userId) {
+		List<Gallery> dataList = galleryRepository.selectGalleryInfoByUserId(userId);
+		List<Gallery> commandList = new ArrayList<Gallery>();
 		
-		return galleryRepository.selectGalleryInfoByUserId(userId);
+		for(int i=0; i<12; i++) {
+			commandList.add(null);
+		}
+		
+		for(Gallery item : dataList) {
+			int idx = Integer.parseInt(item.getImgOrder())-1;
+			commandList.set(idx, item);
+		}
+		
+		return commandList;
 	}
 	
 }
