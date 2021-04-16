@@ -10,8 +10,13 @@ import com.we.art.gallery.model.vo.Gallery;
 @Mapper
 public interface GalleryRepository {
 	
-	int insertAllGalleryInfo(List<Gallery> gallerList);
+	int insertAllGalleryInfo(List<Gallery> galleryList);
+	
+	int updateAllGalleryInfo(List<Gallery> galleryList);
 	
 	@Select("select * from tb_gallery where user_id = #{userId}")
 	List<Gallery> selectGalleryInfoByUserId(String userId);
+	
+	@Select("select path from tb_gallery where img_order = #{imgOrder} and user_id = #{userId}")
+	String selectGalleryInforByImgOrder(String imgOrder,String userId);
 }

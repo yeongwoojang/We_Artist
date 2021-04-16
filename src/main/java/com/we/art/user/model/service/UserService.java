@@ -22,6 +22,17 @@ public interface UserService {
 	void insertProPic(String userId, List<MultipartFile> files);
 	Map<String,Object> selectProPicByFIdx(String fIdx);
 	int updateProPic(String userId);
+
+	//김지연 비밀번호 찾기 시작
+
+	String findPassword(String email);
+	
+	//끝
+	
+
 }
+
+
+
 
 

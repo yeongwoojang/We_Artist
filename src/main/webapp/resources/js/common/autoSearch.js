@@ -33,7 +33,7 @@ function autoCompleteByUserName(inp, arr) {
 		}
 		currentFocus = -1;
 		let fixedCard = document.getElementById("auto_search");
-		fixedCard.style="width:20vw; z-index:999; visibility:visible;"
+		fixedCard.style="width:30vw; z-index:999; visibility:visible; margin-top:7.7vh;"
 		a = document.createElement("DIV");
 		a.setAttribute("id", this.id + "autocomplete-list");
 		a.setAttribute("class", "autocomplete-items");

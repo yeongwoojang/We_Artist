@@ -9,6 +9,7 @@ public class Gallery {
 	private String bdNo;
 	private String path;
 	private String imgOrder;
+	
 	public String getUserId() {
 		return userId;
 	}

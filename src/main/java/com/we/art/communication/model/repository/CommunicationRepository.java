@@ -30,4 +30,5 @@ public interface CommunicationRepository {
 	
 	@Select("SELECT *FROM TB_HISTORY WHERE TO_ID =#{userId} AND IS_CHECK = 0")
 	public List<History> selectHistoryById(String userId);
+	
 }

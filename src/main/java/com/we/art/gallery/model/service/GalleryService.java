@@ -11,5 +11,6 @@ public interface GalleryService {
 	public int insertAllGalleryInfo(List<Gallery> gallerList, String userId);
 	public int updateGalleryInfo(List<MultipartFile> files, String userId);
 	public List<Gallery> selectGalleryInfoByUserId(String userId);
+	public String selectGalleryInforByImgOrder(String imgOrder,String userId);
 	
 }
