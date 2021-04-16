@@ -1,7 +1,9 @@
 package com.we.art.user.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
@@ -158,18 +162,45 @@ public class UserController {
 	
 	//김지연 시작
 	//비밀번호 찾기
-	@GetMapping("findId") 
-	public String findId() {
-		return "user/findId";
+	@GetMapping("findPassword") 
+	public String findPassword() {
+		return "user/findPassword";
 	}
 	
-	//비밀번호 찾기 요청
-	@PostMapping("findId")
-	public String findPw(@RequestBody User user) throws Exception {
-		System.out.println("폼에서 받아온 E-mail 값 : " + user);
+	//비밀번호 찾기 인증번호
+		@GetMapping("passEmail") 
+		public String passEmail() {
+			return "user/passEmail";
+		}
 		
-		return findPw(user);
-	}
+	//새 비밀번호 입력
+			@GetMapping("pass_change") 
+			public String pass_change() {
+				return "user/pass_change";
+			}
 	
+		
+			
+			@PostMapping("findimpl")
+			public String findImpl(@ModelAttribute User user, String email, HttpSession session,Model model) {
+				System.out.println(user);
+				String result = userService.findPassword(email);;
+				if (result != null) { //만약에 userInfo가 null이 아니면 (DB에 입력받은 이메일이 다면)
+					model.addAttribute("url",ConfigCode.DOMAIN+"/user/login");	//이동할 경로를 설정 
+					model.addAttribute("alertMsg" , "이메일이 발송되었습니다.");
+					
+				
+				}
+				
+				else { //만약에 findInfo가 null이라  (DB에 입력받은 이메일이 없다면)
+					model.addAttribute("alertMsg" , "이메일 주소가 일치하지 않거나 존재하지 않습니다..");//result.jsp에 alert안에 들어갈 문자열 지장
+					model.addAttribute("url",ConfigCode.DOMAIN+"/user/findPassword"); //이동할 경로를 설정 
+				}
+				
+				return "common/result"; //model에 담긴 값을 result.jsp로 전달
 
+			}
+			
+			
 }
+

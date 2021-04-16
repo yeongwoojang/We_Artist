@@ -21,4 +21,6 @@
 		<mapper resource="mybatis/mapper/chat/chatMapper.xml"/>
 		<mapper resource="mybatis/mapper/board/boardMapper.xml"/>
 	</mappers>
+
+	
 </configuration>

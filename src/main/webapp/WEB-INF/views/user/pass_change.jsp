@@ -69,23 +69,24 @@
 	
 	<div class="container">
     	<div class="py-5 text-center">
-        	<h2>아이디 / 비밀번호 찾기</h2>
+        	<h2>비밀번호 설정하기</h2>
     	</div>
     	
     	<div class="login_container">
         	<header class="logo_header">
-            	로그인에 문제가 있나요?
-				이메일 주소, 전화번호 또는 사용자 이름을 입력하시면 계정에 다시 액세스할 수 있는 링크를 보내드립니다.
+            	새로운 비밀번호를 입력해 주세요.
         	</header>
         	
         	<section class="login_box">
-            	<input type="text" placeholder="사용자 아이디를 입력하세요." class="login_input" id="userID">
+            	<input type="text" placeholder="새 비밀번호 입력" class="login_input" id="userID">
             		<div class="btn">
-                		<button type="button" onclick="moveMain();" class="login_btn" disabled>비밀번호 찾기</button>
+                		<button type="submit" name="submit"  class="login_btn" >로그인 하러가기</button>
             		</div>
         	</section>
     	</div>
    </div>
+   
+  
 
 </body>
 </html>
