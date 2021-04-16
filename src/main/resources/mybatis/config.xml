@@ -12,6 +12,7 @@
 	<!--typeAlias 들어올 곳  -->
 		<typeAlias type="com.we.art.chat.model.vo.ChatContent"	alias="chatContent" />
 		<typeAlias type="com.we.art.board.model.vo.Board" alias="board"/>
+		<typeAlias type="com.we.art.gallery.model.vo.Gallery" alias="gallery"/>
 		<typeAlias type="com.we.art.common.util.file.FileVo" alias="fileVo"/>
 	</typeAliases>
 	
@@ -20,5 +21,6 @@
 	<!-- mapper 들어올 곳 -->
 		<mapper resource="mybatis/mapper/chat/chatMapper.xml"/>
 		<mapper resource="mybatis/mapper/board/boardMapper.xml"/>
+		<mapper resource="mybatis/mapper/gallery/galleryMapper.xml"/>
 	</mappers>
 </configuration>

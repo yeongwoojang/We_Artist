@@ -22,10 +22,10 @@ let setGalleryInfo = (bdNo,fIdx,userId,src) => {
 	imgObj.fIdx = fIdx;
 	imgObj.userId = userId;
 	imgObj.path = src;
-	imgObj.imgOrder = galleryImg;
+	imgObj.imgOrder = galleryImg.substring(11);
 	console.dir(imgObj);
 	
-	galleryImgList.push(imgObj);
+	setGalleryImgList(imgObj);
 	console.dir(galleryImgList);
 	document.querySelector('#'+galleryImg).src = src;
 	document.querySelector('#BoardList').className = 'd-none';
@@ -42,13 +42,36 @@ let uploadGalleryInfo = () => {
 	})
 	.then(res => res.text)
 	.then(res => {alert(res)});
+}
+
+let setGalleryImgList = (imgObj) => {
+	let flg = true;
+	galleryImgList.forEach((item)=>{
+		if(item.imgOrder == imgObj.imgOrder){
+			let temp = new Object();
+			temp = imgObj;
+			imgObj = item;
+			item = temp;
+			flg = false;
+		}	
+	})
 	
-	
-	
-	
-	
-	
-	
+	if(flg){
+		galleryImgList.push(imgObj);	
+	}
 }
 
 init();
+
+
+
+
+
+
+
+
+
+
+
+
+
