@@ -138,22 +138,16 @@ public class UserServiceImpl implements UserService {
 		      
 		      ResponseEntity<String> response = http.exchange(request, String.class);
 		      mail.send(email, "We Artist 임시비밀번호 입니다.", response.getBody());
-			
-			//user객체에 임시 비밀번호 담기
-			//user.setPassword(tempPw);
-			
-			//메일 전송
-			//MailUtil mail = new MailUtil();
-			//mail.sendMail(user);
-			
-			//회원 비밀번호를 암호화하여  user객체에 다시 저장
-			//String securePw = encoder.encode(user.getPassword());
-			//user.setPassword(securePw);
-			
-			//비밀번호 변경
-			//user.modifyPassword(user);
+		      
+		      // 임시비밀번호 암호화 해서 변수
+		      //String rePassword = encoder.encode(tempPw);
+		      String rePassword = tempPw;	//나중에 위에 쓸때주석하셈
+
+		      userRepository.changePassword(rePassword, email);
 			
 			result = "Success";
+			
+			
 			
 		} else {
 			

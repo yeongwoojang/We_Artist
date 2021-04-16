@@ -34,6 +34,8 @@ public interface UserRepository {
 	@Update("update tb_user set password=#{password} where email=#{email}")
 	User findPassword(String password, String email);
 	
+	@Update("update tb_user set password=#{password} where email=#{email}")
+	int changePassword(String password, String email);
 	
 
 	
