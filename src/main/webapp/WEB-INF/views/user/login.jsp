@@ -35,12 +35,12 @@
 							<input type="checkbox" id="remember_us" name="remember_userId" ${checked}>
 						</label> 아이디 기억하기
 						<div class="interval_height a_none">
-							<a href="${pageContext.request.contextPath}/user/search_main">&nbsp; 아이디 / 비밀번호 찾기</a>
+							<a href="${pageContext.request.contextPath}/user/findPassword">&nbsp; 아이디 / 비밀번호 찾기</a>
 						</div>
 					</div>
 	
 	        		<div class="col-4">
-	            		<button type="btn-login" class="btn btn-primary btn-block" >로그인</button>
+	            		<button type="btn-login" class="btn btn-primary btn-block"> 로그인</button>
 	        		</div>
 	    	</form>
 	       

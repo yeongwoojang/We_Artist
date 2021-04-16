@@ -23,4 +23,6 @@
 		<mapper resource="mybatis/mapper/board/boardMapper.xml"/>
 		<mapper resource="mybatis/mapper/gallery/galleryMapper.xml"/>
 	</mappers>
+
+	
 </configuration>
