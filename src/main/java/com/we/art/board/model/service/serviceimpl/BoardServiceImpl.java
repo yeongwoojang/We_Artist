@@ -58,7 +58,6 @@ public class BoardServiceImpl implements BoardService{
 			commandMap.put("files", boardRepository.selectFileByBdNo(board.getBdNo()));
 			commandList.add(commandMap);
 		}
-		
 		return boardList.isEmpty() ? null : commandList;
 	}
 
