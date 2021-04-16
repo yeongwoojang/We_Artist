@@ -10,6 +10,13 @@
 		 order by bd_no desc
 	</select>
 	
+	<!--장영우 추가-->
+	<select id="selectBoardByBdNo" resultType="board">
+		SELECT * FROM TB_BOARD
+		WHERE BD_NO = #{bdNo}
+	</select>
+	<!--/장영우 추가-->
+	
 	<select id="selectFileByBdNo" resultType="fileVo">
 		select * from tb_file
 		where f_idx in 

@@ -57,6 +57,8 @@
                 <label for="nickName">닉네임</label>
                 <input id="nickName" type="text" class="form-control" name="nickName"
                        aria-describedby="nickNameHelp" required minlength="2" maxlength="15">
+                <button class="btn btn-primary" type="button" onclick="nicknameCheck()">check</button>
+                <span class="text-danger" id="nickname_check"></span>
                 <small class="invalid-feedback">닉네임을 입력하세요.</small>
             </div>
 

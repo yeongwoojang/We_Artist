@@ -21,16 +21,20 @@ public class GalleryServiceImpl implements GalleryService{
 	}
 	
 	@Override
-	public int insertGalleryInfo(List<MultipartFile> files, String userId) {
-		List<Gallery> galleryList = new ArrayList<Gallery>();
-		
-		return 0;
+	public int insertAllGalleryInfo(List<Gallery> gallerList, String userId) {
+		return galleryRepository.insertAllGalleryInfo(gallerList);
 	}
 
 	@Override
 	public int updateGalleryInfo(List<MultipartFile> files, String userId) {
 		
 		return 0;
+	}
+
+	@Override
+	public List<Gallery> selectGalleryInfoByUserId(String userId) {
+		
+		return galleryRepository.selectGalleryInfoByUserId(userId);
 	}
 	
 }

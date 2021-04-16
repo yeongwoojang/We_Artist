@@ -3,8 +3,9 @@ package com.we.art.communication.model.vo;
 import lombok.Data;
 
 @Data
-public class Follower {
-	private String fwrNo;
-	private String fromId;
+public class History {
+
 	private String toId;
+	private String fromId;
+	private int isCheck;
 }

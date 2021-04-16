@@ -1,9 +1,7 @@
 package com.we.art.user.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -18,13 +16,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.we.art.chat.model.service.ChatService;
 import com.we.art.chat.model.vo.ChatRoom;
@@ -32,7 +26,6 @@ import com.we.art.common.code.ConfigCode;
 import com.we.art.common.code.ErrorCode;
 import com.we.art.common.exception.ToAlertException;
 import com.we.art.user.model.service.UserService;
-import com.we.art.user.model.service.impl.UserServiceImpl;
 import com.we.art.user.model.vo.User;
 import com.we.art.user.validator.UserValidator;
 
@@ -86,6 +79,15 @@ public class UserController {
 	@ResponseBody
 	public String idCheck(String userId) {
 		if (userService.selectUserById(userId) != null) {
+			return "fail";
+		}
+		return "success";
+	}
+	
+	@GetMapping("nicknamecheck")
+	@ResponseBody
+	public String nicknameCheck(String nickName) {
+		if(userService.selectUserByNick(nickName) != null) {
 			return "fail";
 		}
 		return "success";

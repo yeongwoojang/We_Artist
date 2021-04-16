@@ -1,6 +1,5 @@
 package com.we.art.user.model.service.impl;
 
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.we.art.common.code.ConfigCode;
 import com.we.art.common.mail.MailSender;
-import com.we.art.common.mail.MailUtil;
 import com.we.art.user.model.repository.UserRepository;
 import com.we.art.user.model.service.UserService;
 import com.we.art.user.model.vo.User;
@@ -49,6 +47,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User selectUserById(String userId) {
 		return userRepository.selectUserById(userId);
+	}
+	
+	@Override
+	public User selectUserByNick(String nickName) {
+		return userRepository.selectUserByNick(nickName);
 	}
 
 
