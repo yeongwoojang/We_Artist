@@ -31,9 +31,6 @@
 	   				</div>
 	   				
 					<div class="form-group">
-						<label class="font-weight-bold text-white"> 
-							<input type="checkbox" id="remember_us" name="remember_userId" ${checked}>
-						</label> 아이디 기억하기
 						<div class="interval_height a_none">
 							<a href="${pageContext.request.contextPath}/user/findPassword">&nbsp; 아이디 / 비밀번호 찾기</a>
 						</div>
