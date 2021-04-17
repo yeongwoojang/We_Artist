@@ -171,7 +171,10 @@ function connectPushSocket(){
 // 			fetchNotiCount();
 			let notiBox = document.getElementById("noti_box");
 			let listGroup = document.getElementById("list_group");
-			
+			let emptyNotiBox = document.getElementById("empty_noti_box");
+			if(emptyNotiBox!=null){
+				notiBox.removeChild(emptyNotiBox);
+			}
 			let curNotiCount = parseInt(document.getElementById("noti_count").innerHTML)
 			document.getElementById("noti_count").innerHTML = curNotiCount+1;
 			let notiInfo = document.createElement("li");
@@ -264,6 +267,8 @@ function fetchNotiCount(){
 		let notiBox = document.getElementById("noti_box");
 		let notiCount = document.getElementById("noti_count")
 		let listGroup = document.getElementById("list_group");
+		
+		let emptyNotiBox = document.getElementById("empty_noti_box");
 		// 알람 아이콘 클릭 시
 		document.getElementById("notification_icon").addEventListener("click",(e)=>{
 			if(document.getElementById("noti_box").style.visibility=='visible'){
@@ -272,6 +277,9 @@ function fetchNotiCount(){
 				document.getElementById("noti_box").style.visibility = "visible";
 			}
 		});
+		if(followingReqList.length!=0){
+			notiBox.removeChild(emptyNotiBox);
+		}
 		notiCount.innerHTML = followingReqList.length;
 		for(let i=0;i<followingReqList.length;i++){
 			let notiInfo = document.createElement("li");

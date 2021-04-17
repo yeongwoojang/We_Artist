@@ -76,10 +76,10 @@
 	      <nav id="navbar" class="container navbar order-last order-lg-0 d-flex justify-content-center">
 	        <ul>
 	        
-	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
+	          <li><a class="nav-link scrollto active fs-4" href="/search/main" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Live</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="/user/profile?userId=${sessionScope.userInfo.userId }" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/personal/personal?nickName=${userInfo.nickName}" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
 			  <li style="cursor: pointer;">
@@ -93,6 +93,9 @@
     	</div>
     		<div id="auto_search"class="card position-fixed top-0 start-50 translate-middle-x border border-1" style="width: 30vw; z-index: 999; visibility: hidden; margin-top:7.7vh;"></div>
     		<div id="noti_box"class="card position-fixed top-0 end-0 border border-1" style="width: 20vw; height:20vh; z-index: 999; visibility: hidden; margin-top:7.7vh; margin-right:1vh; overflow:auto;">
+    			<div id="empty_noti_box"class="d-flex align-items-center justify-content-center text-muted "style="height:100%;">
+    				알림이 없습니다.
+    			</div>
     			<ul id="list_group" class="list-group">
     			
     			</ul>
