@@ -17,14 +17,26 @@
     <p class="text-muted">
     	<div class="col-lg-10 row">
                 <div class="col-lg-6">
-                    <img class="mx-auto rounded-circle" src="/resources/img/boyoung.jpg" alt="" style="
-					    width: 14rem;
-					    height: 14rem;
-					    border: 0.5rem solid rgba(0, 0, 0, 0.1);
-					">
+                <c:set var="pic" value="${files}"/>
+                    <c:choose>
+                    	<c:when test="${empty pic}">
+		                    <img class="mx-auto rounded-circle" src="/resources/img/boyoung.jpg" alt="" style="
+							    width: 14rem;
+							    height: 14rem;
+							    border: 0.5rem solid rgba(0, 0, 0, 0.1);
+							">
+						</c:when>
+						<c:otherwise>
+							<img class="mx-auto rounded-circle" src="${pic.path}" alt="" style="
+							    width: 14rem;
+							    height: 14rem;
+							    border: 0.5rem solid rgba(0, 0, 0, 0.1);
+							">
+						</c:otherwise>
+					</c:choose>
                 </div>
                 <div class="col-lg-4">
-					<form action="" id="form" name="form"
+					<form action="${contetxt}/user/proPic" id="form" name="form"
 						method="post" enctype="multipart/form-data" autocomplete="off">
 						<label for="ex_file">프로필 사진 바꾸기</label> 
 						<input src="/resources/img/boyoung.jpg" type="file" id="ex_file" name="filename" required />

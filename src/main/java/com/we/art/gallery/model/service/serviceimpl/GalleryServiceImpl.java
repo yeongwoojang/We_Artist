@@ -72,5 +72,11 @@ public class GalleryServiceImpl implements GalleryService{
 		
 		return commandList;
 	}
+
+	@Override
+	public String selectGalleryInforByImgOrder(String imgOrder, String userId) {
+		// TODO Auto-generated method stub
+		return galleryRepository.selectGalleryInforByImgOrder(imgOrder, userId);
+	}
 	
 }

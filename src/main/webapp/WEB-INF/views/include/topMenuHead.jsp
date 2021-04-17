@@ -69,7 +69,7 @@
 	        <a href="/index" class="scrollto fs-2 text-white" style="text-decoration:none;">We Artist</a>
 	      </div>
 <!-- <img src="/resources/theEvent/assets/img/logo.png" alt="" title=""> -->
-		<div class="container input-group border rounded-pill p-2" style="width:25vw;">
+		<div class="container input-group border rounded-pill p-2" style="width:90vw;">
 	    			<span class="input-group-text bg-transparent border border-0 px-1"><i class="fas fa-search text-muted" style="font-size:1vw;"></i></span>
  					<input type="text" id="inp_search_user" class="form-control border border-0 shadow-none bg-transparent text-muted p-0" placeholder="유저를 검색하세요" style="outline:none; font-size:1vw;">
 			  </div>
@@ -78,42 +78,25 @@
 	        
 	          <li><a class="nav-link scrollto active fs-4" href="#" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Mypage</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="/user/profile" style="font-family: 'Open Sans', sans-serif;">프로필</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Live</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/user/profile?userId=${sessionScope.userInfo.userId }" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
-<!-- 	          <li> -->
-	          
-<!-- 			</li> -->
-			 <li style="cursor: pointer;"><i id="notification_icon" class="fas fa-bell fs-5 text-white"></i></li>
-		
-	<!--           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-	          <ul>
-	            <li><a href="#">Drop Down 1</a></li>
-	            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-	              <ul>
-	                <li><a href="#">Deep Drop Down 1</a></li>
-	                <li><a href="#">Deep Drop Down 2</a></li>
-	                <li><a href="#">Deep Drop Down 3</a></li>
-	                <li><a href="#">Deep Drop Down 4</a></li>
-	                <li><a href="#">Deep Drop Down 5</a></li>
-	              </ul>
-	            </li>
-	            <li><a href="#">Drop Down 2</a></li>
-	            <li><a href="#">Drop Down 3</a></li>
-	            <li><a href="#">Drop Down 4</a></li>
-	          </ul>
-	        </li> -->
-	        
-	          
+			  <li style="cursor: pointer;">
+			 	 <i id="notification_icon" class="fas fa-bell fs-5 text-white"></i>
+				 <span id="noti_count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.3vw;"></span>
+			 </li>
 	        </ul>
 	        <i class="bi bi-list mobile-nav-toggle"></i>
 	      </nav>
 	      <!-- .navbar -->
     	</div>
-    		
+    		<div id="auto_search"class="card position-fixed top-0 start-50 translate-middle-x border border-1" style="width: 30vw; z-index: 999; visibility: hidden; margin-top:7.7vh;"></div>
+    		<div id="noti_box"class="card position-fixed top-0 end-0 border border-1" style="width: 20vw; z-index: 999; visibility: hidden; margin-top:7.7vh; margin-right:1vh">
+    			
+    		</div>
   	</header>
-  	<div id="auto_search"class="navbar-nav position-fixed start-50 translate-middle-x border border-1" style="width:15vw; z-index:999; visibility:hidden;"></div>
+<!--   	<div id="auto_search"class="navbar-nav position-fixed start-50 translate-middle-x border border-1" style="width:30vw; z-index:999; visibility:hidden;"></div> -->
   	
   	
   	<!-- Toast창  -->

@@ -22,7 +22,7 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 	connectSocket(); //소켓 연결
 	currentUserId = "${userInfo.userId}"; //현재 로그인한 유저의 ID
 	connectPushSocket();
-
+	fetchNotiCount();
 }
 
 // 소켓 연결을 위한 함수
@@ -161,9 +161,23 @@ function connectPushSocket(){
 					setTimeout(function() {
 			 			document.getElementById("liveFollowingToast").className ="toast hide";
 						}, 5000);
+					
+			document.getElementById("followingMessage").addEventListener("click",function(event){
+					deleteNoti(toId,fromId);
+			});		
 			console.log("푸시소켓 응답")
 			createNewRoom(fromId,toId);
 			
+			fetchNotiCount();
+// 			let noti_box = document.getElementById("noti_box");
+// 			let noti_count = document.getElementById("noti_count");
+// 			for(let i=0; i<5; i++){
+// 				let box = document.createElement("div");			
+// 				let p = document.createElement("p")
+// 				p.innerHTML = "안녕";
+// 				box.appendChild(p);
+// 				noti_box.appendChild(box);
+// 			}
 		});
 		console.log("푸시소켓 연결")
 	});
@@ -220,5 +234,54 @@ function reSetMyChatRoomList(){
 			}
 		});
 }
+
+
+function fetchNotiCount(){
+	const url = '/communication/fetchnoticountimpl';
+	fetch(url,{
+		method : "GET",
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		let count = JSON.parse(text).length;
+		let notiCount = document.getElementById("noti_count")
+		notiCount.innerHTML = count;
+	});
+}
+
+function deleteNoti(toId,fromId){
+	const url = '/communication/deletenotiimpl'
+	let paramObj = new Object();
+	paramObj.toId = toId;
+	paramObj.fromId = fromId;
+	
+	let headerObj = new Headers();
+	headerObj.append('content-type','application/json');
+	
+	fetch(url,{
+		method: "POST",
+		headers : headerObj,
+		body : JSON.stringify(paramObj)
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		if(text=="success"){
+			//알림 히스토리 삭제를 성공 했을 시
+		}else{
+			//알림 히스토리 삭제를 실패 했을 시
+		}
+	});
+	
+	
+	
+	
+	
+	
+}
+
 
 </script>

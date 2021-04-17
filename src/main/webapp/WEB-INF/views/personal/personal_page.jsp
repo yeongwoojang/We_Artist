@@ -99,7 +99,7 @@
                 				<p class="p-2 mb-0"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;">${boardInfo.board.bdContent}</p>
                 			</c:if>
            			 	</div>
-          			</div>	
+          			</div>		
           			<c:if test="${fn:length(boardInfo.files)>1}">
           				<script>overlap("${boardInfo.board.bdNo}");</script>
           			</c:if>
@@ -222,9 +222,9 @@
 		let userId = "${personalUserInfo.userId}";
 		let nickName = "${curUserInfo.nickName}";
 		if(currentUserId!=""){
-			stompPushClient.send("/push", {}, JSON.stringify({'fromId' : currentUserId, 'toId': userId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
-	 		createNewRoom(currentUserId,userId);
-	 		reSetMyChatRoomList();	
+// 			stompPushClient.send("/push", {}, JSON.stringify({'fromId' : currentUserId, 'toId': userId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
+// 	 		createNewRoom(currentUserId,userId);
+// 	 		reSetMyChatRoomList();	
 	 		followingImpl(userId,currentUserId);
 		}else{
 			location.href = "/user/login";
@@ -252,7 +252,11 @@
 		}).then((text)=>{
 			if(text=="success"){
 				//팔로잉 성공 시
-				console.log(text);
+				let userId = "${personalUserInfo.userId}";
+				let nickName = "${curUserInfo.nickName}";
+				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
+	 			createNewRoom(currentUserId,userId);
+	 			reSetMyChatRoomList();	
 				let fBtn = document.getElementById("btn_about_following");
 				fBtn.innerHTML ="팔로우 끊기";
 				fBtn.setAttribute("onclick","unfollowing()")
@@ -312,7 +316,7 @@
 				return response.text();
 			}
 		}).then((text)=>{
-			console.log(text);
+			console.log(JSON.parse(text));
 			document.getElementById("follower_count").innerHTML = text;
 		});
 		
