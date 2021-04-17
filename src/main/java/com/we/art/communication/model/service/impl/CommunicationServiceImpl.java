@@ -1,6 +1,7 @@
 package com.we.art.communication.model.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -37,14 +38,6 @@ public class CommunicationServiceImpl implements CommunicationService{
 		return communicationRepository.insertFollowing(following);
 	}
 
-	
-	
-	@Override
-	public int deleteHistory(History history) {
-		return communicationRepository.deleteHistory(history);
-	}
-
-
 	@Override
 	public int deleteFollowing(Following following) {
 		return communicationRepository.deleteFollowing(following);
@@ -52,9 +45,16 @@ public class CommunicationServiceImpl implements CommunicationService{
 
 
 	@Override
-	public List<History> selectHistoryById(String userId) {
+	public List<Map<String, Object>> selectHistoryById(String userId) {
 		return communicationRepository.selectHistoryById(userId);
 	}
+
+
+	@Override
+	public int updateHistory(History history) {
+		return communicationRepository.updateHistory(history);
+	}
+	
 	
 	
 

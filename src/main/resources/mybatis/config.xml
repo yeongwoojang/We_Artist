@@ -25,6 +25,7 @@
 		<mapper resource="mybatis/mapper/board/boardMapper.xml"/>
 		<mapper resource="mybatis/mapper/user/userMapper.xml"/>
 		<mapper resource="mybatis/mapper/gallery/galleryMapper.xml"/>
+		<mapper resource="mybatis/mapper/communication/communicationMapper.xml"></mapper>
 	</mappers>
 
 	

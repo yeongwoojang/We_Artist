@@ -2,6 +2,7 @@ package com.we.art.communication.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,14 +72,7 @@ public class CommunicationController {
 			Model model) {
 		int res = communicationService.deleteFollowing(following);
 		if (res != 0) {
-			History history = new History();
-			history.setFromId(following.getFromId());
-			history.setToId(following.getToId());
-			if (communicationService.deleteHistory(history) != 0) {
 				return "success";
-			} else {
-				return "failed";
-			}
 		} else {
 			return "failed";
 		}
@@ -86,11 +80,11 @@ public class CommunicationController {
 	
 	@GetMapping("fetchnoticountimpl")
 	@ResponseBody
-	public List<History> fetchNotiCount(Model model) {
+	public List<Map<String,Object>> fetchNotiCount(Model model) {
 		User userInfo = (User)model.getAttribute("userInfo");
 		System.out.println("유저 인포 : "+userInfo);
 		if(userInfo!=null) {
-			List<History> historyList = communicationService.selectHistoryById(userInfo.getUserId());
+			List<Map<String,Object>> historyList = communicationService.selectHistoryById(userInfo.getUserId());
 			System.out.println(historyList);
 			if(historyList.size()==0) {
 				historyList = new ArrayList<>();
@@ -102,13 +96,13 @@ public class CommunicationController {
 		}
 	}
 	
-	@PostMapping("deletenotiimpl")
+	@PostMapping("updatehistoryimpl")
 	@ResponseBody
-	public String deleteNoti(@RequestBody History history, Model model) {
+	public String updateHistoryImpl(@RequestBody History history, Model model) {
 		User userInfo = (User)model.getAttribute("userInfo");
+		
 		if(userInfo!=null) {
-			
-			int res = communicationService.deleteHistory(history);
+			int res = communicationService.updateHistory(history);
 			if(res!=0) {
 				return "success";
 			}else {
@@ -118,4 +112,12 @@ public class CommunicationController {
 			return "failed";
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

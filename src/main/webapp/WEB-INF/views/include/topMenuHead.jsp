@@ -92,8 +92,11 @@
 	      <!-- .navbar -->
     	</div>
     		<div id="auto_search"class="card position-fixed top-0 start-50 translate-middle-x border border-1" style="width: 30vw; z-index: 999; visibility: hidden; margin-top:7.7vh;"></div>
-    		<div id="noti_box"class="card position-fixed top-0 end-0 border border-1" style="width: 20vw; z-index: 999; visibility: hidden; margin-top:7.7vh; margin-right:1vh">
+    		<div id="noti_box"class="card position-fixed top-0 end-0 border border-1" style="width: 20vw; height:20vh; z-index: 999; visibility: hidden; margin-top:7.7vh; margin-right:1vh; overflow:auto;">
+    			<ul id="list_group" class="list-group">
     			
+    			</ul>
+    			<!-- 알림 목록을 동적으로 뿌려줄 곳 -->
     		</div>
   	</header>
 <!--   	<div id="auto_search"class="navbar-nav position-fixed start-50 translate-middle-x border border-1" style="width:30vw; z-index:999; visibility:hidden;"></div> -->

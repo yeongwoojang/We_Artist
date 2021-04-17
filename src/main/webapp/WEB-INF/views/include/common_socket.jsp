@@ -155,7 +155,7 @@ function connectPushSocket(){
 			let nickName = pushInfo.nickName;
 			let followingMessage = document.getElementById("followingMessage");
 			followingMessage.innerHTML = nickName+"님이 당신을 팔로우했습니다.";
-			followingMessage.href ="/personal/personal?nickName="+nickName
+			followingMessage.style.cursor ="pointer"
 			followingMessage.className ="text-primary"
 			document.getElementById("liveFollowingToast").className ="toast show";
 					setTimeout(function() {
@@ -163,12 +163,26 @@ function connectPushSocket(){
 						}, 5000);
 					
 			document.getElementById("followingMessage").addEventListener("click",function(event){
-					deleteNoti(toId,fromId);
+				checkNoti(pushInfo);
 			});		
 			console.log("푸시소켓 응답")
 			createNewRoom(fromId,toId);
 			
-			fetchNotiCount();
+// 			fetchNotiCount();
+			let notiBox = document.getElementById("noti_box");
+			let listGroup = document.getElementById("list_group");
+			
+			let curNotiCount = parseInt(document.getElementById("noti_count").innerHTML)
+			document.getElementById("noti_count").innerHTML = curNotiCount+1;
+			let notiInfo = document.createElement("li");
+			notiInfo.setAttribute("class","list-group-item");
+			notiInfo.innerHTML = nickName +"님으로부터 팔로잉 요청이 있습니다.";
+			notiInfo.style.cursor = "pointer";
+			notiInfo.addEventListener("click",(e)=>{
+				clickNoti(e.target,pushInfo);
+			});
+			listGroup.appendChild(notiInfo);
+			notiBox.appendChild(listGroup);
 // 			let noti_box = document.getElementById("noti_box");
 // 			let noti_count = document.getElementById("noti_count");
 // 			for(let i=0; i<5; i++){
@@ -245,43 +259,65 @@ function fetchNotiCount(){
 			return response.text();
 		}
 	}).then((text)=>{
-		let count = JSON.parse(text).length;
+		let followingReqList = JSON.parse(text);
+		console.dir(followingReqList)
+		let notiBox = document.getElementById("noti_box");
 		let notiCount = document.getElementById("noti_count")
-		notiCount.innerHTML = count;
+		let listGroup = document.getElementById("list_group");
+		// 알람 아이콘 클릭 시
+		document.getElementById("notification_icon").addEventListener("click",(e)=>{
+			if(document.getElementById("noti_box").style.visibility=='visible'){
+				document.getElementById("noti_box").style.visibility = "hidden";
+			}else{
+				document.getElementById("noti_box").style.visibility = "visible";
+			}
+		});
+		notiCount.innerHTML = followingReqList.length;
+		for(let i=0;i<followingReqList.length;i++){
+			let notiInfo = document.createElement("li");
+			notiInfo.setAttribute("class","list-group-item");
+			notiInfo.innerHTML = followingReqList[i].nickName +"님으로부터 팔로잉 요청이 있습니다.";
+			notiInfo.style.cursor = "pointer";
+			notiInfo.addEventListener("click",(e)=>{
+				clickNoti(e.target,followingReqList[i]);
+			});
+			listGroup.appendChild(notiInfo);
+			notiBox.appendChild(listGroup);
+		}
+// 		notiBox.style.visibility = "visible";
 	});
 }
 
-function deleteNoti(toId,fromId){
-	const url = '/communication/deletenotiimpl'
-	let paramObj = new Object();
-	paramObj.toId = toId;
-	paramObj.fromId = fromId;
-	
-	let headerObj = new Headers();
-	headerObj.append('content-type','application/json');
-	
-	fetch(url,{
-		method: "POST",
-		headers : headerObj,
-		body : JSON.stringify(paramObj)
-	}).then(response=>{
-		if(response.ok){
-			return response.text();
-		}
-	}).then((text)=>{
-		if(text=="success"){
-			//알림 히스토리 삭제를 성공 했을 시
-		}else{
-			//알림 히스토리 삭제를 실패 했을 시
-		}
-	});
-	
-	
-	
-	
-	
-	
+function checkNoti(pushInfo){
+	const url = '/communication/updatehistoryimpl'
+		console.dir(pushInfo);
+		let paramObj = new Object();
+		paramObj.toId = pushInfo.toId;
+		paramObj.fromId = pushInfo.fromId;
+		
+		let headerObj = new Headers();
+		headerObj.append('content-type','application/json');
+		
+		fetch(url,{
+			method: "POST",
+			headers : headerObj,
+			body : JSON.stringify(paramObj)
+		}).then(response=>{
+			if(response.ok){
+				return response.text();
+			}
+		}).then((text)=>{
+			if(text=="success"){
+				location.href ="/personal/personal?nickName="+pushInfo.nickName;
+			}
+		})
 }
 
-
+function clickNoti(liTag,pushInfo){
+	let data = JSON.stringify(pushInfo);
+	console.log(data.nickName);
+	document.getElementById("list_group").removeChild(liTag);
+	checkNoti(pushInfo);
+	
+}
 </script>
