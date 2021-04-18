@@ -88,6 +88,7 @@ let connectSocket = function(){
 						messageBox.innerHTML = msg;
 						borderBox.appendChild(messageBox);
 						chatBox.appendChild(borderBox);
+						chatBox.scrollTop = chatBox.scrollHeight; 
 					}
 					
 				}else{

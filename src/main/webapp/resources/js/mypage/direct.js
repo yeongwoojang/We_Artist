@@ -10,6 +10,8 @@ function sendMessage() {
 			drawMyChatting(msg);
 			let msgTime = getCurrentTime();
 			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgTo': selectUser,'msgTime' : msgTime }));
+			let chatBox = document.getElementById("chat_box")
+			chatBox.scrollTop = chatBox.scrollHeight; 
 			insertChatContentImpl(currentRoomId,msg,currentUserId,selectUser,msgTime);
 		}
 	}
@@ -127,6 +129,8 @@ function selectChatContentListImpl(chatRoomNo,firstUser,secondUser){
 				}
 				
 			}
+			let chatBox = document.getElementById("chat_box");
+			chatBox.scrollTop = chatBox.scrollHeight; 
 		}
 	})
 }
