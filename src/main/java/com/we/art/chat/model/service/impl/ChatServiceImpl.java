@@ -1,6 +1,7 @@
 package com.we.art.chat.model.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -51,7 +52,8 @@ public class ChatServiceImpl implements ChatService{
 
 
 	@Override
-	public List<ChatContent> selectChatContentList(ChatRoom chatRoom) {
+	public List<Map<String, Object>> selectChatContentList(ChatRoom chatRoom) {
+		System.out.println(chatRoom);
 		return chatRepository.selectChatContentList(chatRoom);
 	}
 

@@ -4,6 +4,16 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.we.art.chat.model.repository.ChatRepository">
 
+	<select id="selectChatContentList" resultMap="chatContentData">
+		SELECT CHAT_NO,CHAT_ROOM_NO,MSG,TO_DATE(MSG_TIME,'YYYY-MM-DD HH24:MI:SS') MSGTIME ,MSG_TO,MSG_FROM
+			FROM TB_CHAT_CONTENT
+			WHERE CHAT_ROOM_NO = (SELECT CHAT_ROOM_NO
+			FROM TB_CHAT_ROOM
+			WHERE ((FIRST_USER = #{firstUser} AND SECOND_USER = #{secondUser})
+			OR (FIRST_USER = #{secondUser} AND SECOND_USER = #{firstUser})))
+			ORDER BY MSGTIME ASC
+	</select>
+
 	<select id="selectLastMessageList" parameterType="map" resultType="chatContent">
 	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME
 	FROM(
@@ -16,6 +26,17 @@
 	)
 	WHERE RowIdx =1
 	</select>
+	
+	
+	
+	<resultMap type="map" id="chatContentData">
+		<result column="CHAT_NO" javaType="String" property="chatNo"/>
+		<result column="CHAT_ROOM_NO" javaType="string" property="chatRoomNo"/>
+		<result column="MSG" javaType="String" property="msg"/>
+		<result column="MSGTIME" javaType="date" property="msgTime"/>
+		<result column="MSG_TO" javaType="String" property="msgTo"/>
+		<result column="MSG_FROM" javaType="String" property="msgFrom"/>
+	</resultMap>
 	
 </mapper>
 <!-- 	<select id="selectLastMessageList" parameterType="map" resultType="chatContent"> -->
