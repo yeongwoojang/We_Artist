@@ -50,8 +50,9 @@ let connectSocket = function(){
 					let lastMessageTime = document.querySelectorAll(".last_message_time") //해당 유저에게 마지막으로 message 를 받은 시간을 나타내는 p태그리스트 
 					
 					//받은 메세지가 글자수 10자를 넘으면 10글자만 보여주고 나머지는 "......."으로 표시
+					let lastMsg = msg;
 					if (msg.length >= 10) {
-						msg = msg.substr(0,10)+"......" 
+						lastMsg = msg.substr(0,10)+"......" 
 					}
 					
 					for(let i =0; i< chatRoomCard.length; i++){
@@ -59,10 +60,11 @@ let connectSocket = function(){
 						//메세지를 보낸 유저와 팔로잉 한 유저가 일치한다면 그 유저가 보낸 메세지를 Cardview에 표시
 						if((uName==msgFrom || uName == msgTo )){
 							console.dir(lastMessage)
-							lastMessage[i].innerHTML = msg
+							lastMessage[i].innerHTML = lastMsg
 							lastMessageTime[i].innerHTML = getCurrentTime();
 						}
 					}
+					
 					let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
 					if(msgFrom!= currentUserId && chatIndex==null && roomId == currentRoomId) {
 						let chatBox = document.getElementById("chat_box");
@@ -138,8 +140,10 @@ function getCurrentTime(){
 	let day = today.getDay();  // 요일
 	let hours = today.getHours(); // 시
 	let minutes = today.getMinutes();  // 분
+	let seconds = today.getSeconds();  // 초
+	let milliseconds = today.getMilliseconds(); // 밀리초
 	
-	return year+"년 "+month+"월 "+date+"일 "+hours+"시 "+minutes+"분"
+	return year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
 }
 
 //팔로잉 요청 수락용 푸시Socket
@@ -179,7 +183,7 @@ function connectPushSocket(){
 			document.getElementById("noti_count").innerHTML = curNotiCount+1;
 			let notiInfo = document.createElement("li");
 			notiInfo.setAttribute("class","list-group-item");
-			notiInfo.innerHTML = nickName +"님으로부터 팔로잉 요청이 있습니다.";
+			notiInfo.innerHTML = nickName +"님이 당신을 팔로우 했습니다.";
 			notiInfo.style.cursor = "pointer";
 			notiInfo.addEventListener("click",(e)=>{
 				clickNoti(e.target,pushInfo);

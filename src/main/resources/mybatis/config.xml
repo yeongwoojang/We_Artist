@@ -12,6 +12,7 @@
 	<typeAliases>
 	<!--typeAlias 들어올 곳  -->
 		<typeAlias type="com.we.art.chat.model.vo.ChatContent"	alias="chatContent" />
+		<typeAlias type="com.we.art.chat.model.vo.ChatRoom"	alias="chatRoom" />
 		<typeAlias type="com.we.art.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.we.art.gallery.model.vo.Gallery" alias="gallery"/>
 		<typeAlias type="com.we.art.common.util.file.FileVo" alias="fileVo"/>

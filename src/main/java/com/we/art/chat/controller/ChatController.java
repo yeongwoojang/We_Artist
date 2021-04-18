@@ -2,6 +2,7 @@ package com.we.art.chat.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -83,6 +84,7 @@ public class ChatController {
 	@PostMapping("insertchatcontentimpl")
 	@ResponseBody
 	public String insertChatContentImpl(@RequestBody ChatContent chatContent) {
+		System.out.println(chatContent);
 		int res = chatService.insertChatContent(chatContent);
 		if(res!=0) {
 			return "success";
@@ -93,9 +95,12 @@ public class ChatController {
 	
 	@PostMapping("selectchatcontentlistimpl")
 	@ResponseBody
-	public List<ChatContent> selectChatContentListImpl(@RequestBody ChatRoom chatRoom){
-		List<ChatContent> chatContentList = new ArrayList<ChatContent>();
+	public List<Map<String,Object>> selectChatContentListImpl(@RequestBody ChatRoom chatRoom){
+		List<Map<String,Object>> chatContentList = new ArrayList<Map<String,Object>>();
+		System.out.println(chatRoom.getFirstUser());
+		System.out.println(chatRoom.getSecondUser());
 		chatContentList = chatService.selectChatContentList(chatRoom);
+		System.out.println("결과 : "+chatContentList);
 		return chatContentList;
 	}
 	

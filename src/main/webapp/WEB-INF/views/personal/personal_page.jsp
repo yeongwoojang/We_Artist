@@ -324,7 +324,7 @@
 	
 	
 	function modifyProfile(){
-		location.href ="/user/profile";
+		location.href ="/user/profile?userId="+currentUserId;
 	}
   </script>
 </body>

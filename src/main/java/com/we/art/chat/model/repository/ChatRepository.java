@@ -1,6 +1,7 @@
 package com.we.art.chat.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -36,12 +37,7 @@ public interface ChatRepository {
 			+" VALUES('CHATNO'||SC_CHAT_IDX.NEXTVAL,#{chatRoomNo},#{msg},#{msgTime},#{msgTo},#{msgFrom})")
 	int insertChatContent(ChatContent chatContent);
 	
-	@Select("SELECT *FROM TB_CHAT_CONTENT"
-			+ " WHERE CHAT_ROOM_NO = (SELECT CHAT_ROOM_NO"
-			+ " FROM TB_CHAT_ROOM"
-			+ " WHERE (FIRST_USER = #{firstUser} AND SECOND_USER = #{secondUser})"
-			+ " OR (FIRST_USER = #{secondUser} AND SECOND_USER = #{firstUser}))")
-	List<ChatContent> selectChatContentList(ChatRoom chatRoom);
+	List<Map<String,Object>> selectChatContentList(ChatRoom chatRoom);
 	
 	List<ChatContent> selectLastMessageList(@Param("myChatRoomList")List<ChatRoom> myChatRoomList);
 }
