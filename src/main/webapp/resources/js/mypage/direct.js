@@ -2,6 +2,7 @@ let userId = null;
 let selectUser = null;
 let isSubscribe = false;
 let currentRoomId = null;
+let msgToNickName = null;
 //메세지 전송 함수
 function sendMessage() {
 	if (event.keyCode == 13) {
@@ -9,7 +10,8 @@ function sendMessage() {
 		if (msg != "") {
 			drawMyChatting(msg);
 			let msgTime = getCurrentTime();
-			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgTo': selectUser,'msgTime' : msgTime }));
+			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgFromNickName' : currentUserNickName,'msgTo': selectUser,'msgToNickName' :msgToNickName ,'msgTime' : msgTime }));
+			console.dir(currentRoomId)
 			let chatBox = document.getElementById("chat_box")
 			chatBox.scrollTop = chatBox.scrollHeight; 
 			insertChatContentImpl(currentRoomId,msg,currentUserId,selectUser,msgTime);
@@ -17,8 +19,11 @@ function sendMessage() {
 	}
 }
 
-function createRoomId(selectedUser){
-	selectUser = selectedUser //팔로우 목록중 한명을 클릭했을 시 선택한 유저의 ID를 'selectUser' 변수에 담는다.
+function createRoomId(selectedUserInfo){
+	console.log(selectedUserInfo)
+	selectUser = selectedUserInfo.toId //팔로우 목록중 한명을 클릭했을 시 선택한 유저의 ID를 'selectUser' 변수에 담는다.
+	console.log("현재 로그인 유저 : "+currentUserId);
+	msgToNickName = selectedUserInfo.nickName;
 	enterChatRoomImpl(currentUserId,selectUser); //입장한 채팅방의 번호를 가져온다.
 //	let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
 //	let sendMessageBox = document.getElementById("send_message_box"); //메시지를입력하는 box
@@ -30,6 +35,7 @@ function createRoomId(selectedUser){
 
 function enterChatRoomImpl(currentUserId,selectUser){
 	
+	console.log(currentUserId+" : "+ selectUser)
 	let url = '/chat/enterchatroomimpl'
 	let paramObj = new Object();
 	paramObj.firstUser = currentUserId;
@@ -189,13 +195,12 @@ function drawYourChatting(msg){
 }
 
 
-
-
-
-
-
-
-
-
-
-
+	let followingUserItemList = document.querySelectorAll(".item_following_user")
+	for(let i=0;i<followingUserItemList.length; i++){
+		followingUserItemList[i].addEventListener("click",(e)=>{
+			if(e.target.dataset.userid==followingList[i].toId){
+				console.dir(followingList[i])
+		createRoomId(followingList[i]);
+			}
+		});
+	}
