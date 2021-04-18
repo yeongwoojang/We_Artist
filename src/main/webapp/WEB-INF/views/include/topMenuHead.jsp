@@ -82,6 +82,7 @@
 	          <li><a class="nav-link scrollto fs-5" href="/personal/personal?nickName=${userInfo.nickName}" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/chat/direct" style="font-family: 'Open Sans', sans-serif;"><i class="fas fa-envelope fs-5 text-white"></i></a></li>
 			  <li style="cursor: pointer;">
 			 	 <i id="notification_icon" class="fas fa-bell fs-5 text-white"></i>
 				 <span id="noti_count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.3vw;"></span>
