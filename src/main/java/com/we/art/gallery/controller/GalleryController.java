@@ -42,8 +42,11 @@ public class GalleryController {
 		this.galleryService = galleryService;
 	}
 	
-	@GetMapping("gallery")
-	public String ShowGallery() {
+	@GetMapping("gallery/{userId}")
+	public String ShowGallery(@PathVariable(name = "userId")String userId, Model model) {
+		System.out.println("userId = " + userId);
+		System.out.println(galleryService.selectGalleryByUserId(userId));
+		model.addAttribute("galleryList",galleryService.selectGalleryByUserId(userId));
 		return "gallery/gallery";
 	}
 	
