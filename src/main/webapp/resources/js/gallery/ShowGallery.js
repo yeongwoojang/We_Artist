@@ -130,8 +130,6 @@ let onDocumentMouseDown = (event) => {
         targetList.forEach((e) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
-				//let src = '/resources/'+ gltfPath +'/textures/'+e.material.name+'_baseColor.jpeg';
-				//srcToBlob(src,'#imgInfo','#divTest');
 				document.querySelector('#imgInfo').src = galleryData[e.name].path;	
 				document.querySelector('#imgTitle').innerText = galleryData[e.name].title;	
 				document.querySelector('#imgContent').innerText = galleryData[e.name].content;	

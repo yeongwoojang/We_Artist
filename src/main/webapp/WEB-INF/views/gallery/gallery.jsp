@@ -10,7 +10,7 @@
 	    		<div class="rightBox d-inline-flex flex-column justify-content-between">
 	    			<h1 id="imgTitle">TITLE</h1>
 	    			<span id="imgContent">
-	    				이곳은 내용이 들어갈곳
+	    				후에 css 수정해서 좀 이쁘게
 	    			</span>
 	    			<span id="btn_back">Back</span>
 	    		</div>
