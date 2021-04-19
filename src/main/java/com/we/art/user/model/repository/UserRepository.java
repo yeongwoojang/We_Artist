@@ -1,10 +1,13 @@
 package com.we.art.user.model.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.we.art.common.util.file.FileVo;
 import com.we.art.user.model.vo.User;
 
 @Mapper
@@ -31,6 +34,15 @@ public interface UserRepository {
 	@Update("update tb_user set password=#{password}, name=#{name}, phone=#{phone}, nickname=#{nickName} where  user_id = #{userId}")
 	int updateUser(User persistInfo);
 	
+	@Insert("insert into tb_file(f_idx, f_origin, f_rename, user_id, f_save_path)"
+			+ " values('f'||sc_file_idx.nextval, #{fOrigin}, #{fRename}, #{userId}, #{fSavePath})")
+	int insertFile(FileVo file);
+	
+	@Update("update tb_user set f_idx='f'||sc_file_idx.currval where user_id = #{userId}")
+	int updateProPic(String userId);
+	
+	FileVo selectProPicByFIdx(String fIdx);
+	
 	@Update("update tb_user set password=#{password} where email=#{email}")
 	User findPassword(String password, String email);
 	
@@ -38,7 +50,4 @@ public interface UserRepository {
 	int changePassword(String password, String email);
 	
 
-	
-	
-	
 }

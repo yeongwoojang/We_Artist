@@ -1,11 +1,14 @@
 package com.we.art.communication.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.we.art.communication.model.vo.Following;
 import com.we.art.communication.model.vo.History;
@@ -22,12 +25,11 @@ public interface CommunicationRepository {
 	@Insert("INSERT INTO TB_FOLLOWING(FROM_ID,TO_ID) VALUES(#{fromId},#{toId})")
 	public int insertFollowing(Following following);
 	
-	@Delete("DELETE FROM TB_HISTORY WHERE FROM_ID=#{fromId} AND TO_ID=#{toId} AND IS_CHECK = 0")
-	public int deleteHistory(History history);
-	
 	@Delete("DELETE FROM TB_FOLLOWING WHERE FROM_ID =#{fromId} AND TO_ID=#{toId}")
 	public int deleteFollowing(Following following);
 	
-	@Select("SELECT *FROM TB_HISTORY WHERE TO_ID =#{userId} AND IS_CHECK = 0")
-	public List<History> selectHistoryById(String userId);
+	public List<Map<String, Object>> selectHistoryById(@Param("userId") String userId);
+	
+	@Update("UPDATE TB_HISTORY SET IS_CHECK = 1 WHERE TO_ID=#{toId} AND FROM_ID =#{fromId}")
+	public int updateHistory(History history);
 }

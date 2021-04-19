@@ -7,7 +7,11 @@ let stompClient = null;
 let stompPushClient = null;
 let myChatRoomList = null;
 let tempMsgFrom = null;
+let followingList = new Array();
 window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
+	currentUserId = "${userInfo.userId}"; //현재 로그인한 유저의 ID
+	currentUserNickName = "${userInfo.nickName}"; //현재 로그인한 유저의 닉네임
+	console.log("커몬 소켓")
 	getAlluser();
 	myChatRoomList = new Array(); //내가 속한 채팅방 리스트
 	let chatRoom;
@@ -20,9 +24,9 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 	</c:forEach>
 	console.log("나의 채팅방 리스트 : "+myChatRoomList);
 	connectSocket(); //소켓 연결
-	currentUserId = "${userInfo.userId}"; //현재 로그인한 유저의 ID
 	connectPushSocket();
-
+	fetchNotiCount();
+	directMessage();
 }
 
 // 소켓 연결을 위한 함수
@@ -37,32 +41,37 @@ let connectSocket = function(){
 			console.log("채팅방 번호 : "+myChatRoomList[i].chatRoomNo)
 			stompClient.subscribe("/queue/"+myChatRoomList[i].chatRoomNo,function(response){
 				if(currentURI.indexOf('/chat/direct')!=-1){ //만약 현제 페이지가 채팅화면 이라면
+					
 					let msgInfo = JSON.parse(response.body) //넘어온 message 정보를 담고있는 json을 파싱
 					let msg = msgInfo.message;
 					let msgFrom = msgInfo.msgFrom;
 					let msgTo = msgInfo.msgTo;
 					let roomId = msgInfo.roomId;
+					let msgToNickName = msgInfo.msgToNickName;
+					let msgFromNickName = msgInfo.msgFromNickName;
+					console.log("뭐찍히냐"+msgToNickName)
 					console.log(msg)
-//		 			subscribeImpl(msg,msgFrom,msgTo); //받은 메시지를 Controller에 전달
 					
 					let chatRoomCard = document.querySelectorAll(".chat_room_card"); //팔로잉하고 있는 유저들의 item항목을 담고있는 div태그 리스트
 					let lastMessage = document.querySelectorAll(".last_message"); //해당 유저에게 마지막으로 받은 message를 보여 줄 div태그 리스트
 					let lastMessageTime = document.querySelectorAll(".last_message_time") //해당 유저에게 마지막으로 message 를 받은 시간을 나타내는 p태그리스트 
 					
 					//받은 메세지가 글자수 10자를 넘으면 10글자만 보여주고 나머지는 "......."으로 표시
+					let lastMsg = msg;
 					if (msg.length >= 10) {
-						msg = msg.substr(0,10)+"......" 
+						lastMsg = msg.substr(0,10)+"......" 
 					}
 					
 					for(let i =0; i< chatRoomCard.length; i++){
 						let uName = chatRoomCard[i].childNodes[1].innerHTML
 						//메세지를 보낸 유저와 팔로잉 한 유저가 일치한다면 그 유저가 보낸 메세지를 Cardview에 표시
-						if((uName==msgFrom || uName == msgTo )){
+						if((uName==msgFromNickName || uName == msgToNickName )){
 							console.dir(lastMessage)
-							lastMessage[i].innerHTML = msg
+							lastMessage[i].innerHTML = lastMsg
 							lastMessageTime[i].innerHTML = getCurrentTime();
 						}
 					}
+					
 					let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
 					if(msgFrom!= currentUserId && chatIndex==null && roomId == currentRoomId) {
 						let chatBox = document.getElementById("chat_box");
@@ -70,7 +79,6 @@ let connectSocket = function(){
 						borderBox.style.padding = "10px";
 						borderBox.style.marginBottom = "10px";
 						borderBox.style.border = "1px solid #DCDCDC"
-						console.log("메세지 띄우자")
 						if (msg.length >= 20) {
 							borderBox.style.width = "30%";
 						}
@@ -86,6 +94,7 @@ let connectSocket = function(){
 						messageBox.innerHTML = msg;
 						borderBox.appendChild(messageBox);
 						chatBox.appendChild(borderBox);
+						chatBox.scrollTop = chatBox.scrollHeight; 
 					}
 					
 				}else{
@@ -138,8 +147,10 @@ function getCurrentTime(){
 	let day = today.getDay();  // 요일
 	let hours = today.getHours(); // 시
 	let minutes = today.getMinutes();  // 분
+	let seconds = today.getSeconds();  // 초
+	let milliseconds = today.getMilliseconds(); // 밀리초
 	
-	return year+"년 "+month+"월 "+date+"일 "+hours+"시 "+minutes+"분"
+	return year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
 }
 
 //팔로잉 요청 수락용 푸시Socket
@@ -155,70 +166,142 @@ function connectPushSocket(){
 			let nickName = pushInfo.nickName;
 			let followingMessage = document.getElementById("followingMessage");
 			followingMessage.innerHTML = nickName+"님이 당신을 팔로우했습니다.";
-			followingMessage.href ="/personal/personal?nickName="+nickName
+			followingMessage.style.cursor ="pointer"
 			followingMessage.className ="text-primary"
 			document.getElementById("liveFollowingToast").className ="toast show";
 					setTimeout(function() {
 			 			document.getElementById("liveFollowingToast").className ="toast hide";
 						}, 5000);
+					
+			document.getElementById("followingMessage").addEventListener("click",function(event){
+				checkNoti(pushInfo);
+			});		
 			console.log("푸시소켓 응답")
-			createNewRoom(fromId,toId);
+// 			createNewRoom(fromId,toId);
 			
+// 			fetchNotiCount();
+			let notiBox = document.getElementById("noti_box");
+			let listGroup = document.getElementById("list_group");
+			let emptyNotiBox = document.getElementById("empty_noti_box");
+			if(emptyNotiBox!=null){
+				notiBox.removeChild(emptyNotiBox);
+			}
+			let curNotiCount = parseInt(document.getElementById("noti_count").innerHTML)
+			document.getElementById("noti_count").innerHTML = curNotiCount+1;
+			let notiInfo = document.createElement("li");
+			notiInfo.setAttribute("class","list-group-item");
+			notiInfo.innerHTML = nickName +"님이 당신을 팔로우 했습니다.";
+			notiInfo.style.cursor = "pointer";
+			notiInfo.addEventListener("click",(e)=>{
+				clickNoti(e.target,pushInfo);
+			});
+			listGroup.appendChild(notiInfo);
+			notiBox.appendChild(listGroup);
 		});
 		console.log("푸시소켓 연결")
 	});
 }
 
 
-function createNewRoom(fromId,toId){
-	
-	let url = '/chat/enterchatroomimpl'
-	let paramObj = new Object();
-	paramObj.firstUser = fromId;
-	paramObj.secondUser = toId;
-	let headerObj = new Headers();
-	headerObj.append("content-type","application/json");
+
+
+
+function fetchNotiCount(){
+	const url = '/communication/fetchnoticountimpl';
 	fetch(url,{
-		method : "POST",
-		headers : headerObj,
-		body : JSON.stringify(paramObj)
-	})
-	.then(response=>{
+		method : "GET",
+	}).then(response=>{
 		if(response.ok){
-			return response.text()
+			return response.text();
 		}
-	})
-	.then((text)=>{
-		if(text!='failed'){
-			//TODO 채팅방 만들기를 성공했을 시
-			stompClient.disconnect();
-			reSetMyChatRoomList();
-			
-			
-		}else{
-			//TODO 채팅방 만들기를 실패했을 시
+	}).then((text)=>{
+		let followingReqList = JSON.parse(text);
+		console.dir(followingReqList)
+		let notiBox = document.getElementById("noti_box");
+		let notiCount = document.getElementById("noti_count")
+		let listGroup = document.getElementById("list_group");
+		
+		let emptyNotiBox = document.getElementById("empty_noti_box");
+		// 알람 아이콘 클릭 시
+		document.getElementById("notification_icon").addEventListener("click",(e)=>{
+			if(document.getElementById("noti_box").style.visibility=='visible'){
+				document.getElementById("noti_box").style.visibility = "hidden";
+			}else{
+				document.getElementById("noti_box").style.visibility = "visible";
+			}
+		});
+		if(followingReqList.length!=0){
+			notiBox.removeChild(emptyNotiBox);
 		}
+		notiCount.innerHTML = followingReqList.length;
+		for(let i=0;i<followingReqList.length;i++){
+			let notiInfo = document.createElement("li");
+			notiInfo.setAttribute("class","list-group-item");
+			notiInfo.innerHTML = followingReqList[i].nickName +"님으로부터 팔로잉 요청이 있습니다.";
+			notiInfo.style.cursor = "pointer";
+			notiInfo.addEventListener("click",(e)=>{
+				clickNoti(e.target,followingReqList[i]);
+			});
+			listGroup.appendChild(notiInfo);
+			notiBox.appendChild(listGroup);
+		}
+// 		notiBox.style.visibility = "visible";
 	});
 }
 
-function reSetMyChatRoomList(){
-	let url = '/chat/selectmychatroomlistimpl'
+function checkNoti(pushInfo){
+	const url = '/communication/updatehistoryimpl'
+		console.dir(pushInfo);
+		let paramObj = new Object();
+		paramObj.toId = pushInfo.toId;
+		paramObj.fromId = pushInfo.fromId;
+		
+		let headerObj = new Headers();
+		headerObj.append('content-type','application/json');
+		
 		fetch(url,{
-			method : "GET"
-		})
-		.then(response=>{
+			method: "POST",
+			headers : headerObj,
+			body : JSON.stringify(paramObj)
+		}).then(response=>{
 			if(response.ok){
-				return response.text()
+				return response.text();
+			}
+		}).then((text)=>{
+			if(text=="success"){
+				location.href ="/personal/personal?nickName="+pushInfo.nickName;
 			}
 		})
-		.then((text)=>{
-			if(text!='failed'){
-				myChatRoomList = JSON.parse(text) //내가 속한 채팅방 리스트
-				console.log("MYCHATROOMLIST : "+myChatRoomList);			
-				connectSocket();
-			}else{
-			}
-		});
+}
+
+function clickNoti(liTag,pushInfo){
+	let data = JSON.stringify(pushInfo);
+	console.log(data.nickName);
+	document.getElementById("list_group").removeChild(liTag);
+	checkNoti(pushInfo);
+	
+}
+
+
+function directMessage(){
+	
+	let followingInfo;
+	<c:forEach var="followingInfo" items="${followingList}" varStatus="status">
+		followingInfo= new Object();
+		followingInfo.toId = "${followingInfo.toId}";
+		followingInfo.nickName = "${followingInfo.nickName}";
+		followingList.push(followingInfo);
+	</c:forEach>
+	console.log("센드 다이렉트"+"${sendDirect}")
+	console.dir(followingList)
+	for(let i=0; i<followingList.length; i++){
+		if(followingList[i].nickName == "${sendDirect}"){
+			console.dir(followingList[i])
+			console.log("여기는"+followingList[i].toId)
+			console.log(followingList[i])
+			createRoomId(followingList[i])
+		}
+	}
 }
 
 </script>

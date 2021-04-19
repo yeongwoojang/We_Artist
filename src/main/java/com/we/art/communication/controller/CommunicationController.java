@@ -1,6 +1,8 @@
 package com.we.art.communication.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.we.art.communication.model.service.CommunicationService;
 import com.we.art.communication.model.vo.Following;
@@ -19,6 +22,7 @@ import com.we.art.user.model.vo.User;
 
 @Controller
 @RequestMapping("communication")
+@SessionAttributes("userInfo")
 public class CommunicationController {
 
 	private final CommunicationService communicationService;
@@ -68,16 +72,52 @@ public class CommunicationController {
 			Model model) {
 		int res = communicationService.deleteFollowing(following);
 		if (res != 0) {
-			History history = new History();
-			history.setFromId(following.getFromId());
-			history.setToId(following.getToId());
-			if (communicationService.deleteHistory(history) != 0) {
 				return "success";
-			} else {
-				return "failed";
-			}
 		} else {
 			return "failed";
 		}
 	}
+	
+	@GetMapping("fetchnoticountimpl")
+	@ResponseBody
+	public List<Map<String,Object>> fetchNotiCount(Model model) {
+		User userInfo = (User)model.getAttribute("userInfo");
+		System.out.println("유저 인포 : "+userInfo);
+		if(userInfo!=null) {
+			List<Map<String,Object>> historyList = communicationService.selectHistoryById(userInfo.getUserId());
+			System.out.println(historyList);
+			if(historyList.size()==0) {
+				historyList = new ArrayList<>();
+			}
+			System.out.println(historyList);
+			return historyList;
+		}else {
+			return null;
+		}
+	}
+	
+	@PostMapping("updatehistoryimpl")
+	@ResponseBody
+	public String updateHistoryImpl(@RequestBody History history, Model model) {
+		User userInfo = (User)model.getAttribute("userInfo");
+		
+		if(userInfo!=null) {
+			int res = communicationService.updateHistory(history);
+			if(res!=0) {
+				return "success";
+			}else {
+				return "failed";
+			}
+		}else {
+			return "failed";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

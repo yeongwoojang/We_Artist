@@ -1,5 +1,10 @@
 package com.we.art.user.model.service.impl;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +17,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.we.art.common.code.ConfigCode;
+import com.we.art.common.code.ErrorCode;
+import com.we.art.common.exception.ToAlertException;
 import com.we.art.common.mail.MailSender;
+import com.we.art.common.util.file.FileUtil;
+import com.we.art.common.util.file.FileVo;
 import com.we.art.user.model.repository.UserRepository;
 import com.we.art.user.model.service.UserService;
 import com.we.art.user.model.vo.User;
@@ -163,6 +173,39 @@ public class UserServiceImpl implements UserService {
 	public int updateUser(User persistInfo) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void insertProPic(String userId, List<MultipartFile> files) {
+		FileUtil fileUtil = new FileUtil();
+
+		try {
+			List<FileVo> fileList = fileUtil.fileUpload(files);
+			for(FileVo fileVo : fileList) {
+				fileVo.setUserId(userId); // 파일 저장시 필요한 userId
+				userRepository.insertFile(fileVo); // TB_FILE 테이블에 파일 넣기
+			}
+		} catch (Exception e) {
+			throw new ToAlertException(ErrorCode.IB01,e);
+		}
+		
+	}
+	
+	@Override
+	public int updateProPic(String userId) {
+		
+		
+		
+		return userRepository.updateProPic(userId);
+	}
+
+	@Override
+	public Map<String, Object> selectProPicByFIdx(String fIdx) {
+		FileVo fileList = new FileVo();
+		fileList = userRepository.selectProPicByFIdx(fIdx);
+		Map<String,Object> commandMap = new HashMap<String,Object>();
+		commandMap.put("files",fileList);
+		return commandMap;
 	}
 
 	

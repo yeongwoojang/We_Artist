@@ -1,6 +1,7 @@
 package com.we.art.chat.model.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,13 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public int insertChatRoom(ChatRoom chatRoom) {
+		System.out.println("챗룸 :"+chatRoom);
 		return chatRepository.insertChatRoom(chatRoom);
 	}
 
 
 	@Override
-	public List<String> selectFollowingList(String userId) {
+	public List<Map<String,String>> selectFollowingList(String userId) {
 		return chatRepository.selectFollowingList(userId);
 	}
 
@@ -51,13 +53,14 @@ public class ChatServiceImpl implements ChatService{
 
 
 	@Override
-	public List<ChatContent> selectChatContentList(ChatRoom chatRoom) {
+	public List<Map<String, Object>> selectChatContentList(ChatRoom chatRoom) {
+		System.out.println(chatRoom);
 		return chatRepository.selectChatContentList(chatRoom);
 	}
 
 
 	@Override
-	public List<ChatContent> selectLastMessageList(List<ChatRoom> myChatRoomList) {
+	public List<Map<String,Object>> selectLastMessageList(List<ChatRoom> myChatRoomList) {
 		return chatRepository.selectLastMessageList(myChatRoomList);
 	}
 

@@ -35,19 +35,27 @@
       <div class="container">
         <div>
           <div class="details">
-          	<div class="d-flex align-items-center justify-content-center">
-             	<p id="user" class="fs-4 text-center fw-bold my-0"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 700;">${personalUserInfo.nickName}</p>	
+          	<div class="d-flex align-items-center flex-column">
+          		<div class="mb-3">
+	             	<p id="user" class="fs-4 text-center fw-bold my-0"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 700;">${personalUserInfo.nickName}</p>	
+          		</div>
+          		<div>
              	 <c:choose>
           			<c:when test="${pageState eq 'isMine'}">
           			<button type="button" class="btn btn-primary mx-3" onclick="modifyProfile()" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">프로필 설정</button>
           			</c:when>
           			<c:when test="${pageState eq 'isFollowed'}">
           				<button  type="button" id="btn_about_following" onclick="unfollowing()"class="btn btn-primary btn-sm mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight:400; width:120px; height:40px;">팔로잉 끊기</button>
+          				<button type="button" class="btn btn-primary mx-3" onclick="location.href='/chat/direct?sendDirect=${personalUserInfo.nickName}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">메세지 보내기</button>
           			</c:when>
           			<c:when test="${pageState eq 'nothing'}">
           				<button type="button" id="btn_about_following" onclick="following()" class="btn btn-primary mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">팔로잉</button>
+          				<button type="button" class="btn btn-primary mx-3" onclick="location.href='/chat/direct?sendDirect=${personalUserInfo.nickName}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">메세지 보내기</button>
          		 	</c:when>
          		 </c:choose>
+         		 
+         		 	<button type="button" class="btn btn-primary mx-3" onclick="location.href='/gallery/gallery/${personalUserInfo.userId}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">갤러리</button>
+         		 </div>
              </div>
             <div class="d-flex justify-content-center m-3">
             	<div class="d-flex mr-1"><p class="fs-5">게시물</p><p class="fs-5">${personalBoardInfoList.size()}</p></div>
@@ -99,7 +107,7 @@
                 				<p class="p-2 mb-0"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;">${boardInfo.board.bdContent}</p>
                 			</c:if>
            			 	</div>
-          			</div>	
+          			</div>		
           			<c:if test="${fn:length(boardInfo.files)>1}">
           				<script>overlap("${boardInfo.board.bdNo}");</script>
           			</c:if>
@@ -222,9 +230,9 @@
 		let userId = "${personalUserInfo.userId}";
 		let nickName = "${curUserInfo.nickName}";
 		if(currentUserId!=""){
-			stompPushClient.send("/push", {}, JSON.stringify({'fromId' : currentUserId, 'toId': userId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
-	 		createNewRoom(currentUserId,userId);
-	 		reSetMyChatRoomList();	
+// 			stompPushClient.send("/push", {}, JSON.stringify({'fromId' : currentUserId, 'toId': userId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
+// 	 		createNewRoom(currentUserId,userId);
+// 	 		reSetMyChatRoomList();	
 	 		followingImpl(userId,currentUserId);
 		}else{
 			location.href = "/user/login";
@@ -252,7 +260,11 @@
 		}).then((text)=>{
 			if(text=="success"){
 				//팔로잉 성공 시
-				console.log(text);
+				let userId = "${personalUserInfo.userId}";
+				let nickName = "${curUserInfo.nickName}";
+				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
+	 			createNewRoom(currentUserId,userId);
+	 			reSetMyChatRoomList();	
 				let fBtn = document.getElementById("btn_about_following");
 				fBtn.innerHTML ="팔로우 끊기";
 				fBtn.setAttribute("onclick","unfollowing()")
@@ -312,7 +324,7 @@
 				return response.text();
 			}
 		}).then((text)=>{
-			console.log(text);
+			console.log(JSON.parse(text));
 			document.getElementById("follower_count").innerHTML = text;
 		});
 		
@@ -320,7 +332,7 @@
 	
 	
 	function modifyProfile(){
-		location.href ="/user/profile";
+		location.href ="/user/profile?userId="+currentUserId;
 	}
   </script>
 </body>

@@ -1,6 +1,7 @@
 package com.we.art.chat.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,8 +20,7 @@ public interface ChatRepository {
 	int insertChatRoom(ChatRoom chatRoom);
 	
 	//로그인 한 유저의 Following 리스트를 조회하는 쿼리
-	@Select("SELECT TO_ID FROM TB_FOLLOWING WHERE FROM_ID =#{userId}")
-	List<String> selectFollowingList(String userId);
+	List<Map<String,String>> selectFollowingList(@Param("userId") String userId);
 	
 	//특정 유저와의 채팅방을 조회하는 메소드
 	@Select("SELECT *"
@@ -36,12 +36,7 @@ public interface ChatRepository {
 			+" VALUES('CHATNO'||SC_CHAT_IDX.NEXTVAL,#{chatRoomNo},#{msg},#{msgTime},#{msgTo},#{msgFrom})")
 	int insertChatContent(ChatContent chatContent);
 	
-	@Select("SELECT *FROM TB_CHAT_CONTENT"
-			+ " WHERE CHAT_ROOM_NO = (SELECT CHAT_ROOM_NO"
-			+ " FROM TB_CHAT_ROOM"
-			+ " WHERE (FIRST_USER = #{firstUser} AND SECOND_USER = #{secondUser})"
-			+ " OR (FIRST_USER = #{secondUser} AND SECOND_USER = #{firstUser}))")
-	List<ChatContent> selectChatContentList(ChatRoom chatRoom);
+	List<Map<String,Object>> selectChatContentList(ChatRoom chatRoom);
 	
-	List<ChatContent> selectLastMessageList(@Param("myChatRoomList")List<ChatRoom> myChatRoomList);
+	List<Map<String,Object>> selectLastMessageList(@Param("myChatRoomList")List<ChatRoom> myChatRoomList);
 }
