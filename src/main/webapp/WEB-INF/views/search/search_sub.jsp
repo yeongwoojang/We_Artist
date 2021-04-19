@@ -165,9 +165,6 @@
 	}
 	
  	 function showModal(imageLink,fIdx){
- 	  let index = 0;
- 	  let slideSequence = new Array();
- 	  let carouselInne;
  	  carouselInner = document.querySelector(".carousel-inner");
 	  for(let i = 0; i< imageList.length; i++){
 		  let carouselItem = document.createElement("div");
@@ -177,20 +174,13 @@
 //		  img.style="width:100%;height:100%;object-fit:cover;";
 		  carouselItem.appendChild(img);
 		  
-		  if(fIdx==imageList[i].fIdx){
-			  carouselItem.setAttribute("class","carousel-item active");
-			  carouselInner.appendChild(carouselItem); //선택한 사진을 제일 먼저 보여줘야 하기 때문에 일단 먼저 appnedChild해준다.
+		  if(fIdx==imageList[i].fIdx){ //선택한 사진이라면 슬라이드의 가장 앞부분을 차지해야 한다.
+			  carouselItem.setAttribute("class","carousel-item active"); //class 속성으로 active를 사진 아이템이 슬라이드의 가장 첫부분을 차지한다.
 		  }else{
-				carouselItem.setAttribute("class","carousel-item");
+			carouselItem.setAttribute("class","carousel-item");
 		  }
-		  slideSequence.push(carouselItem);
+		  carouselInner.appendChild(carouselItem);
 	  }
-	  	for(let i = 0; i <slideSequence.length; i++){
-	  		if(fIdx!=slideSequence[i].dataset.fidx){
-		  		carouselInner.appendChild(slideSequence[i]);
-	  		}
-	  	}
-	  
 		$('#exampleModal').modal("show");
 	}
 
