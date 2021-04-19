@@ -16,7 +16,7 @@
             <div class="container">
         		<div class="input-group border rounded-pill  p-2">
  					<span class="input-group-text bg-transparent border border-0"><i class="fas fa-search"></i></span>
- 						 <input type="text" class="form-control border border-0 shadow-none" placeholder="이미지를 검색하세요"style="outline:none">
+ 						 <input type="text" class="form-control border border-0 shadow-none" placeholder="태그를 검색하세요"style="outline:none">
 				</div>
         	</div>
         	<div class="p-3">

@@ -54,7 +54,7 @@
          		 	</c:when>
          		 </c:choose>
          		 
-         		 	<button type="button" class="btn btn-primary mx-3" onclick="location.href='/gallery/gallery/${personalUserInfo.userId}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">갤러리</button>
+         		 	<button type="button" class="btn btn-primary mx-3" onclick="location.href='/gallery/${personalUserInfo.userId}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">갤러리</button>
          		 </div>
              </div>
             <div class="d-flex justify-content-center m-3">
