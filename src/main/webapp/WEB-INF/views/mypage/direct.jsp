@@ -16,16 +16,16 @@
 	<section class="d-flex align-items-center justify-content-center" style="height:90vh;">
 		<div class="d-flex container" style="height:80vh;">
 			<div class="card col-4">
-				<div id="userId" class="card-header p-2 bg-white">${userInfo.nickName}님의 팔로우 목록</div> 
+				<div id="userId" class="card-header p-4 bg-white text-center fw-bold">${userInfo.nickName}님의 팔로우 목록</div> 
 				<div class="card-body d-flex flex-column" style="width:100%;height:70vh; overflow:auto;">
 					<c:forEach var ="followingInfo" items ="${followingList}" varStatus="status">
 						<c:set var="loop_flag" value="false" />
 						<div class="chat_room_card card p-3 position-relative mb-2">
-							<a href="#" class="following_user text-dark mb-3 item_following_user" data-userid="${followingInfo.toId}"><c:out value="${followingInfo.nickName}"></c:out></a>
+							<a href="#" class="following_user text-dark mb-3 item_following_user fw-bold" data-userid="${followingInfo.toId}"><c:out value="${followingInfo.nickName}"></c:out></a>
 							<c:forEach var="chatContent" items="${lastMessageList}" varStatus="sts">
 								<c:if test="${chatContent.msgFrom == followingInfo.toId || chatContent.msgTo ==followingInfo.toId}">
 									<div class="last_message text-secondary"><c:out value="${chatContent.msg}"></c:out></div>
-									<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px;"><c:out value="${chatContent.msgTime}"></c:out></p>
+									<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px; font-size:1px;"><c:out value="${chatContent.msgTime}"></c:out></p>
 									<c:set var="loop_flag" value="true" />
 								</c:if>
 						   </c:forEach>
@@ -38,6 +38,7 @@
 				</div>
 			</div>
 			<div class="card col-7">
+				<div id="opponent" class="card-header bg-white p-4 fw-bold" style="visibility : hidden;"></div>
 					<div id="chat_box" class="card-body d-flex flex-column" style="width:30vw height:100%; overflow:auto;">
 					<div id="chat_index"class="container position-relative" style="width:30vw; height:100%">
 						<p class="position-absolute top-50 start-50 translate-middle fs-1"><i class="far fa-circle"></i></p>

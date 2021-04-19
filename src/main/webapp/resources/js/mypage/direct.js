@@ -61,6 +61,9 @@ function enterChatRoomImpl(currentUserId,selectUser){
 			if(chatIndex!=null){
 				chatIndex.parentNode.removeChild(chatIndex); //유저를 선택하면 chatIndex 제거
 			}
+			let opponent = document.getElementById("opponent");
+			opponent.style.visibility="visible";
+			opponent.innerHTML = msgToNickName;
 			sendMessageBox.style.visibility="visible" // 메세지를 입력하는 box를 보이게한다.
 			let chatBox = document.getElementById("chat_box");
 			chatBox.innerHTML = "";
