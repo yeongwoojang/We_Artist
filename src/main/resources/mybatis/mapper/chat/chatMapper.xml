@@ -63,20 +63,6 @@
 	</resultMap>
 	
 	
-	<resultMap type="map" id="lastMessageData">
-		<result column="CHAT_NO" javaType="String" property="chatNo"/>
-		<result column="CHAT_ROOM_NO" javaType="string" property="chatRoomNo"/>
-		<result column="MSG" javaType="String" property="msg"/>
-		<result column="MSG_TIME" javaType="date" property="msgTime"/>
-		<result column="MSG_TO" javaType="String" property="msgTo"/>
-		<result column="MSG_FROM" javaType="String" property="msgFrom"/>
-		<result column="MSG_FROM_NICKNAME" javaType="String" property="msgFromNickName"/>
-		<result column="MSG_TO_NICKNAME" javaType="String" property="msgToNickName"/>
-	</resultMap>
-	
-	
-	
-	
 	<resultMap type="map" id="followingData">
 		<result column="TO_ID" javaType="String" property="toId"/>
 		<result column="NICKNAME" javaType="String" property="nickName"/>

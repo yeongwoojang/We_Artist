@@ -16,7 +16,7 @@
             <div class="container">
         		<div class="input-group border rounded-pill  p-2">
  					<span class="input-group-text bg-transparent border border-0"><i class="fas fa-search"></i></span>
- 						 <input type="text" class="form-control border border-0 shadow-none" placeholder="태그를 검색하세요"style="outline:none">
+ 						 <input id ="search_box"type="text" class="form-control border border-0 shadow-none" placeholder="태그를 검색하세요"style="outline:none" onKeyPress="if( event.keyCode==13 ){searchByTag();}">
 				</div>
         	</div>
         	<div class="p-3">
@@ -396,6 +396,7 @@
     </div>
   </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center active"><i class="fas fa-arrow-up"></i></a>
+  <script src="${context}/resources/js/search/search_main.js"></script>
     <script src="${context}/resources/theEvent/assets/vendor/aos/aos.js"></script>
   <script src="${context}/resources/theEvent/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="${context}/resources/theEvent/assets/vendor/glightbox/js/glightbox.min.js"></script>
