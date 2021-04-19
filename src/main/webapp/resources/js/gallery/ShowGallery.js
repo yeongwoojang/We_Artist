@@ -126,7 +126,7 @@ let onDocumentMouseDown = (event) => {
     console.dir(intersects);
     if(intersects.length > 0){
         console.log('Hit @' + toString(intersects[0].point) + '\n'+ intersects[0].object.name);
-        
+         
         targetList.forEach((e) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
