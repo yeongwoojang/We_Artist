@@ -27,7 +27,7 @@
 		<mapper resource="mybatis/mapper/user/userMapper.xml"/>
 		<mapper resource="mybatis/mapper/gallery/galleryMapper.xml"/>
 		<mapper resource="mybatis/mapper/communication/communicationMapper.xml"></mapper>
-		<mapper resource="mybatis/mapper/search/seaerchMapper.xml"></mapper>
+		<mapper resource="mybatis/mapper/search/searchMapper.xml"></mapper>
 	</mappers>
 
 	
