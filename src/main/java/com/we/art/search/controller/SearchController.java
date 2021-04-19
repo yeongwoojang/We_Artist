@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.we.art.common.util.file.FileVo;
 import com.we.art.search.model.service.SearchService;
 import com.we.art.user.model.vo.User;
 
@@ -31,7 +32,13 @@ public class SearchController {
 
 
 	@GetMapping("main")
-	public String searchMain(@SessionAttribute("userInfo") User userInfo,HttpSession session) {
+	public String searchMain(@SessionAttribute("userInfo") User userInfo,HttpSession session,Model model) {
+		List<FileVo> imageList = searchService.selectAllImageFile();
+		System.out.println("이미지 리스트 : "+imageList);
+		if(imageList.size()==0) {
+			imageList = new ArrayList<FileVo>();
+		}
+		model.addAttribute("imageList",imageList);
 		return "search/search_sub";
 	}
 	

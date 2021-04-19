@@ -17,6 +17,8 @@
 		<typeAlias type="com.we.art.gallery.model.vo.Gallery" alias="gallery"/>
 		<typeAlias type="com.we.art.common.util.file.FileVo" alias="fileVo"/>
 		<typeAlias type="com.we.art.user.model.vo.User" alias="user"/>
+		<typeAlias type="com.we.art.common.util.file.FileVo" alias="fileVo"/>
+		
 	</typeAliases>
 	
 	

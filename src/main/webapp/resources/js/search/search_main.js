@@ -18,3 +18,18 @@ function selectBoardByTag(tag){
 		console.dir(JSON.parse(text));
 	});
 }
+
+  let myModalEl = document.getElementById('exampleModal')
+  myModalEl.addEventListener('hidden.bs.modal', function (event) {
+	  let carouselInner = document.querySelector(".carousel-inner");
+	  while(carouselInner.hasChildNodes()){
+		  carouselInner.removeChild(carouselInner.firstChild);
+	  }
+  });
+  
+  let modalCloseBtn = document.getElementById('btn_modal_close');
+  modalCloseBtn.addEventListener('click',function(){
+	  $('#exampleModal').modal("hide");
+  })
+  myModalEl.addEventListener('shown.bs.modal',function(event){
+  });

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.we.art.common.util.file.FileVo;
 import com.we.art.search.model.repository.SearchRepository;
 import com.we.art.search.model.service.SearchService;
 
@@ -21,5 +22,12 @@ public class SearchServiceImpl implements SearchService{
 	public List<Map<String, Object>> selectBoardByTag(String tag) {
 		return searchRepository.selectBoardByTag(tag);
 	}
+
+	@Override
+	public List<FileVo> selectAllImageFile() {
+		return searchRepository.selectAllImageFile();
+	}
+	
+	
 
 }

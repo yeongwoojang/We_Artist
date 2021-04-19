@@ -30,4 +30,8 @@
 			<result column="IS_DEL" javaType="String" property="isDel"/>
 			<result column="F_SAVE_PATH" javaType="String" property="fSavePath"/>
 	</resultMap>
+	
+	<select id="selectAllImageFile" resultType="fileVo">
+		SELECT *FROM TB_FILE
+	</select>
 </mapper>
