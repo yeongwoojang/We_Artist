@@ -46,7 +46,7 @@ public class GalleryController {
 	public String ShowGallery(@PathVariable(name = "userId")String userId, Model model) {
 		System.out.println("userId = " + userId);
 		System.out.println(galleryService.selectGalleryByUserId(userId));
-		model.addAttribute("galleryList",galleryService.selectGalleryByUserId(userId));
+		model.addAttribute("galleryList",galleryService.selectGalleryByUserId(userId));       
 		return "gallery/gallery";
 	}
 	
