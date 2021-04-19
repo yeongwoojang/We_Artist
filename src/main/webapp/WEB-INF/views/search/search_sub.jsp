@@ -178,22 +178,17 @@
 		  carouselItem.appendChild(img);
 		  
 		  if(fIdx==imageList[i].fIdx){
-				carouselItem.setAttribute("class","carousel-item active");
-			  slideSequence[index] = carouselItem;
-			  index++;
+			  carouselItem.setAttribute("class","carousel-item active");
+			  carouselInner.appendChild(carouselItem); //선택한 사진을 제일 먼저 보여줘야 하기 때문에 일단 먼저 appnedChild해준다.
 		  }else{
 				carouselItem.setAttribute("class","carousel-item");
-				if(i==0){
-				  slideSequence[imageList.length-1] = carouselItem;
-				}else{
-					
-				}
 		  }
-		  
-				
+		  slideSequence.push(carouselItem);
 	  }
 	  	for(let i = 0; i <slideSequence.length; i++){
-	  		carouselInner.appendChild(slideSequence[i]);
+	  		if(fIdx!=slideSequence[i].dataset.fidx){
+		  		carouselInner.appendChild(slideSequence[i]);
+	  		}
 	  	}
 	  
 		$('#exampleModal').modal("show");
