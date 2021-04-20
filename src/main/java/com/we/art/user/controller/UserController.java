@@ -2,6 +2,7 @@ package com.we.art.user.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -119,7 +120,11 @@ public class UserController {
 	public String ShowProfile(String userId, Model model) {
 		User user = userService.selectUserById(userId);
 		String fIdx = user.getfIdx();
-		model.addAllAttributes(userService.selectProPicByFIdx(fIdx));
+		System.out.println(model);
+		System.out.println(userId);
+		Map<String,Object> picture = userService.selectProPicByFIdx(fIdx);
+		model.addAttribute("picture",picture);
+		
 		return "user/profile";
 	}
 	
@@ -139,16 +144,16 @@ public class UserController {
 	
 	@PostMapping("proPic")
 	public String uploadProPic(@RequestParam List<MultipartFile> files,
-			@SessionAttribute("persistInfo")User persistInfo) {
+			@SessionAttribute(name="userInfo", required = false)User user) {
 		
-		String userId = persistInfo.getUserId();
+		String userId = user.getUserId();
 		userService.insertProPic(userId, files);
 		userService.updateProPic(userId);
 		
 		
 		
 		
-		return "user/profile";
+		return "redirect:/user/profile?userId=" + userId;
 	}
 
 	@GetMapping("login")
