@@ -1,71 +1,53 @@
-let conn = new WebSocket('wss://localhost:8443/socket');
+let conn = new WebSocket('wss://localhost:8443/socket'); // 해당 주소로 소켓을 연다
 
-let peerConnection, dataChannel;
-let input = document.getElementById("messageInput"); // 입력받은 메세지 정보
+let peerConnection, dataChannel; // 연결채널, 데이터 전송을 위한 채널을 연다
+let input = document.getElementById("messageInput"); // 채팅 입력받을 곳
 
-let localStream;
-let localVideo = document.querySelector('#localVideo');
 let remoteStream;
 let remoteVideo = document.querySelector('#remoteVideo');
 
-// 상태여부를 가지고 있는 변수
-let isInitiator = false;
-let isStarted = false;
-let isChannelReay = false;
-
+// 채팅 입력시 사용
 let sendMessage = () => {
-    dataChannel.send(input.value);
-    input.value = "";
+	dataChannel.send(input.value);
+	let mychat = document.createElement('li');
+	mychat.innerText = '나	: ' + input.value;
+	mychat.className = 'text-left';
+	document.querySelector('#chatRoom').appendChild(mychat);
+	input.value = "";
 }
 
-const constraints = {
-	video : true,
-	audio : false
-}
-
-navigator.mediaDevices.getUserMedia(constraints)   // getUserMedia 사용시 해당 디바이스의 카메라를 사용한다
-//navigator.mediaDevices.getDisplayMedia(constraints)  // getDisplayMedia 사용시 해당 원하는 화면을 사용할 수 있다.
-.then((stream) => {
-	peerConnection.addStream(stream);
-	localStream = stream;
-	localVideo.srcObject = stream;
-	console.dir(stream);
-})
-.catch((error) => {
-	
-})
-
+// conn 에 대한 이벤트 작성
 conn.onopen = () => {
-	console.log('Connected');
-	initialize();
-};
+	console.log('Host Connected');
+	initialize(); //연결됬을때 실행
+}
 
 conn.onmessage = (msg) => {
-    console.dir("Got message", msg.data);
-    let content = JSON.parse(msg.data);
-    let data = content.data;
-    switch (content.event) {
-    case "offer":
-        handleOffer(data);
-        break;
-    case "answer":
-        handleAnswer(data);
-        break;
-    // when a remote peer sends an ice candidate to us
-    case "candidate":
-        handleCandidate(data);
-        break;
-    default:
-        break;
-    }
-};
+	console.dir('Got Message', msg.data);
+	let content = JSON.parse(msg.data);
+	let data = content.data;
+	switch(content.event){
+		case "offer":
+			handleOffer(data);
+			break;
+		case "answer":
+			handleAnswer(data);
+			break;
+		case "candidate":
+			handleCandidate(data);
+        	break;
+		default:
+			break;
+	}
+}
 
 let send = (message) => {
 	conn.send(JSON.stringify(message));
 }
 
 let initialize = () => {
-    let configuration = {
+	
+	let configuration = {
 		'iceServers' : [
 			{
 				"url" : 'stun:stun2.1.google.com:19302'
@@ -81,13 +63,15 @@ let initialize = () => {
 		      'username': 'sunmin:sunmin'
 		    }
 		]
-	}; // 이게 뭔지 모르겠네
-
-    peerConnection = new RTCPeerConnection(configuration);
-
-    // Setup ice handling
+	};
+	
+	// 로컬 컴퓨터와 원격 피어의 연결을 담당한다
+	peerConnection = new RTCPeerConnection(configuration);
+	console.dir(peerConnection);
+	// Setup ice handling
 	// 후보자가 서버에 접근할때 마다 해당 이벤트가 발생한다.
     peerConnection.onicecandidate = (event) => {
+		
         if (event.candidate) {
             send({
                 event : "candidate", // 후보자
@@ -95,15 +79,18 @@ let initialize = () => {
             });
         }
     };
-	peerConnection.onaddstream = (event) => {
+
+	peerConnection.ontrack = (event) => {
+			alert('ss');
 			console.dir(event);
-			remoteVideo.srcObject = event.stream;
+			remoteVideo.srcObject = event.streams[0];
 	};
 
-    // creating data channel
+	// creating data channel
 	// dataChannel -> 이미지,영상,텍스트 데이터를 전송할 수 있는 채널이다.
     dataChannel = peerConnection.createDataChannel("dataChannel", {
         reliable : true
+
     });
 
     dataChannel.onerror = (error) => {
@@ -113,6 +100,10 @@ let initialize = () => {
     // when we receive a message from the other peer, printing it on the console
 	// 메세지 를 받으면 발생하는 이벤트
     dataChannel.onmessage = (event) => {
+		let chat = document.createElement('li');
+		chat.innerText = '상대	: ' + event.data;
+		chat.className = 'text-right';
+		document.querySelector('#chatRoom').appendChild(chat);
         console.log("message:", event.data);
     };
 
@@ -123,9 +114,9 @@ let initialize = () => {
   	peerConnection.ondatachannel = (event) => {
         dataChannel = event.channel;
   	};
-    
+	
+	console.dir(peerConnection);
 }
-
 // 성공시 offer를 전송하고 실패시 메시지를 띄운다.
 let createOffer = () => {
 	console.log('createOffer Yes');
@@ -134,7 +125,6 @@ let createOffer = () => {
             event : "offer",
             data : offer
         });
-		peerConnection.addStream(localStream);
         peerConnection.setLocalDescription(offer);
     }, (error) => {
         alert("Error creating an offer");
@@ -165,3 +155,30 @@ let handleAnswer = (answer) => {
     peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
     console.log("connection established successfully!!");
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
