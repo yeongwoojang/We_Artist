@@ -25,15 +25,9 @@ let setMedia = () => {
 		localStream = stream;
 		localVideo.srcObject = stream;
 		for(const track of stream.getTracks()){
-			console.dir(track);
 			peerConnection.addTrack(track,stream);
-			console.dir(peerConnection);
 		}
-		console.dir(stream);
 	})
-	.catch((error) => {
-		
-	})	
 }
 
 // conn 에 대한 이벤트 작성
