@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -33,20 +34,26 @@ public class ChatController {
 	}
 
 	@GetMapping("direct")
-	public String direct(@SessionAttribute("userInfo") User userInfo, @SessionAttribute("myChatRoomList") List<ChatRoom> myChatRoomList,HttpSession session, Model model) {
-		List<String> followingList = new ArrayList<>();
+	public String direct(@SessionAttribute("userInfo") User userInfo,
+			@SessionAttribute("myChatRoomList") List<ChatRoom> myChatRoomList,
+			@RequestParam(value = "sendDirect", required = false, defaultValue = "0") String sendDirect, HttpSession session,
+			Model model) {
+		
+		List<Map<String,String>> followingList = new ArrayList<Map<String,String>>();
 		followingList = chatService.selectFollowingList(userInfo.getUserId());
-		List<ChatContent> lastMessageList = new ArrayList<>();
-		if(followingList.size()!=0) {
+		List<Map<String, Object>> lastMessageList = new ArrayList<>();
+		if (followingList.size() != 0) {
 			followingList = chatService.selectFollowingList(userInfo.getUserId());
 		}
-		if(myChatRoomList.size()!=0) {
+		if (myChatRoomList.size() != 0) {
 			lastMessageList = chatService.selectLastMessageList(myChatRoomList);
 		}
-		System.out.println(followingList);
-		System.out.println("lastMessageList : " +lastMessageList);
+		System.out.println("컨트롤러에있는 팔로잉 리스트"+followingList);
+		model.addAttribute("sendDirect",sendDirect);
 		model.addAttribute("followingList", followingList);
-		model.addAttribute("lastMessageList",lastMessageList);
+		System.out.println("팔로잉 인포 : "+ followingList);
+		model.addAttribute("lastMessageList", lastMessageList);
+		System.out.println("라스트메세지 : "+lastMessageList);
 		return "mypage/direct";
 	}
 
@@ -61,69 +68,57 @@ public class ChatController {
 	@PostMapping("enterchatroomimpl")
 	@ResponseBody
 	public String enterChatRoom(@RequestBody ChatRoom chatRoom) {
+		System.out.println("이건 컨트롤러 챗룸 : "+ chatRoom);
 		ChatRoom currentChatRoom = chatService.selectRoomId(chatRoom);
-		if(currentChatRoom!=null) {
+		if (currentChatRoom != null) {
 			System.out.println("있다.");
 			return currentChatRoom.getChatRoomNo();
-		}else {
+		} else {
 			System.out.println("없다.");
 			int res = chatService.insertChatRoom(chatRoom);
-			if(res!=0) {
+			if (res != 0) {
 				currentChatRoom = chatService.selectRoomId(chatRoom);
-				if(currentChatRoom!=null) {
+				if (currentChatRoom != null) {
 					return currentChatRoom.getChatRoomNo();
-				}else {
+				} else {
 					return "failed";
 				}
-			}else {
+			} else {
 				return "failed";
 			}
 		}
 	}
-	
+
 	@PostMapping("insertchatcontentimpl")
 	@ResponseBody
 	public String insertChatContentImpl(@RequestBody ChatContent chatContent) {
 		System.out.println(chatContent);
 		int res = chatService.insertChatContent(chatContent);
-		if(res!=0) {
+		if (res != 0) {
 			return "success";
-		}else {
+		} else {
 			return "failed";
 		}
 	}
-	
+
 	@PostMapping("selectchatcontentlistimpl")
 	@ResponseBody
-	public List<Map<String,Object>> selectChatContentListImpl(@RequestBody ChatRoom chatRoom){
-		List<Map<String,Object>> chatContentList = new ArrayList<Map<String,Object>>();
+	public List<Map<String, Object>> selectChatContentListImpl(@RequestBody ChatRoom chatRoom) {
+		List<Map<String, Object>> chatContentList = new ArrayList<Map<String, Object>>();
 		System.out.println(chatRoom.getFirstUser());
 		System.out.println(chatRoom.getSecondUser());
 		chatContentList = chatService.selectChatContentList(chatRoom);
-		System.out.println("결과 : "+chatContentList);
+		System.out.println("결과 : " + chatContentList);
 		return chatContentList;
 	}
-	
+
 	@GetMapping("selectmychatroomlistimpl")
 	@ResponseBody
-	public List<ChatRoom> selectMyChatRoomListimpl(@SessionAttribute("userInfo") User userInfo,HttpSession session) {
+	public List<ChatRoom> selectMyChatRoomListimpl(@SessionAttribute("userInfo") User userInfo, HttpSession session) {
 		List<ChatRoom> myChatRoomList = new ArrayList<ChatRoom>();
 		myChatRoomList = chatService.selectMyChatRoomList(userInfo.getUserId());
 		session.setAttribute("myChatRoomList", myChatRoomList);
-		System.out.println("MYCHATROOMLIST : "+ myChatRoomList);
+		System.out.println("MYCHATROOMLIST : " + myChatRoomList);
 		return myChatRoomList;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

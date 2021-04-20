@@ -16,7 +16,7 @@
             <div class="container">
         		<div class="input-group border rounded-pill  p-2">
  					<span class="input-group-text bg-transparent border border-0"><i class="fas fa-search"></i></span>
- 						 <input type="text" class="form-control border border-0 shadow-none" placeholder="이미지를 검색하세요"style="outline:none">
+ 						 <input id ="search_box"type="text" class="form-control border border-0 shadow-none" placeholder="태그를 검색하세요"style="outline:none" onKeyPress="if( event.keyCode==13 ){searchByTag();}">
 				</div>
         	</div>
         	<div class="p-3">
@@ -31,295 +31,14 @@
 
       <div class="container-fluid venue-gallery-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
         <div class="row g-0">
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/1.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/1.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/2.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/2.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/3.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/3.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/4.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/4.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/5.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/5.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/6.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/6.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="${context}/resources/theEvent/assets/img/venue-gallery/8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
+			
+			<c:forEach var="image" items="${imageList}" varStatus="status">
+				 <div class="col-lg-3 col-md-4">
+            		<div class="venue-gallery image_item" data-imagelink ="${image.fSavePath}/${image.fRename}" data-fidx = "${image.fIdx}">
+                			<img src=<c:url value="/images/${image.fSavePath}/${image.fRename}"/> alt="" class="img-fluid">
+            		</div>
+          		</div>	
+			</c:forEach>
         </div>
       </div>
 
@@ -395,7 +114,83 @@
       </div>
     </div>
   </footer>
+  		 <!-- Modal --> 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<p id="btn_modal_close"class="float-end text-white fs-1 mt-2 mr-1" style="cursor: pointer;"><i class="fas fa-times"></i></p>
+	<button class="carousel-control-prev position-absolute top-50 start-0 translate-middle-y" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="z-index:9999; height:10vh;">
+    	<span class="carousel-control-prev-icon primary" aria-hidden="true"></span>
+    	<span class="visually-hidden">Previous</span>
+  	</button>
+  	<button class="carousel-control-next position-absolute top-50 end-0 translate-middle-y" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="z-index:9999;height:10vh;">
+    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    	<span class="visually-hidden">Next</span>
+  	</button>
+  <div class="modal-dialog modal-xl" id="myModal">
+    <div class="modal-content">
+    	<div class="row g-0">
+       		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+       			<div class="carousel-inner">
+       					<!-- 동적으로 데이터를 받아서 뿌려줄 부분 -->
+  				</div>
+			</div>
+    	</div>
+  	  </div>
+  </div>
+</div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center active"><i class="fas fa-arrow-up"></i></a>
+  <script>
+  
+  let imageList = new Array();
+  let imageObj
+  <c:forEach var="image" items="${imageList}" varStatus="status">
+  	imageObj = new Object();
+  	imageObj.fIdx =  "${image.fIdx}";
+  	imageObj.fOrigin = "${image.fOrigin}";
+  	imageObj.fRename = "${image.fRename}";
+  	imageObj.fDate = "${image.fDate}";
+  	imageObj.userId = "${image.userId}";
+  	imageObj.fSavePath = "${image.fSavePath}";
+  	imageObj.isDel = "${image.isDel}";
+  	imageList.push(imageObj);
+  </c:forEach>
+  
+ 
+
+	let imageItemList = document.querySelectorAll('.image_item');
+	for(let i=0;i<imageItemList.length; i++){
+		imageItemList[i].addEventListener('click',(e)=>{
+			console.dir(imageItemList[i].dataset.fidx);
+			showModal(imageItemList[i].dataset.imagelink,imageItemList[i].dataset.fidx);
+		});
+	}
+	
+ 	 function showModal(imageLink,fIdx){
+ 	  carouselInner = document.querySelector(".carousel-inner");
+	  for(let i = 0; i< imageList.length; i++){
+		  let carouselItem = document.createElement("div");
+		  let img = document.createElement("img");
+		  img.setAttribute("class","d-block w-100 img-fluid");
+		  img.src = "/images/"+imageList[i].fSavePath+"/"+imageList[i].fRename;
+//		  img.style="width:100%;height:100%;object-fit:cover;";
+		  carouselItem.appendChild(img);
+		  
+		  if(fIdx==imageList[i].fIdx){ //선택한 사진이라면 슬라이드의 가장 앞부분을 차지해야 한다.
+			  carouselItem.setAttribute("class","carousel-item active"); //class 속성으로 active를 사진 아이템이 슬라이드의 가장 첫부분을 차지한다.
+		  }else{
+			carouselItem.setAttribute("class","carousel-item");
+		  }
+		  carouselInner.appendChild(carouselItem);
+	  }
+		$('#exampleModal').modal("show");
+	}
+
+
+  </script>
+  
+  
+  
+  
+  <script src="${context}/resources/js/search/search_main.js"></script>
     <script src="${context}/resources/theEvent/assets/vendor/aos/aos.js"></script>
   <script src="${context}/resources/theEvent/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="${context}/resources/theEvent/assets/vendor/glightbox/js/glightbox.min.js"></script>

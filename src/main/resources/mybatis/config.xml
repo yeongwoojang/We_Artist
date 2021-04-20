@@ -17,6 +17,8 @@
 		<typeAlias type="com.we.art.gallery.model.vo.Gallery" alias="gallery"/>
 		<typeAlias type="com.we.art.common.util.file.FileVo" alias="fileVo"/>
 		<typeAlias type="com.we.art.user.model.vo.User" alias="user"/>
+		<typeAlias type="com.we.art.common.util.file.FileVo" alias="fileVo"/>
+		
 	</typeAliases>
 	
 	
@@ -27,6 +29,7 @@
 		<mapper resource="mybatis/mapper/user/userMapper.xml"/>
 		<mapper resource="mybatis/mapper/gallery/galleryMapper.xml"/>
 		<mapper resource="mybatis/mapper/communication/communicationMapper.xml"></mapper>
+		<mapper resource="mybatis/mapper/search/searchMapper.xml"></mapper>
 	</mappers>
 
 	

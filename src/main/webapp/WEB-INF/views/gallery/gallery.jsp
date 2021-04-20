@@ -8,9 +8,9 @@
 	    			<img alt="loading..." src="" id="imgInfo"style="width: 500px; height: 400px;">
 	    		</div>
 	    		<div class="rightBox d-inline-flex flex-column justify-content-between">
-	    			<h1 class="title">TITLE</h1>
-	    			<span>
-	    				이곳은 내용이 들어갈곳
+	    			<h1 id="imgTitle">TITLE</h1>
+	    			<span id="imgContent">
+	    				후에 css 수정해서 좀 이쁘게
 	    			</span>
 	    			<span id="btn_back">Back</span>
 	    		</div>
@@ -18,6 +18,15 @@
 	    </div>
 	 </section>
 	  <!-- End Hero Section -->
+	<div id="userGalleryList" class="d-none">
+		<c:forEach items="${galleryList}" var="item" varStatus="status">
+			<div id="Cube003_${item.imgOrder}"
+				data-title="${item.title}"
+				data-content="${item.content}"
+				data-path="${item.path}">
+			</div>
+		</c:forEach>
+	</div>
 	
 	<script src="https://threejs.org/build/three.min.js"></script>
 	<script src="${context}/resources/js/gallery/OrbitControls.js"></script>
