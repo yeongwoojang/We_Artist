@@ -77,16 +77,11 @@
 	        <ul>
 	        
 	          <li><a class="nav-link scrollto active fs-4" href="/search/main" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/gallery/gallery" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Live</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/personal/personal?nickName=${userInfo.nickName}" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
-	          
-	          <c:if test="${user == null }">
 	          <li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
-	          </c:if>
-	          <c:if test="${user != null }">
 	          <li><a class="nav-link scrollto fs-5" href="/search/main" style="font-family: 'Open Sans', sans-serif;">로그아웃</a></li>
-	          </c:if>
 	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/chat/direct" style="font-family: 'Open Sans', sans-serif;"><i class="fas fa-envelope fs-5 text-white"></i></a></li>
 			  <li style="cursor: pointer;">
