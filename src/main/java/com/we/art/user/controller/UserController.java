@@ -224,6 +224,14 @@ public class UserController {
 				return "common/result"; //model에 담긴 값을 result.jsp로 전달
 
 			}
+	
+	 //로그아웃
+		@RequestMapping("/logout")
+	    public ModelAndView logout(HttpSession session) {
+	        session.invalidate();
+	        ModelAndView mv = new ModelAndView("redirect:/");
+	        return mv;
+	    }
 			
 			
 }
