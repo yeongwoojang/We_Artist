@@ -2,16 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/topMenuHead.jsp"%>
 
-<section id="speakers">
-	<video id="localVideoa" autoplay muted playsinline></video>
-	<video id="remoteVideoa" autoplay playsinline></video>
-</section>
-
-<button onclick="createOffer()">Create</button>
-<br>
-<input type="text" id="messageInput"/>
-<button onclick="sendMessage()">Send</button>
-<hr />
 <section class="position-relative">
 	<div class="card w-50 mx-auto">
 		<div class="card-header">
@@ -22,7 +12,7 @@
 				<div class="col-3">
 					<c:choose>
 						<c:when test="${empty data}">
-							<img src="/resources/img/boyoung.jpg" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
+							<img src="/resources/img/defaultImg.png" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
 						</c:when>
 						<c:otherwise>
 							<img src="${data.path}" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
@@ -37,7 +27,7 @@
 				<div class="col-3">
 					<c:choose>
 						<c:when test="${empty data}">
-							<img src="/resources/img/boyoung.jpg" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
+							<img src="/resources/img/defaultImg.png" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
 						</c:when>
 						<c:otherwise>
 							<img src="${data.path}" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
@@ -47,7 +37,7 @@
 				<div class="col-3">
 					<c:choose>
 						<c:when test="${empty data}">
-							<img src="/resources/img/boyoung.jpg" alt="" class="img-thumbnail" id="gallery-img${status.index+2}"/>
+							<img src="/resources/img/defaultImg.png" alt="" class="img-thumbnail" id="gallery-img${status.index+2}"/>
 						</c:when>
 						<c:otherwise>
 							<img src="${data.path}" alt="" class="img-thumbnail" id="gallery-img${status.index+2}"/>
@@ -62,7 +52,7 @@
 				<div class="col-3">
 					<c:choose>
 						<c:when test="${empty data}">
-							<img src="/resources/img/boyoung.jpg" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
+							<img src="/resources/img/defaultImg.png" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
 						</c:when>
 						<c:otherwise>
 							<img src="${data.path}" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
@@ -72,7 +62,7 @@
 				<div class="col-3">
 					<c:choose>
 						<c:when test="${empty data}">
-							<img src="/resources/img/boyoung.jpg" alt="" class="img-thumbnail" id="gallery-img${status.index+4}"/>
+							<img src="/resources/img/defaultImg.png" alt="" class="img-thumbnail" id="gallery-img${status.index+4}"/>
 						</c:when>
 						<c:otherwise>
 							<img src="${data.path}" alt="" class="img-thumbnail" id="gallery-img${status.index+4}"/>
@@ -87,7 +77,7 @@
 				<div class="col-3">
 					<c:choose>
 						<c:when test="${empty data}">
-							<img src="/resources/img/boyoung.jpg" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
+							<img src="/resources/img/defaultImg.png" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
 						</c:when>
 						<c:otherwise>
 							<img src="${data.path}" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
@@ -97,7 +87,7 @@
 				<div class="col-3">
 					<c:choose>
 						<c:when test="${empty data}">
-							<img src="/resources/img/boyoung.jpg" alt="" class="img-thumbnail" id="gallery-img${status.index+6}"/>
+							<img src="/resources/img/defaultImg.png" alt="" class="img-thumbnail" id="gallery-img${status.index+6}"/>
 						</c:when>
 						<c:otherwise>
 							<img src="${data.path}" alt="" class="img-thumbnail" id="gallery-img${status.index+6}"/>
@@ -112,7 +102,7 @@
 				<div class="col-3">
 					<c:choose>
 						<c:when test="${empty data}">
-							<img src="/resources/img/boyoung.jpg" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
+							<img src="/resources/img/defaultImg.png" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
 						</c:when>
 						<c:otherwise>
 							<img src="${data.path}" alt="" class="img-thumbnail" id="gallery-img${status.index+1}"/>
@@ -145,9 +135,6 @@
 	</div>
 </section>
 
-<!-- <script type="text/javascript" src="/resources/js/live/liveClient.js"></script> -->
-<script type="text/javascript" src="/resources/js/gallery/load-image.all.min.js"></script>
-<script type="text/javascript" src="/resources/js/gallery/rotationImg.js"></script>
 <script type="text/javascript" src="/resources/js/gallery/upload.js"></script>
 </body>
 </html>
