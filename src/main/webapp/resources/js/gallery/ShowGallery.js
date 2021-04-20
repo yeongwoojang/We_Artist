@@ -41,6 +41,7 @@ let init = () => {
 
     camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
     camera.position.z = 2;
+	console.dir(camera);
 
     // middle에 랜더한다
     renderer = new THREE.WebGLRenderer();
@@ -111,10 +112,6 @@ let init = () => {
 
 }
 
-let getPath = (id) => {
-	return galleryData[id].path;
-}
-
 let onDocumentMouseDown = (event) => {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
@@ -166,6 +163,7 @@ let animate = () =>{
 }
 
 let render = () => {
+	
     renderer.render(scene,camera);
 }
 
