@@ -68,6 +68,7 @@
 	        <!-- <h1><a href="index.html">The<span>Event</span></a></h1>-->
 	        <a href="/index" class="scrollto fs-2 text-white" style="text-decoration:none;">We Artist</a>
 	      </div>
+	      
 <!-- <img src="/resources/theEvent/assets/img/logo.png" alt="" title=""> -->
 		<div class="container input-group border rounded-pill p-2" style="width:90vw;">
 	    			<span class="input-group-text bg-transparent border border-0 px-1"><i class="fas fa-search text-muted" style="font-size:1vw;"></i></span>
@@ -81,6 +82,7 @@
 	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Live</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/personal/personal?nickName=${userInfo.nickName}" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">로그인</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/search/main" style="font-family: 'Open Sans', sans-serif;">로그아웃</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">회원가입</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/chat/direct" style="font-family: 'Open Sans', sans-serif;"><i class="fas fa-envelope fs-5 text-white"></i></a></li>
 			  <li style="cursor: pointer;">

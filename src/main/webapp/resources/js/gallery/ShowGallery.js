@@ -3,7 +3,6 @@ import {GLTFLoader} from '/resources/js/gallery/GLTFLoader.js';
 // 기본사용한는 전역변수
 let scene, camera, renderer, controls,textureLoader;
 let container = document.querySelector('.middle');
-const gltfPath = 'landscape_gallery_by_stoneysteiner';
 
 let targetList = []; // 클릭할 객체 -> 액자안에 그림 배열
 let galleryData = new Object();
@@ -11,7 +10,6 @@ let imgData = new Object();
 let mouse = { x:0, y:0}; // 마우스 클릭시 x,y축을 저장
 
 let initGallery = () => {
-	console.dir(document.querySelector('#userGalleryList'));
 	let list = document.querySelector('#userGalleryList');
 	for(let item of list.children){
 		let temp = new Object();
@@ -21,10 +19,6 @@ let initGallery = () => {
 		galleryData[item.id] = temp;
 		imgData[item.id] = item.dataset.path;  
 	}
-	
-	console.dir(galleryData);
-	console.dir(galleryData['Cube003_2'].path);
-	
 }
 
 let init = () => {
@@ -41,6 +35,7 @@ let init = () => {
 
     camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
     camera.position.z = 2;
+	console.dir(camera);
 
     // middle에 랜더한다
     renderer = new THREE.WebGLRenderer();
@@ -72,9 +67,6 @@ let init = () => {
 
     const backLight = new THREE.DirectionalLight(color, intensity);
     backLight.position.set(0, ypos, -5);
-
-	const light = new THREE.PointLight(color,intensity);
-	light.position.set(0,0.1,0);
 	
 	textureLoader = new THREE.TextureLoader();
 	
@@ -92,9 +84,7 @@ let init = () => {
         // Cube003의 children은 액자인지 그림만인지... 하튼 객체 찾아냄
         target = root.getObjectByName('Cube003');
         for(let item of target.children){
-			//console.log(galleryData[item.name].title);
 			item.material.map = textureLoader.load(imgData[item.name]);
-			console.dir(item);
             targetList.push(item);
         }
         // 상하좌우 조명설치
@@ -102,17 +92,12 @@ let init = () => {
 	    root.add(leftLight);
 	    root.add(frontLight);
 	    root.add(backLight);
-		//root.add(light); //바닥 텍스쳐 사용시 사용할듯함
         root.add(camera);
     });
 
     document.addEventListener('click', onDocumentMouseDown);
 	window.addEventListener('resize',onWindowResize);
 
-}
-
-let getPath = (id) => {
-	return galleryData[id].path;
 }
 
 let onDocumentMouseDown = (event) => {
@@ -124,21 +109,23 @@ let onDocumentMouseDown = (event) => {
     ray.setFromCamera( mouse, camera );
     let intersects = ray.intersectObjects( targetList);
     console.dir(intersects);
-    if(intersects.length > 0){
-        console.log('Hit @' + toString(intersects[0].point) + '\n'+ intersects[0].object.name);
-         
+    if(intersects.length > 0){       
         targetList.forEach((e) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
             if(e.name === intersects[0].object.name){
-				document.querySelector('#imgInfo').src = galleryData[e.name].path;	
-				document.querySelector('#imgTitle').innerText = galleryData[e.name].title;	
-				document.querySelector('#imgContent').innerText = galleryData[e.name].content;	
-				document.querySelector("#divTest").className = 'd-flex position-absolute';
-				document.removeEventListener('click',onDocumentMouseDown);
-				document.querySelector('#btn_back').addEventListener('click',back);
+				clickObject(e.name);
             }
         })
     }
+}
+
+let clickObject = (objName) => {
+	document.querySelector('#imgInfo').src = galleryData[objName].path;	
+	document.querySelector('#imgTitle').innerText = galleryData[objName].title;	
+	document.querySelector('#imgContent').innerText = galleryData[objName].content;	
+	document.querySelector("#divTest").className = 'd-flex position-absolute';
+	document.removeEventListener('click',onDocumentMouseDown);
+	document.querySelector('#btn_back').addEventListener('click',back);
 }
 
 // 상세페이지 닫을시 다음 요소들을 초기화 해준다.
@@ -155,17 +142,13 @@ let onWindowResize = () => {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// 백터 값사용시 x,y,z를 정리해서 출력해줌
-let toString = (v) => {
-     return "[ " + v.x + ", " + v.y + ", " + v.z + " ]";
-}
-
 let animate = () =>{
     requestAnimationFrame(animate);
     render();
 }
 
 let render = () => {
+	
     renderer.render(scene,camera);
 }
 

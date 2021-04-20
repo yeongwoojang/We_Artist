@@ -15,8 +15,6 @@
               <strong>Phone:</strong> +82 314 55488 55<br>
               <strong>Email:</strong> w____A@artist.we<br>
             </p>
-
-
           </div>
 
         </div>
