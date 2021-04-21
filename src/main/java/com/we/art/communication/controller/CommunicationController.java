@@ -82,7 +82,6 @@ public class CommunicationController {
 	@ResponseBody
 	public List<Map<String,Object>> fetchNotiCount(Model model) {
 		User userInfo = (User)model.getAttribute("userInfo");
-		System.out.println("유저 인포 : "+userInfo);
 		if(userInfo!=null) {
 			List<Map<String,Object>> historyList = communicationService.selectHistoryById(userInfo.getUserId());
 			System.out.println(historyList);
@@ -92,7 +91,7 @@ public class CommunicationController {
 			System.out.println(historyList);
 			return historyList;
 		}else {
-			return null;
+			return new ArrayList<>();
 		}
 	}
 	

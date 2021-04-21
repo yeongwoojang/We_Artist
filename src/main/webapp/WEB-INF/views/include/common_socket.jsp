@@ -164,8 +164,10 @@ function connectPushSocket(){
 			let fromId = pushInfo.fromId;
 			let toId = pushInfo.toId;
 			let nickName = pushInfo.nickName;
+			let message = pushInfo.message;
+			console.log(message);
 			let followingMessage = document.getElementById("followingMessage");
-			followingMessage.innerHTML = nickName+"님이 당신을 팔로우했습니다.";
+			followingMessage.innerHTML = message;
 			followingMessage.style.cursor ="pointer"
 			followingMessage.className ="text-primary"
 			document.getElementById("liveFollowingToast").className ="toast show";
@@ -303,5 +305,59 @@ function directMessage(){
 		}
 	}
 }
+
+function createNewRoom(fromId,toId){
+    
+    let url = '/chat/enterchatroomimpl'
+    let paramObj = new Object();
+    paramObj.firstUser = fromId;
+    paramObj.secondUser = toId;
+    let headerObj = new Headers();
+    headerObj.append("content-type","application/json");
+    fetch(url,{
+        method : "POST",
+        headers : headerObj,
+        body : JSON.stringify(paramObj)
+    })
+    .then(response=>{
+        if(response.ok){
+            return response.text()
+        }
+    })
+    .then((text)=>{
+        if(text!='failed'){
+            //TODO 채팅방 만들기를 성공했을 시
+            stompClient.disconnect();
+            reSetMyChatRoomList();
+            
+            
+        }else{
+            //TODO 채팅방 만들기를 실패했을 시
+        }
+    });
+}
+
+
+function reSetMyChatRoomList(){
+    let url = '/chat/selectmychatroomlistimpl'
+        fetch(url,{
+            method : "GET"
+        })
+        .then(response=>{
+            if(response.ok){
+                return response.text()
+            }
+        })
+        .then((text)=>{
+            if(text!='failed'){
+                myChatRoomList = JSON.parse(text) //내가 속한 채팅방 리스트
+                console.log("MYCHATROOMLIST : "+myChatRoomList);            
+                connectSocket();
+            }else{
+            }
+        });
+}
+
+
 
 </script>
