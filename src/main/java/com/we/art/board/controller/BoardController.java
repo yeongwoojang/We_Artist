@@ -1,5 +1,6 @@
 package com.we.art.board.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,4 +61,15 @@ public class BoardController {
 		return commandMap;
 	}
 	
+	
+	@GetMapping("fetchlikeuserlist")
+	@ResponseBody
+	public List<Map<String,String>> fetchlikeuserlist(@RequestParam("bdNo") String bdNo){
+		List<Map<String,String>> likeUserList = boardService.selectLikeListByBdNo(bdNo);
+		if(likeUserList==null) {
+			likeUserList = new ArrayList<>();
+		}
+		
+		return likeUserList;
+	}
 }

@@ -34,7 +34,7 @@
 			
 			<c:forEach var="image" items="${imageList}" varStatus="status">
 				 <div class="col-lg-3 col-md-4">
-            		<div class="venue-gallery image_item" data-imagelink ="${image.fSavePath}/${image.fRename}" data-fidx = "${image.fIdx}">
+            		<div class="venue-gallery image_item" data-imagelink ="${image.fSavePath}/${image.fRename}" data-fidx = "${image.fIdx}" data-nickname="${image.nickName}">
                 			<img src=<c:url value="/images/${image.fSavePath}/${image.fRename}"/> alt="" class="img-fluid">
             		</div>
           		</div>	
@@ -125,8 +125,15 @@
     	<span class="carousel-control-next-icon" aria-hidden="true"></span>
     	<span class="visually-hidden">Next</span>
   	</button>
-  <div class="modal-dialog modal-xl" id="myModal">
+  <div class="modal-dialog modal-lg" id="myModal">
     <div class="modal-content">
+   		<div class="p-3 d-flex justify-content-between">
+   			<div id="user_info" class="d-flex justify-content-start">
+   				<div>프사</div>
+   				<div id="user_nickname">유저이름</div>
+   			</div>   
+   			<div style="cursor:pointer;" onclick='movePersonalPage();'>피드 바로가기</div>
+   		</div>
     	<div class="row g-0">
        		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
        			<div class="carousel-inner">
@@ -160,12 +167,14 @@
 	for(let i=0;i<imageItemList.length; i++){
 		imageItemList[i].addEventListener('click',(e)=>{
 			console.dir(imageItemList[i].dataset.fidx);
-			showModal(imageItemList[i].dataset.imagelink,imageItemList[i].dataset.fidx);
+			showModal(imageItemList[i].dataset.imagelink,imageItemList[i].dataset.fidx,imageItemList[i].dataset.nickname);
 		});
 	}
 	
- 	 function showModal(imageLink,fIdx){
+ 	 function showModal(imageLink,fIdx,nickname){
  	  carouselInner = document.querySelector(".carousel-inner");
+ 	  let userInfo = document.getElementById("user_nickname");
+ 	  userInfo.innerHTML = nickname;
 	  for(let i = 0; i< imageList.length; i++){
 		  console.log(imageList[i].fSavePath+"/"+imageList[i].fRename)
 		  let carouselItem = document.createElement("div");

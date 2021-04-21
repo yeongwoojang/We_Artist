@@ -1,6 +1,7 @@
 package com.we.art.board.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,5 +32,7 @@ public interface BoardRepository {
 	
 	List<FileVo> selectFileByBdNo(String bdNo);
 
-	Board selectBoardByBdNo(String bdNo); //장영우 추가
+	Map<String,Object> selectBoardByBdNo(String bdNo); //장영우 추가
+	
+	List<Map<String,String>> selectLikeListByBdNo(String bdNo);
 }

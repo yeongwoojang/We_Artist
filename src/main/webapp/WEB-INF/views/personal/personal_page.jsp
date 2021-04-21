@@ -67,7 +67,7 @@
       </div>
       </section>
 	<!--사진피드 -->
-      <section id="hotels" class="section-with-bg">
+      <section id="venue" class="section-with-bg">
       <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="section border-bottom border-top border-2 mb-3">
           <h2 class="text-center fs-1 fw-bold p-5">게시물</h2>
@@ -83,30 +83,14 @@
       	</c:if>
       	<c:if test="${personalBoardInfoList.size()!=0}">
         <c:set var="loop_flag" value="false" />
-		 	<div class="row aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+		 	<div class="row g-0 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
 		 		<c:forEach var ="boardInfo" items ="${personalBoardInfoList}" varStatus="sts">
 		 			<c:forEach var ="file" items ="${boardInfo.files}" varStatus="status">
 		 			<c:if test="${status.index==0}">
 					<div class="col-lg-4 col-md-6">
-            			<div class="hotel">
-             				<div class="hotel-img position-relative mb-0" id="${boardInfo.board.bdNo}" onclick="showModal('${boardInfo.board.bdNo}','${boardInfo}');"style="cursor: pointer;overflow:hidden;height:60%;">
-                				<img src=<c:url value='/images/${file.fSavePath}/${file.fRename}'/> alt="" style="width:100%; object-fit:contain;">
+             				<div class="venue-gallery position-relative mb-0" id="${boardInfo.board.bdNo}" onclick="showModal('${boardInfo.board.bdNo}','${boardInfo}');"style="cursor: pointer;">
+                				<img src=<c:url value='/images/${file.fSavePath}/${file.fRename}'/> alt="" class="img-fluid">
               				</div>
-              				<c:if test="${fn:length(boardInfo.board.bdTitle)>17}">
-              					<c:set var="bdTitle" value="${boardInfo.board.Title}"></c:set>
-              					<p class="p-2 border-bottom fs-3 mx-1"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 700;">${fn:substring(bdTitle,0,17)}......</p>
-              				</c:if>
-              				<c:if test="${fn:length(boardInfo.board.bdTitle)<=17}">
-              					<p class="p-2 border-bottom fs-3 mx-1"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 700;">${boardInfo.board.bdTitle}</p>
-              				</c:if>
-                			<c:if test="${fn:length(boardInfo.board.bdContent)>22}">
-                				<c:set var="bdContent" value="${boardInfo.board.bdContent}"></c:set>
- 	             				<p class="p-2 mb-0"style= "font-family: 'Nanum Gothic', sans-serif; font-style:normal;">${fn:substring(bdContent,0,22)}......</p>
-                			</c:if>
-                			<c:if test="${fn:length(boardInfo.board.bdContent)<=22}">
-                				<p class="p-2 mb-0"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;">${boardInfo.board.bdContent}</p>
-                			</c:if>
-           			 	</div>
           			</div>		
           			<c:if test="${fn:length(boardInfo.files)>1}">
           				<script>overlap("${boardInfo.board.bdNo}");</script>
@@ -120,7 +104,7 @@
 		 <!-- Modal --> 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<p id="btn_modal_close"class="float-end text-white fs-1 mt-2 mr-1" style="cursor: pointer;"><i class="fas fa-times"></i></p>
-  <div class="modal-dialog modal-xl" id="myModal">
+  <div class="modal-dialog modal-lg" id="myModal">
     <div class="modal-content">
     	<div class="row g-0">
     		<div class="col col-md-8">
@@ -138,10 +122,15 @@
   						</button>
 					</div>
       			</div>
-      		<div class="bg-light col col-md-4">
-      			<h4 id="board_title" class="fw-bold border-bottom mx-1 p-2"style="font-size:2vw;"></h4>
-            	<h6 id="board_content"class="fw-nomal p-2" style="font-size:1vw;"></h6>
+      		<div class="bg-light col col-md-4 d-flex flex-column">
+      			<div id="board_title" class="border-bottom mx-1 p-2"style="font-size:1vw;"></div>
+            	<div id="board_content"class="p-2 border-bottom mx-1" style="height:90%; overflow:auto; font-size:0.8vw;"></div>
+            	<div class="p-2 d-flex align-items-center">
+            		<i id="like_icon" onclick="updateLike();" class="fas fa-heart text-dark mx-2 my-1" style="cursor:pointer; font-size:20px;"></i>
+            		<div style="font-size:15px;">ㄴㅇㅀㄴㅇㅀㅇㄴㅀ 님 외 5명이 좋아합니다.</div>
+            	</div>
       		</div>
+            	
     	</div>
       
   	  </div>
@@ -161,179 +150,8 @@
   <script src="${context}/resources/theEvent/assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="${context}/resources/theEvent/assets/js/main.js"></script>
   
-  <script>
+  <script src="${context}/resources/js/personal/personal.js">
   
-  let myModalEl = document.getElementById('exampleModal')
-  myModalEl.addEventListener('hidden.bs.modal', function (event) {
-	  let carouselInner = document.querySelector(".carousel-inner");
-	  while(carouselInner.hasChildNodes()){
-		  carouselInner.removeChild(carouselInner.firstChild);
-	  }
-  });
-  
-  let modalCloseBtn = document.getElementById('btn_modal_close');
-  modalCloseBtn.addEventListener('click',function(){
-	  $('#exampleModal').modal("hide");
-  })
-  myModalEl.addEventListener('shown.bs.modal',function(event){
-  });
-    
-  	let selectedBoard;
-  	let boardInfo;
-  	let fileList;
-  	
-	function showModal(bdNo,boardInfo){
-		fetchSelectBoard(bdNo);
-		
-	}
-	function fetchSelectBoard(bdNo){
-		const url = '/fetchselectedboard?bdNo='+bdNo;
-		fetch(url,{
-			method : "GET"
-		}).then(response=>{
-			if(response.ok){
-				return response.text();
-			}
-		}).then((text)=>{
-			selectedBoard = JSON.parse(text);
-			let carouselInner = document.querySelector(".carousel-inner");
-			let boardContent = document.getElementById("board_content");
-			let boardTitle = document.getElementById("board_title");
-			boardContent.innerHTML = selectedBoard.board.bdContent;
-			boardTitle.innerHTML = selectedBoard.board.bdTitle;
-			boardInfo = selectedBoard.board; //선택한 게시물 정보
-			fileList = selectedBoard.files; //선택한 게시물에 속해있는 파일 리스트 정보
-			for(let i = 0; i<fileList.length; i++){
-					let carouselItem = document.createElement("div")
-					let img = document.createElement("img");
-					img.setAttribute("class","d-block w-100 img-fluid");
-					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
-					console.log("/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename);
-// 					img.style="width:100%;height:100%;object-fit:cover;";
-				if(i==0){
-					console.log('이건 0')
-					carouselItem.setAttribute("class","carousel-item active");
-				}else{
-					carouselItem.setAttribute("class","carousel-item");
-					console.log('이건 0이아님')
-				}
-	       			carouselItem.appendChild(img);
-	       			carouselInner.appendChild(carouselItem);
-	       			console.dir(carouselInner.childNodes);
-			}
-			
-			$('#exampleModal').modal("show");
-		});
-	}
-	
-	function following(){
-		let userId = "${personalUserInfo.userId}";
-		let nickName = "${curUserInfo.nickName}";
-		if(currentUserId!=""){
-// 			stompPushClient.send("/push", {}, JSON.stringify({'fromId' : currentUserId, 'toId': userId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
-// 	 		createNewRoom(currentUserId,userId);
-// 	 		reSetMyChatRoomList();	
-	 		followingImpl(userId,currentUserId);
-		}else{
-			location.href = "/user/login";
-		}
-
-	}
-	
-	function followingImpl(toId,fromId){
-		const url = '/communication/followingimpl';
-		let paramObj = new Object();
-		paramObj.toId = toId;
-		paramObj.fromId = fromId;
-		
-		let headerObj = new Headers();
-		headerObj.append('content-type','application/json');
-		
-		fetch(url,{
-			method:"POST",
-			headers : headerObj,
-			body : JSON.stringify(paramObj)
-		}).then(response=>{
-			if(response.ok){
-				return response.text();
-			}
-		}).then((text)=>{
-			if(text=="success"){
-				//팔로잉 성공 시
-				let userId = "${personalUserInfo.userId}";
-				let nickName = "${curUserInfo.nickName}";
-				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
-	 			createNewRoom(currentUserId,userId);
-	 			reSetMyChatRoomList();	
-				let fBtn = document.getElementById("btn_about_following");
-				fBtn.innerHTML ="팔로우 끊기";
-				fBtn.setAttribute("onclick","unfollowing()")
-				reSetFollowingCountimpl();
-			}else{
-				//팔로잉 실패 시
-			}
-		})
-	}
-	
-	function unfollowing(){
-		let toId = "${personalUserInfo.userId}";
-		let fromId = currentUserId;
-		unFollowingImpl(toId,fromId);
-	}
-	
-	
-	function unFollowingImpl(toId,fromId){
-		const url ='/communication/unfollowingimpl';
-		let paramObj = new Object();
-		paramObj.toId = toId;
-		paramObj.fromId = fromId;
-		
-		let headerObj = new Headers();
-		headerObj.append('content-type','application/json');
-		
-		fetch(url,{
-			method:"POST",
-			headers : headerObj,
-			body : JSON.stringify(paramObj)
-		}).then(response=>{
-			if(response.ok){
-				return response.text();
-			}
-		}).then((text)=>{
-			if(text=="success"){
-				//언팔로우 성공 시
-				console.log(text);
-				let fBtn = document.getElementById("btn_about_following");
-				fBtn.innerHTML ="팔로잉";
-				fBtn.setAttribute("onclick","following()")
-				reSetFollowingCountimpl();
-			}else{
-				//언팔로우 실패 시
-			}
-		})
-	}
-	
-	
-	function reSetFollowingCountimpl(){
-		let nickName = "${personalUserInfo.nickName}";
-		const url = '/personal/resetfollowingcountimpl?nickName='+nickName;
-		fetch(url,{
-			method:"GET",
-		}).then(response=>{
-			if(response.ok){
-				return response.text();
-			}
-		}).then((text)=>{
-			console.log(JSON.parse(text));
-			document.getElementById("follower_count").innerHTML = text;
-		});
-		
-	}
-	
-	
-	function modifyProfile(){
-		location.href ="/user/profile?userId="+currentUserId;
-	}
   </script>
 </body>
 </html>
