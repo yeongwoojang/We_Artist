@@ -56,9 +56,7 @@ public class BoardController {
 	@ResponseBody
 	public Map<String,Object> fetchSelectedBoard(@RequestParam("bdNo") String bdNo) {
 		Map<String,Object> commandMap = new HashMap<String,Object>();
-		System.out.println("게시물번호 : "+bdNo);
 		commandMap = boardService.selectBoardByBdNo(bdNo);
-		System.out.println("게시물 번호로 알아본 게시물의 정보 : "+ commandMap);
 		return commandMap;
 	}
 	

@@ -12,7 +12,7 @@
 	
 	<!--장영우 추가-->
 	<select id="selectBoardByBdNo" resultMap="boardData">
-		SELECT BD_NO, USER_ID, BD_CONTENT,V_NO,TAG,
+		SELECT BD_NO,USER_ID, BD_TITLE,BD_CONTENT,V_NO,TAG,
 		 (SELECT COUNT(*) FROM TB_LIKE WHERE BD_NO=#{bdNo}) LIKE_COUNT
 		 FROM TB_BOARD
 		WHERE BD_NO = #{bdNo}
@@ -32,8 +32,6 @@
 	</select>
 
 	
-
-
 	<select id="certificateLike" resultMap="like">
 		SELECT *FROM TB_LIKE
 		WHERE BD_NO = #{bdNo} AND LK_ID = #{lkId}	
