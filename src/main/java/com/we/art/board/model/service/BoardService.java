@@ -12,4 +12,5 @@ public interface BoardService {
 	public List<Map<String, Object>> selectBoardByUserId(String userId);
 	public Map<String,Object> selectBoardByBdNo(String bdNo);
 	public List<Map<String,String>> selectLikeListByBdNo(String bdNo);
+	public int insertLike(String bdNo,String lkId);
 }

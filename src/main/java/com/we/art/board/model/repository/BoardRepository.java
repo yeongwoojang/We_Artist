@@ -24,8 +24,6 @@ public interface BoardRepository {
 			+ " values('b'||sc_bd_idx.currval, 'f'||sc_file_idx.currval)")
 	int insertBoardMaster();
 	
-	//소중히 작성했던 코드들이 사라지고 있습니다....-김선민만세-
-	
 	List<Board> selectBoardByUserId(String userId);
 	
 	List<FileVo> selectFileByBdNo(String bdNo);
@@ -33,4 +31,6 @@ public interface BoardRepository {
 	Map<String,Object> selectBoardByBdNo(String bdNo); //장영우 추가
 	
 	List<Map<String,String>> selectLikeListByBdNo(String bdNo);
+	
+	int insertLike(String bdNo,String lkId);
 }
