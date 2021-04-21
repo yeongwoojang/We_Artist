@@ -19,36 +19,55 @@
 
           <div class="col-md-4">
             <div class="contact-phone">
+            	<div class="jb-a rounded-circle" style="
+							    width: 14rem;
+							    height: 14rem;
+							    border: 0.5rem solid rgba(0, 0, 0, 0.1);
+							">
             	<c:set var="pic" value="${picture}"/>
                     <c:choose>
                     	<c:when test="${empty pic}">
-		                    <img class="mx-auto rounded-circle" src="/resources/img/boyoung.jpg" alt="" style="
+		                    <img class="mx-auto rounded-circle propic" src="/resources/img/boyoung.jpg" alt="" style="
 							    width: 14rem;
 							    height: 14rem;
 							    border: 0.5rem solid rgba(0, 0, 0, 0.1);
 							">
 						</c:when>
 						<c:otherwise>
-							<img class="mx-auto rounded-circle" src="<c:url value="/images/${pic.files.fSavePath}/${pic.files.fRename}"/>" alt="" style="
+							<img class="mx-auto propic" src="<c:url value="/images/${pic.files.fSavePath}/${pic.files.fRename}"/>" alt="" style="
 							    width: 14rem;
-							    height: 14rem;
-							    border: 0.5rem solid rgba(0, 0, 0, 0.1);
-							">
+							    height: 14rem;"
+							    >
 						</c:otherwise>
 					</c:choose>
-              <h3>${sessionScope.userInfo.userId}</h3>
-              
+					<div class="overlay overlayFade">
+					<div class="textProPic">
+					<label for="ex_file">
+					<i class="fas fa-plus" style="color: blanchedalmond;"></i>
+					</label> 
+					</div>
+					</div>			
+			</div>
+			<p></p>
+             <form action="${contetxt}/user/proPic" id="form" name="form"
+						method="post" enctype="multipart/form-data" autocomplete="off" style="margin-top: 5px">
+						<input class="d-none" type="file" id="ex_file" name="files" required />
+						<button type="submit" class="btn btn-outline-secondary">업로드</button>
+				</form>
+			<div style="font-size: 30px;
+				    margin-bottom: 15px;
+				    font-weight: bold;
+				    color: #112363;
+				    margin-top: 8px;
+				    ">
+             ${sessionScope.userInfo.userId}
+              </div>	
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="contact-email">
-              <form action="${contetxt}/user/proPic" id="form" name="form"
-						method="post" enctype="multipart/form-data" autocomplete="off">
-						<label for="ex_file">프로필 사진 바꾸기</label> 
-						<input src="/resources/img/boyoung.jpg" type="file" id="ex_file" name="files" required />
-						<button type="submit" class="btn btn-primary">업로드</button>
-				</form>
+              
             </div>
           </div>
 
@@ -90,6 +109,6 @@
 
       </div>
     </section><!-- End Contact Section -->
-
+<script src="/resources/js/user/profile.js"></script>
 </body>
 </html>

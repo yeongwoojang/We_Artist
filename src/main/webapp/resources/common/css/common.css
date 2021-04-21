@@ -46,3 +46,52 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+.jb-a{
+			position: relative;
+			width: 14rem;
+			height: 14rem;
+			display: inline-block;
+			overflow: hidden;
+}
+
+.propic{
+			display: block;
+			transform: translate(-10px, -10px);
+}
+
+.overlay{
+			position: absolute;
+			transition: all .3s ease;
+			opacity: 0;
+			background: #D0D3D4;
+}
+
+.jb-a:hover .overlay{
+			opacity: .6;
+}
+
+.textProPic{
+	color: black;
+	font-family: sans-serif;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 18px;
+	padding: 8px 32px;
+	border-radius: 5px;	
+}
+
+.overlayFade{
+	height: 100%;
+	width:100%;
+	top: 0;
+	left: 0;
+	background: #808080;
+	opacity: 0;
+}
+.jb-a:hover .overlayFade{
+	opacity: .7;
+}
+		

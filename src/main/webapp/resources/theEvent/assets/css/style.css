@@ -138,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 997;
   background: rgba(6, 12, 34, 0.98);
 }
-/* 스크롤이 가능하고 메인 세션이 있다면 사용*/
+/* �뒪�겕濡ㅼ씠 媛��뒫�븯怨� 硫붿씤 �꽭�뀡�씠 �엳�떎硫� �궗�슜*/
 #header.header-scrolled, #header.header-inner {
   position: fixed;
   left: 0;
