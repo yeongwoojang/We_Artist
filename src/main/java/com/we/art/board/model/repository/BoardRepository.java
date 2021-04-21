@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.we.art.board.model.vo.Board;
 import com.we.art.common.util.file.FileVo;
@@ -32,5 +33,9 @@ public interface BoardRepository {
 	
 	List<Map<String,String>> selectLikeListByBdNo(String bdNo);
 	
-	int insertLike(String bdNo,String lkId);
+	int insertLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
+	
+	int deleteLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
+	
+	Map<String,String> certificateLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
 }

@@ -17,11 +17,11 @@
   	let boardInfo;
   	let fileList;
   	
-	function showModal(bdNo,boardInfo){
+	 function showModal(bdNo,boardInfo){
 		fetchSelectBoard(bdNo);
 		
 	}
-	function fetchSelectBoard(bdNo){
+	    function fetchSelectBoard(bdNo){
 		const url = '/fetchselectedboard?bdNo='+bdNo;
 		fetch(url,{
 			method : "GET"
@@ -35,8 +35,8 @@
 			let carouselInner = document.querySelector(".carousel-inner");
 			let boardContent = document.getElementById("board_content");
 			let boardTitle = document.getElementById("board_title");
-			let likeIcon = document.getElementById("like_icon");
-			likeIcon.setAttribute("onclick","updateLike("+selectedBoard.bdNo+");")
+			let likeIcon = document.getElementById("like_icon")
+			likeIcon.setAttribute("onclick","updateLike();")
 			boardContent.innerHTML = selectedBoard.board.bdContent;
 			boardTitle.innerHTML = selectedBoard.board.bdTitle;
 			boardInfo = selectedBoard.board; //선택한 게시물 정보
@@ -50,21 +50,29 @@
 					console.log("/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename);
 // 					img.style="width:100%;height:100%;object-fit:cover;";
 				if(i==0){
-					console.log('이건 0')
 					carouselItem.setAttribute("class","carousel-item active");
 				}else{
 					carouselItem.setAttribute("class","carousel-item");
-					console.log('이건 0이아님')
 				}
 	       			carouselItem.appendChild(img);
 	       			carouselInner.appendChild(carouselItem);
 	       			console.dir(carouselInner.childNodes);
 			}
-			
-			$('#exampleModal').modal("show");
+			test();
 		});
 	}
 	
+	async function test(){
+		let likeIcon = document.getElementById("like_icon");
+		let result = await certificatelike(selectedBoard.board.bdNo);
+		console.log("test : "+ result)
+			if(result=="true"){
+				likeIcon.setAttribute("class","fas fa-heart text-dark");
+			}else{
+				likeIcon.setAttribute("class","fas fa-heart text-danger");
+			}
+			$('#exampleModal').modal("show")
+	}
 	function following(){
 		let userId = "${personalUserInfo.userId}";
 		let nickName = "${curUserInfo.nickName}";
@@ -76,6 +84,7 @@
 		}else{
 			location.href = "/user/login";
 		}
+		console.log("테스트 종료")
 
 	}
 	
@@ -141,7 +150,6 @@
 		}).then((text)=>{
 			if(text=="success"){
 				//언팔로우 성공 시
-				console.log(text);
 				let fBtn = document.getElementById("btn_about_following");
 				fBtn.innerHTML ="팔로잉";
 				fBtn.setAttribute("onclick","following()")
@@ -163,7 +171,6 @@
 				return response.text();
 			}
 		}).then((text)=>{
-			console.log(JSON.parse(text));
 			document.getElementById("follower_count").innerHTML = text;
 		});
 		
@@ -175,20 +182,72 @@
 	}
 	
 	
-	let a = false;
-	function updateLike(bdNo){
-		//전달 받은 bdNo의 like업데이트
-		let likeIcon = document.getElementById("like_icon");
-		if(!a){
-		likeIcon.setAttribute("class","fas fa-heart text-danger");
-		a=!a			
+	   async function updateLike(){
+		bdNo = selectedBoard.board.bdNo;
+		 let result =  await certificatelike(bdNo);
+		if(result=="true"){
+			insertLike(bdNo); 
 		}else{
-		likeIcon.setAttribute("class","fas fa-heart text-dark");
-		a=!a			
-			
+			deleteLike(bdNo);
 		}
 	}
 	
+	    async function certificatelike(bdNo){
+		const url = '/certificatelike?bdNo='+bdNo+'&lkId='+currentUserId;
+		let response = await fetch(url,{method:"GET"});
+		if(response.ok){
+			let result = await response.text();
+			if(result=="ok"){
+				return "true";
+			}else{
+				return "false";
+			}
+		}
+	}
+	
+	
+	function insertLike(bdNo){
+		//전달 받은 bdNo의 like업데이트
+		console.log("INSERET 실행")
+		const url = '/insertlike?bdNo='+bdNo+'&lkId='+currentUserId;
+		fetch(url,{
+			method:"GET"
+		}).then(response=>{
+			if(response.ok){
+				return response.text();
+			}
+		}).then((text)=>{
+			if(text=="success"){
+				//좋아요 성공 시
+				let likeIcon = document.getElementById("like_icon");
+				likeIcon.setAttribute("class","fas fa-heart text-danger");
+			}else{
+				//좋아요 실패 시
+			}
+		})
+		
+	}
+	
+	
+	function deleteLike(bdNo){
+			console.log("DELETE 실행")
+		const url = '/deletelike?bdNo='+bdNo+'&lkId='+currentUserId;
+		fetch(url,{
+			method:"GET"
+		}).then(response=>{
+			if(response.ok){
+				return response.text();
+			}
+		}).then((text)=>{
+			if(text=="success"){
+				//좋아요 취소 성공 시
+					let likeIcon = document.getElementById("like_icon");
+					likeIcon.setAttribute("class","fas fa-heart text-dark");
+			}else{
+				//좋아요 취소 실패 시
+			}
+		})
+	}
 	
 	
 	

@@ -12,11 +12,9 @@
 	
 	<!--장영우 추가-->
 	<select id="selectBoardByBdNo" resultMap="boardData">
-		SELECT BD_NO, B.USER_ID, B.BD_CONTENT,B.V_NO,B.TAG,
+		SELECT BD_NO, USER_ID, BD_CONTENT,V_NO,TAG,
 		 (SELECT COUNT(*) FROM TB_LIKE WHERE BD_NO=#{bdNo}) LIKE_COUNT
-		FROM 
-		TB_BOARD B JOIN TB_LIKE L 
-		USING(BD_NO)
+		 FROM TB_BOARD
 		WHERE BD_NO = #{bdNo}
 	</select>
 	<!--/장영우 추가-->
@@ -29,21 +27,33 @@
 
 
 	<select id="selectLikeListByBdNo" resultMap="like">
-		SELECT *FROM TB_LIKE
+		SELECT BD_NO,USER_ID,NICKNAME FROM TB_LIKE JOIN TB_USER ON(USER_ID=LK_ID)
 		WHERE BD_NO = #{bdNo}
 	</select>
 
-	<resultMap type="map" id="like">
-		<result column="BD_NO" javaType="String" property="bdNo"/>
-		<result column="LK_NO" javaType="String" property="lkNo"/>
-		<result column="LK_ID" javaType="String" property="lkId"/>
-	</resultMap>
+	
 
+
+	<select id="certificateLike" resultMap="like">
+		SELECT *FROM TB_LIKE
+		WHERE BD_NO = #{bdNo} AND LK_ID = #{lkId}	
+	</select>
 
 	<insert id="insertLike">
-		INSERT TB_LIKE(BD_NO,LK_ID)
+		INSERT INTO TB_LIKE(BD_NO,LK_ID)
 		VALUES(#{bdNo},#{lkId})
 	</insert>
+	
+	<delete id="deleteLike">
+		DELETE FROM TB_LIKE WHERE BD_NO =#{bdNo} AND LK_ID = #{lkId}
+	</delete>
+
+
+	<resultMap type="map" id="like">
+		<result column="BD_NO" javaType="String" property="bdNo"/>
+		<result column="LK_ID" javaType="String" property="lkId"/>
+		<result column="NICKNAME" javaType="String" property="nickName"/>
+	</resultMap>
 
 	<resultMap type="map" id="boardData">
 		<result column="BD_NO" javaType="String" property="bdNo"/>

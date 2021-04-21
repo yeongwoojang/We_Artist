@@ -82,8 +82,18 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int insertLike(String bdNo, String lkId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardRepository.insertLike(bdNo, lkId);
+	}
+
+	@Override
+	public int deleteLike(String bdNo, String lkId) {
+		return boardRepository.deleteLike(bdNo, lkId);
+	}
+
+	@Override
+	public Map<String, String> certificateLike(String bdNo, String lkId) {
+		return boardRepository.certificateLike(bdNo, lkId);
+				
 	}
 	
 	
