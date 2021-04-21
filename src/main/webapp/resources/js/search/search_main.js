@@ -17,7 +17,7 @@ function selectBoardByTag(tag){
 	}).then((text)=>{
 		console.dir(JSON.parse(text));
 		let boardList = JSON.parse(text);
-		
+		imageList = boardList;
 		let imageLayout = document.getElementById("image_layout");
 		while(imageLayout.hasChildNodes()){
 			imageLayout.removeChild(imageLayout.firstChild);
@@ -36,12 +36,22 @@ function selectBoardByTag(tag){
 		
 		let image = document.createElement("img");
 		image.setAttribute("class","img-fluid");
-		image.src = boardList[i].fSavePath+"/"+boardList[i].fRename
+		image.src = "/images/"+boardList[i].fSavePath+"/"+boardList[i].fRename
 		
 		imageBox.appendChild(image);
 		wrapImageBox.appendChild(imageBox);
-		imageLayout.appendChild(wrapImageBox);			
+		imageLayout.appendChild(wrapImageBox);	
 		}
+				
+		let imageItemList = document.querySelectorAll('.image_item');
+		
+		for(let i=0;i<imageItemList.length; i++){
+			imageItemList[i].addEventListener('click',(e)=>{
+				console.dir(imageItemList[i].dataset.fidx);
+				showModal(imageItemList[i].dataset.imagelink,imageItemList[i].dataset.fidx);
+			});
+			
+			}	
 	});
 }
 

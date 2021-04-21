@@ -167,6 +167,7 @@
  	 function showModal(imageLink,fIdx){
  	  carouselInner = document.querySelector(".carousel-inner");
 	  for(let i = 0; i< imageList.length; i++){
+		  console.log(imageList[i].fSavePath+"/"+imageList[i].fRename)
 		  let carouselItem = document.createElement("div");
 		  let img = document.createElement("img");
 		  img.setAttribute("class","d-block w-100 img-fluid");
