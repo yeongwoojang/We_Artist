@@ -24,9 +24,7 @@ public interface BoardRepository {
 			+ " values('b'||sc_bd_idx.currval, 'f'||sc_file_idx.currval)")
 	int insertBoardMaster();
 	
-	@Insert("insert into tb_like(bd_no, lk_no, lk_id)"
-			+ " values('b'||sc_bd_idx.currval, 'l'||sc_like_idx.nextval, #{userId})")
-	int insertLike(String userId);
+	//소중히 작성했던 코드들이 사라지고 있습니다....-김선민만세-
 	
 	List<Board> selectBoardByUserId(String userId);
 	
