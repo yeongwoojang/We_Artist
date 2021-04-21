@@ -32,7 +32,6 @@ public class BoardServiceImpl implements BoardService{
 		String userId = board.getUserId();
 		
 		boardRepository.insertBoard(board); // TB_BOARD 테이블 인서트
-		boardRepository.insertLike(userId); // TB_LIKE 해당 게시물 좋아요 테이블 인서트
 		
 		try {
 			List<FileVo> fileList = fileUtil.fileUpload(files);
