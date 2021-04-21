@@ -16,6 +16,32 @@ function selectBoardByTag(tag){
 		}
 	}).then((text)=>{
 		console.dir(JSON.parse(text));
+		let boardList = JSON.parse(text);
+		
+		let imageLayout = document.getElementById("image_layout");
+		while(imageLayout.hasChildNodes()){
+			imageLayout.removeChild(imageLayout.firstChild);
+		}
+		for(let i = 0; i<boardList.length; i++){
+			console.log(boardList[i].tag);
+			console.log(boardList[i].fIdx);
+			
+		let wrapImageBox = document.createElement("div");
+		wrapImageBox.setAttribute("class","col-lg-3 col-md-4");
+		
+		let imageBox = document.createElement("div");
+		imageBox.setAttribute("class","venue-gallery image_item")
+		imageBox.setAttribute("data-imagelink",boardList[i].fSavePath+"/"+boardList[i].fRename);
+		imageBox.setAttribute("data-fidx",boardList[i].fIdx);
+		
+		let image = document.createElement("img");
+		image.setAttribute("class","img-fluid");
+		image.src = boardList[i].fSavePath+"/"+boardList[i].fRename
+		
+		imageBox.appendChild(image);
+		wrapImageBox.appendChild(imageBox);
+		imageLayout.appendChild(wrapImageBox);			
+		}
 	});
 }
 

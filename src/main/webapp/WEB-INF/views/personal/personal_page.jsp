@@ -90,7 +90,7 @@
 					<div class="col-lg-4 col-md-6">
             			<div class="hotel">
              				<div class="hotel-img position-relative mb-0" id="${boardInfo.board.bdNo}" onclick="showModal('${boardInfo.board.bdNo}','${boardInfo}');"style="cursor: pointer;overflow:hidden;height:60%;">
-                				<img src=<c:url value='/images/2021\4\12\2cdfe272-71d5-42d5-8b59-cb4d30b6809b'/> alt="" style="width:100%; object-fit:contain;">
+                				<img src=<c:url value='/images/${boardInfo.files.fSavePath}/${boardInfo.files.fRename}'/> alt="" style="width:100%; object-fit:contain;">
               				</div>
               				<c:if test="${fn:length(boardInfo.board.bdTitle)>17}">
               					<c:set var="bdTitle" value="${boardInfo.board.Title}"></c:set>

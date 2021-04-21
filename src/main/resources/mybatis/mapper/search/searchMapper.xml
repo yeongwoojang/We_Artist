@@ -11,7 +11,7 @@
 		ON(F.F_IDX = BM.F_IDX AND B.BD_NO = BM.BD_NO)
 		WHERE F.F_IDX IN 
 		(
-		SELECT F_IDX FROM TB_BOARD_MASTER WHERE BD_NO =
+		SELECT F_IDX FROM TB_BOARD_MASTER WHERE BD_NO IN
 		(SELECT BD_NO FROM TB_BOARD WHERE TAG LIKE '%'||#{tag}||'%')
 		)
 	</select>	
@@ -32,6 +32,6 @@
 	</resultMap>
 	
 	<select id="selectAllImageFile" resultType="fileVo">
-		SELECT *FROM TB_FILE
+		SELECT *FROM TB_FILE WHERE F_IDX  IN (SELECT F_IDX FROM TB_BOARD_MASTER)
 	</select>
 </mapper>

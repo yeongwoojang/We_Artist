@@ -30,7 +30,7 @@
       </div>
 
       <div class="container-fluid venue-gallery-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-        <div class="row g-0">
+        <div id="image_layout"class="row g-0">
 			
 			<c:forEach var="image" items="${imageList}" varStatus="status">
 				 <div class="col-lg-3 col-md-4">
