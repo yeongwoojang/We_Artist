@@ -80,6 +80,11 @@ public class BoardServiceImpl implements BoardService{
 	public List<Map<String, String>> selectLikeListByBdNo(String bdNo) {
 		return boardRepository.selectLikeListByBdNo(bdNo);
 	}
+
+	@Override
+	public int insertLike(String bdNo, String lkId) {
+		return 0;
+	}
 	
 	
 	

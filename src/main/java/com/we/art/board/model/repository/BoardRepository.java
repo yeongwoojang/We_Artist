@@ -24,10 +24,6 @@ public interface BoardRepository {
 			+ " values('b'||sc_bd_idx.currval, 'f'||sc_file_idx.currval)")
 	int insertBoardMaster();
 	
-	@Insert("insert into tb_like(bd_no, lk_no, lk_id)"
-			+ " values('b'||sc_bd_idx.currval, 'l'||sc_like_idx.nextval, #{userId})")
-	int insertLike(String userId);
-	
 	List<Board> selectBoardByUserId(String userId);
 	
 	List<FileVo> selectFileByBdNo(String bdNo);
@@ -35,4 +31,6 @@ public interface BoardRepository {
 	Map<String,Object> selectBoardByBdNo(String bdNo); //장영우 추가
 	
 	List<Map<String,String>> selectLikeListByBdNo(String bdNo);
+	
+	int insertLike(String bdNo,String lkId);
 }
