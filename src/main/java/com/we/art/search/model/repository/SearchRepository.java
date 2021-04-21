@@ -13,5 +13,5 @@ import com.we.art.common.util.file.FileVo;
 public interface SearchRepository {
 	public List<Map<String,Object>> selectBoardByTag(String tag);
 	
-	public List<FileVo> selectAllImageFile();
+	public List<Map<String,Object>> selectAllImageFile();
 }

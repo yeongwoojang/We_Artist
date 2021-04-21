@@ -33,10 +33,10 @@ public class SearchController {
 
 	@GetMapping("main")
 	public String searchMain(@SessionAttribute("userInfo") User userInfo,HttpSession session,Model model) {
-		List<FileVo> imageList = searchService.selectAllImageFile();
+		List<Map<String,Object>> imageList = searchService.selectAllImageFile();
 		System.out.println("이미지 리스트 : "+imageList);
 		if(imageList.size()==0) {
-			imageList = new ArrayList<FileVo>();
+			imageList = new ArrayList<Map<String,Object>>();
 		}
 		model.addAttribute("imageList",imageList);
 		return "search/search_sub";

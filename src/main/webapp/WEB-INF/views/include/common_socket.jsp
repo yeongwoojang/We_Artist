@@ -164,39 +164,43 @@ function connectPushSocket(){
 			let fromId = pushInfo.fromId;
 			let toId = pushInfo.toId;
 			let nickName = pushInfo.nickName;
-			let followingMessage = document.getElementById("followingMessage");
-			followingMessage.innerHTML = nickName+"님이 당신을 팔로우했습니다.";
-			followingMessage.style.cursor ="pointer"
-			followingMessage.className ="text-primary"
-			document.getElementById("liveFollowingToast").className ="toast show";
-					setTimeout(function() {
-			 			document.getElementById("liveFollowingToast").className ="toast hide";
-						}, 5000);
-					
-			document.getElementById("followingMessage").addEventListener("click",function(event){
-				checkNoti(pushInfo);
-			});		
-			console.log("푸시소켓 응답")
-// 			createNewRoom(fromId,toId);
-			
-// 			fetchNotiCount();
-			let notiBox = document.getElementById("noti_box");
-			let listGroup = document.getElementById("list_group");
-			let emptyNotiBox = document.getElementById("empty_noti_box");
-			if(emptyNotiBox!=null){
-				notiBox.removeChild(emptyNotiBox);
+			let message = pushInfo.message;
+			console.log(message);
+			if(fromId!=toId){
+				let followingMessage = document.getElementById("followingMessage");
+				followingMessage.innerHTML = message;
+				followingMessage.style.cursor ="pointer"
+				followingMessage.className ="text-primary"
+				document.getElementById("liveFollowingToast").className ="toast show";
+						setTimeout(function() {
+				 			document.getElementById("liveFollowingToast").className ="toast hide";
+							}, 5000);
+						
+				document.getElementById("followingMessage").addEventListener("click",function(event){
+					checkNoti(pushInfo);
+				});		
+				console.log("푸시소켓 응답")
+//	 			createNewRoom(fromId,toId);
+				
+//	 			fetchNotiCount();
+				let notiBox = document.getElementById("noti_box");
+				let listGroup = document.getElementById("list_group");
+				let emptyNotiBox = document.getElementById("empty_noti_box");
+				if(emptyNotiBox!=null){
+					notiBox.removeChild(emptyNotiBox);
+				}
+				let curNotiCount = parseInt(document.getElementById("noti_count").innerHTML)
+				document.getElementById("noti_count").innerHTML = curNotiCount+1;
+				let notiInfo = document.createElement("li");
+				notiInfo.setAttribute("class","list-group-item");
+				notiInfo.innerHTML = nickName +"님이 당신을 팔로우 했습니다.";
+				notiInfo.style.cursor = "pointer";
+				notiInfo.addEventListener("click",(e)=>{
+					clickNoti(e.target,pushInfo);
+				});
+				listGroup.appendChild(notiInfo);
+				notiBox.appendChild(listGroup);
 			}
-			let curNotiCount = parseInt(document.getElementById("noti_count").innerHTML)
-			document.getElementById("noti_count").innerHTML = curNotiCount+1;
-			let notiInfo = document.createElement("li");
-			notiInfo.setAttribute("class","list-group-item");
-			notiInfo.innerHTML = nickName +"님이 당신을 팔로우 했습니다.";
-			notiInfo.style.cursor = "pointer";
-			notiInfo.addEventListener("click",(e)=>{
-				clickNoti(e.target,pushInfo);
-			});
-			listGroup.appendChild(notiInfo);
-			notiBox.appendChild(listGroup);
 		});
 		console.log("푸시소켓 연결")
 	});
@@ -303,5 +307,59 @@ function directMessage(){
 		}
 	}
 }
+
+function createNewRoom(fromId,toId){
+    
+    let url = '/chat/enterchatroomimpl'
+    let paramObj = new Object();
+    paramObj.firstUser = fromId;
+    paramObj.secondUser = toId;
+    let headerObj = new Headers();
+    headerObj.append("content-type","application/json");
+    fetch(url,{
+        method : "POST",
+        headers : headerObj,
+        body : JSON.stringify(paramObj)
+    })
+    .then(response=>{
+        if(response.ok){
+            return response.text()
+        }
+    })
+    .then((text)=>{
+        if(text!='failed'){
+            //TODO 채팅방 만들기를 성공했을 시
+            stompClient.disconnect();
+            reSetMyChatRoomList();
+            
+            
+        }else{
+            //TODO 채팅방 만들기를 실패했을 시
+        }
+    });
+}
+
+
+function reSetMyChatRoomList(){
+    let url = '/chat/selectmychatroomlistimpl'
+        fetch(url,{
+            method : "GET"
+        })
+        .then(response=>{
+            if(response.ok){
+                return response.text()
+            }
+        })
+        .then((text)=>{
+            if(text!='failed'){
+                myChatRoomList = JSON.parse(text) //내가 속한 채팅방 리스트
+                console.log("MYCHATROOMLIST : "+myChatRoomList);            
+                connectSocket();
+            }else{
+            }
+        });
+}
+
+
 
 </script>

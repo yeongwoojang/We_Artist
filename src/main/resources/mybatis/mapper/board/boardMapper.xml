@@ -11,8 +11,10 @@
 	</select>
 	
 	<!--장영우 추가-->
-	<select id="selectBoardByBdNo" resultType="board">
-		SELECT * FROM TB_BOARD
+	<select id="selectBoardByBdNo" resultMap="boardData">
+		SELECT BD_NO,USER_ID, BD_TITLE,BD_CONTENT,V_NO,TAG,
+		 (SELECT COUNT(*) FROM TB_LIKE WHERE BD_NO=#{bdNo}) LIKE_COUNT
+		 FROM TB_BOARD
 		WHERE BD_NO = #{bdNo}
 	</select>
 	<!--/장영우 추가-->
@@ -23,4 +25,53 @@
 		(select f_idx from tb_board_master where bd_no = #{bdNo})
 	</select>
 
+
+	<select id="selectLikeListByBdNo" resultMap="like">
+		SELECT BD_NO,USER_ID,NICKNAME FROM TB_LIKE JOIN TB_USER ON(USER_ID=LK_ID)
+		WHERE BD_NO = #{bdNo}
+	</select>
+
+	
+	<select id="certificateLike" resultMap="like">
+		SELECT *FROM TB_LIKE
+		WHERE BD_NO = #{bdNo} AND LK_ID = #{lkId}	
+	</select>
+
+	<insert id="insertLike">
+		INSERT INTO TB_LIKE(BD_NO,LK_ID)
+		VALUES(#{bdNo},#{lkId})
+	</insert>
+	
+	<delete id="deleteLike">
+		DELETE FROM TB_LIKE WHERE BD_NO =#{bdNo} AND LK_ID = #{lkId}
+	</delete>
+
+
+	<select id="selectLikeCount"  resultType = "Integer">
+		SELECT COUNT(*) FROM TB_LIKE
+		WHERE BD_NO = #{bdNo}
+	</select>
+
+	<resultMap type="map" id="like">
+		<result column="BD_NO" javaType="String" property="bdNo"/>
+		<result column="LK_ID" javaType="String" property="lkId"/>
+		<result column="NICKNAME" javaType="String" property="nickName"/>
+	</resultMap>
+
+	<resultMap type="map" id="boardData">
+		<result column="BD_NO" javaType="String" property="bdNo"/>
+		<result column="USER_ID" javaType="String" property="userId"/>
+		<result column="NICKNAME" javaType="String" property="nickName"/>
+		<result column="BD_TITLE" javaType="String" property="bdTitle"/>
+		<result column="BD_CONTENT" javaType="String" property="bdContent"/>
+		<result column="V_NO" javaType="String" property="vNo"/>
+		<result column="TAG" javaType="String" property="tag"/>
+		<result column="F_IDX" javaType="String" property="fIdx"/>
+		<result column="F_ORIGIN" javaType="String" property="fOrigin"/>
+		<result column="F_RENAME" javaType="String" property="fRename"/>
+		<result column="F_DATE" javaType="String" property="fDate"/>
+		<result column="IS_DEL" javaType="String" property="isDel"/>
+		<result column="F_SAVE_PATH" javaType="String" property="fSavePath"/>
+		<result column="LIKE_COUNT" javaType="Integer" property="likeCount"/>
+	</resultMap>
 </mapper>

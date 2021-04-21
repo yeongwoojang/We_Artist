@@ -1,9 +1,11 @@
 package com.we.art.board.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.we.art.board.model.vo.Board;
 import com.we.art.common.util.file.FileVo;
@@ -23,13 +25,19 @@ public interface BoardRepository {
 			+ " values('b'||sc_bd_idx.currval, 'f'||sc_file_idx.currval)")
 	int insertBoardMaster();
 	
-	@Insert("insert into tb_like(bd_no, lk_no, lk_id)"
-			+ " values('b'||sc_bd_idx.currval, 'l'||sc_like_idx.nextval, #{userId})")
-	int insertLike(String userId);
-	
 	List<Board> selectBoardByUserId(String userId);
 	
 	List<FileVo> selectFileByBdNo(String bdNo);
 
-	Board selectBoardByBdNo(String bdNo); //장영우 추가
+	Map<String,Object> selectBoardByBdNo(String bdNo); //장영우 추가
+	
+	List<Map<String,String>> selectLikeListByBdNo(String bdNo);
+	
+	int insertLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
+	
+	int deleteLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
+	
+	Map<String,String> certificateLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
+	
+	int selectLikeCount(@Param("bdNo")String bdNo);
 }

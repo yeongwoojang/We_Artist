@@ -9,5 +9,5 @@ public interface SearchService {
 
 	public List<Map<String,Object>> selectBoardByTag(String tag);
 	
-	public List<FileVo> selectAllImageFile();
+	public List<Map<String,Object>> selectAllImageFile();
 }

@@ -32,7 +32,6 @@ public class BoardServiceImpl implements BoardService{
 		String userId = board.getUserId();
 		
 		boardRepository.insertBoard(board); // TB_BOARD 테이블 인서트
-		boardRepository.insertLike(userId); // TB_LIKE 해당 게시물 좋아요 테이블 인서트
 		
 		try {
 			List<FileVo> fileList = fileUtil.fileUpload(files);
@@ -64,7 +63,7 @@ public class BoardServiceImpl implements BoardService{
 //	장영우가 추가한 부분
 	@Override
 	public Map<String, Object> selectBoardByBdNo(String bdNo) {
-		Board board = null;
+		Map<String,Object> board = null;
 		board = boardRepository.selectBoardByBdNo(bdNo);
 		List<FileVo> fileList = new ArrayList<>();
 		fileList = boardRepository.selectFileByBdNo(bdNo);
@@ -74,6 +73,32 @@ public class BoardServiceImpl implements BoardService{
 			commandMap.put("files",fileList);
 		}
 		return commandMap;
+	}
+
+	@Override
+	public List<Map<String, String>> selectLikeListByBdNo(String bdNo) {
+		return boardRepository.selectLikeListByBdNo(bdNo);
+	}
+
+	@Override
+	public int insertLike(String bdNo, String lkId) {
+		return boardRepository.insertLike(bdNo, lkId);
+	}
+
+	@Override
+	public int deleteLike(String bdNo, String lkId) {
+		return boardRepository.deleteLike(bdNo, lkId);
+	}
+
+	@Override
+	public Map<String, String> certificateLike(String bdNo, String lkId) {
+		return boardRepository.certificateLike(bdNo, lkId);
+				
+	}
+
+	@Override
+	public int selectLikeCount(String bdNo) {
+		return boardRepository.selectLikeCount(bdNo);
 	}
 	
 	

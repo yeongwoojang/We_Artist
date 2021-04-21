@@ -24,7 +24,7 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public List<FileVo> selectAllImageFile() {
+	public List<Map<String,Object>> selectAllImageFile() {
 		return searchRepository.selectAllImageFile();
 	}
 	
