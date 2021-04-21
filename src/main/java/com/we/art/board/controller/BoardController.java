@@ -39,17 +39,17 @@ public class BoardController {
 		board.setUserId(userId);
 		
 		boardService.insertBoard(board, files);
-		return "redirect:/filetest";
+		return "personal/personal_page";
 	}
 	
-	@GetMapping("filetest")
+	@GetMapping("fileupload")
 	public String test() {
 		for(Map<String, Object> data:boardService.selectBoardByUserId("test01")) {
 			System.out.println("-----------------------------------------------------");
 			System.out.println(data.get("board"));
 			System.out.println(data.get("files"));
 		}
-		return "common/filetest";
+		return "personal/fileupload";
 	}
 	
 	@GetMapping("fetchselectedboard")
