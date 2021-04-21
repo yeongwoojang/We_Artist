@@ -1,6 +1,4 @@
 const tagClassName = 'mx-2 my-2 btn btn-primary';
-const tagInputClassName = 'border-0 bg-primary text-white outline-none';
-const tagArea = document.querySelector('.tag_area');
 const addTag = document.querySelector('#add_tag');
 const addTagInput = document.querySelector('#add_tag_input');
 const addTagText = document.querySelector('#add_tag_text');
@@ -9,15 +7,14 @@ const imgArea = document.querySelector('.img_area');
 
 let init = () => {
 	addTag.addEventListener('click',()=>{
-		if(isTagClose()){
-			addTagInput.className = tagClassName;	
-		}else{
+		if(!isTagClose()){
 			insertNewTag();
-			addTagInput.className = tagClassName;
 		}
+		addTagInput.className = tagClassName;
+		addTagText.focus();
 	})
 	
-	addTagText.addEventListener('keyup',isEnter)
+	addTagText.addEventListener('keyup',isEnter);
 }
 
 let inputAutoSize = () => {
@@ -63,11 +60,13 @@ let isTagClose = () => {
 }
 
 let preview = (input) => {
+	console.dir(input);
 	if(input.files && input.files[0]){
 		for(let item of input.files){
 			let reader = new FileReader();
 		
 			reader.onload = (e) => {
+				console.dir(e);
 				let img = document.createElement('img');
 				img.width = 100;
 				img.height = 100;

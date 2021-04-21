@@ -12,7 +12,7 @@
 				  <input type="text" class="form-control" placeholder="Title" aria-label="Large" aria-describedby="inputGroup-sizing-sm" name="bdTitle">
 				</div>
 				<div class="input-group input-group-lg">
-					<textarea class="form-control" placeholder="Content" rows="10" aria-label="With textarea" name="bdContent"></textarea>
+					<textarea class="form-control border-0 outline-none" placeholder="Content" rows="10" aria-label="With textarea" name="bdContent"></textarea>
 				</div>
 				<div class="tag_area d-flex flex-wrap">
 					<div class="d-none" id="add_tag_input">
