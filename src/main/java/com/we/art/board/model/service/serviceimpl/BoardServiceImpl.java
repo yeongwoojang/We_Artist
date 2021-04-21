@@ -63,7 +63,7 @@ public class BoardServiceImpl implements BoardService{
 //	장영우가 추가한 부분
 	@Override
 	public Map<String, Object> selectBoardByBdNo(String bdNo) {
-		Board board = null;
+		Map<String,Object> board = null;
 		board = boardRepository.selectBoardByBdNo(bdNo);
 		List<FileVo> fileList = new ArrayList<>();
 		fileList = boardRepository.selectFileByBdNo(bdNo);
@@ -73,6 +73,11 @@ public class BoardServiceImpl implements BoardService{
 			commandMap.put("files",fileList);
 		}
 		return commandMap;
+	}
+
+	@Override
+	public List<Map<String, String>> selectLikeListByBdNo(String bdNo) {
+		return boardRepository.selectLikeListByBdNo(bdNo);
 	}
 	
 	

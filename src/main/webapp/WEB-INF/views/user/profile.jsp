@@ -1,23 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/topMenuHead.jsp"%>
-<div class="profile" style="
-    background-color: rgb(51, 51, 51);
-">
+    <section id="contact" class="section-bg">
 
-<div class="container" style="
-    background-color: white;
-    max-width: 600px;
-    border-left: 0.2rem solid black;
-    border-right: 0.2rem solid black;
-">
-    <h1 class="display-4">PROFILE</h1><br>
-    <span class="lead">반갑습니다. 프로필 정보를 설정해주세요.</span>
-    <hr class="my-4">
-    <p class="text-muted">
-    	<div class="col-lg-10 row">
-                <div class="col-lg-6">
-                <c:set var="pic" value="${files}"/>
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>PROFILE</h2>
+          <p>프로필 정보를 설정해주세요.</p>
+        </div>
+
+        <div class="row contact-info">
+
+          <div class="col-md-4">
+            <div class="contact-address">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-phone">
+            	<c:set var="pic" value="${picture}"/>
                     <c:choose>
                     	<c:when test="${empty pic}">
 		                    <img class="mx-auto rounded-circle" src="/resources/img/boyoung.jpg" alt="" style="
@@ -27,73 +29,67 @@
 							">
 						</c:when>
 						<c:otherwise>
-							<img class="mx-auto rounded-circle" src="${pic.path}" alt="" style="
+							<img class="mx-auto rounded-circle" src="<c:url value="/images/${pic.files.fSavePath}/${pic.files.fRename}"/>" alt="" style="
 							    width: 14rem;
 							    height: 14rem;
 							    border: 0.5rem solid rgba(0, 0, 0, 0.1);
 							">
 						</c:otherwise>
 					</c:choose>
-                </div>
-                <div class="col-lg-4">
-					<form action="${contetxt}/user/proPic" id="form" name="form"
+              <h3>${sessionScope.userInfo.userId}</h3>
+              
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-email">
+              <form action="${contetxt}/user/proPic" id="form" name="form"
 						method="post" enctype="multipart/form-data" autocomplete="off">
 						<label for="ex_file">프로필 사진 바꾸기</label> 
-						<input src="/resources/img/boyoung.jpg" type="file" id="ex_file" name="filename" required />
+						<input src="/resources/img/boyoung.jpg" type="file" id="ex_file" name="files" required />
 						<button type="submit" class="btn btn-primary">업로드</button>
-					</form>
-				</div>
+				</form>
             </div>
-        <form class="needs-validation" id="frm-profile" action="${context}/user/update" method="post" novalidate>
-        	
-            <div class="form-group row">
-                <label class="col-sm-6 col-form-label">Email</label>
-                <div class="col-sm-10">
-                	<input class="form-control" type="hidden" name="userId" value="${sessionScope.userInfo.userId }">
-                    <input class="form-control" name="email" type="text" value="${sessionScope.userInfo.email }" readonly>
-                </div>
-            </div>
+          </div>
 
-            <div class="form-group row">
-                <label for="name" class="col-sm-6 col-form-label">Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="name" name="name" value="${sessionScope.userInfo.name }" aria-describedby="nameHelp" minlength="2" maxlength="50">
-                    <small id="nameHelp" class="form-text text-muted">이름을 입력하세요.</small>
-                </div>
-            </div>
+        </div>
 
-            <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-6 col-form-label">Password</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" aria-describedby="passwordHelp" minlength="8" maxlength="16" required>
-                    <small id="passwordHelp" class="form-text text-muted">회원 정보 변경을 위해서 새로운 8자 이상 16자 이내의 패스워드나, 기존의 패스워드를 입력하셔야 합니다.</small>
-                    <small class="invalid-feedback">패스워드를 8자 이상 16자 이내로 입력하세요.</small>
-                </div>
+        <div class="form">
+          <form id="frm-profile" action="${context}/user/update" method="post" role="form" class="php-email-form" novalidate>
+            <div class="row">
+              <div class="form-group col-md-6">
+              	<label for="name" class="col-sm-6 col-form-label">Name</label>
+              	<input class="form-control" type="hidden" name="userId" value="${sessionScope.userInfo.userId }">
+                <input type="text" name="name" class="form-control" id="name" value="${sessionScope.userInfo.name }"  minlength="2" maxlength="50" required>
+              </div>
+              <div class="form-group col-md-6 mt-3 mt-md-0">
+              	<label class="col-sm-6 col-form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" value="${sessionScope.userInfo.email }" readonly>
+              </div>
             </div>
+            <div class="form-group mt-3">
+            	<label for="password" class="col-sm-6 col-form-label">Password</label>
+              	<input type="password" class="form-control" name="password" id="password" placeholder="Password" minlength="8" maxlength="16" required>
+            </div>
+            <div class="form-group mt-3">
+            	<label for="phone" class="col-sm-6 col-form-label">Phone</label>
+             	<input type="tel" class="form-control" id="phone" name="phone" value="${sessionScope.userInfo.phone }">
+            </div>
+            <div class="form-group mt-3">
+            	<label for="inputNickname" class="col-sm-6 col-form-label">Nickname</label>
+             	<input type="text" class="form-control" name="nickName" id="inputNickname" value="${sessionScope.userInfo.nickName }">
+            </div>
+            <div class="my-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit">Submit</button></div>
+          </form>
+        </div>
 
-            <div class="form-group row">
-                <label for="inputPhone3" class="col-sm-6 col-form-label">Phone</label>
-                <div class="col-sm-10">
-                    <input type="tel" class="form-control" id="inputPhone3" name="phone" value="${sessionScope.userInfo.phone }">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="inputNickname" class="col-sm-6 col-form-label">Nickname</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nickName" id="inputNickname" value="${sessionScope.userInfo.nickName }">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">설정하기</button>
-                </div>
-            </div>
-        </form>
-    </p>
-</div>
-</div>
+      </div>
+    </section><!-- End Contact Section -->
 
 </body>
 </html>

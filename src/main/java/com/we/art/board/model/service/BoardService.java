@@ -11,4 +11,5 @@ public interface BoardService {
 	public void insertBoard(Board board, List<MultipartFile> files);
 	public List<Map<String, Object>> selectBoardByUserId(String userId);
 	public Map<String,Object> selectBoardByBdNo(String bdNo);
+	public List<Map<String,String>> selectLikeListByBdNo(String bdNo);
 }

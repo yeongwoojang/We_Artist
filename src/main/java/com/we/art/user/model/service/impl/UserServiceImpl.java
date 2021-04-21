@@ -51,8 +51,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insertUser(User persistInfo) {
-//		persistInfo.setPassword(encoder.encode(persistInfo.getPassword())); //회원가입좀 하겠습니다 - 장영우
-		persistInfo.setPassword(persistInfo.getPassword());
+		persistInfo.setPassword(encoder.encode(persistInfo.getPassword())); 
 		return userRepository.insertUser(persistInfo);
 	}
 
@@ -173,8 +172,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int updateUser(User persistInfo) {
-		// TODO Auto-generated method stub
-		return 0;
+		persistInfo.setPassword(encoder.encode(persistInfo.getPassword())); 
+		return userRepository.updateUser(persistInfo);
 	}
 
 	@Override

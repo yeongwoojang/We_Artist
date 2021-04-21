@@ -68,6 +68,7 @@
 	        <!-- <h1><a href="index.html">The<span>Event</span></a></h1>-->
 	        <a href="/index" class="scrollto fs-2 text-white" style="text-decoration:none;">We Artist</a>
 	      </div>
+	      
 <!-- <img src="/resources/theEvent/assets/img/logo.png" alt="" title=""> -->
 		<div class="container input-group border rounded-pill p-2" style="width:90vw;">
 	    			<span class="input-group-text bg-transparent border border-0 px-1"><i class="fas fa-search text-muted" style="font-size:1vw;"></i></span>
