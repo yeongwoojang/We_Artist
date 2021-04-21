@@ -166,39 +166,41 @@ function connectPushSocket(){
 			let nickName = pushInfo.nickName;
 			let message = pushInfo.message;
 			console.log(message);
-			let followingMessage = document.getElementById("followingMessage");
-			followingMessage.innerHTML = message;
-			followingMessage.style.cursor ="pointer"
-			followingMessage.className ="text-primary"
-			document.getElementById("liveFollowingToast").className ="toast show";
-					setTimeout(function() {
-			 			document.getElementById("liveFollowingToast").className ="toast hide";
-						}, 5000);
-					
-			document.getElementById("followingMessage").addEventListener("click",function(event){
-				checkNoti(pushInfo);
-			});		
-			console.log("푸시소켓 응답")
-// 			createNewRoom(fromId,toId);
-			
-// 			fetchNotiCount();
-			let notiBox = document.getElementById("noti_box");
-			let listGroup = document.getElementById("list_group");
-			let emptyNotiBox = document.getElementById("empty_noti_box");
-			if(emptyNotiBox!=null){
-				notiBox.removeChild(emptyNotiBox);
+			if(fromId!=toId){
+				let followingMessage = document.getElementById("followingMessage");
+				followingMessage.innerHTML = message;
+				followingMessage.style.cursor ="pointer"
+				followingMessage.className ="text-primary"
+				document.getElementById("liveFollowingToast").className ="toast show";
+						setTimeout(function() {
+				 			document.getElementById("liveFollowingToast").className ="toast hide";
+							}, 5000);
+						
+				document.getElementById("followingMessage").addEventListener("click",function(event){
+					checkNoti(pushInfo);
+				});		
+				console.log("푸시소켓 응답")
+//	 			createNewRoom(fromId,toId);
+				
+//	 			fetchNotiCount();
+				let notiBox = document.getElementById("noti_box");
+				let listGroup = document.getElementById("list_group");
+				let emptyNotiBox = document.getElementById("empty_noti_box");
+				if(emptyNotiBox!=null){
+					notiBox.removeChild(emptyNotiBox);
+				}
+				let curNotiCount = parseInt(document.getElementById("noti_count").innerHTML)
+				document.getElementById("noti_count").innerHTML = curNotiCount+1;
+				let notiInfo = document.createElement("li");
+				notiInfo.setAttribute("class","list-group-item");
+				notiInfo.innerHTML = nickName +"님이 당신을 팔로우 했습니다.";
+				notiInfo.style.cursor = "pointer";
+				notiInfo.addEventListener("click",(e)=>{
+					clickNoti(e.target,pushInfo);
+				});
+				listGroup.appendChild(notiInfo);
+				notiBox.appendChild(listGroup);
 			}
-			let curNotiCount = parseInt(document.getElementById("noti_count").innerHTML)
-			document.getElementById("noti_count").innerHTML = curNotiCount+1;
-			let notiInfo = document.createElement("li");
-			notiInfo.setAttribute("class","list-group-item");
-			notiInfo.innerHTML = nickName +"님이 당신을 팔로우 했습니다.";
-			notiInfo.style.cursor = "pointer";
-			notiInfo.addEventListener("click",(e)=>{
-				clickNoti(e.target,pushInfo);
-			});
-			listGroup.appendChild(notiInfo);
-			notiBox.appendChild(listGroup);
 		});
 		console.log("푸시소켓 연결")
 	});

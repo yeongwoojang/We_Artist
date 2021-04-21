@@ -65,6 +65,7 @@ public class BoardController {
 	@ResponseBody
 	public List<Map<String,String>> fetchlikeuserlist(@RequestParam("bdNo") String bdNo){
 		List<Map<String,String>> likeUserList = boardService.selectLikeListByBdNo(bdNo);
+		System.out.println(likeUserList);
 		if(likeUserList==null) {
 			likeUserList = new ArrayList<>();
 		}
@@ -76,7 +77,6 @@ public class BoardController {
 	@GetMapping("certificatelike")
 	@ResponseBody
 	public String certificateLike(@RequestParam("bdNo") String bdNo, @RequestParam("lkId") String lkId) {
-		System.out.println("bdNo : "+bdNo+"lkId : "+lkId);
 		Map<String,String> like = boardService.certificateLike(bdNo, lkId);
 		//좋아요을 한 적이 없다면 테이블을 조회한 값이 null이다.
 		if(like==null) {
@@ -111,8 +111,13 @@ public class BoardController {
 		}
 	}
 	
-	
-	
+	@GetMapping("selectlikecount")
+	@ResponseBody
+	public int selectLikeCount(@RequestParam("bdNo") String bdNo) {
+		int likeCount = boardService.selectLikeCount(bdNo);
+		System.out.println("좋아요 갯수 : "+ likeCount);
+		return likeCount;
+	}
 	
 	
 	
