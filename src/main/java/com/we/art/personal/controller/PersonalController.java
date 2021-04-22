@@ -117,13 +117,30 @@ public class PersonalController {
 	public String personalPrivatePage() {
 		return "personal/personal_private_page";
 	}
+	
+	@GetMapping("fetchfollowinglist")
+	@ResponseBody
+	public List<User> fetchFollowingList(@RequestParam("userId") String userId){
+		List<User> followingList = new ArrayList<>();
+		System.out.println("받은 유저아이디 : "+ userId);
+		followingList = personalService.selectFollowingList(userId);
+		System.out.println("팔로잉리스트 : "+ followingList);
+		return followingList;
+	}
+	
+	
+	@GetMapping("fetchfollowerlist")
+	@ResponseBody
+	public List<User> fetchFollowerList(@RequestParam("userId") String userId){
+		List<User> followerList = new ArrayList<>();
+		followerList = personalService.selectFollowerList(userId);
+		System.out.println(followerList);
+		return followerList;
+	}
 }
 
 
-//List<User> followingList = personalService.selectFollowingList(user.getUserId());
-//if(followingList==null) {
-//	followingList = new ArrayList<>();
-//}
+
 //
 //List<User> followerList = personalService.selectFollowerList(user.getUserId());
 //if(followerList==null) {

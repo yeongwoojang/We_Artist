@@ -27,7 +27,7 @@
 
 
 	<select id="selectLikeListByBdNo" resultMap="like">
-		SELECT BD_NO,USER_ID,NICKNAME FROM TB_LIKE JOIN TB_USER ON(USER_ID=LK_ID)
+		SELECT BD_NO,USER_ID,NICKNAME, NAME FROM TB_LIKE JOIN TB_USER ON(USER_ID=LK_ID)
 		WHERE BD_NO = #{bdNo}
 	</select>
 
@@ -56,6 +56,7 @@
 		<result column="BD_NO" javaType="String" property="bdNo"/>
 		<result column="LK_ID" javaType="String" property="lkId"/>
 		<result column="NICKNAME" javaType="String" property="nickName"/>
+		<result column="NAME" javaType="String" property="name"/>
 	</resultMap>
 
 	<resultMap type="map" id="boardData">

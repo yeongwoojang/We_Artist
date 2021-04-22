@@ -7,7 +7,8 @@ let msgToNickName = null;
 function sendMessage() {
 	if (event.keyCode == 13) {
 		let msg = document.getElementById("msg_box").value;
-		if (msg != "") {
+		let spaceArea = /\s/;
+		if (!spaceArea.exec(msg)) {
 			drawMyChatting(msg);
 			let msgTime = getCurrentTime();
 			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgFromNickName' : currentUserNickName,'msgTo': selectUser,'msgToNickName' :msgToNickName ,'msgTime' : msgTime }));
