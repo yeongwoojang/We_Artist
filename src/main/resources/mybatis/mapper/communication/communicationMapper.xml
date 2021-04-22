@@ -29,6 +29,16 @@
 	INSERT INTO TB_HISTORY(TO_ID,FROM_ID,NOTI_METHOD,NOTI_TIME,BD_NO,BD_TITLE) VALUES(#{toId},#{fromId},#{notiMethod},#{notiTime},#{bdNo},#{bdTitle})
 </insert>
 
+<update id="updateHistory">
+	UPDATE TB_HISTORY SET IS_CHECK = 1 WHERE TO_ID=#{toId} AND FROM_ID =#{fromId} AND NOTI_METHOD = #{notiMethod} 
+	<if test='bdNo ==null'>
+		AND BD_NO IS NULL 
+	</if>
+	<if test='bdNo !=null'>
+		AND BD_NO = #{bdNo}
+	</if>
+</update>
+
 	<resultMap type="map" id="NotiData">
 		<result column="TO_ID" javaType="String" property="toId"/>
 		<result column="FROM_ID" javaType="string" property="fromId"/>

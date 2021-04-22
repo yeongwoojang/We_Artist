@@ -105,14 +105,14 @@ public class BoardController {
 		User userInfo = (User)model.getAttribute("userInfo");
 		System.out.println("MapData : "+ mapData);
 		if(userInfo!=null) {
-			int res = boardService.insertLike(mapData.get("bdNo"), mapData.get("lkId"));
+			int res = boardService.insertLike(mapData.get("bdNo"), userInfo.getUserId());
 			if(res!=0) {
 				System.out.println("getUserId : "+ userInfo.getUserId());
 				System.out.println("toId : "+mapData.get("toId") );
 				if(!userInfo.getUserId().equals(mapData.get("toId"))) { //좋아요를 누른 게시물이 본인의 것이 아닐 때만 좋아요 히스토리 테이블에 담는다.
 					History history = new History();
 					history.setFromId(userInfo.getUserId());
-					history.setToId(mapData.get("lkId"));
+					history.setToId(mapData.get("toId"));
 					history.setNotiMethod(NotificationCode.LIKE.toString());
 					history.setBdNo(mapData.get("bdNo"));
 					
@@ -122,7 +122,7 @@ public class BoardController {
 					if(checkDataList.size()==0) {
 						history = new History();
 						history.setFromId(userInfo.getUserId());
-						history.setToId(mapData.get("lkId"));
+						history.setToId(mapData.get("toId"));
 						history.setNotiMethod(NotificationCode.LIKE.toString());
 						Calendar cal = Calendar.getInstance();
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -131,15 +131,15 @@ public class BoardController {
 						history.setBdNo(mapData.get("bdNo"));
 						history.setBdTitle(mapData.get("bdTitle"));
 						if (communicationService.insertHistory(history) != 0) {
-							return "success";
+							return "sendNoti";
 						} else {
 							return "failed";
 						}
 					}else {
-						return "success";
+						return "notSendNoti";
 					}
 				}else {
-					return "success";
+					return "notSendNoti";
 				}
 			}else {
 				return "failed";

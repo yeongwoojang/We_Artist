@@ -120,7 +120,7 @@ public class CommunicationController {
 	@ResponseBody
 	public String updateHistoryImpl(@RequestBody History history, Model model) {
 		User userInfo = (User)model.getAttribute("userInfo");
-		
+		System.out.println("히스토리 : "+ history);
 		if(userInfo!=null) {
 			int res = communicationService.updateHistory(history);
 			if(res!=0) {

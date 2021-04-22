@@ -29,7 +29,6 @@ public interface CommunicationRepository {
 	
 	public List<Map<String, Object>> selectHistoryById(@Param("userId") String userId);
 	
-	@Update("UPDATE TB_HISTORY SET IS_CHECK = 1 WHERE TO_ID=#{toId} AND FROM_ID =#{fromId},#{notiMethod}")
 	public int updateHistory(History history);
 	
 	public List<Map<String,String>> certificateHistory(History history);

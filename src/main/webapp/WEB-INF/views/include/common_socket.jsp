@@ -157,6 +157,8 @@ function connectPushSocket(){
 			let toId = pushInfo.toId;
 			let nickName = pushInfo.nickName;
 			let message = pushInfo.message;
+			let bdNo = pushInfo.bdNo;
+			let notiMethod = pushInfo.notiMethod;
 			
 			//<우측 하단 토스트를 띄워주기 위한 부분>
 			if(fromId!=toId){
@@ -209,7 +211,8 @@ function fetchNotiCount(){
 			return response.text();
 		}
 	}).then((text)=>{
-		let followingReqList = JSON.parse(text);
+		let historyList = JSON.parse(text);
+		console.dir(historyList);
 		let notiBox = document.getElementById("noti_box");
 		let notiCount = document.getElementById("noti_count")
 		let listGroup = document.getElementById("list_group");
@@ -223,17 +226,21 @@ function fetchNotiCount(){
 				document.getElementById("noti_box").style.visibility = "visible";
 			}
 		});
-		if(followingReqList.length!=0){
+		if(historyList.length!=0){
 			notiBox.removeChild(emptyNotiBox);
 		}
-		notiCount.innerHTML = followingReqList.length;
-		for(let i=0;i<followingReqList.length;i++){
+		notiCount.innerHTML = historyList.length;
+		for(let i=0;i<historyList.length;i++){
 			let notiInfo = document.createElement("li");
 			notiInfo.setAttribute("class","list-group-item");
-			notiInfo.innerHTML = followingReqList[i].nickName +"님으로부터 팔로잉 요청이 있습니다.";
+			if(historyList[i].notiMethod =='following'){
+				notiInfo.innerHTML = historyList[i].nickName +"님으로부터 팔로잉 요청이 있습니다.";
+			}else{
+				notiInfo.innerHTML = historyList[i].nickName +"님이 "+historyList[i].bdTitle +"게시물을 좋아합니다.";
+			}
 			notiInfo.style.cursor = "pointer";
 			notiInfo.addEventListener("click",(e)=>{
-				clickNoti(e.target,followingReqList[i]);
+				clickNoti(e.target,historyList[i]);
 			});
 			listGroup.appendChild(notiInfo);
 			notiBox.appendChild(listGroup);
@@ -247,6 +254,8 @@ function checkNoti(pushInfo){
 		let paramObj = new Object();
 		paramObj.toId = pushInfo.toId;
 		paramObj.fromId = pushInfo.fromId;
+		paramObj.bdNo = pushInfo.bdNo;
+		paramObj.notiMethod = pushInfo.notiMethod;
 		
 		let headerObj = new Headers();
 		headerObj.append('content-type','application/json');

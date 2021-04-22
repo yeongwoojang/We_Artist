@@ -293,7 +293,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 		let userId = "${personalUserInfo.userId}";
 		let nickName = "${curUserInfo.nickName}";
 		if(currentUserId!=""){
-//			stompPushClient.send("/push", {}, JSON.stringify({'fromId' : currentUserId, 'toId': userId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
 //	 		createNewRoom(currentUserId,userId);
 //	 		reSetMyChatRoomList();	
 	 		followingImpl(userId,currentUserId);
@@ -325,7 +324,7 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				//팔로잉 성공 시
 				let userId = "${personalUserInfo.userId}";
 				let nickName = "${curUserInfo.nickName}";
-				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'message' : nickName+'님이 당신을 팔로우 했습니다.' })); //해당 유저에게 팔로잉 요청을 보낸다.
+				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'bdNo' : null, notiMethod : 'following','message' : nickName+'님이 당신을 팔로우 했습니다.' })); //해당 유저에게 팔로잉 요청을 보낸다.
 //	 			createNewRoom(currentUserId,userId);
 //	 			reSetMyChatRoomList();	
 				let fBtn = document.getElementById("btn_about_following");
@@ -433,7 +432,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 		paramObj.toId = "${personalUserInfo.userId}"
 		paramObj.bdNo = bdNo;
 		paramObj.bdTitle = bdTitle;
-		paramObj.lkId = currentUserId;
 		
 		let headerObj = new Headers();
 		headerObj.append('content-type','application/json');
@@ -446,7 +444,7 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				return response.text();
 			}
 		}).then((text)=>{
-			if(text=="success"){
+			if(text=="sendNoti"){
 				//좋아요 성공 시
 				let likeIcon = document.getElementById("like_icon");
 				likeIcon.setAttribute("class","fas fa-heart text-danger");
@@ -457,10 +455,15 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				let fromId = currentUserId;
 				//해당 유저에게 좋아요를 했다고 알림을 보낸다.
 				stompPushClient.send("/push", {}, JSON.stringify(
-					{'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'message' : nickName+'님이 사용자님의 게시물을 좋아합니다.'}
+					{'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'bdNo' :bdNo, 'notiMethod' : 'like' ,'message' : nickName+'님이 '+bdTitle +' 게시물을 좋아합니다.'}
 					)); 
+			}else if(text=="notSendNoti"){
+				let likeIcon = document.getElementById("like_icon");
+				likeIcon.setAttribute("class","fas fa-heart text-danger");
+				selectLikeCount(bdNo);	
 			}else{
 				//좋아요 실패 시
+				
 			}
 		})
 		
