@@ -12,12 +12,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="crossorigin="anonymous"></script>
   <script type="text/javascript">
   function overlap(id){
-	  console.log(id);
 	  let div = document.getElementById(id);
 	  let icon = document.createElement("i");
 	  icon.setAttribute("class","fas fa-copy position-absolute top-0 end-0 m-3 fs-3 text-white");
 	  div.appendChild(icon)
-	  console.dir(div);
   }
   </script>
   <style>
@@ -63,8 +61,8 @@
              </div>
             <div class="d-flex justify-content-center m-3">
             	<div class="d-flex mr-1"><p class="fs-5">게시물</p><p class="fs-5">${personalBoardInfoList.size()}</p></div>
-            	<div class="d-flex mx-3"><p class="fs-5" style="cursor: pointer;">팔로잉</p><p id="following_count"class="fs-5">${followingCount}</p></div>
-            	<div class="d-flex ml-1"><p class="fs-5" style="cursor: pointer;">팔로워</p><p id="follower_count"class="fs-5">${followerCount}</p></div>
+            	<div class="d-flex mx-3"><p class="fs-5" style="cursor: pointer;" onclick="fetchFollowingList();">팔로잉</p><p id="following_count"class="fs-5">${followingCount}</p></div>
+            	<div class="d-flex ml-1"><p class="fs-5" style="cursor: pointer;" onclick="fetchFollowerList();">팔로워</p><p id="follower_count"class="fs-5">${followerCount}</p></div>
             </div>
             </div>
         </div>
@@ -108,8 +106,8 @@
 		 <!-- Modal --> 
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<p id="btn_modal_close"class="float-end text-white fs-1 mt-2 mr-1" style="cursor: pointer;"><i class="fas fa-times"></i></p>
-  		<div class="modal-dialog modal-lg">
-   		 <div class="modal-content">
+  		<div class="modal-dialog modal-lg modal-dialog-centered">
+   		 <div class="modal-content" style="border-radius: 20px;">
     			<div class="row g-0">
     				<div class="col col-md-8">
        					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -127,11 +125,11 @@
 							</div>
       					</div>
       				<div class="bg-light col col-md-4 d-flex flex-column">
-      					<div id="board_title" class="border-bottom mx-1 p-2"style="font-size:1vw;"></div>
+      					<div id="board_title" class="border-bottom mx-1 p-3"style="font-size:1vw;"></div>
             			<div id="board_content"class="p-2 border-bottom mx-1" style="height:90%; overflow:auto; font-size:0.8vw;"></div>
            		 	<div class="p-2 d-flex align-items-center">
             				<i id="like_icon" onclick="updateLike();" class="fas fa-heart text-dark mx-2 my-1" style="cursor:pointer; font-size:20px;"></i>
-            				<div id="like_description" style="font-size:12px;" onclick="fetchLikeUserList();"class="p-2"></div>
+            				<div id="like_description" style="font-size:12px; cursor:pointer;" onclick="fetchLikeUserList();"class="p-2"></div>
             			</div>
       				</div>
     			</div>
@@ -139,25 +137,56 @@
  		 </div>
 		</div>
 
-		<!-- Modal -->
+		<!-- 좋아요 리스트 모달-->
 		<div class="modal fade" id="likeUserListModal" tabindex="-1" aria-labelledby="likeUserListModalLabel" aria-hidden="true">
- 			<div class="modal-dialog">
-   				<div class="modal-content">
-    				<div class="modal-header">
-        				<h5 class="modal-title text-center" id="likeUserListModalLabel">좋아요</h5>
-        				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ 			<div class="modal-dialog modal-dialog-centered">
+   				<div class="modal-content" style="border-radius: 20px;">
+    				<div class="d-flex border-bottom p-2">
+        				<div class="modal-title  fw-bold text-center flex-fill" id="likeUserListModalLabel">좋아요
+        				<button type="button" class="btn-close float-end " data-bs-dismiss="modal" aria-label="Close"></button>
+        				</div>
       				</div>
-      				<ul id="like_user_list"class="list-group list-group-flush">
+      				<ul id="like_user_list"class="list-group list-group-flush m-2" style="overflow:auto; height:20vh;">
       					<!-- 비동기로 데이터를 받아올 곳 -->
       				</ul>	
-     				<div class="modal-footer">
-            			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        				<button type="button" class="btn btn-primary">Save changes</button>
-      				</div>
     			</div>
  		 	</div>
 		</div>
-      </section>
+		<!-- 팔로잉 리스트 모달-->
+      <div class="modal fade" id="followingListModal" tabindex="-1" aria-labelledby="followingListModalLabel" aria-hidden="true">
+ 			<div class="modal-dialog modal-dialog-centered">
+   				<div class="modal-content" style="border-radius: 20px;">
+    				<div class="d-flex border-bottom p-2">
+        				<div class="modal-title fw-bold text-center flex-fill" id="followingListModalLabel">팔로잉
+        				<button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        				</div>
+      				</div>
+      				<ul id="following_list"class="list-group list-group-flush m-2" style="overflow:auto; height:20vh;">
+      					<!-- 비동기로 데이터를 받아올 곳 -->
+      				</ul>	
+    			</div>
+ 		 	</div>
+		</div>
+		<!-- 팔로워 리스트 모달-->
+      <div class="modal fade" id="followerListModal" tabindex="-1" aria-labelledby="followerListModalLabel" aria-hidden="true">
+ 			<div class="modal-dialog modal-dialog-centered">
+   				<div class="modal-content" style="border-radius: 20px;">
+    				<div class="d-flex border-bottom p-2">
+        				<div class="modal-title fw-bold text-center flex-fill" id="followerListModalLabel">
+        				팔로워
+        				<button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        				</div>
+        			
+      				</div>
+      				<ul id="follower_list"class="list-group list-group-flush m-2" style="overflow:auto; height:20vh;">
+      					<!-- 비동기로 데이터를 받아올 곳 -->
+      				</ul>	
+    			</div>
+ 		 	</div>
+		</div>
+      </section>				
+      
+
   </main>
 <!-- footer부분 -->
  	<%@include file ="/WEB-INF/views/include/footer.jsp" %>
@@ -191,9 +220,14 @@ myModalEl.addEventListener('shown.bs.modal',function(event){
 
 let likeUserListModal = document.getElementById("likeUserListModal");
 likeUserListModal.addEventListener('shown.bs.modal', function (event) {
+	
 });
 likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 	 $("body").addClass("modal-open");
+	  let likeUserList = document.getElementById("like_user_list");
+	  while(likeUserList.hasChildNodes()){
+		  likeUserList.removeChild(likeUserList.firstChild);
+	  }
 });
 
 
@@ -215,7 +249,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			}
 		}).then((text)=>{
 			selectedBoard = JSON.parse(text);
-			console.dir(selectedBoard);
 			let carouselInner = document.querySelector(".carousel-inner");
 			let boardContent = document.getElementById("board_content");
 			let boardTitle = document.getElementById("board_title");
@@ -232,7 +265,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 					img.setAttribute("class","d-block w-100 img-fluid");
 					img.setAttribute("style","height:100%;");
 					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
-					console.log("/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename);
 //					img.style="width:100%;height:100%;object-fit:cover;";
 				if(i==0){
 					carouselItem.setAttribute("class","carousel-item active");
@@ -241,7 +273,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				}
 	       			carouselItem.appendChild(img);
 	       			carouselInner.appendChild(carouselItem);
-	       			console.dir(carouselInner.childNodes);
 			}
 			likeDescription.innerHTML=selectedBoard.board.likeCount+"명이 게시물을 좋아합니다.";
 			test();
@@ -251,7 +282,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 	async function test(){
 		let likeIcon = document.getElementById("like_icon");
 		let result = await certificatelike(selectedBoard.board.bdNo);
-		console.log("test : "+ result)
 			if(result=="true"){
 				likeIcon.setAttribute("class","fas fa-heart text-dark");
 			}else{
@@ -263,14 +293,12 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 		let userId = "${personalUserInfo.userId}";
 		let nickName = "${curUserInfo.nickName}";
 		if(currentUserId!=""){
-//			stompPushClient.send("/push", {}, JSON.stringify({'fromId' : currentUserId, 'toId': userId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
 //	 		createNewRoom(currentUserId,userId);
 //	 		reSetMyChatRoomList();	
 	 		followingImpl(userId,currentUserId);
 		}else{
 			location.href = "/user/login";
 		}
-		console.log("테스트 종료")
 
 	}
 	
@@ -296,7 +324,7 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				//팔로잉 성공 시
 				let userId = "${personalUserInfo.userId}";
 				let nickName = "${curUserInfo.nickName}";
-				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'message' : nickName+'님이 당신을 팔로우 했습니다.' })); //해당 유저에게 팔로잉 요청을 보낸다.
+				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'bdNo' : null, notiMethod : 'following','message' : nickName+'님이 당신을 팔로우 했습니다.' })); //해당 유저에게 팔로잉 요청을 보낸다.
 //	 			createNewRoom(currentUserId,userId);
 //	 			reSetMyChatRoomList();	
 				let fBtn = document.getElementById("btn_about_following");
@@ -370,10 +398,13 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 	
 	   async function updateLike(){
 		bdNo = selectedBoard.board.bdNo;
+		bdTitle = selectedBoard.board.bdTitle;
 		 let result =  await certificatelike(bdNo);
 		if(result=="true"){
-			insertLike(bdNo); 
+			console.log("좋아요를 한 적이 없으니까 insert하자")
+			insertLike(bdNo,bdTitle); 
 		}else{
+			console.log("좋아요를 한 적이 있으니까 delete하자")
 			deleteLike(bdNo);
 		}
 	}
@@ -384,26 +415,36 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 		if(response.ok){
 			let result = await response.text();
 			if(result=="ok"){
+				console.log("좋아요를 한 적이 없다.")
 				return "true";
 			}else{
+				console.log("좋아요를 한 적이 있다.")
 				return "false";
 			}
 		}
 	}
 	
 	
-	function insertLike(bdNo){
+	function insertLike(bdNo,bdTitle){
 		//전달 받은 bdNo의 like업데이트
-		console.log("INSERET 실행")
-		const url = '/insertlike?bdNo='+bdNo+'&lkId='+currentUserId;
+		const url = '/insertlike';
+		let paramObj = new Object();
+		paramObj.toId = "${personalUserInfo.userId}"
+		paramObj.bdNo = bdNo;
+		paramObj.bdTitle = bdTitle;
+		
+		let headerObj = new Headers();
+		headerObj.append('content-type','application/json');
 		fetch(url,{
-			method:"GET"
+			method:"POST",
+			headers : headerObj,
+			body : JSON.stringify(paramObj)
 		}).then(response=>{
 			if(response.ok){
 				return response.text();
 			}
 		}).then((text)=>{
-			if(text=="success"){
+			if(text=="sendNoti"){
 				//좋아요 성공 시
 				let likeIcon = document.getElementById("like_icon");
 				likeIcon.setAttribute("class","fas fa-heart text-danger");
@@ -414,10 +455,15 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				let fromId = currentUserId;
 				//해당 유저에게 좋아요를 했다고 알림을 보낸다.
 				stompPushClient.send("/push", {}, JSON.stringify(
-					{'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'message' : nickName+'님이 사용자님의 게시물을 좋아합니다.'}
+					{'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'bdNo' :bdNo, 'notiMethod' : 'like' ,'message' : nickName+'님이 '+bdTitle +' 게시물을 좋아합니다.'}
 					)); 
+			}else if(text=="notSendNoti"){
+				let likeIcon = document.getElementById("like_icon");
+				likeIcon.setAttribute("class","fas fa-heart text-danger");
+				selectLikeCount(bdNo);	
 			}else{
 				//좋아요 실패 시
+				
 			}
 		})
 		
@@ -425,7 +471,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 	
 	
 	function deleteLike(bdNo){
-			console.log("DELETE 실행")
 		const url = '/deletelike?bdNo='+bdNo+'&lkId='+currentUserId;
 		fetch(url,{
 			method:"GET"
@@ -455,7 +500,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			}
 		}).then((text)=>{
 			let likeCount = text
-			console.log(likeCount);
 				let likeDescription = document.getElementById("like_description");
 				likeDescription.innerHTML = likeCount+"명이 게시물을 좋아합니다.";
 		})
@@ -475,13 +519,83 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			let ul = document.getElementById("like_user_list");
 			for(let i = 0; i<likeUserList.length; i++){
 				let li = document.createElement("li");
-				li.setAttribute("class","list-group-item")
-				li.innerHTML = likeUserList[i].nickName;
+				li.setAttribute("class","list-group-item border-0")
+				li.setAttribute("style","cursor:pointer")
+				li.setAttribute("onclick","location.href='/personal/personal?nickName='+'"+likeUserList[i].nickName+"'")
+				let nickNameDiv = document.createElement("div");
+				nickNameDiv.setAttribute("class","mb-1 fw-bold");
+				let nameDiv = document.createElement("div");
+				nickNameDiv.innerHTML = likeUserList[i].nickName;			
+				nameDiv.innerHTML = likeUserList[i].name;
+				nameDiv.setAttribute("class","text-muted");
+				nameDiv.setAttribute("style","font-size:0.8vw");
+				li.append(nickNameDiv,nameDiv);
 				ul.appendChild(li);
 			}
-			console.log(likeUserList);
 			$('#likeUserListModal').modal("show")
 		})
+	}
+	
+	function fetchFollowingList(){
+		const url ='/personal/fetchfollowinglist?userId='+"${personalUserInfo.userId}";
+		fetch(url,{
+			method: "GET"
+		}).then(response=>{
+			if(response.ok){
+				return response.text();
+			}
+		}).then((text)=>{
+			let followingList = JSON.parse(text);
+			let ul = document.getElementById("following_list");
+			for(let i = 0; i < followingList.length; i++){
+				let li = document.createElement("li")
+				li.setAttribute("class","list-group")
+				li.setAttribute("class","list-group-item border-0")
+				li.setAttribute("style","cursor:pointer")
+				li.setAttribute("onclick","location.href='/personal/personal?nickName='+'"+followingList[i].nickName+"'")
+				let nickNameDiv = document.createElement("div");
+				nickNameDiv.setAttribute("class","mb-1 fw-bold");
+				let nameDiv = document.createElement("div");
+				nickNameDiv.innerHTML = followingList[i].nickName;			
+				nameDiv.innerHTML = followingList[i].name;
+				nameDiv.setAttribute("class","text-muted");
+				nameDiv.setAttribute("style","font-size:0.8vw");
+				li.append(nickNameDiv,nameDiv);
+				ul.appendChild(li);
+			}
+			$('#followingListModal').modal("show")
+		});
+	}
+	
+	function fetchFollowerList(){
+		const url ='/personal/fetchfollowerlist?userId='+"${personalUserInfo.userId}";
+		fetch(url,{
+			method: "GET"
+		}).then(response=>{
+			if(response.ok){
+				return response.text();
+			}
+		}).then((text)=>{
+			let followerList = JSON.parse(text);
+			let ul = document.getElementById("follower_list");
+			for(let i = 0; i < followerList.length; i++){
+				let li = document.createElement("li")
+				li.setAttribute("class","list-group")
+				li.setAttribute("class","list-group-item border-0")
+				li.setAttribute("style","cursor:pointer")
+				li.setAttribute("onclick","location.href='/personal/personal?nickName='+'"+followerList[i].nickName+"'")
+				let nickNameDiv = document.createElement("div");
+				nickNameDiv.setAttribute("class","mb-1 fw-bold");
+				let nameDiv = document.createElement("div");
+				nickNameDiv.innerHTML = followerList[i].nickName;			
+				nameDiv.innerHTML = followerList[i].name;
+				nameDiv.setAttribute("class","text-muted");
+				nameDiv.setAttribute("style","font-size:0.8vw");
+				li.append(nickNameDiv,nameDiv);
+				ul.appendChild(li);
+			}
+			$('#followerListModal').modal("show")
+		});
 	}
 	</script>
 	

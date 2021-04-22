@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.we.art.board.model.vo.Board;
+import com.we.art.communication.model.vo.LikeHistory;
 
 public interface BoardService {
 	public void insertBoard(Board board, List<MultipartFile> files);
@@ -24,4 +25,6 @@ public interface BoardService {
 	Map<String, String> certificateLike(String bdNo, String lkId);
 	
 	int selectLikeCount(String bdNo);
+	
+	int insertLikeHistory(LikeHistory likeHistory);
 }

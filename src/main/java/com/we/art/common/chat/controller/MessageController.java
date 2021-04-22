@@ -36,7 +36,6 @@ public class MessageController {
 		System.out.println(userInfo.getUserId()+"가 보낸 메세지 내용 :"+ message);
 		String msgTo = message.get("msgTo");
 		String roomId = message.get("roomId");
-		System.out.println("RoomId : "+roomId);
 		simpMessagingTemplate.convertAndSend("/queue/"+ roomId,message);
 //		return message;
 	}
@@ -48,7 +47,6 @@ public class MessageController {
 		System.out.println(userInfo.getUserId()+"가 보낸 메세지 내용 :"+ message);
 		String fromId = message.get("fromId");
 		String toId = message.get("toId");
-		System.out.println("fromId : "+fromId +"그리고 toId : "+ toId);
 		simpMessagingTemplate.convertAndSend("/queue/"+toId,message);
 	}
 

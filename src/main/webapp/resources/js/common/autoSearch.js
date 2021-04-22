@@ -12,7 +12,6 @@ function getAlluser(){
 		}
 	}).then((text)=>{
 		allUserList = JSON.parse(text);
-		console.dir(allUserList);
 		for(let i =0; i<allUserList.length; i++){
 			userNickNameList.push(allUserList[i].nickName);
 			userNameList.push(allUserList[i].name);
@@ -62,22 +61,6 @@ function autoCompleteByUserName(inp, arr) {
 				ul.appendChild(li);
 				a.appendChild(ul);
 				fixedCard.appendChild(a);
-//				li.addEventListener("click", function(e) {
-//					inp.value = this.getElementsByTagName("input")[0].value;
-//					console.log("네임");
-//					let searchNickName = e.target.innerHTML;
-//					for(let i =0;i<allUserList.length; i++){
-//						if(allUserList[i].nickName==searchNickName){
-//							location.href="/personal/personal?nickName="+allUserList[i].nickName;
-//						break;
-//					}
-//				}
-////					closeAllLists();
-//				});
-				
-				
-				
-				
 			}
 		}
 	});

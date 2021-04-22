@@ -30,6 +30,7 @@
 		<mapper resource="mybatis/mapper/gallery/galleryMapper.xml"/>
 		<mapper resource="mybatis/mapper/communication/communicationMapper.xml"></mapper>
 		<mapper resource="mybatis/mapper/search/searchMapper.xml"></mapper>
+		<mapper resource="mybatis/mapper/personal/personalMapper.xml"></mapper>
 	</mappers>
 
 	

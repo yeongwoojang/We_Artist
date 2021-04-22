@@ -7,7 +7,8 @@ let msgToNickName = null;
 function sendMessage() {
 	if (event.keyCode == 13) {
 		let msg = document.getElementById("msg_box").value;
-		if (msg != "") {
+		let spaceArea = /\s/;
+		if (!spaceArea.exec(msg)) {
 			drawMyChatting(msg);
 			let msgTime = getCurrentTime();
 			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgFromNickName' : currentUserNickName,'msgTo': selectUser,'msgToNickName' :msgToNickName ,'msgTime' : msgTime }));
@@ -20,9 +21,7 @@ function sendMessage() {
 }
 
 function createRoomId(selectedUserInfo){
-	console.log(selectedUserInfo)
 	selectUser = selectedUserInfo.toId //팔로우 목록중 한명을 클릭했을 시 선택한 유저의 ID를 'selectUser' 변수에 담는다.
-	console.log("현재 로그인 유저 : "+currentUserId);
 	msgToNickName = selectedUserInfo.nickName;
 	enterChatRoomImpl(currentUserId,selectUser); //입장한 채팅방의 번호를 가져온다.
 //	let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
@@ -35,7 +34,6 @@ function createRoomId(selectedUserInfo){
 
 function enterChatRoomImpl(currentUserId,selectUser){
 	
-	console.log(currentUserId+" : "+ selectUser)
 	let url = '/chat/enterchatroomimpl'
 	let paramObj = new Object();
 	paramObj.firstUser = currentUserId;
@@ -67,7 +65,6 @@ function enterChatRoomImpl(currentUserId,selectUser){
 			sendMessageBox.style.visibility="visible" // 메세지를 입력하는 box를 보이게한다.
 			let chatBox = document.getElementById("chat_box");
 			chatBox.innerHTML = "";
-			console.log(text);
 			selectChatContentListImpl(currentRoomId,currentUserId,selectUser);
 		}else{
 			//TODO 채팅방 만들기를 실패했을 시
@@ -99,7 +96,6 @@ function insertChatContentImpl(roomId,msg,msgFrom,msgTo,msgTime){
 		if(text=='fail'){
 			
 		}else{
-			console.log("통신 성공")
 		}
 	})
 }
@@ -126,15 +122,12 @@ function selectChatContentListImpl(chatRoomNo,firstUser,secondUser){
 		if(text=='failed'){
 			
 		}else{
-			console.dir(text);
 			let chatContentList = JSON.parse(text);
 			for(let i = 0; i<chatContentList.length; i++){
 				if(chatContentList[i].msgFrom==currentUserId){
 					drawMyChatting(chatContentList[i].msg);
-					console.log(chatContentList[i].msg)
 				}else{
 					drawYourChatting(chatContentList[i].msg);
-					console.log(chatContentList[i].msg)
 				}
 				
 			}
@@ -169,7 +162,6 @@ function drawMyChatting(msg){
 			borderBox.appendChild(messageBox);
 			chatBox.appendChild(borderBox);
 			document.getElementById("msg_box").value = "";
-			console.log('메세지 전송')
 }
 
 function drawYourChatting(msg){
@@ -179,7 +171,6 @@ function drawYourChatting(msg){
 		borderBox.style.padding = "10px";
 		borderBox.style.marginBottom = "10px";
 		borderBox.style.border = "1px solid #DCDCDC"
-		console.log("메세지 띄우자")
 		if (msg.length >= 20) {
 			borderBox.style.width = "30%";
 		}
@@ -202,7 +193,6 @@ function drawYourChatting(msg){
 	for(let i=0;i<followingUserItemList.length; i++){
 		followingUserItemList[i].addEventListener("click",(e)=>{
 			if(e.target.dataset.userid==followingList[i].toId){
-				console.dir(followingList[i])
 		createRoomId(followingList[i]);
 			}
 		});
