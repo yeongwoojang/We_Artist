@@ -37,6 +37,7 @@
                     8자 이상 16자 이내로 입력하세요. 영문자, 숫자, 특수기호를 사용할 수 있으며 공백은 사용할 수 없습니다.
                 </small>
                 <small class="invalid-feedback">패스워드를 입력하세요.</small>
+                <span id="pw_confirm" class="valid_info"></span>
             </div>
             
             <div class="form-group">
@@ -72,6 +73,6 @@
 
 
 </div>
-<script src="/resources/js/user/join.js"></script>
+<script src="${context}/resources/js/user/join.js"></script>
 </body>
 </html>
