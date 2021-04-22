@@ -47,6 +47,11 @@
 	</delete>
 
 
+	<select id="selectLikeCount"  resultType = "Integer">
+		SELECT COUNT(*) FROM TB_LIKE
+		WHERE BD_NO = #{bdNo}
+	</select>
+
 	<resultMap type="map" id="like">
 		<result column="BD_NO" javaType="String" property="bdNo"/>
 		<result column="LK_ID" javaType="String" property="lkId"/>

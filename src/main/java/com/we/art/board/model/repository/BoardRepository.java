@@ -38,4 +38,6 @@ public interface BoardRepository {
 	int deleteLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
 	
 	Map<String,String> certificateLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
+	
+	int selectLikeCount(@Param("bdNo")String bdNo);
 }

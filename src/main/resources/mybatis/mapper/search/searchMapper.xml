@@ -24,7 +24,6 @@
 		ON(F.USER_ID = U.USER_ID)
 		WHERE F.F_IDX  IN (SELECT F_IDX FROM TB_BOARD_MASTER)
 	</select>
-	
 		<resultMap type="map" id="boardData">
 			<result column="BD_NO" javaType="String" property="bdNo"/>
 			<result column="USER_ID" javaType="String" property="userId"/>

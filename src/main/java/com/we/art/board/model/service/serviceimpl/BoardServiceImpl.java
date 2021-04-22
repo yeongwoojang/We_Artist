@@ -95,6 +95,11 @@ public class BoardServiceImpl implements BoardService{
 		return boardRepository.certificateLike(bdNo, lkId);
 				
 	}
+
+	@Override
+	public int selectLikeCount(String bdNo) {
+		return boardRepository.selectLikeCount(bdNo);
+	}
 	
 	
 	

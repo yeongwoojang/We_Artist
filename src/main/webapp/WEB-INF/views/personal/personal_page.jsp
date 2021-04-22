@@ -26,6 +26,10 @@
   		font-style:normal;
   		font-weight: 400;
   	}
+  	
+  	body.modal-open {
+    overflow: hidden;
+	}
   </style>
 </head>
 <body id="body">
@@ -102,46 +106,62 @@
 		 	</c:if>
 		</div>
 		 <!-- Modal --> 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<p id="btn_modal_close"class="float-end text-white fs-1 mt-2 mr-1" style="cursor: pointer;"><i class="fas fa-times"></i></p>
-  <div class="modal-dialog modal-lg" id="myModal">
-    <div class="modal-content">
-    	<div class="row g-0">
-    		<div class="col col-md-8">
-       			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-       				<div class="carousel-inner">
-       					<!-- 비동기로 데이터를 받아서 뿌려줄 부분 -->
-  					</div>
-  						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="z-index:9999">
-    						<span class="carousel-control-prev-icon primary" aria-hidden="true"></span>
-    						<span class="visually-hidden">Previous</span>
-  						</button>
-  						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="z-index:9999">
-    						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-    						<span class="visually-hidden">Next</span>
-  						</button>
-					</div>
-      			</div>
-      		<div class="bg-light col col-md-4 d-flex flex-column">
-      			<div id="board_title" class="border-bottom mx-1 p-2"style="font-size:1vw;"></div>
-            	<div id="board_content"class="p-2 border-bottom mx-1" style="height:90%; overflow:auto; font-size:0.8vw;"></div>
-            	<div class="p-2 d-flex align-items-center">
-            		<i id="like_icon" onclick="updateLike();" class="fas fa-heart text-dark mx-2 my-1" style="cursor:pointer; font-size:20px;"></i>
-            		<div id="like_description"style="font-size:15px;">ㄴㅇㅀㄴㅇㅀㅇㄴㅀ 님 외 5명이 좋아합니다.</div>
-            	</div>
-      		</div>
-            	
-    	</div>
-      
-  	  </div>
-  </div>
-</div>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<p id="btn_modal_close"class="float-end text-white fs-1 mt-2 mr-1" style="cursor: pointer;"><i class="fas fa-times"></i></p>
+  		<div class="modal-dialog modal-lg">
+   		 <div class="modal-content">
+    			<div class="row g-0">
+    				<div class="col col-md-8">
+       					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+       						<div class="carousel-inner">
+       							<!-- 비동기로 데이터를 받아서 뿌려줄 부분 -->
+  							</div>
+  								<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="z-index:9999">
+    								<span class="carousel-control-prev-icon primary" aria-hidden="true"></span>
+    								<span class="visually-hidden">Previous</span>
+  								</button>
+  								<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="z-index:9999">
+    								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    								<span class="visually-hidden">Next</span>
+  								</button>
+							</div>
+      					</div>
+      				<div class="bg-light col col-md-4 d-flex flex-column">
+      					<div id="board_title" class="border-bottom mx-1 p-2"style="font-size:1vw;"></div>
+            			<div id="board_content"class="p-2 border-bottom mx-1" style="height:90%; overflow:auto; font-size:0.8vw;"></div>
+           		 	<div class="p-2 d-flex align-items-center">
+            				<i id="like_icon" onclick="updateLike();" class="fas fa-heart text-dark mx-2 my-1" style="cursor:pointer; font-size:20px;"></i>
+            				<div id="like_description" style="font-size:12px;" onclick="fetchLikeUserList();"class="p-2"></div>
+            			</div>
+      				</div>
+    			</div>
+  			  </div>
+ 		 </div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="likeUserListModal" tabindex="-1" aria-labelledby="likeUserListModalLabel" aria-hidden="true">
+ 			<div class="modal-dialog">
+   				<div class="modal-content">
+    				<div class="modal-header">
+        				<h5 class="modal-title text-center" id="likeUserListModalLabel">좋아요</h5>
+        				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      				</div>
+      				<ul id="like_user_list"class="list-group list-group-flush">
+      					<!-- 비동기로 데이터를 받아올 곳 -->
+      				</ul>	
+     				<div class="modal-footer">
+            			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        				<button type="button" class="btn btn-primary">Save changes</button>
+      				</div>
+    			</div>
+ 		 	</div>
+		</div>
       </section>
   </main>
 <!-- footer부분 -->
  	<%@include file ="/WEB-INF/views/include/footer.jsp" %>
   
- 
   
   <script src="${context}/resources/theEvent/assets/vendor/aos/aos.js"></script>
   <script src="${context}/resources/theEvent/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -163,10 +183,20 @@ myModalEl.addEventListener('hidden.bs.modal', function (event) {
 let modalCloseBtn = document.getElementById('btn_modal_close');
 modalCloseBtn.addEventListener('click',function(){
 	  $('#exampleModal').modal("hide");
-})
-myModalEl.addEventListener('shown.bs.modal',function(event){
 });
-  
+myModalEl.addEventListener('shown.bs.modal',function(event){
+	
+});
+
+
+let likeUserListModal = document.getElementById("likeUserListModal");
+likeUserListModal.addEventListener('shown.bs.modal', function (event) {
+});
+likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
+	 $("body").addClass("modal-open");
+});
+
+
 	let selectedBoard;
 	let boardInfo;
 	let fileList;
@@ -213,7 +243,7 @@ myModalEl.addEventListener('shown.bs.modal',function(event){
 	       			carouselInner.appendChild(carouselItem);
 	       			console.dir(carouselInner.childNodes);
 			}
-			likeDescription.innerHTML=selectedBoard.board.likeCount+"명의 사용자가 이 게시물을 좋아합니다.";
+			likeDescription.innerHTML=selectedBoard.board.likeCount+"명이 게시물을 좋아합니다.";
 			test();
 		});
 	}
@@ -377,6 +407,7 @@ myModalEl.addEventListener('shown.bs.modal',function(event){
 				//좋아요 성공 시
 				let likeIcon = document.getElementById("like_icon");
 				likeIcon.setAttribute("class","fas fa-heart text-danger");
+				selectLikeCount(bdNo);
 				
 				let toId = "${personalUserInfo.userId}";
 				let nickName = "${curUserInfo.nickName}";
@@ -407,14 +438,53 @@ myModalEl.addEventListener('shown.bs.modal',function(event){
 				//좋아요 취소 성공 시
 					let likeIcon = document.getElementById("like_icon");
 					likeIcon.setAttribute("class","fas fa-heart text-dark");
+					selectLikeCount(bdNo);
 			}else{
 				//좋아요 취소 실패 시
 			}
 		})
 	}
 	
-</script>
-  
-  </script>
+	function selectLikeCount(bdNo){
+		const url ='/selectlikecount?bdNo='+bdNo;
+		fetch(url,{
+			method:"GET"
+		}).then(response=>{
+			if(response.ok){
+				return response.text();
+			}
+		}).then((text)=>{
+			let likeCount = text
+			console.log(likeCount);
+				let likeDescription = document.getElementById("like_description");
+				likeDescription.innerHTML = likeCount+"명이 게시물을 좋아합니다.";
+		})
+	}
+	
+	function fetchLikeUserList(){
+		bdNo = selectedBoard.board.bdNo;
+		const url ='/fetchlikeuserlist?bdNo='+bdNo;
+		fetch(url,{
+			method:"GET"
+		}).then(response=>{
+			if(response.ok){
+				return response.text();
+			}
+		}).then((text)=>{
+			let likeUserList = JSON.parse(text);
+			let ul = document.getElementById("like_user_list");
+			for(let i = 0; i<likeUserList.length; i++){
+				let li = document.createElement("li");
+				li.setAttribute("class","list-group-item")
+				li.innerHTML = likeUserList[i].nickName;
+				ul.appendChild(li);
+			}
+			console.log(likeUserList);
+			$('#likeUserListModal').modal("show")
+		})
+	}
+	</script>
+	
+	
 </body>
 </html>
