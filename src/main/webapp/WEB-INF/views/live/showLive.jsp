@@ -9,16 +9,14 @@
 				<video id="remoteVideo" autoplay muted playsinline></video>
 			</div>
 			<div class="col-4">
-				<div class="card h-100">
+				<div class="card h-100 mh-100">
 					<div class="card-header text-center">
 						이것은 채팅방
 					</div>
-					<div class="card-body">
-						<ul id="chatRoom">
-			
-						</ul>
-						<button class="ali"></button>			
-					</div>
+					<div id="chatRoom" class="card-body d-flex flex-column justify-content-end">
+										
+					</div>		
+					
 					<div class="card-footer">
 						
 						<div class="input-group mb-3">
@@ -36,6 +34,7 @@
 
 <button onclick="createOffer()">Create</button>
 
+<script type="text/javascript" src="${context}/resources/js/live/liveChat.js"></script>
 <script type="text/javascript" src="${context}/resources/js/live/liveGuest.js"></script>
 </body>
 </html>
