@@ -9,10 +9,7 @@ let remoteVideo = document.querySelector('#remoteVideo');
 // 채팅 입력시 사용
 let sendMessage = () => {
 	dataChannel.send(input.value);
-	let mychat = document.createElement('li');
-	mychat.innerText = '나	: ' + input.value;
-	mychat.className = 'text-left';
-	document.querySelector('#chatRoom').appendChild(mychat);
+	insertChatRoom(false,input.value);
 	input.value = "";
 }
 
@@ -46,6 +43,12 @@ let send = (message) => {
 }
 
 let initialize = () => {
+	
+	input.addEventListener('keyup',()=>{
+		if(window.event.keyCode == 13 && input.value.trim()){
+			sendMessage();
+		}
+	})
 	
 	let configuration = {
 		'iceServers' : [
@@ -100,10 +103,7 @@ let initialize = () => {
     // when we receive a message from the other peer, printing it on the console
 	// 메세지 를 받으면 발생하는 이벤트
     dataChannel.onmessage = (event) => {
-		let chat = document.createElement('li');
-		chat.innerText = '상대	: ' + event.data;
-		chat.className = 'text-right';
-		document.querySelector('#chatRoom').appendChild(chat);
+		insertChatRoom(true,event.data);
         console.log("message:", event.data);
     };
 
