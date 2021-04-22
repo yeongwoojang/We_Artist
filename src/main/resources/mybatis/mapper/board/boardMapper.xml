@@ -51,7 +51,13 @@
 		SELECT COUNT(*) FROM TB_LIKE
 		WHERE BD_NO = #{bdNo}
 	</select>
-
+	
+	<insert id="insertLikeHistory">
+		INSERT INTO TB_LIKE_HISTORY
+		(BD_NO,TO_ID,FROM_ID)
+		VALUES(#{bdNo},#{toId},#{fromId})
+	</insert>
+	
 	<resultMap type="map" id="like">
 		<result column="BD_NO" javaType="String" property="bdNo"/>
 		<result column="LK_ID" javaType="String" property="lkId"/>

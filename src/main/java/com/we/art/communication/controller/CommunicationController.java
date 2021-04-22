@@ -1,6 +1,8 @@
 package com.we.art.communication.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.we.art.common.code.NotificationCode;
 import com.we.art.communication.model.service.CommunicationService;
 import com.we.art.communication.model.vo.Following;
 import com.we.art.communication.model.vo.History;
@@ -54,13 +57,31 @@ public class CommunicationController {
 			History history = new History();
 			history.setFromId(following.getFromId());
 			history.setToId(following.getToId());
+			history.setNotiMethod(NotificationCode.FOLLOWING.toString());
+			history.setBdNo(null);
+			List<Map<String,String>> checkDataList = new ArrayList<>();
+			checkDataList = communicationService.certificateHistory(history);
+			if(checkDataList.size()==0){
+				history = new History();
+				history.setFromId(following.getFromId());
+				history.setToId(following.getToId());
+				history.setNotiMethod(NotificationCode.FOLLOWING.toString());
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String notiTime = sdf.format(cal.getTime());
+				history.setNotiTime(notiTime);
+				history.setBdNo(null);
+				history.setBdTitle(null);
+				if (communicationService.insertHistory(history) != 0) {
+					return "success";
+				} else {
+					return "failed";
+				}
 
-			if (communicationService.insertHistory(history) != 0) {
+			}else {
 				return "success";
-			} else {
-				return "failed";
 			}
-
+			
 		} else {
 			return "failed";
 		}

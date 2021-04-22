@@ -54,6 +54,12 @@ public class CommunicationServiceImpl implements CommunicationService{
 	public int updateHistory(History history) {
 		return communicationRepository.updateHistory(history);
 	}
+
+
+	@Override
+	public List<Map<String, String>> certificateHistory(History history) {
+		return communicationRepository.certificateHistory(history);
+	}
 	
 	
 	

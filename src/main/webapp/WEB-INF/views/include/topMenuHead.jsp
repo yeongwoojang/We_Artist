@@ -127,7 +127,7 @@
       			<button id="btn_toast_close"type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     		</div>
     	<div class="toast-body">
-      		<a id="followingMessage" onclick="">팔로잉 요청이있습니다.</a>
+      		<a id="followingMessage" class="text-primary" onclick="" style="cursor:pointer;">팔로잉 요청이있습니다.</a>
     	</div>
   		</div>
 	</div>

@@ -22,4 +22,6 @@ public interface CommunicationService {
 	public List<Map<String, Object>> selectHistoryById(String userId);
 
 	public int updateHistory(History history);
+	
+	public List<Map<String,String>> certificateHistory(History history);
 }

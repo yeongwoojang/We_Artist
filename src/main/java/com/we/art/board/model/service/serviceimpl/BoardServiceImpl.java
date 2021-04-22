@@ -16,6 +16,7 @@ import com.we.art.common.code.ErrorCode;
 import com.we.art.common.exception.ToAlertException;
 import com.we.art.common.util.file.FileUtil;
 import com.we.art.common.util.file.FileVo;
+import com.we.art.communication.model.vo.LikeHistory;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -99,6 +100,12 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int selectLikeCount(String bdNo) {
 		return boardRepository.selectLikeCount(bdNo);
+	}
+
+	@Override
+	public int insertLikeHistory(LikeHistory likeHistory) {
+		System.out.println("좋아요 기록");
+		return boardRepository.insertLikeHistory(likeHistory);
 	}
 	
 	
