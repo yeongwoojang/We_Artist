@@ -14,7 +14,7 @@ public class LiveController {
 	
 	@GetMapping("/host")
 	public String live(@SessionAttribute(name="userInfo", required = false)User user,Model model) {
-		String userId = user.getUserId();
+		//String userId = user.getUserId();
 		return "live/live";
 	}
 	

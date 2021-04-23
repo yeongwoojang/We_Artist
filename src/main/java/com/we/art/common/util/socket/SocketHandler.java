@@ -16,7 +16,9 @@ public class SocketHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println(message.getPayload());
+		System.out.println(sessions);
+		System.out.println(session);
+		System.out.println(message.getPayload().getClass());
 		for (WebSocketSession webSocketSession : sessions) { // 메세지가 온다면
             if (webSocketSession.isOpen() && !session.getId().equals(webSocketSession.getId())) { // 세션이열려있고, 보낸사람이 아니라면
                 webSocketSession.sendMessage(message); // 메세지 전송
