@@ -2,15 +2,20 @@ let boardListClassName;
 let galleryImg;
 let galleryImgList = [];
 
+let close = () => {
+	document.querySelector('#BoardList').className = 'd-none';
+}
+
 let init = () => {
 	
-	boardListClassName = "card w-50 mx-auto position-fixed top-50 start-50 translate-middle";
+	boardListClassName = "card w-50 mx-auto position-fixed top-50 start-50 translate-middle shadow";
 	
 	for(let i=1; i<13; i++){
 		document.querySelector('#gallery-img'+i).addEventListener('click',()=>{
-			alert('클릭'+i)
+			
 			galleryImg = 'gallery-img'+i;
 			document.querySelector('#BoardList').className = boardListClassName;
+			document.querySelector('#btn-close').addEventListener('click',close);
 			});
 	}
 	

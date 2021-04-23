@@ -184,9 +184,6 @@ let handleAnswer = (answer) => {
 };
 
 
-console.dir(userCount);
-
-
 
 
 

@@ -52,7 +52,7 @@ public class GalleryController {
 	
 	@GetMapping("galleryinfo")
 	public String setGallery(@SessionAttribute(name="userInfo", required = false)User user,Model model) {
-		String userId = "sunmin0406";
+		String userId = "test01";
 		//String userId = user.getUserId();
 		
 		model.addAttribute("userGalleryData", galleryService.selectGalleryInfoByUserId(userId));
