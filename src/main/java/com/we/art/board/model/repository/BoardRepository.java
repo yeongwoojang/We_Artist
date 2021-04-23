@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.we.art.board.model.vo.Board;
 import com.we.art.common.util.file.FileVo;
+import com.we.art.communication.model.vo.LikeHistory;
 
 @Mapper
 public interface BoardRepository {
@@ -40,4 +41,6 @@ public interface BoardRepository {
 	Map<String,String> certificateLike(@Param("bdNo")String bdNo, @Param("lkId")String lkId);
 	
 	int selectLikeCount(@Param("bdNo")String bdNo);
+	
+	int insertLikeHistory(LikeHistory likeHistory);
 }

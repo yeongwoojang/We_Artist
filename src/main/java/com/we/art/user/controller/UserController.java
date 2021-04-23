@@ -145,7 +145,7 @@ public class UserController {
 	@PostMapping("proPic")
 	public String uploadProPic(@RequestParam List<MultipartFile> files,
 			@SessionAttribute(name="userInfo", required = false)User user) {
-		
+		//String fIdx = user.getfIdx();
 		String userId = user.getUserId();
 		userService.insertProPic(userId, files);
 		userService.updateProPic(userId);

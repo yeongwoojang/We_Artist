@@ -19,7 +19,6 @@ public interface CommunicationRepository {
 	@Select("SELECT * FROM TB_USER")
 	public List<User> selectAllUser();
 	
-	@Insert("INSERT INTO TB_HISTORY(TO_ID,FROM_ID) VALUES(#{toId},#{fromId})")
 	public int insertHistory(History history);
 	
 	@Insert("INSERT INTO TB_FOLLOWING(FROM_ID,TO_ID) VALUES(#{fromId},#{toId})")
@@ -30,6 +29,7 @@ public interface CommunicationRepository {
 	
 	public List<Map<String, Object>> selectHistoryById(@Param("userId") String userId);
 	
-	@Update("UPDATE TB_HISTORY SET IS_CHECK = 1 WHERE TO_ID=#{toId} AND FROM_ID =#{fromId}")
 	public int updateHistory(History history);
+	
+	public List<Map<String,String>> certificateHistory(History history);
 }

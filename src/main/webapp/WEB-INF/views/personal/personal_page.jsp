@@ -12,12 +12,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="crossorigin="anonymous"></script>
   <script type="text/javascript">
   function overlap(id){
-	  console.log(id);
 	  let div = document.getElementById(id);
 	  let icon = document.createElement("i");
 	  icon.setAttribute("class","fas fa-copy position-absolute top-0 end-0 m-3 fs-3 text-white");
 	  div.appendChild(icon)
-	  console.dir(div);
   }
   </script>
   <style>
@@ -251,7 +249,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			}
 		}).then((text)=>{
 			selectedBoard = JSON.parse(text);
-			console.dir(selectedBoard);
 			let carouselInner = document.querySelector(".carousel-inner");
 			let boardContent = document.getElementById("board_content");
 			let boardTitle = document.getElementById("board_title");
@@ -268,7 +265,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 					img.setAttribute("class","d-block w-100 img-fluid");
 					img.setAttribute("style","height:100%;");
 					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
-					console.log("/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename);
 //					img.style="width:100%;height:100%;object-fit:cover;";
 				if(i==0){
 					carouselItem.setAttribute("class","carousel-item active");
@@ -277,7 +273,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				}
 	       			carouselItem.appendChild(img);
 	       			carouselInner.appendChild(carouselItem);
-	       			console.dir(carouselInner.childNodes);
 			}
 			likeDescription.innerHTML=selectedBoard.board.likeCount+"명이 게시물을 좋아합니다.";
 			test();
@@ -287,7 +282,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 	async function test(){
 		let likeIcon = document.getElementById("like_icon");
 		let result = await certificatelike(selectedBoard.board.bdNo);
-		console.log("test : "+ result)
 			if(result=="true"){
 				likeIcon.setAttribute("class","fas fa-heart text-dark");
 			}else{
@@ -299,14 +293,12 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 		let userId = "${personalUserInfo.userId}";
 		let nickName = "${curUserInfo.nickName}";
 		if(currentUserId!=""){
-//			stompPushClient.send("/push", {}, JSON.stringify({'fromId' : currentUserId, 'toId': userId, 'nickName' : nickName})); //해당 유저에게 팔로잉 요청을 보낸다.
 //	 		createNewRoom(currentUserId,userId);
 //	 		reSetMyChatRoomList();	
 	 		followingImpl(userId,currentUserId);
 		}else{
 			location.href = "/user/login";
 		}
-		console.log("테스트 종료")
 
 	}
 	
@@ -332,7 +324,7 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				//팔로잉 성공 시
 				let userId = "${personalUserInfo.userId}";
 				let nickName = "${curUserInfo.nickName}";
-				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'message' : nickName+'님이 당신을 팔로우 했습니다.' })); //해당 유저에게 팔로잉 요청을 보낸다.
+				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'bdNo' : null, notiMethod : 'following','message' : nickName+'님이 당신을 팔로우 했습니다.' })); //해당 유저에게 팔로잉 요청을 보낸다.
 //	 			createNewRoom(currentUserId,userId);
 //	 			reSetMyChatRoomList();	
 				let fBtn = document.getElementById("btn_about_following");
@@ -406,10 +398,13 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 	
 	   async function updateLike(){
 		bdNo = selectedBoard.board.bdNo;
+		bdTitle = selectedBoard.board.bdTitle;
 		 let result =  await certificatelike(bdNo);
 		if(result=="true"){
-			insertLike(bdNo); 
+			console.log("좋아요를 한 적이 없으니까 insert하자")
+			insertLike(bdNo,bdTitle); 
 		}else{
+			console.log("좋아요를 한 적이 있으니까 delete하자")
 			deleteLike(bdNo);
 		}
 	}
@@ -420,27 +415,36 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 		if(response.ok){
 			let result = await response.text();
 			if(result=="ok"){
+				console.log("좋아요를 한 적이 없다.")
 				return "true";
 			}else{
+				console.log("좋아요를 한 적이 있다.")
 				return "false";
 			}
 		}
 	}
 	
 	
-	function insertLike(bdNo){
+	function insertLike(bdNo,bdTitle){
 		//전달 받은 bdNo의 like업데이트
-		console.log("현재 아이디 : "+ currentUserId);
-		console.log("INSERET 실행")
-		const url = '/insertlike?bdNo='+bdNo+'&lkId='+currentUserId;
+		const url = '/insertlike';
+		let paramObj = new Object();
+		paramObj.toId = "${personalUserInfo.userId}"
+		paramObj.bdNo = bdNo;
+		paramObj.bdTitle = bdTitle;
+		
+		let headerObj = new Headers();
+		headerObj.append('content-type','application/json');
 		fetch(url,{
-			method:"GET"
+			method:"POST",
+			headers : headerObj,
+			body : JSON.stringify(paramObj)
 		}).then(response=>{
 			if(response.ok){
 				return response.text();
 			}
 		}).then((text)=>{
-			if(text=="success"){
+			if(text=="sendNoti"){
 				//좋아요 성공 시
 				let likeIcon = document.getElementById("like_icon");
 				likeIcon.setAttribute("class","fas fa-heart text-danger");
@@ -451,10 +455,15 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				let fromId = currentUserId;
 				//해당 유저에게 좋아요를 했다고 알림을 보낸다.
 				stompPushClient.send("/push", {}, JSON.stringify(
-					{'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'message' : nickName+'님이 사용자님의 게시물을 좋아합니다.'}
+					{'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'bdNo' :bdNo, 'notiMethod' : 'like' ,'message' : nickName+'님이 '+bdTitle +' 게시물을 좋아합니다.'}
 					)); 
+			}else if(text=="notSendNoti"){
+				let likeIcon = document.getElementById("like_icon");
+				likeIcon.setAttribute("class","fas fa-heart text-danger");
+				selectLikeCount(bdNo);	
 			}else{
 				//좋아요 실패 시
+				
 			}
 		})
 		
@@ -462,7 +471,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 	
 	
 	function deleteLike(bdNo){
-			console.log("DELETE 실행")
 		const url = '/deletelike?bdNo='+bdNo+'&lkId='+currentUserId;
 		fetch(url,{
 			method:"GET"
@@ -492,7 +500,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			}
 		}).then((text)=>{
 			let likeCount = text
-			console.log(likeCount);
 				let likeDescription = document.getElementById("like_description");
 				likeDescription.innerHTML = likeCount+"명이 게시물을 좋아합니다.";
 		})
@@ -525,7 +532,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				li.append(nickNameDiv,nameDiv);
 				ul.appendChild(li);
 			}
-			console.log(likeUserList);
 			$('#likeUserListModal').modal("show")
 		})
 	}
@@ -540,7 +546,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			}
 		}).then((text)=>{
 			let followingList = JSON.parse(text);
-			console.dir(followingList);
 			let ul = document.getElementById("following_list");
 			for(let i = 0; i < followingList.length; i++){
 				let li = document.createElement("li")

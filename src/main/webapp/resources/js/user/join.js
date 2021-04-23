@@ -1,4 +1,4 @@
-   let idCheckFlg = true;
+   let idCheckFlg = false;
    let idCheck = () => {
       //사용자가 입력한 아이디
       //요소의 아이디속성이 있을 경우 해당 엘리먼트를 가져다가 사용할 수 있다.
@@ -24,7 +24,7 @@
       }
    }
    
-   let nicknameCheckFlg = true;
+   let nicknameCheckFlg = false;
    
    let nicknameCheck = () => {
       let nickName = document.getElementById("nickName");
