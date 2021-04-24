@@ -9,15 +9,31 @@
 </head>
 <body>
 <section id="venue">
-
       <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
 
         <div class="section-header">
             <div class="container">
+            	<div class="btn-group mb-3" role="group" aria-label="Basic radio toggle button group">
+            		<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" data-type="all" checked>
+  					<label class="btn btn-outline-dark rounded-pill" for="btnradio1">전체</label>
+            	
+  					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-type="tag">
+  					<label class="btn btn-outline-dark rounded-pill" for="btnradio2">태그</label>
+
+ 					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off"  data-type="bdTitle">
+  					<label class="btn btn-outline-dark rounded-pill" for="btnradio3" >제목</label>
+
+  					<input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off"  data-type="bdContent">
+ 					 <label class="btn btn-outline-dark rounded-pill" for="btnradio4">내용</label>
+ 					 
+ 					<input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off"  data-type="name">
+ 					 <label class="btn btn-outline-dark rounded-pill" for="btnradio5">이름</label> 
+				</div>
         		<div class="input-group border rounded-pill  p-2">
  					<span class="input-group-text bg-transparent border border-0"><i class="fas fa-search"></i></span>
- 						 <input id ="search_box"type="text" class="form-control border border-0 shadow-none" placeholder="태그를 검색하세요"style="outline:none" onKeyPress="if( event.keyCode==13 ){searchByTag();}">
+ 						 <input id ="search_box"type="text" class="form-control border border-0 shadow-none" placeholder="태그를 검색하세요"style="outline:none" onKeyPress="if( event.keyCode==13 ){search();}">
 				</div>
+
         	</div>
         	<div class="p-3">
         		<h2>We are Artist</h2>

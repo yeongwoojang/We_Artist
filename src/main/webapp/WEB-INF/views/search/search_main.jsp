@@ -171,9 +171,7 @@
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
      <button type="button" class="btn btn-primary" id="liveToastBtn" onclick="tShow();">Show live toast</button>
 
@@ -187,6 +185,7 @@
 <!--     	</div> -->
 <!--   		</div> -->
 <!-- 	</div> -->
+
 	
     </section>
     <script src="${context}/resources/js/search/search_main.js"></script>
