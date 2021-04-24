@@ -20,7 +20,7 @@ public interface ChatRepository {
 	int insertChatRoom(ChatRoom chatRoom);
 	
 	//로그인 한 유저의 Following 리스트를 조회하는 쿼리
-	List<Map<String,String>> selectFollowingList(@Param("userId") String userId);
+	List<Map<String,String>> selectSenderList(@Param("userId") String userId);
 	
 	//특정 유저와의 채팅방을 조회하는 메소드
 	@Select("SELECT *"

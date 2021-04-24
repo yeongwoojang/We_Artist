@@ -36,22 +36,27 @@ public class ChatController {
 	@GetMapping("direct")
 	public String direct(@SessionAttribute("userInfo") User userInfo,
 			@SessionAttribute("myChatRoomList") List<ChatRoom> myChatRoomList,
-			@RequestParam(value = "sendDirect", required = false, defaultValue = "0") String sendDirect, HttpSession session,
+			@RequestParam(value = "sendDirectNickName", required = false, defaultValue = "0") String sendDirectNickName,
+			@RequestParam(value = "sendDirectUserId", required = false, defaultValue = "0") String sendDirectUserId,
+			HttpSession session,
 			Model model) {
 		
-		List<Map<String,String>> followingList = new ArrayList<Map<String,String>>();
-		followingList = chatService.selectFollowingList(userInfo.getUserId());
+		System.out.println("다이렉트 메세지 보낼 사람: "+sendDirectNickName+" , "+sendDirectUserId );
+		User directUser = new User();
+		directUser.setNickName(sendDirectNickName);
+		directUser.setUserId(sendDirectUserId);
+		List<Map<String,String>> senderList = new ArrayList<Map<String,String>>();
+		senderList = chatService.selectSenderList(userInfo.getUserId());
 		List<Map<String, Object>> lastMessageList = new ArrayList<>();
-		if (followingList.size() != 0) {
-			followingList = chatService.selectFollowingList(userInfo.getUserId());
+		if (senderList.size() != 0) {
+			senderList = chatService.selectSenderList(userInfo.getUserId());
 		}
 		if (myChatRoomList.size() != 0) {
 			lastMessageList = chatService.selectLastMessageList(myChatRoomList);
 		}
-		System.out.println("컨트롤러에있는 팔로잉 리스트"+followingList);
-		model.addAttribute("sendDirect",sendDirect);
-		model.addAttribute("followingList", followingList);
-		System.out.println("팔로잉 인포 : "+ followingList);
+		System.out.println("senderList : "+ senderList);
+		model.addAttribute("sendDirect",directUser);
+		model.addAttribute("senderList", senderList);
 		model.addAttribute("lastMessageList", lastMessageList);
 		System.out.println("라스트메세지 : "+lastMessageList);
 		return "mypage/direct";

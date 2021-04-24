@@ -29,8 +29,8 @@ public class ChatServiceImpl implements ChatService{
 
 
 	@Override
-	public List<Map<String,String>> selectFollowingList(String userId) {
-		return chatRepository.selectFollowingList(userId);
+	public List<Map<String,String>> selectSenderList(String userId) {
+		return chatRepository.selectSenderList(userId);
 	}
 
 

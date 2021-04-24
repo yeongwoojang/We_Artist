@@ -14,4 +14,10 @@ public interface SearchRepository {
 	public List<Map<String,Object>> selectBoardByTag(String tag);
 	
 	public List<Map<String,Object>> selectAllImageFile();
+	
+	public List<Map<String,Object>> selectBoardByTitle(String bdTitle);
+	
+	public List<Map<String,Object>> selectBoardByContent(String bdContent);
+	
+	public List<Map<String,Object>> selectBoardByName(String name);
 }
