@@ -1,4 +1,4 @@
-let conn = new WebSocket('wss://localhost:8443/socket/test1'); // 해당 주소로 소켓을 연다
+let conn = new WebSocket('wss://localhost:8443/socket'); // 해당 주소로 소켓을 연다
 
 let peerConnection;
 let dataChannel; // 연결채널, 데이터 전송을 위한 채널을 연다
@@ -40,7 +40,7 @@ conn.onopen = () => {
 }
 
 conn.onmessage = (msg) => {
-	console.dir('Got Message', msg.data);
+	console.log('Got Message', msg.data);
 	let content = JSON.parse(msg.data);
 	let data = content.data;
 	switch(content.event){
@@ -182,9 +182,6 @@ let handleAnswer = (answer) => {
     peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
     console.log("connection established successfully!!");
 };
-
-
-console.dir(userCount);
 
 
 

@@ -115,11 +115,18 @@
 			<button onclick="uploadGalleryInfo()">Save</button>
 		</div>
 	</div>
-    <div class="d-none" id="BoardList" style="background-color: rgba(255,255,255,0.7)">
-		<div class="card-header row">
-			Upload
+    <div class="d-none" id="BoardList" style="background-color: rgba(255,255,255,1);">
+		<div class="card-header d-flex justify-content-between">
+			<div class="align-self-center">
+				Upload
+			</div>
+			<div class="flex-inline justify-content-end">
+				<div class="btn btn-danger btn-sm" id="btn-close">
+					X
+				</div> 
+			</div>
 		</div>
-		<div class="row">
+		<div class="row card-body overflow-auto" style="height: 600px;" id="boardListContent">
 			<c:forEach items="${userBoardData}" var="boardData">			
 					<c:forEach items="${boardData.files}" var="boardFile" varStatus="status">				
 						<div class="col-3 mb-1" onclick='setGalleryInfo(

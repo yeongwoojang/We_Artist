@@ -112,7 +112,7 @@ let onDocumentMouseDown = (event) => {
     if(intersects.length > 0){       
         targetList.forEach((e) => {
             // 클릭했을때 눌린 객체가 그림인지 아닌지 확인하는 조건문
-            if(e.name === intersects[0].object.name){
+            if(e.name === intersects[0].object.name && galleryData[e.name]){
 				clickObject(e.name);
             }
         })
@@ -122,8 +122,8 @@ let onDocumentMouseDown = (event) => {
 let clickObject = (objName) => {
 	document.querySelector('#imgInfo').src = galleryData[objName].path;	
 	document.querySelector('#imgTitle').innerText = galleryData[objName].title;	
-	document.querySelector('#imgContent').innerText = galleryData[objName].content;	
-	document.querySelector("#divTest").className = 'd-flex position-absolute';
+	//document.querySelector('#imgContent').innerText = galleryData[objName].content;	
+	document.querySelector("#divTest").className = 'card position-absolute';
 	document.removeEventListener('click',onDocumentMouseDown);
 	document.querySelector('#btn_back').addEventListener('click',back);
 }

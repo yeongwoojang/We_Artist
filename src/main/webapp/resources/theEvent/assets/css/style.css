@@ -1828,3 +1828,12 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: #ddd;
 }
+
+/* 커스텀 CSS */
+#boardListContent {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+#boardListContent::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
