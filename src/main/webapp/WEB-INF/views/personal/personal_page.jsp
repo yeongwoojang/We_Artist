@@ -28,44 +28,62 @@
   	body.modal-open {
     overflow: hidden;
 	}
+	
+	@media(max-width: 991px) { 
+	 	#board_content{
+	 	display:none;
+	 	}
+	 	#content_modal{
+	 		width:80%;
+	 	}
+	 	#detail_info{
+	 		display:none;
+	 	}
+	 	#option{
+	 	display:none;
+	 	}
+	 }
   </style>
 </head>
 <body id="body">
 <main id="main">
     <!-- ======= Speaker Details Sectionn ======= -->
     <section id="speakers-details" class="section-with-bg">
-      <div class="container">
-        <div>
+    <div class="container d-flex justify-content-center">
+     <div class="jb-a rounded-circle" style="  width: 14rem;   height: 14rem;border: 0.5rem solid rgba(0, 0, 0, 0.1);">
+		<img class="mx-auto propic" id="picture" src="/images/${personalUserInfo.fSavePath}/${personalUserInfo.fRename}" alt="" style=" width: 14rem;  height: 14rem;">
+	 </div>
           <div class="details">
           	<div class="d-flex align-items-center flex-column">
           		<div class="mb-3">
 	             	<p id="user" class="fs-4 text-center fw-bold my-0"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 700;">${personalUserInfo.nickName}</p>	
           		</div>
-          		<div>
+          		<div id="option"class="d-flex align-items-center">
              	 <c:choose>
           			<c:when test="${pageState eq 'isMine'}">
-          			<button type="button" class="btn btn-primary mx-3" onclick="modifyProfile()" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">프로필 설정</button>
+          			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="modifyProfile()" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">프로필 설정</button>
           			</c:when>
           			<c:when test="${pageState eq 'isFollowed'}">
-          				<button  type="button" id="btn_about_following" onclick="unfollowing()"class="btn btn-primary btn-sm mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight:400; width:120px; height:40px;">팔로잉 끊기</button>
-          				<button type="button" class="btn btn-primary mx-3" onclick="location.href='/chat/direct?sendDirect=${personalUserInfo.nickName}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">메세지 보내기</button>
+          				<button  type="button" id="btn_about_following" onclick="unfollowing()"class="btn btn-primary btn-sm mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight:400;">팔로우 끊기</button>
+          				<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="sendDirectMessage();" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">메세지 보내기</button>
           			</c:when>
           			<c:when test="${pageState eq 'nothing'}">
-          				<button type="button" id="btn_about_following" onclick="following()" class="btn btn-primary mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">팔로잉</button>
-          				<button type="button" class="btn btn-primary mx-3" onclick="location.href='/chat/direct?sendDirect=${personalUserInfo.nickName}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">메세지 보내기</button>
+          				<button type="button" id="btn_about_following" onclick="following()" class="btn btn-primary mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">팔로우</button>
+          				<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="sendDirectMessage();" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; ">메세지 보내기</button>
          		 	</c:when>
          		 </c:choose>
          		 
-         		 	<button type="button" class="btn btn-primary mx-3" onclick="location.href='/gallery/${personalUserInfo.userId}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">갤러리</button>
+         		 	<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/gallery/${personalUserInfo.userId}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">갤러리</button>
          		 </div>
+         		 
              </div>
-            <div class="d-flex justify-content-center m-3">
-            	<div class="d-flex mr-1"><p class="fs-5">게시물</p><p class="fs-5">${personalBoardInfoList.size()}</p></div>
-            	<div class="d-flex mx-3"><p class="fs-5" style="cursor: pointer;" onclick="fetchFollowingList();">팔로잉</p><p id="following_count"class="fs-5">${followingCount}</p></div>
-            	<div class="d-flex ml-1"><p class="fs-5" style="cursor: pointer;" onclick="fetchFollowerList();">팔로워</p><p id="follower_count"class="fs-5">${followerCount}</p></div>
+            <div id="detail_info"class="d-flex justify-content-center m-3">
+            	<div class="d-flex mr-1"><p class="text-lg">게시물</p><p class="text-lg">${personalBoardInfoList.size()}</p></div>
+            	<div class="d-flex mx-3"><p class="text-lg" style="cursor: pointer;" onclick="fetchFollowingList();">팔로잉</p><p id="following_count"class="text-lg">${followingCount}</p></div>
+            	<div class="d-flex ml-1"><p class="text-lg" style="cursor: pointer;" onclick="fetchFollowerList();">팔로워</p><p id="follower_count"class="text-lg">${followerCount}</p></div>
             </div>
-            </div>
-        </div>
+      	</div>
+            
       </div>
       </section>
 	<!--사진피드 -->
@@ -91,7 +109,8 @@
 		 			<c:if test="${status.index==0}">
 					<div class="col-lg-4 col-md-6">
              				<div class="venue-gallery position-relative mb-0" id="${boardInfo.board.bdNo}" onclick="showModal('${boardInfo.board.bdNo}','${boardInfo}');"style="cursor: pointer;">
-                				<img src=<c:url value='/images/${file.fSavePath}/${file.fRename}'/> alt="" class="img-fluid">
+<!--                 				<img src=<c:url value='/images/2021/4/12/2cdfe272-71d5-42d5-8b59-cb4d30b6809b'/> alt="" class="img-fluid" style="width:30rem; height:20rem;object-fit: cover;"> -->
+                				<img src=<c:url value='/images/${file.fSavePath}/${file.fRename}'/> alt="" class="img-fluid" style="width:30rem; height:20rem; object-fit: cover;">
               				</div>
           			</div>		
           			<c:if test="${fn:length(boardInfo.files)>1}">
@@ -106,33 +125,37 @@
 		 <!-- Modal --> 
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<p id="btn_modal_close"class="float-end text-white fs-1 mt-2 mr-1" style="cursor: pointer;"><i class="fas fa-times"></i></p>
-  		<div class="modal-dialog modal-lg modal-dialog-centered">
-   		 <div class="modal-content" style="border-radius: 20px;">
-    			<div class="row g-0">
-    				<div class="col col-md-8">
-       					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-       						<div class="carousel-inner">
-       							<!-- 비동기로 데이터를 받아서 뿌려줄 부분 -->
-  							</div>
-  								<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="z-index:9999">
-    								<span class="carousel-control-prev-icon primary" aria-hidden="true"></span>
-    								<span class="visually-hidden">Previous</span>
-  								</button>
-  								<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="z-index:9999">
-    								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-    								<span class="visually-hidden">Next</span>
-  								</button>
-							</div>
-      					</div>
-      				<div class="bg-light col col-md-4 d-flex flex-column">
-      					<div id="board_title" class="border-bottom mx-1 p-3"style="font-size:1vw;"></div>
-            			<div id="board_content"class="p-2 border-bottom mx-1" style="height:90%; overflow:auto; font-size:0.8vw;"></div>
-           		 	<div class="p-2 d-flex align-items-center">
-            				<i id="like_icon" onclick="updateLike();" class="fas fa-heart text-dark mx-2 my-1" style="cursor:pointer; font-size:20px;"></i>
-            				<div id="like_description" style="font-size:12px; cursor:pointer;" onclick="fetchLikeUserList();"class="p-2"></div>
-            			</div>
-      				</div>
-    			</div>
+			<button class="carousel-control-prev position-fixed top-50 start-0" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="z-index:9999; height:10vh;">
+    			<span class="carousel-control-prev-icon primary" aria-hidden="true"></span>
+    			<span class="visually-hidden">Previous</span>
+  			</button>
+  			<button class="carousel-control-next position-absolute top-50 end-0 translate-middle-y" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="z-index:9999;height:10vh;">
+    			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    			<span class="visually-hidden">Next</span>
+  			</button>
+  			<div id="content_modal"class="modal-dialog modal-lg modal-dialog-centered">
+   				 <div class="modal-content" style="border-radius: 20px;">
+   				 	<div class="modal-body">
+   				 		<div class="container">
+   				 			<div class="row"> 
+    							<div class="col-lg-8">
+       								<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+       									<div class="carousel-inner">
+       									<!-- 비동기로 데이터를 받아서 뿌려줄 부분 -->
+  										</div>
+									</div>
+      							</div>
+      							<div class="col-lg-4 d-flex flex-column">
+      								<div id="board_title" class="border-bottom mx-1 p-3"style="font-size:1vw;"></div>
+            						<div id="board_content"class="p-2 border-bottom mx-1" style="height:90%; overflow:auto; font-size:0.8vw;"></div>
+           		 					<div class="p-2 d-flex align-items-center">
+            							<i id="like_icon" onclick="updateLike();" class="fas fa-heart text-dark mx-2 my-1" style="cursor:pointer; font-size:20px;"></i>
+            							<div id="like_description" style="font-size:12px; cursor:pointer;" onclick="fetchLikeUserList();"class="p-2"></div>
+            						</div>
+      							</div>
+      						</div>
+      					</div>	
+      				</div>	
   			  </div>
  		 </div>
 		</div>
@@ -262,13 +285,28 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			for(let i = 0; i<fileList.length; i++){
 					let carouselItem = document.createElement("div")
 					let img = document.createElement("img");
-					img.setAttribute("class","d-block w-100 img-fluid");
-					img.setAttribute("style","height:100%;");
+// 					let img = document.createElement("img");
+// 					img.setAttribute("id","content_img")
+// 					img.setAttribute("class","d-block w-100 img-fluid");
+// 					img.setAttribute("style","width:30rem;");
+// 					img.src="/images/2021/4/12/2cdfe272-71d5-42d5-8b59-cb4d30b6809b";
+// // 					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
+// //					img.style="width:100%;height:100%;object-fit:cover;";
+				if(i==0){
+					img.setAttribute("id","content_img")
+					img.setAttribute("class","d-block w-100");
+					img.setAttribute("style","width:25rem; height:25rem; object-fit:contain;");
+// 					img.src="/images/2021/4/12/2cdfe272-71d5-42d5-8b59-cb4d30b6809b";
 					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
 //					img.style="width:100%;height:100%;object-fit:cover;";
-				if(i==0){
 					carouselItem.setAttribute("class","carousel-item active");
 				}else{
+					img.setAttribute("id","content_img")
+					img.setAttribute("class","d-block w-100");
+					img.setAttribute("style","width:25rem; height:25rem; object-fit:contain;");
+					img.src="/images/2021/4/12/2cdfe272-71d5-42d5-8b59-cb4d30b6809b";
+// 					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
+//					img.style="width:100%;height:100%;object-fit:cover;";
 					carouselItem.setAttribute("class","carousel-item");
 				}
 	       			carouselItem.appendChild(img);
@@ -596,6 +634,14 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			}
 			$('#followerListModal').modal("show")
 		});
+	}
+	
+	function sendDirectMessage(){
+		let nickName = '${personalUserInfo.nickName}';
+		let userId ='${personalUserInfo.userId}';
+	
+// 		alert("nickName : "+ nickName+" 이고 userId : "+ userId);
+		location.href="/chat/direct?sendDirectNickName="+nickName+"&sendDirectUserId="+userId
 	}
 	</script>
 	

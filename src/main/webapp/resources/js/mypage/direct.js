@@ -7,8 +7,11 @@ let msgToNickName = null;
 function sendMessage() {
 	if (event.keyCode == 13) {
 		let msg = document.getElementById("msg_box").value;
+		let a = msg.substr(" ");
+		console.log(a.length);
+		console.log(msg.trim()+"asd");
 		let spaceArea = /\s/;
-		if (!spaceArea.exec(msg)) {
+		if (msg.trim()!="") {
 			drawMyChatting(msg);
 			let msgTime = getCurrentTime();
 			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgFromNickName' : currentUserNickName,'msgTo': selectUser,'msgToNickName' :msgToNickName ,'msgTime' : msgTime }));
@@ -21,7 +24,7 @@ function sendMessage() {
 }
 
 function createRoomId(selectedUserInfo){
-	selectUser = selectedUserInfo.toId //팔로우 목록중 한명을 클릭했을 시 선택한 유저의 ID를 'selectUser' 변수에 담는다.
+	selectUser = selectedUserInfo.userId //팔로우 목록중 한명을 클릭했을 시 선택한 유저의 ID를 'selectUser' 변수에 담는다.
 	msgToNickName = selectedUserInfo.nickName;
 	enterChatRoomImpl(currentUserId,selectUser); //입장한 채팅방의 번호를 가져온다.
 //	let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
@@ -192,8 +195,8 @@ function drawYourChatting(msg){
 	let followingUserItemList = document.querySelectorAll(".item_following_user")
 	for(let i=0;i<followingUserItemList.length; i++){
 		followingUserItemList[i].addEventListener("click",(e)=>{
-			if(e.target.dataset.userid==followingList[i].toId){
-		createRoomId(followingList[i]);
+			if(e.target.dataset.userid==senderList[i].userId){
+		createRoomId(senderList[i]);
 			}
 		});
 	}

@@ -9,7 +9,7 @@ import com.we.art.chat.model.vo.ChatRoom;
 public interface ChatService {
 
 	public int insertChatRoom(ChatRoom charRoom);
-	public List<Map<String,String>> selectFollowingList(String userId);
+	public List<Map<String,String>> selectSenderList(String userId);
 	public ChatRoom selectRoomId(ChatRoom chatRoom);
 	public List<ChatRoom> selectMyChatRoomList(String userId);
 	public int insertChatContent(ChatContent chatContent);

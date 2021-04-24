@@ -45,12 +45,12 @@ public class PersonalController {
 		System.out.println(userInfo);
 		User user = new User();
 		user.setNickName(nickName);
-		user = personalService.selectUserByNickName(user);
+		Map<String,String> personalUserInfo = personalService.selectUserByNickName(user);
 		String pageState = null; 
 		
 		//이 유저의 팔로워 수, 팔로잉 한 수를 구한다.
-		int followingCount = personalService.selectFollowingCount(user.getUserId());
-		int followerCount = personalService.selectFollowerCount(user.getUserId());
+		int followingCount = personalService.selectFollowingCount(personalUserInfo.get("userId"));
+		int followerCount = personalService.selectFollowerCount(personalUserInfo.get("userId"));
 	
 		
 		if(userInfo==null) {
@@ -63,7 +63,7 @@ public class PersonalController {
 				System.out.println("isMine");
 				pageState = "isMine";
 				//만약 내가 이사람을 팔로잉 한 상태라면
-			}else if(personalService.selectUserIsFollowing(new Following(userInfo.getUserId(),user.getUserId()))!=null) {
+			}else if(personalService.selectUserIsFollowing(new Following(userInfo.getUserId(),personalUserInfo.get("userId")))!=null) {
 				//팔로잉 버튼을 언팔로우 버튼으로 바꿔야한다.
 				System.out.println("isFollowed");
 				pageState = "isFollowed";
@@ -73,9 +73,9 @@ public class PersonalController {
 			}
 		}
 		
+		System.out.println("아아아아 : "+ personalUserInfo);
 		
-		
-		List<Map<String,Object>> boardInfo = boardService.selectBoardByUserId(user.getUserId());
+		List<Map<String,Object>> boardInfo = boardService.selectBoardByUserId(personalUserInfo.get("userId"));
 		if(boardInfo!=null) {
 			for(int i = 0; i< boardInfo.size(); i++) {
 				System.out.println("게시물정보 :"+boardInfo.get(i).get("board"));		
@@ -89,7 +89,7 @@ public class PersonalController {
 		model.addAttribute("followerCount",followerCount);
 		model.addAttribute("pageState",pageState);
 		model.addAttribute("personalBoardInfoList",boardInfo);
-		model.addAttribute("personalUserInfo",user);
+		model.addAttribute("personalUserInfo",personalUserInfo);
 		return "personal/personal_page";
 	}
 
@@ -98,8 +98,8 @@ public class PersonalController {
 	public int reSetFollowingCountimpl(@RequestParam("nickName") String nickName){
 		User user = new User();
 		user.setNickName(nickName);
-		user = personalService.selectUserByNickName(user);
-		return personalService.selectFollowerCount(user.getUserId());
+		Map<String,String> personalUserInfo = personalService.selectUserByNickName(user);
+		return personalService.selectFollowerCount(personalUserInfo.get("userId"));
 	}
 	
 	@GetMapping("resetfollowercountimpl")
@@ -107,8 +107,8 @@ public class PersonalController {
 	public int reSetFollowerCountimpl(@RequestParam("nickName") String nickName){
 		User user = new User();
 		user.setNickName(nickName);
-		user = personalService.selectUserByNickName(user);
-		return personalService.selectFollowingCount(user.getUserId());
+		Map<String,String> personalUserInfo = personalService.selectUserByNickName(user);
+		return personalService.selectFollowingCount(personalUserInfo.get("userId"));
 	}
 	
 	

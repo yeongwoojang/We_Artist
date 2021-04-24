@@ -21,6 +21,7 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 		chatRoom.seconduser = "${item.secondUser}";
 		myChatRoomList.push(chatRoom)
 	</c:forEach>
+		console.dir(myChatRoomList);
 	connectSocket(); //소켓 연결
 	connectPushSocket();
 	fetchNotiCount();
@@ -284,19 +285,19 @@ function clickNoti(liTag,pushInfo){
 
 
 function directMessage(){
-	
-	let followingInfo;
-	<c:forEach var="followingInfo" items="${followingList}" varStatus="status">
-		followingInfo= new Object();
-		followingInfo.toId = "${followingInfo.toId}";
-		followingInfo.nickName = "${followingInfo.nickName}";
-		followingList.push(followingInfo);
-	</c:forEach>
-	for(let i=0; i<followingList.length; i++){
-		if(followingList[i].nickName == "${sendDirect}"){
-			createRoomId(followingList[i])
-		}
+	let obj= new Object();
+	obj.userId = "${sendDirect.userId}";
+	obj.nickName="${sendDirect.nickName}";
+	if(obj.userId!="0" && obj.nickName!="0"){
+		createRoomId(obj)
 	}
+// 	for(let i=0; i<list.length; i++){
+// 		console.log("123")
+// 		if(list[i].nickName == "${sendDirect}"){
+// 			console.log(list[i].nickName)
+// 			createRoomId(obj)
+// 		}
+// 	}
 }
 
 function createNewRoom(fromId,toId){
