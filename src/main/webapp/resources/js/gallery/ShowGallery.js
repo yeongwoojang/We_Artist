@@ -9,6 +9,16 @@ let galleryData = new Object();
 let imgData = new Object();
 let mouse = { x:0, y:0}; // 마우스 클릭시 x,y축을 저장
 
+let isGalleryNull = () => {
+	initGallery();
+	if(imgData == null){
+		init();
+		animate();
+	}else{
+		document.querySelector('#divUpload').className = 'card position-absolute';
+	}
+}
+
 let initGallery = () => {
 	let list = document.querySelector('#userGalleryList');
 	for(let item of list.children){
@@ -152,5 +162,7 @@ let render = () => {
     renderer.render(scene,camera);
 }
 
-init();
-animate();
+
+isGalleryNull();
+//init();
+//animate();

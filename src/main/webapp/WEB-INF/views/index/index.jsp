@@ -44,7 +44,7 @@
   <script src="assets/js/main.js"></script>
   
   <!-- Gallery JS File -->
-  <script src="https://threejs.org/build/three.min.js"></script>
+  <script src="${context}/resources/js/gallery/three.js"></script>
   <script src="${context}/resources/js/gallery/GLTFLoader.js"></script>
   <script type='module' src="${context}/resources/js/gallery/indexBack.js"></script>
 </body>

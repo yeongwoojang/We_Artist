@@ -4,9 +4,16 @@
 
 <section class="position-relative">
 	<div class="card w-50 mx-auto">
-		<div class="card-header">
-			Gallery Setting
-		</div>
+		<div class="card-header d-flex justify-content-between">
+				<div class="align-self-center">
+					Upload
+				</div>
+				<div class="flex-inline justify-content-end">
+					<div class="btn btn-danger btn-sm" id="btn-closes">
+						X
+					</div> 
+				</div>
+			</div>
 		<div class="row justify-content-center">
 			<c:forEach items="${userGalleryData}" var="data" begin="3" end="5" varStatus="status">			
 				<div class="col-3">
