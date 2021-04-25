@@ -43,4 +43,6 @@ public interface BoardRepository {
 	int selectLikeCount(@Param("bdNo")String bdNo);
 	
 	int insertLikeHistory(LikeHistory likeHistory);
+	
+	int deleteBoardById(@Param("bdNo") String bdNo);
 }

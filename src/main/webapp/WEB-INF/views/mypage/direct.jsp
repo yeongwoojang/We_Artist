@@ -28,22 +28,27 @@
 	<section id="contact" class="section-bg d-flex justify-content-center">
 		<div class="row container float-center" style="height:80vh;">
 			<div id="follow_list"class="card col-4">
-				<div id="userId" class="card-header p-4 bg-white text-center fw-bold">${userInfo.nickName}님의 팔로우 목록</div> 
-				<div class="card-body d-flex flex-column" style="width:100%;height:70vh; overflow:auto;">
+				<div id="userId" class="card-header p-4 bg-white text-center fw-bold">${userInfo.nickName}</div> 
+				<div id="sender_list_box"class="card-body d-flex flex-column" style="width:100%;height:70vh; overflow:auto;">
 					<c:forEach var ="senderInfo" items ="${senderList}" varStatus="status">
 						<c:set var="loop_flag" value="false" />
 						<div class="chat_room_card card p-3 position-relative mb-2">
 							<a href="#" class="following_user text-dark mb-3 item_following_user fw-bold" data-userid="${senderInfo.userId}"><c:out value="${senderInfo.nickName}"></c:out></a>
 							<c:forEach var="chatContent" items="${lastMessageList}" varStatus="sts">
 								<c:if test="${chatContent.msgFrom == senderInfo.userId || chatContent.msgTo ==senderInfo.userId}">
-									<div class="last_message text-secondary"><c:out value="${chatContent.msg}"></c:out></div>
+									<c:if test="${chatContent.msgFrom !=userInfo.userId}">
+									<div class="last_message text-dark fw-bold"><c:out value="${chatContent.msg}"></c:out></div>
+									</c:if>
+									<c:if test="${chatContent.msgFrom == userInfo.userId}">
+									<div class="last_message text-dark"><c:out value="${chatContent.msg}"></c:out></div>
+									</c:if>
 									<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px; font-size:1px;"><c:out value="${chatContent.msgTime}"></c:out></p>
 									<c:set var="loop_flag" value="true" />
 								</c:if>
 						   </c:forEach>
 						    <c:if test="${not loop_flag}">
 						   <div class="last_message text-secondary"></div>
-							<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px;"></p>
+							<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px; font-size:1px;"></p>
 							</c:if>
 						</div>
 					</c:forEach>
@@ -88,6 +93,7 @@
 	
 	</main>	
 		<%@include file ="/WEB-INF/views/include/footer.jsp" %>
+		<script src="${context}/resources/js/mypage/direct.js"></script>
 		<script>
 			let senderList = new Array();
 			let obj;
@@ -97,12 +103,8 @@
 				obj.nickName = "${senderInfo.nickName}";
 				senderList.push(obj);
 			</c:forEach>
-			console.dir(senderList);
 		</script>
-	<script src="${context}/resources/js/mypage/direct.js"></script>
-	<script>
 	
-
-	</script>
+	
 </body>
 </html>

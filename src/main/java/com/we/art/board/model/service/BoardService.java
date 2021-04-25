@@ -27,4 +27,6 @@ public interface BoardService {
 	int selectLikeCount(String bdNo);
 	
 	int insertLikeHistory(LikeHistory likeHistory);
+	
+	int deleteBoardById(String bdNo);
 }

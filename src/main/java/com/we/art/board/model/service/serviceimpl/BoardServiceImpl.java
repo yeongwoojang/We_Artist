@@ -104,8 +104,12 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int insertLikeHistory(LikeHistory likeHistory) {
-		System.out.println("좋아요 기록");
 		return boardRepository.insertLikeHistory(likeHistory);
+	}
+
+	@Override
+	public int deleteBoardById(String bdNo) {
+		return boardRepository.deleteBoardById(bdNo);
 	}
 	
 	
