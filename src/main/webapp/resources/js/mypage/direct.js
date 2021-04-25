@@ -7,10 +7,6 @@ let msgToNickName = null;
 function sendMessage() {
 	if (event.keyCode == 13) {
 		let msg = document.getElementById("msg_box").value;
-		let a = msg.substr(" ");
-		console.log(a.length);
-		console.log(msg.trim()+"asd");
-		let spaceArea = /\s/;
 		if (msg.trim()!="") {
 			drawMyChatting(msg);
 			let msgTime = getCurrentTime();
@@ -24,14 +20,9 @@ function sendMessage() {
 }
 
 function createRoomId(selectedUserInfo){
-	selectUser = selectedUserInfo.userId //팔로우 목록중 한명을 클릭했을 시 선택한 유저의 ID를 'selectUser' 변수에 담는다.
-	msgToNickName = selectedUserInfo.nickName;
+	selectUser = selectedUserInfo.userId //채팅방을 연결할 유저의 아이디
+	msgToNickName = selectedUserInfo.nickName; //채팅방을 연결할 유저의 닉네임
 	enterChatRoomImpl(currentUserId,selectUser); //입장한 채팅방의 번호를 가져온다.
-//	let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
-//	let sendMessageBox = document.getElementById("send_message_box"); //메시지를입력하는 box
-//	chatIndex.parentNode.removeChild(chatIndex); //유저를 선택하면 chatIndex 제거
-//	sendMessageBox.style.visibility="visible" // 메세지를 입력하는 box를 보이게한다.
-//	subscribeChannel(currentRoomId); // 선택한 유저를 구독
 }
 
 
@@ -55,8 +46,7 @@ function enterChatRoomImpl(currentUserId,selectUser){
 	})
 	.then((text)=>{
 		if(text!='failed'){
-			//TODO 채팅방 만들기를 성공했을 시
-			currentRoomId = text;
+			currentRoomId = text; //채팅방 번호를 반환 받는다.
 			let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
 			let sendMessageBox = document.getElementById("send_message_box"); //메시지를입력하는 box
 			if(chatIndex!=null){
@@ -69,6 +59,19 @@ function enterChatRoomImpl(currentUserId,selectUser){
 			let chatBox = document.getElementById("chat_box");
 			chatBox.innerHTML = "";
 			selectChatContentListImpl(currentRoomId,currentUserId,selectUser);
+			//만약 새로 생성한 채팅방 번호라면...
+			if(myChatRoomList.indexOf(currentRoomId<0)){
+				
+				//내가 속한 채팅방 리스트를 다시 내려받고 
+				//채팅방 구독 리스트를 업데이트
+				 stompClient.disconnect();
+				reSetMyChatRoomList();
+				
+				//상대방에게 채팅방을 개설했다는 신호를 푸시 소켓을 통해 전송
+				stompPushClient.send("/push", {}, JSON.stringify(
+					{'fromId' : currentUserId, 'toId': selectUser, 'nickName' : null, 'bdNo' :null, 'notiMethod' : 'direct' ,'message' : null}
+				)); 		
+			} 
 		}else{
 			//TODO 채팅방 만들기를 실패했을 시
 		}
@@ -196,7 +199,7 @@ function drawYourChatting(msg){
 	for(let i=0;i<followingUserItemList.length; i++){
 		followingUserItemList[i].addEventListener("click",(e)=>{
 			if(e.target.dataset.userid==senderList[i].userId){
-		createRoomId(senderList[i]);
+			createRoomId(senderList[i]);
 			}
 		});
 	}

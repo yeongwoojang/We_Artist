@@ -639,12 +639,9 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 	function sendDirectMessage(){
 		let nickName = '${personalUserInfo.nickName}';
 		let userId ='${personalUserInfo.userId}';
-	
-// 		alert("nickName : "+ nickName+" 이고 userId : "+ userId);
 		location.href="/chat/direct?sendDirectNickName="+nickName+"&sendDirectUserId="+userId
 	}
 	</script>
-	
 	
 </body>
 </html>

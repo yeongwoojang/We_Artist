@@ -21,7 +21,7 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 		chatRoom.seconduser = "${item.secondUser}";
 		myChatRoomList.push(chatRoom)
 	</c:forEach>
-		console.dir(myChatRoomList);
+	console.dir(myChatRoomList);
 	connectSocket(); //소켓 연결
 	connectPushSocket();
 	fetchNotiCount();
@@ -31,7 +31,7 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 // 소켓 연결을 위한 함수
 let connectSocket = function(){
 	let currentURI = document.location.pathname; //현재 페이지의 uri을 가져오는 코드
-
+	console.log(currentURI);
 	let socket = new SockJS("/chat/room1"); //sockJS객체 생성 endPoint : "room1"
 	stompClient = Stomp.over(socket); //stomp객체에 sockJs객체 연경
 	stompClient.connect({}, function(frame) {  
@@ -61,6 +61,9 @@ let connectSocket = function(){
 					for(let i =0; i< chatRoomCard.length; i++){
 						let uName = chatRoomCard[i].childNodes[1].innerHTML
 						//메세지를 보낸 유저와 팔로잉 한 유저가 일치한다면 그 유저가 보낸 메세지를 Cardview에 표시
+						console.log("uName : "+uName)
+						console.log("msgFromNickName" +msgFromNickName)
+						console.log("msgToNickName" +msgToNickName)
 						if((uName==msgFromNickName || uName == msgToNickName )){
 							lastMessage[i].innerHTML = lastMsg
 							lastMessageTime[i].innerHTML = getCurrentTime();
@@ -162,7 +165,7 @@ function connectPushSocket(){
 			let notiMethod = pushInfo.notiMethod;
 			
 			//<우측 하단 토스트를 띄워주기 위한 부분>
-			if(fromId!=toId){
+			if((fromId!=toId) && notiMethod!='direct'){
 				let followingMessage = document.getElementById("followingMessage");
 				followingMessage.innerHTML = message;
 				document.getElementById("liveFollowingToast").className ="toast show";
@@ -194,6 +197,9 @@ function connectPushSocket(){
 				});
 				listGroup.appendChild(notiInfo);
 				notiBox.appendChild(listGroup);
+			}else if(notiMethod=='direct'){
+				 stompClient.disconnect();
+		         reSetMyChatRoomList();
 			}
 		});
 	});
@@ -291,13 +297,6 @@ function directMessage(){
 	if(obj.userId!="0" && obj.nickName!="0"){
 		createRoomId(obj)
 	}
-// 	for(let i=0; i<list.length; i++){
-// 		console.log("123")
-// 		if(list[i].nickName == "${sendDirect}"){
-// 			console.log(list[i].nickName)
-// 			createRoomId(obj)
-// 		}
-// 	}
 }
 
 function createNewRoom(fromId,toId){

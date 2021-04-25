@@ -73,8 +73,6 @@ public class PersonalController {
 			}
 		}
 		
-		System.out.println("아아아아 : "+ personalUserInfo);
-		
 		List<Map<String,Object>> boardInfo = boardService.selectBoardByUserId(personalUserInfo.get("userId"));
 		if(boardInfo!=null) {
 			for(int i = 0; i< boardInfo.size(); i++) {
@@ -138,11 +136,3 @@ public class PersonalController {
 		return followerList;
 	}
 }
-
-
-
-//
-//List<User> followerList = personalService.selectFollowerList(user.getUserId());
-//if(followerList==null) {
-//	followerList = new ArrayList<>();
-//}
