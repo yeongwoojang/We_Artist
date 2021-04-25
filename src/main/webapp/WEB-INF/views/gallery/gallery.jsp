@@ -4,6 +4,15 @@
 	<section id="hero">
 	    <div class="hero-container middle" data-aos="zoom-in" data-aos-delay="100">
 		
+		<div class="d-none" id="divUpload">
+			<div class="card-body bg-dark">
+				<p>${galleryUserId} 님의 Gallery에</p>
+				<p>아직 업로드된 작품이 없습니다.</p>
+				<a href="${context}/galleryinfo" class="btn btn-light">업로드 하러가기</a>
+			</div>
+		</div>
+		
+		
 	   
 	    <div class="d-none" style="width: 600px; background-color: rgba(0,0,0,0.8)" id="divTest">
 		  <img class="card-img-top" src="" alt="Card image cap" id="imgInfo">

@@ -44,16 +44,15 @@ public class GalleryController {
 	
 	@GetMapping("gallery/{userId}")
 	public String ShowGallery(@PathVariable(name = "userId")String userId, Model model) {
-		System.out.println("userId = " + userId);
-		System.out.println(galleryService.selectGalleryByUserId(userId));
-		model.addAttribute("galleryList",galleryService.selectGalleryByUserId(userId));       
+		model.addAttribute("galleryList",galleryService.selectGalleryByUserId(userId));
+		model.addAttribute("galleryUserId", userId);
 		return "gallery/gallery";
 	}
 	
 	@GetMapping("galleryinfo")
 	public String setGallery(@SessionAttribute(name="userInfo", required = false)User user,Model model) {
-		String userId = "test01";
-		//String userId = user.getUserId();
+		//String userId = "test01";
+		String userId = user.getUserId();
 		
 		model.addAttribute("userGalleryData", galleryService.selectGalleryInfoByUserId(userId));
 		model.addAttribute("userBoardData", boardService.selectBoardByUserId(userId));
