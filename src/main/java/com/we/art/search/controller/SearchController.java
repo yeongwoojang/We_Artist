@@ -45,7 +45,7 @@ public class SearchController {
 	
 	@GetMapping("tag")
 	@ResponseBody
-	public List<Map<String,Object>>searchByTag(@RequestParam("tag") String tag, Model model) {
+	public List<Map<String,Object>> searchByTag(@RequestParam("tag") String tag, Model model) {
 		System.out.println("검색할 태그 : "+ tag);
 		List<Map<String, Object>> searchResultList = searchService.selectBoardByTag("#"+tag);
 		if(searchResultList.size()==0) {
@@ -54,4 +54,51 @@ public class SearchController {
 		System.out.println("검색 결과 : "+searchResultList);
 		return searchResultList;
 	}
+	
+	@GetMapping("bdTitle")
+	@ResponseBody
+	public List<Map<String,Object>> searchByTitle(@RequestParam("bdTitle") String bdTitle, Model model){
+		List<Map<String,Object>> searchResultList = searchService.selectBoardByTitle(bdTitle);
+		if(searchResultList.size()==0) {
+			searchResultList = new ArrayList<>();
+		}
+		System.out.println("검색 결과 : "+ searchResultList);
+		return searchResultList;
+	}
+	
+	@GetMapping("bdContent")
+	@ResponseBody
+	public List<Map<String,Object>> searchByContent(@RequestParam("bdContent") String bdContent, Model model){
+		List<Map<String,Object>> searchResultList = searchService.selectBoardByContent(bdContent);
+		if(searchResultList.size()==0) {
+			searchResultList = new ArrayList<>();
+		}
+		System.out.println("검색 결과 : "+ searchResultList);
+		return searchResultList;
+	}
+	
+	@GetMapping("name")
+	@ResponseBody
+	public List<Map<String,Object>> searchByName(@RequestParam("name") String name, Model model){
+		List<Map<String,Object>> searchResultList = searchService.selectBoardByName(name);
+		if(searchResultList.size()==0) {
+			searchResultList = new ArrayList<>();
+		}
+		System.out.println("검색 결과 : "+ searchResultList);
+		return searchResultList;
+	}	
+	
+	@GetMapping("all")
+	@ResponseBody
+	public List<Map<String,Object>> searchAll(Model model){
+		System.out.println("보드올실행");
+		List<Map<String,Object>> searchResultList = searchService.selectAllImageFile();
+		if(searchResultList.size()==0) {
+			searchResultList = new ArrayList<>();
+		}
+		System.out.println("검색 결과 : "+ searchResultList);
+		return searchResultList;
+	}	
+	
+	
 }

@@ -42,10 +42,14 @@
 	) t2 ON(t1.CHAT_ROOM_NO = t2.CHAT_ROOM_NO) WHERE t1.MSG_TIME = t2.MSG_TIME AND t1.RowIdx = 1
 	</select>
 	
-	<select id="selectFollowingList" resultMap="followingData">
-		SELECT TO_ID,NICKNAME FROM TB_FOLLOWING JOIN TB_USER 
-		ON(TO_ID = USER_ID)
-		WHERE FROM_ID =#{userId}
+	<select id="selectSenderList" resultMap="followingData">
+		SELECT DISTINCT NICKNAME, USER_ID
+		FROM
+		(
+		SELECT * FROM TB_CHAT_CONTENT
+		WHERE (MSG_FROM=#{userId} OR MSG_TO=#{userId})
+		) C JOIN TB_USER
+		ON(MSG_TO=USER_ID OR MSG_FROM =USER_ID) WHERE USER_ID !=#{userId}
 	</select>
 	
 	
@@ -66,6 +70,7 @@
 	<resultMap type="map" id="followingData">
 		<result column="TO_ID" javaType="String" property="toId"/>
 		<result column="NICKNAME" javaType="String" property="nickName"/>
+		<result column="USER_ID" javaType="String" property="userId"/>
 	</resultMap>
 </mapper>
 <!-- 	<select id="selectLastMessageList" parameterType="map" resultType="chatContent"> -->

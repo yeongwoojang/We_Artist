@@ -1,6 +1,7 @@
 package com.we.art.personal.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -11,8 +12,7 @@ import com.we.art.user.model.vo.User;
 @Mapper
 public interface PersonalRepository {
 	
-	@Select("SELECT *FROM TB_USER WHERE NICKNAME = #{nickName}")
-	public User selectUserByNickName(User user);
+	public Map<String,String> selectUserByNickName(User user);
 	
 	@Select("SELECT *FROM TB_FOLLOWING WHERE FROM_ID = #{fromId} AND TO_ID = #{toId}") //만약 팔로잉 한 사람이라면
 	public Following selectUserIsFollowing(Following following);

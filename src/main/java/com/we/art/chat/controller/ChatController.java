@@ -36,22 +36,28 @@ public class ChatController {
 	@GetMapping("direct")
 	public String direct(@SessionAttribute("userInfo") User userInfo,
 			@SessionAttribute("myChatRoomList") List<ChatRoom> myChatRoomList,
-			@RequestParam(value = "sendDirect", required = false, defaultValue = "0") String sendDirect, HttpSession session,
+			@RequestParam(value = "sendDirectNickName", required = false, defaultValue = "0") String sendDirectNickName,
+			@RequestParam(value = "sendDirectUserId", required = false, defaultValue = "0") String sendDirectUserId,
+			HttpSession session,
 			Model model) {
 		
-		List<Map<String,String>> followingList = new ArrayList<Map<String,String>>();
-		followingList = chatService.selectFollowingList(userInfo.getUserId());
+		System.out.println("다이렉트 메세지 보낼 사람: "+sendDirectNickName+" , "+sendDirectUserId );
+		User directUser = new User();
+		directUser.setNickName(sendDirectNickName);
+		directUser.setUserId(sendDirectUserId);
+		
+		List<Map<String,String>> senderList = new ArrayList<Map<String,String>>();
+		senderList = chatService.selectSenderList(userInfo.getUserId());
 		List<Map<String, Object>> lastMessageList = new ArrayList<>();
-		if (followingList.size() != 0) {
-			followingList = chatService.selectFollowingList(userInfo.getUserId());
+		if (senderList.size() != 0) {
+			senderList = chatService.selectSenderList(userInfo.getUserId());
 		}
 		if (myChatRoomList.size() != 0) {
 			lastMessageList = chatService.selectLastMessageList(myChatRoomList);
 		}
-		System.out.println("컨트롤러에있는 팔로잉 리스트"+followingList);
-		model.addAttribute("sendDirect",sendDirect);
-		model.addAttribute("followingList", followingList);
-		System.out.println("팔로잉 인포 : "+ followingList);
+		System.out.println("senderList : "+ senderList);
+		model.addAttribute("sendDirect",directUser);
+		model.addAttribute("senderList", senderList);
 		model.addAttribute("lastMessageList", lastMessageList);
 		System.out.println("라스트메세지 : "+lastMessageList);
 		return "mypage/direct";
@@ -69,14 +75,18 @@ public class ChatController {
 	@ResponseBody
 	public String enterChatRoom(@RequestBody ChatRoom chatRoom) {
 		System.out.println("이건 컨트롤러 챗룸 : "+ chatRoom);
+		//이미 만들어진 채팅방이 있는 지 확인
 		ChatRoom currentChatRoom = chatService.selectRoomId(chatRoom);
+		//만약 이미 만들어진 채팅방이 있다면
 		if (currentChatRoom != null) {
-			System.out.println("있다.");
+			//그 채팅방의 번호를 반환
 			return currentChatRoom.getChatRoomNo();
 		} else {
-			System.out.println("없다.");
+			//만약 이미 만들어진 채팅방이 없다면
+			//채팅방을 새로 생성
 			int res = chatService.insertChatRoom(chatRoom);
 			if (res != 0) {
+				//채팅방 생성을 성공했으면 방금 그 채팅방 번호를 반환
 				currentChatRoom = chatService.selectRoomId(chatRoom);
 				if (currentChatRoom != null) {
 					return currentChatRoom.getChatRoomNo();
@@ -92,7 +102,6 @@ public class ChatController {
 	@PostMapping("insertchatcontentimpl")
 	@ResponseBody
 	public String insertChatContentImpl(@RequestBody ChatContent chatContent) {
-		System.out.println(chatContent);
 		int res = chatService.insertChatContent(chatContent);
 		if (res != 0) {
 			return "success";
@@ -108,7 +117,6 @@ public class ChatController {
 		System.out.println(chatRoom.getFirstUser());
 		System.out.println(chatRoom.getSecondUser());
 		chatContentList = chatService.selectChatContentList(chatRoom);
-		System.out.println("결과 : " + chatContentList);
 		return chatContentList;
 	}
 

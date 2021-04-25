@@ -2,6 +2,7 @@ package com.we.art.personal.model.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class PersonalServiceImpl implements PersonalService{
 
 
 	@Override
-	public User selectUserByNickName(User user) {
+	public Map<String,String> selectUserByNickName(User user) {
 		return personalRepository.selectUserByNickName(user);
 	}
 

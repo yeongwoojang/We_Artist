@@ -1,7 +1,17 @@
-function searchByTag(){
+let searchType;
+
+function search(){
 let searchBox = document.getElementById("search_box");
-	selectBoardByTag(searchBox.value);
-	console.log(searchBox.value);
+console.log(searchType);
+	if(searchType=='tag'){
+		selectBoardByTag(searchBox.value);
+	}else if(searchType=='bdTitle'){
+		selectBoardByTitle(searchBox.value);
+	}else if(searchType=='bdContent'){
+		selectBoardByContent(searchBox.value);
+	}else if(searchType=='name'){
+		selectBoardByName(searchBox.value);
+	}
 }
 
 function selectBoardByTag(tag){
@@ -15,8 +25,78 @@ function selectBoardByTag(tag){
 			return response.text();
 		}
 	}).then((text)=>{
-		console.dir(JSON.parse(text));
+		document.getElementById("search_box").value="";
 		let boardList = JSON.parse(text);
+		drawSearchResult(boardList);
+	});
+}
+
+
+
+
+function selectBoardByTitle(bdTitle){
+	const url = '/search/bdTitle?bdTitle='+bdTitle;
+	fetch(url,{
+		method : "GET"
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		let boardList = JSON.parse(text);
+		document.getElementById("search_box").value="";
+		drawSearchResult(boardList);
+		
+	});
+}
+
+function selectBoardByContent(bdContent){
+	const url = '/search/bdContent?bdContent='+bdContent;
+	fetch(url,{
+		method : "GET"
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		document.getElementById("search_box").value="";
+		let boardList = JSON.parse(text);
+		drawSearchResult(boardList);
+	});
+}
+
+function selectBoardByName(name){
+	const url = '/search/name?name='+name;
+	fetch(url,{
+		method : "GET"
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		document.getElementById("search_box").value="";
+		let boardList = JSON.parse(text);
+		drawSearchResult(boardList);
+	});
+}
+
+function selectBoardAll(){
+	console.log("selectBoardAll")
+	const url = '/search/all';
+	fetch(url,{
+		method : "GET"
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		let boardList = JSON.parse(text);
+		drawSearchResult(boardList);
+	});
+}
+
+
+function drawSearchResult(boardList){
 		imageList = boardList;
 		let imageLayout = document.getElementById("image_layout");
 		while(imageLayout.hasChildNodes()){
@@ -24,10 +104,6 @@ function selectBoardByTag(tag){
 		}
 		console.dir(imageList);
 		for(let i = 0; i<imageList.length; i++){
-			console.log(imageList[i].tag);
-			console.log(imageList[i].fIdx);
-			console.log(imageList[i].nickName);
-			
 		let wrapImageBox = document.createElement("div");
 		wrapImageBox.setAttribute("class","col-lg-3 col-md-4");
 		
@@ -50,14 +126,11 @@ function selectBoardByTag(tag){
 		
 		for(let i=0;i<imageItemList.length; i++){
 			imageItemList[i].addEventListener('click',(e)=>{
-				console.dir(imageItemList[i].dataset.fidx);
 				showModal(imageItemList[i].dataset.imagelink,imageItemList[i].dataset.fidx,imageItemList[i].dataset.nickname);
 			});
 			
 			}	
-	});
 }
-
 
 function movePersonalPage(){
 	let nickName = document.getElementById("user_nickname").innerHTML;
@@ -78,4 +151,21 @@ function movePersonalPage(){
 	  $('#exampleModal').modal("hide");
   })
   myModalEl.addEventListener('shown.bs.modal',function(event){
+	
   });
+
+
+let list = document.querySelectorAll('.btn-check');
+	list.forEach((e)=>{
+		if(e.checked){
+			searchType = e.dataset.type;
+		}
+		e.addEventListener('click',(event)=>{
+			searchType = event.target.dataset.type;
+			if(searchType=='all'){
+				selectBoardAll();
+			}
+		});
+	});
+
+

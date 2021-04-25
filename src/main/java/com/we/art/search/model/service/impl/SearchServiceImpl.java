@@ -27,6 +27,21 @@ public class SearchServiceImpl implements SearchService{
 	public List<Map<String,Object>> selectAllImageFile() {
 		return searchRepository.selectAllImageFile();
 	}
+
+	@Override
+	public List<Map<String, Object>> selectBoardByTitle(String bdTitle) {
+		return searchRepository.selectBoardByTitle(bdTitle);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectBoardByContent(String bdContent) {
+		return searchRepository.selectBoardByContent(bdContent);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectBoardByName(String name) {
+		return searchRepository.selectBoardByName(name);
+	}
 	
 	
 
