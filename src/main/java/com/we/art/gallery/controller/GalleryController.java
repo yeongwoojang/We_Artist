@@ -27,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.we.art.board.model.service.BoardService;
 import com.we.art.common.code.ConfigCode;
+import com.we.art.common.code.ErrorCode;
+import com.we.art.common.exception.ToAlertException;
 import com.we.art.gallery.model.service.GalleryService;
 import com.we.art.gallery.model.vo.Gallery;
 import com.we.art.user.model.vo.User;
@@ -43,8 +45,17 @@ public class GalleryController {
 	}
 	
 	@GetMapping("gallery/{userId}")
-	public String ShowGallery(@PathVariable(name = "userId")String userId, Model model) {
-		model.addAttribute("galleryList",galleryService.selectGalleryByUserId(userId));
+	public String ShowGallery(@PathVariable(name = "userId")String userId,
+							  @SessionAttribute(name="userInfo")User user,
+							  Model model) {
+		List<Map<String, Object>> galleryList = galleryService.selectGalleryByUserId(userId);
+		
+		if(!userId.equals(user.getUserId()) && galleryList == null) {
+			throw new ToAlertException(ErrorCode.GALLERYISNULL);
+		}else if(userId.equals("main")) {
+			galleryList = null;
+		}
+		model.addAttribute("galleryList",galleryList);
 		model.addAttribute("galleryUserId", userId);
 		return "gallery/gallery";
 	}
