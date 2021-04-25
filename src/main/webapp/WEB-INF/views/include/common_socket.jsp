@@ -33,8 +33,6 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 		 	directMessage();
 			}, 1000);
 	}
-		
-	
 
 }
 
