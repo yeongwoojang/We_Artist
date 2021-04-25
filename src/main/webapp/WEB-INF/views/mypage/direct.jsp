@@ -25,15 +25,15 @@
 </head>
 <body id="body">
 	<main id="main">
-	<section id="contact" class="section-bg d-flex justify-content-center">
-		<div class="row container float-center" style="height:80vh;">
-			<div id="follow_list"class="card col-4">
-				<div id="userId" class="card-header p-4 bg-white text-center fw-bold">${userInfo.nickName}</div> 
+	<section id="contact" class="section-bg bg-dark d-flex justify-content-center">
+		<div class="row container  d-flex justify-content-center align-items-center bg-light p-2" style="height:70vh; border-radius:50px;">
+			<div id="follow_list"class="card col-4 bg-light" style="height:60vh;">
+				<div id="userId" class="card-header p-4 bg-light text-center fw-bold">${userInfo.nickName}</div> 
 				<div id="sender_list_box"class="card-body d-flex flex-column" style="width:100%;height:70vh; overflow:auto;">
 					<c:forEach var ="senderInfo" items ="${senderList}" varStatus="status">
 						<c:set var="loop_flag" value="false" />
-						<div class="chat_room_card card p-3 position-relative mb-2">
-							<a href="#" class="following_user text-dark mb-3 item_following_user fw-bold" data-userid="${senderInfo.userId}"><c:out value="${senderInfo.nickName}"></c:out></a>
+						<div class="chat_room_card card p-3 position-relative mb-2 bg-light">
+							<a href="#" class="following_user text-dark mb-3 item_following_user" data-userid="${senderInfo.userId}"><c:out value="${senderInfo.nickName}"></c:out></a>
 							<c:forEach var="chatContent" items="${lastMessageList}" varStatus="sts">
 								<c:if test="${chatContent.msgFrom == senderInfo.userId || chatContent.msgTo ==senderInfo.userId}">
 									<c:if test="${chatContent.msgFrom !=userInfo.userId}">
@@ -54,18 +54,23 @@
 					</c:forEach>
 				</div>
 			</div>
-			<div id="chat_layout"class="card col-7" style="height:80vh;">
-				<div id="opponent" class="card-header bg-white p-4 fw-bold" style="visibility : hidden;"></div>
+			<div id="chat_layout"class="card col-7 bg-light" style="height:60vh;">
+				<div id="opponent_layout"class="d-flex justify-content-between align-items-center border-bottom py-3" style="visibility:hidden;">
+					<div id="opponent" class="bg-light p-2 fw-bold"></div>
+					<div onclick="showChatListModal();" style="cursor:pointer;">
+						<p id="plus"><i id="plus_content"class="fas fa-plus-circle position-absolute top-0 end-0 mx-3 mt-3"style="font-size:30px;"></i></p>
+					</div>
+				</div>
 					<div id="chat_box" class="card-body d-flex flex-column" style="overflow:auto;">
 					<div id="chat_index"class="container position-relative" style="width:30vw; height:100%">
-						<div onclick="">
+						<div onclick="showChatListModal();" style="cursor:pointer;">
 						<p class="position-absolute top-50 start-50 translate-middle"><i class="far fa-circle" style="font-size:45px;"></i></p>
 						<p class="position-absolute top-50 start-50 translate-middle"><i class="fas fa-location-arrow"style="font-size:25px;"></i></p>
 						</div>
 						
 					</div>
 					</div>
-					<div id="send_message_box" class="card-footer" style="visibility:hidden;">
+					<div id="send_message_box" class="card-footer bg-transparent" style="visibility:hidden;">
 						<div class="input-group border rounded-pill p-2 bg-white">
  			 				<input id="msg_box" type="text" class="form-control border border-0 bg-white shadow-none" placeholder="메시지를 입력하세요" style="outline:none" onkeydown="JavaScript:sendMessage();">
 						</div>
@@ -79,12 +84,12 @@
    				<div class="modal-content" style="border-radius: 20px;">
     				<div class="d-flex border-bottom p-2">
         				<div class="modal-title fw-bold text-center flex-fill" id="messageListModal">
-        				팔로워
+        				새로운 메세지
         				<button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
         				</div>
         			
       				</div>
-      				<ul id="follower_list"class="list-group list-group-flush m-2" style="overflow:auto; height:20vh;">
+      				<ul id="chat_list"class="list-group list-group-flush m-2" style="overflow:auto; height:20vh;">
       					<!-- 비동기로 데이터를 받아올 곳 -->
       				</ul>	
     			</div>
@@ -103,6 +108,7 @@
 				obj.nickName = "${senderInfo.nickName}";
 				senderList.push(obj);
 			</c:forEach>
+			console.dir(senderList);
 		</script>
 	
 	

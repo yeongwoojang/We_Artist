@@ -53,8 +53,10 @@ function enterChatRoomImpl(currentUserId,selectUser){
 			if(chatIndex!=null){
 				chatIndex.parentNode.removeChild(chatIndex); //유저를 선택하면 chatIndex 제거
 			}
+			let opponentLayout = document.getElementById("opponent_layout");
+			opponentLayout.setAttribute("style","visibility:visible;");
 			let opponent = document.getElementById("opponent");
-			opponent.style.visibility="visible";
+//			opponent.style.visibility="visible";
 			opponent.innerHTML = msgToNickName;
 			sendMessageBox.style.visibility="visible" // 메세지를 입력하는 box를 보이게한다.
 			let chatBox = document.getElementById("chat_box");
@@ -196,6 +198,35 @@ function resetSenderList(){
 }
 
 
+function showChatListModal(){
+	let ul = document.getElementById("chat_list");
+	for(let i = 0; i < senderList.length; i++){
+		let li = document.createElement("li")
+		li.setAttribute("class","list-group-item border-0 mini_chat_list")
+		li.setAttribute("style","cursor:pointer")
+		let nickNameDiv = document.createElement("div");
+		nickNameDiv.setAttribute("class","mb-1 fw-bold");
+		nickNameDiv.innerHTML = senderList[i].nickName;			
+		li.appendChild(nickNameDiv);
+		ul.appendChild(li);
+		}
+	
+		let miniChatList = document.querySelectorAll('.mini_chat_list');
+	for(let i=0;i<miniChatList.length; i++){
+		console.log("asdf");
+		console.dir(miniChatList[i]);
+		miniChatList[i].addEventListener("click",(e)=>{
+			console.dir(senderList[i]);
+			createRoomId(senderList[i]);
+			$('#messageListModal').modal("hide");
+		});
+	}
+	
+	
+	
+	$('#messageListModal').modal("show")
+}
+
 
 
 function drawMyChatting(msg){
@@ -257,3 +288,16 @@ function drawYourChatting(msg){
 			}
 		});
 	}
+	
+	
+let messageListModal = document.getElementById('messageListModal')
+	messageListModal.addEventListener('hidden.bs.modal', function (event) {
+	  let chatList = document.querySelector(".chat_list");
+	  while(chatList.hasChildNodes()){
+		  chatList.removeChild(chatList.firstChild);
+	  }
+});	
+	
+	
+	
+	
