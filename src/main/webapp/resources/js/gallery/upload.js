@@ -6,19 +6,39 @@ let close = () => {
 	document.querySelector('#BoardList').className = 'd-none';
 }
 
+let backPage = (nickName) => {
+	location.href = location.origin + '/personal/personal?nickName='+nickName;
+}
+
 let init = () => {
 	
+	// 보드리스트의 class을 미리 저장해둔다
 	boardListClassName = "card w-50 mx-auto position-fixed top-50 start-50 translate-middle shadow";
 	
+	// 이미지 마다 클릭 이벤트를 작성한다.
 	for(let i=1; i<13; i++){
-		document.querySelector('#gallery-img'+i).addEventListener('click',()=>{
-			
+		let galleryImgDiv = document.querySelector('#gallery-img'+i);
+		
+		galleryImgDiv.className = 'position-relative ' + galleryImgDiv.className;
+		
+		galleryImgDiv.addEventListener('click',()=>{	
 			galleryImg = 'gallery-img'+i;
 			document.querySelector('#BoardList').className = boardListClassName;
 			document.querySelector('#btn-close').addEventListener('click',close);
 			});
 	}
 	
+}
+
+let removeGalleryInfo = () => {
+	galleryImgList.forEach((item, index) => {
+		if(item.imgOrder == imgOrder){
+			temp = galleryImgList.splice(index,1);
+			galleryImgList = temp;
+		}
+	})
+	document.querySelector('#'+galleryImg).src = '/resources/img/defaultImg.png';
+	document.querySelector('#BoardList').className = 'd-none';
 }
 
 let setGalleryInfo = (bdNo,fIdx,userId,src) => {
