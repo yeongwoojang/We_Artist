@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -128,6 +129,28 @@ public class CommunicationController {
 			}else {
 				return "failed";
 			}
+		}else {
+			return "failed";
+		}
+	}
+	
+	@GetMapping("selectmessagehistoryimpl")
+	@ResponseBody
+	public String insertMessageHistoryImpl(@RequestParam("userId") String userId) {
+		Map<String,String> result= communicationService.selectMessageHistory(userId);
+		if(result!=null) {
+			return "success";
+		}else {
+			return "failed";
+		}
+	}
+	
+	@GetMapping("insertmessagehistoryimpl")
+	@ResponseBody
+	public String insertMessageNotiImpl(@RequestParam("userId") String userId) {
+		int res = communicationService.insertMessageHistory(userId);
+		if(res!=0) {
+			return "success";
 		}else {
 			return "failed";
 		}

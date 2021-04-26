@@ -60,8 +60,17 @@ public class CommunicationServiceImpl implements CommunicationService{
 	public List<Map<String, String>> certificateHistory(History history) {
 		return communicationRepository.certificateHistory(history);
 	}
-	
-	
-	
 
+
+	@Override
+	public int insertMessageHistory(String userId) {
+		return communicationRepository.insertMessageHistory(userId);
+	}
+
+
+	@Override
+	public Map<String, String> selectMessageHistory(String userId) {
+		return communicationRepository.selectMessageHistory(userId);
+	}
+	
 }
