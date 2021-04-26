@@ -9,6 +9,8 @@ let myChatRoomList = null;
 let tempMsgFrom = null;
 let followingList = new Array();
 window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
+	
+	console.log("window.onload !")
 	currentUserId = "${userInfo.userId}"; //현재 로그인한 유저의 ID
 	currentUserNickName = "${userInfo.nickName}"; //현재 로그인한 유저의 닉네임
 	getAlluser();
@@ -21,18 +23,23 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 		chatRoom.seconduser = "${item.secondUser}";
 		myChatRoomList.push(chatRoom)
 	</c:forEach>
-	console.dir(myChatRoomList);
 	connectSocket(); //소켓 연결
 	connectPushSocket();
 	fetchNotiCount();
-	directMessage();
+	let currentURI = document.location.pathname; //현재 페이지의 uri을 가져오는 코드
+	if(currentURI.indexOf('/chat/direct')!=-1){
+		
+		setTimeout(function() {
+		 	directMessage();
+			}, 1000);
+	}
+
 }
 
 // 소켓 연결을 위한 함수
 let connectSocket = function(){
-	let currentURI = document.location.pathname; //현재 페이지의 uri을 가져오는 코드
-	console.log(currentURI);
 	let socket = new SockJS("/chat/room1"); //sockJS객체 생성 endPoint : "room1"
+	let currentURI = document.location.pathname;
 	stompClient = Stomp.over(socket); //stomp객체에 sockJs객체 연경
 	stompClient.connect({}, function(frame) {  
 		//내가 속한 모든 채팅방을 구독
@@ -61,10 +68,12 @@ let connectSocket = function(){
 					for(let i =0; i< chatRoomCard.length; i++){
 						let uName = chatRoomCard[i].childNodes[1].innerHTML
 						//메세지를 보낸 유저와 팔로잉 한 유저가 일치한다면 그 유저가 보낸 메세지를 Cardview에 표시
-						console.log("uName : "+uName)
-						console.log("msgFromNickName" +msgFromNickName)
-						console.log("msgToNickName" +msgToNickName)
 						if((uName==msgFromNickName || uName == msgToNickName )){
+							if(uName==msgFromNickName){
+								lastMessage[i].setAttribute("class","last_message text-dark fw-bold");
+							}else if(uName!=msgFromNickName || document.getElementById("opponent").innerHTML==uName){
+								lastMessage[i].setAttribute("class","last_message text-dark");
+							}
 							lastMessage[i].innerHTML = lastMsg
 							lastMessageTime[i].innerHTML = getCurrentTime();
 						}
@@ -103,6 +112,8 @@ let connectSocket = function(){
 					}	
 			});
 		}
+		console.log("유저의 모든 채팅방 구독완료")
+		console.log("채팅용 소켓 연결 완료")
 	});	
 }
 
@@ -197,7 +208,7 @@ function connectPushSocket(){
 				});
 				listGroup.appendChild(notiInfo);
 				notiBox.appendChild(listGroup);
-			}else if(notiMethod=='direct'){
+			}else if((fromId!=toId) &&notiMethod=='direct'){
 				 stompClient.disconnect();
 		         reSetMyChatRoomList();
 			}
@@ -294,6 +305,7 @@ function directMessage(){
 	let obj= new Object();
 	obj.userId = "${sendDirect.userId}";
 	obj.nickName="${sendDirect.nickName}";
+	console.log("directMessage실행");
 	if(obj.userId!="0" && obj.nickName!="0"){
 		createRoomId(obj)
 	}

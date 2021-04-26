@@ -171,7 +171,16 @@ public class BoardController {
 		return likeCount;
 	}
 	
-	
+	@PostMapping("deleteboardimpl")
+	@ResponseBody
+	public String deleteBoardById(@RequestBody Map<String,String> param) {
+		int res = boardService.deleteBoardById(param.get("bdNo"));
+		if(res!=0) {
+			return "success";
+		}else {
+			return "failed";
+		}
+	}
 	
 	
 	

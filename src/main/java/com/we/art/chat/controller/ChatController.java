@@ -49,9 +49,9 @@ public class ChatController {
 		List<Map<String,String>> senderList = new ArrayList<Map<String,String>>();
 		senderList = chatService.selectSenderList(userInfo.getUserId());
 		List<Map<String, Object>> lastMessageList = new ArrayList<>();
-		if (senderList.size() != 0) {
-			senderList = chatService.selectSenderList(userInfo.getUserId());
-		}
+//		if (senderList.size() != 0) {
+//			senderList = chatService.selectSenderList(userInfo.getUserId());
+//		}
 		if (myChatRoomList.size() != 0) {
 			lastMessageList = chatService.selectLastMessageList(myChatRoomList);
 		}
@@ -129,4 +129,22 @@ public class ChatController {
 		System.out.println("MYCHATROOMLIST : " + myChatRoomList);
 		return myChatRoomList;
 	}
+	
+	
+	
+	@GetMapping("resetsenderlist")
+	@ResponseBody
+	public List<Map<String,String>> resetSenderList(@SessionAttribute("userInfo") User userInfo){
+		List<Map<String,String>> senderList = new ArrayList<Map<String,String>>();
+		senderList = chatService.selectSenderList(userInfo.getUserId());
+		
+		return senderList;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

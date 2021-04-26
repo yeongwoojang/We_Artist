@@ -146,7 +146,10 @@
 									</div>
       							</div>
       							<div class="col-lg-4 d-flex flex-column">
-      								<div id="board_title" class="border-bottom mx-1 p-3"style="font-size:1vw;"></div>
+      								<div class="d-flex justify-content-between  align-items-center border-bottom mx-1 p-2">
+      									<div id="board_title" style="font-size:1vw;"></div>
+      									<div id="delete_link" class="text-danger" style="font-size:10px; cursor:pointer;" onclick="deleteBoard();">삭제</div>
+      								</div>
             						<div id="board_content"class="p-2 border-bottom mx-1" style="height:90%; overflow:auto; font-size:0.8vw;"></div>
            		 					<div class="p-2 d-flex align-items-center">
             							<i id="like_icon" onclick="updateLike();" class="fas fa-heart text-dark mx-2 my-1" style="cursor:pointer; font-size:20px;"></i>
@@ -363,8 +366,6 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 				let userId = "${personalUserInfo.userId}";
 				let nickName = "${curUserInfo.nickName}";
 				stompPushClient.send("/push", {}, JSON.stringify({'fromId' : fromId, 'toId': toId, 'nickName' : nickName, 'bdNo' : null, notiMethod : 'following','message' : nickName+'님이 당신을 팔로우 했습니다.' })); //해당 유저에게 팔로잉 요청을 보낸다.
-//	 			createNewRoom(currentUserId,userId);
-//	 			reSetMyChatRoomList();	
 				let fBtn = document.getElementById("btn_about_following");
 				fBtn.innerHTML ="팔로우 끊기";
 				fBtn.setAttribute("onclick","unfollowing()")
@@ -636,11 +637,34 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 		});
 	}
 	
+	function deleteBoard(){
+		const url ='/deleteboardimpl';
+		let paramObj = new Object();
+		paramObj.bdNo = boardInfo.bdNo;
+		let headerObj = new Headers();
+		headerObj.append("content-type",'application/json');
+		fetch(url,{
+			method : "POST",
+			headers : headerObj,
+			body : JSON.stringify(paramObj)
+		}).then(response=>{
+			if(response.ok){
+				return response.text();
+			}
+		}).then((text)=>{
+			if(text=='success'){
+				location.href = href="/personal/personal?nickName="+currentUserNickName;
+			}
+		});
+	}
+	
+	
 	function sendDirectMessage(){
 		let nickName = '${personalUserInfo.nickName}';
 		let userId ='${personalUserInfo.userId}';
 		location.href="/chat/direct?sendDirectNickName="+nickName+"&sendDirectUserId="+userId
 	}
+	
 	</script>
 	
 </body>

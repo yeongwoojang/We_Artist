@@ -58,6 +58,10 @@
 		VALUES(#{bdNo},#{toId},#{fromId})
 	</insert>
 	
+	<delete id="deleteBoardById">
+		DELETE FROM TB_BOARD WHERE BD_NO = #{bdNo}
+	</delete>
+	
 	<resultMap type="map" id="like">
 		<result column="BD_NO" javaType="String" property="bdNo"/>
 		<result column="LK_ID" javaType="String" property="lkId"/>
