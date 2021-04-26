@@ -10,7 +10,7 @@
 					유저 아이디 넣을까
 				</div>
 				<div class="flex-inline justify-content-end">
-					<div class="btn btn-danger btn-sm" id="btn-close">
+					<div class="btn btn-danger btn-sm" id="btn-close" onclick="changePage()">
 						X
 					</div> 
 				</div>
@@ -29,7 +29,7 @@
 							<div class="input-group mb-3">
 							  <input type="text" class="form-control" id="messageInput"aria-label="Recipient's username" aria-describedby="button-addon2">
 							  <div class="input-group-append">
-							    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="sendMessage()">-></button>
+							    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="sendMessage()">></button>
 							  </div>
 							</div>
 						</div>

@@ -133,8 +133,7 @@ let createOffer = () => {
     }, (error) => {
         alert("Error creating an offer");
     });
-	divLive.className = divLiveClass;
-	divLiveList.className = 'd-none';
+	changePage();
 }
 
 let handleOffer = (offer) => {
@@ -161,6 +160,16 @@ let handleAnswer = (answer) => {
     peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
     console.log("connection established successfully!!");
 };
+
+let changePage = () => {	
+	if(divLiveList.className == 'd-none'){
+		divLive.className = 'd-none';
+		divLiveList.className = divLiveClass;
+	}else{
+		divLive.className = divLiveClass;
+		divLiveList.className = 'd-none';
+	}
+}
 
 
 
