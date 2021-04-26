@@ -33,6 +33,7 @@ public class GalleryServiceImpl implements GalleryService{
 		List<String> orderList = new ArrayList<String>();
 		List<Gallery> updateList = new ArrayList<Gallery>();
 		List<Gallery> insertList = new ArrayList<Gallery>();
+		List<Gallery> deleteList = new ArrayList<Gallery>();
 		
 		for(Gallery item : dataList) {
 			orderList.add(item.getImgOrder());
@@ -40,7 +41,11 @@ public class GalleryServiceImpl implements GalleryService{
 		
 		for(Gallery data : galleryList) {
 			if(orderList.contains(data.getImgOrder())) {
-				updateList.add(data);
+				if(data.getPath().contains("defaultImg")) {
+					deleteList.add(data);
+				}else {
+					updateList.add(data);
+				}
 			}else {
 				insertList.add(data);
 			}
@@ -55,6 +60,10 @@ public class GalleryServiceImpl implements GalleryService{
 			
 			if(!updateList.isEmpty()) {
 				res += galleryRepository.updateAllGalleryInfo(updateList);
+			}
+			
+			if(!deleteList.isEmpty()) {
+				res += galleryRepository.deleteAllGalleryInfo(deleteList);
 			}
 		}
 		

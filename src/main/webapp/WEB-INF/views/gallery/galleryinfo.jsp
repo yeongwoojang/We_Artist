@@ -134,7 +134,7 @@
 			</div>
 		</div>
 		<div class="row card-body overflow-auto" style="height: 600px;" id="boardListContent">
-			<div class="col-3 mb-1" onclick="removeGalleryInfo()">
+			<div class="col-3 mb-1" onclick="setGalleryInfo(null,null,'${userInfo.userId}','/resources/img/defaultImg.png')">
 				<img src="/resources/img/defaultImg.png" alt="" class="img-fluid"/>
 				
 			</div>

@@ -30,6 +30,15 @@
 		</foreach>
 	</update>
 	
+	<delete id="deleteAllGalleryInfo">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END ;">
+			DELETE FROM TB_GALLERY
+			<where>
+				IMG_ORDER = #{item.imgOrder} and user_id = #{item.userId} 
+			</where>
+		</foreach>
+	</delete>
+	
 	<select id="selectGalleryByRandom" resultMap="randomGallery">
 		SELECT BD.BD_TITLE, BD.BD_CONTENT, F.F_SAVE_PATH, F.F_RENAME
 		FROM (

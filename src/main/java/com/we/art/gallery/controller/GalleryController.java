@@ -86,7 +86,7 @@ public class GalleryController {
 		
 		galleryService.insertAllGalleryInfo(gallerList, userId);
 		
-		return "redirect:/galleryinfo";
+		return "gallery/gallery";
 	}
 	
 	@GetMapping("headtest")
