@@ -15,6 +15,8 @@ public interface GalleryRepository {
 	
 	int updateAllGalleryInfo(List<Gallery> galleryList);
 	
+	int deleteAllGalleryInfo(List<Gallery> galleryList);
+	
 	@Select("select * from tb_gallery where user_id = #{userId}")
 	List<Gallery> selectGalleryInfoByUserId(String userId);
 	
