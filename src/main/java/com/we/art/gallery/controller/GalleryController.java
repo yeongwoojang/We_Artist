@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.we.art.board.model.service.BoardService;
@@ -34,6 +36,7 @@ import com.we.art.gallery.model.vo.Gallery;
 import com.we.art.user.model.vo.User;
 
 @Controller
+@SessionAttributes("userInfo")
 public class GalleryController {
 	
 	private final BoardService boardService;
@@ -46,15 +49,21 @@ public class GalleryController {
 	
 	@GetMapping("gallery/{userId}")
 	public String ShowGallery(@PathVariable(name = "userId")String userId,
-							  @SessionAttribute(name="userInfo")User user,
+							  @SessionAttribute(name="userInfo", required = false)User user,
 							  Model model) {
-		List<Map<String, Object>> galleryList = galleryService.selectGalleryByUserId(userId);
+		List<Map<String, Object>> galleryList = new ArrayList<Map<String,Object>>();
 		
-		if(!userId.equals(user.getUserId()) && galleryList == null) {
+		// 탑바에서 접속시 사용
+		if(userId.equals("main")) {
+			galleryList = galleryService.selectGalleryByRandom();	
+		}else if(!userId.equals(user.getUserId())
+				&& galleryService.selectGalleryByUserId(userId).isEmpty()) {
 			throw new ToAlertException(ErrorCode.GALLERYISNULL);
-		}else if(userId.equals("main")) {
-			galleryList = null;
+		}else {
+			galleryList = galleryService.selectGalleryByUserId(userId);
 		}
+		
+		
 		model.addAttribute("galleryList",galleryList);
 		model.addAttribute("galleryUserId", userId);
 		return "gallery/gallery";

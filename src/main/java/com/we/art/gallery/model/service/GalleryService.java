@@ -14,4 +14,5 @@ public interface GalleryService {
 	public List<Gallery> selectGalleryInfoByUserId(String userId);
 	public String selectGalleryInforByImgOrder(String imgOrder,String userId);
 	public List<Map<String, Object>> selectGalleryByUserId(String userId);
+	public List<Map<String, Object>> selectGalleryByRandom();
 }

@@ -29,4 +29,42 @@
 			</where>
 		</foreach>
 	</update>
+	
+	<select id="selectGalleryByRandom" resultMap="randomGallery">
+		SELECT BD.BD_TITLE, BD.BD_CONTENT, F.F_SAVE_PATH, F.F_RENAME
+		FROM (
+			SELECT B.BD_NO, B.F_IDX
+			FROM (
+				SELECT ROWNUM RNUM, BD_NO, F_IDX
+				FROM TB_BOARD_MASTER
+			) B
+			WHERE B.RNUM IN
+			<foreach collection="list" item="item" open="(" close=")" separator=","> 
+				#{item}
+			</foreach>
+		) BM, TB_BOARD BD, TB_FILE F
+		WHERE
+		BM.F_IDX = F.F_IDX AND BM.BD_NO = BD.BD_NO
+	</select>
+	
+	<resultMap type="map" id="randomGallery">
+		<result column="BD_TITLE" property="bdTitle"/>
+		<result column="BD_CONTENT" property="bdContent"/>
+		<result column="F_SAVE_PATH" property="fSavePath"/>
+		<result column="F_RENAME" property="fRename"/>
+	</resultMap>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

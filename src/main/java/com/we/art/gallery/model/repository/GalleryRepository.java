@@ -1,6 +1,7 @@
 package com.we.art.gallery.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -25,4 +26,9 @@ public interface GalleryRepository {
 	
 	@Select("select path from tb_gallery where img_order = #{imgOrder} and user_id = #{userId}")
 	String selectGalleryInforByImgOrder(String imgOrder,String userId);
+	
+	@Select("select count(*) from tb_board_master")
+	int selectGalleryAllCount();
+	
+	List<Map<String, Object>> selectGalleryByRandom(List<Integer> randomList);
 }

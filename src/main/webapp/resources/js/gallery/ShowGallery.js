@@ -11,7 +11,7 @@ let mouse = { x:0, y:0}; // 마우스 클릭시 x,y축을 저장
 
 let isGalleryNull = () => {
 	initGallery();
-	if(imgData == null){
+	if(imgData != null){
 		init();
 		animate();
 	}else{

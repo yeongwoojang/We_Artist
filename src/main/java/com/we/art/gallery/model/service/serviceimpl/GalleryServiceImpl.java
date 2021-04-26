@@ -3,8 +3,11 @@ package com.we.art.gallery.model.service.serviceimpl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -102,6 +105,37 @@ public class GalleryServiceImpl implements GalleryService{
 		}
 		
 		
+		return commanList;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectGalleryByRandom() {
+		List<Map<String, Object>> commanList = new ArrayList<Map<String,Object>>();
+		Set<Integer> randomSet = new HashSet<Integer>();
+		
+		while(randomSet.size() < 12) {
+			randomSet.add(new Random().nextInt(galleryRepository.selectGalleryAllCount()-1)+1);
+			System.out.println(randomSet);
+		}
+		
+		List<Integer> list = new ArrayList<Integer>(randomSet);
+		List<Map<String, Object>> tempList = new ArrayList<Map<String,Object>>();
+		tempList = galleryRepository.selectGalleryByRandom(list);
+		System.out.println("first : " + tempList);
+		
+		for(Map<String, Object> item : tempList) {
+			Map<String, Object> commanMap = new HashMap<String, Object>();
+			commanMap.put("imgOrder", commanList.size()+1);
+			commanMap.put("title", item.get("bdTitle"));
+			commanMap.put("content", item.get("bdContent"));
+			commanMap.put("path", "/images/"
+								  + item.get("fSavePath")
+								  + item.get("fRename"));
+			System.out.println("Map : " + commanMap);
+			commanList.add(commanMap);
+		}
+		
+		System.out.println(commanList);
 		return commanList;
 	}
 	
