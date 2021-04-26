@@ -102,6 +102,8 @@ let connectSocket = function(){
 						borderBox.appendChild(messageBox);
 						chatBox.appendChild(borderBox);
 						chatBox.scrollTop = chatBox.scrollHeight; 
+						
+					
 					}
 					
 				}else{
@@ -109,7 +111,10 @@ let connectSocket = function(){
 					setTimeout(function() {
 			 			document.getElementById("liveMessageToast").className ="toast hide";
 						}, 5000);
-					}	
+					let messageNoti = document.getElementById("message_noti");
+					messageNoti.setAttribute("style","visibility:visible");
+					}
+					
 			});
 		}
 		console.log("유저의 모든 채팅방 구독완료")
