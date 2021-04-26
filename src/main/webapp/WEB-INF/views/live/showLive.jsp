@@ -90,8 +90,6 @@
 	</div>
 </section>
 
-<button onclick="createOffer()">Create</button>
-
 <script type="text/javascript" src="${context}/resources/js/live/liveChat.js"></script>
 <script type="text/javascript" src="${context}/resources/js/live/liveGuest.js"></script>
 </body>
