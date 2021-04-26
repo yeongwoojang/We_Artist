@@ -653,7 +653,7 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 			}
 		}).then((text)=>{
 			if(text=='success'){
-				location.href = href="/personal/personal?nickName="+currentUserNickName;
+				location.href ="/personal/personal?nickName="+currentUserNickName;
 			}
 		});
 	}

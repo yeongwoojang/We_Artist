@@ -122,12 +122,12 @@
       			<button id="btn_toast_close"type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     		</div>
     	<div class="toast-body">
-      		메세지가 도착했습니다.
+    		<a id="toast_msg" class="text-primary" onclick="" style="cursor:pointer;"></a>
     	</div>
   		</div>
 	</div>
 	
-	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 4">
 		<div id="liveFollowingToast" class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
     		<div class="toast-header bg-light d-flex justify-content-between">
     			<i class="fas fa-bell fs-5 text-dark"></i>

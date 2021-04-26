@@ -32,4 +32,10 @@ public interface CommunicationRepository {
 	public int updateHistory(History history);
 	
 	public List<Map<String,String>> certificateHistory(History history);
+	
+	@Insert("INSERT INTO TB_MESSAGE_HISTORY(USER_ID,IS_CHECK) VALUES(#{userId},0)")
+	public int insertMessageHistory(String userId);
+	
+	@Select("SELECT *FROM TB_MESSAGE_HISTORY WHERE USER_ID = #{userId}")
+	public Map<String,String> selectMessageHistory(String userId);
 }
