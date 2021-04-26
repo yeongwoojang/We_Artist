@@ -1837,3 +1837,17 @@ h1, h2, h3, h4, h5, h6 {
 #boardListContent::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
 }
+
+#chatRoom {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+#chatRoom::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+
+
+
+
+

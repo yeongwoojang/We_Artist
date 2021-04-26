@@ -8,7 +8,7 @@ let insertChatRoom = (isHost,text) => {
 	let chatContent = document.createElement('div');
 	chatContent.className = contentDivClassName;
 	chatContent.innerText = text;
-	chatContent.style.maxWidth = '50%';
+	chatContent.style.maxWidth = '60%';
 	
 	if(isHost){	
 		chatTile.className = hostDivClassName;

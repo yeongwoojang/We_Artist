@@ -3,6 +3,10 @@ let conn = new WebSocket('wss://localhost:8443/socket'); // 해당 주소로 소
 let peerConnection, dataChannel; // 연결채널, 데이터 전송을 위한 채널을 연다
 let input = document.getElementById("messageInput"); // 채팅 입력받을 곳
 
+let divLive = document.querySelector('#divLive');
+let divLiveList = document.querySelector('#divLiveList');
+let divLiveClass = 'container mx-auto';
+
 let remoteStream;
 let remoteVideo = document.querySelector('#remoteVideo');
 
@@ -129,6 +133,8 @@ let createOffer = () => {
     }, (error) => {
         alert("Error creating an offer");
     });
+	divLive.className = divLiveClass;
+	divLiveList.className = 'd-none';
 }
 
 let handleOffer = (offer) => {
