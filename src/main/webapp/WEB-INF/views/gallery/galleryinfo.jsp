@@ -9,7 +9,7 @@
 					Upload
 				</div>
 				<div class="flex-inline justify-content-end">
-					<div class="btn btn-danger btn-sm" id="btn-closes">
+					<div class="btn btn-danger btn-sm" id="btn-closes" onclick="backPage('${userInfo.nickName}')">
 						X
 					</div> 
 				</div>
@@ -134,6 +134,10 @@
 			</div>
 		</div>
 		<div class="row card-body overflow-auto" style="height: 600px;" id="boardListContent">
+			<div class="col-3 mb-1" onclick="removeGalleryInfo()">
+				<img src="/resources/img/defaultImg.png" alt="" class="img-fluid"/>
+				
+			</div>
 			<c:forEach items="${userBoardData}" var="boardData">			
 					<c:forEach items="${boardData.files}" var="boardFile" varStatus="status">				
 						<div class="col-3 mb-1" onclick='setGalleryInfo(
