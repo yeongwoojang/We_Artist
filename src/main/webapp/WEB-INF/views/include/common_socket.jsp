@@ -26,9 +26,9 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 	connectSocket(); //소켓 연결
 	connectPushSocket();
 	fetchNotiCount();
+	selectNotiheckChatContentImpl(currentUserId); //현재 유저가 확인하지 않은 메세지의 갯수를 구하는 메소드
 	let currentURI = document.location.pathname; //현재 페이지의 uri을 가져오는 코드
 	if(currentURI.indexOf('/chat/direct')!=-1){
-		
 		setTimeout(function() {
 		 	directMessage();
 			}, 500);
@@ -52,14 +52,13 @@ let connectSocket = function(){
 				let roomId = msgInfo.roomId;
 				let msgToNickName = msgInfo.msgToNickName;
 				let msgFromNickName = msgInfo.msgFromNickName;
+				console.dir(msgInfo);
 				if(currentURI.indexOf('/chat/direct')!=-1){ //만약 현제 페이지가 채팅화면 이라면
-					
-					
 					
 					let chatRoomCard = document.querySelectorAll(".chat_room_card"); //팔로잉하고 있는 유저들의 item항목을 담고있는 div태그 리스트
 					let lastMessage = document.querySelectorAll(".last_message"); //해당 유저에게 마지막으로 받은 message를 보여 줄 div태그 리스트
 					let lastMessageTime = document.querySelectorAll(".last_message_time") //해당 유저에게 마지막으로 message 를 받은 시간을 나타내는 p태그리스트 
-					
+					let senderListBox = document.getElementById("sender_list_box");
 					//받은 메세지가 글자수 10자를 넘으면 10글자만 보여주고 나머지는 "......."으로 표시
 					let lastMsg = msg;
 					if (msg.length >= 10) {
@@ -67,9 +66,10 @@ let connectSocket = function(){
 					}
 					
 					for(let i =0; i< chatRoomCard.length; i++){
-						let uName = chatRoomCard[i].childNodes[1].innerHTML
+						let uName = chatRoomCard[i].querySelector(".following_user").innerHTML;
 						//메세지를 보낸 유저와 팔로잉 한 유저가 일치한다면 그 유저가 보낸 메세지를 Cardview에 표시
 						if((uName==msgFromNickName || uName == msgToNickName )){
+							senderListBox.insertBefore(chatRoomCard[i],senderListBox.firstChild);
 							if(uName==msgFromNickName){
 								lastMessage[i].setAttribute("class","last_message text-dark fw-bold");
 							}else if(uName!=msgFromNickName || document.getElementById("opponent").innerHTML==uName){
@@ -80,8 +80,12 @@ let connectSocket = function(){
 						}
 					}
 					
+					
+					
+					
 					let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
 					if(msgFrom!= currentUserId && chatIndex==null && roomId == currentRoomId) {
+						updateChatContentImpl(msgTo,msgFrom); //메시지를 확인했으므로 IS_CHECK를 1로 변경
 						let chatBox = document.getElementById("chat_box");
 						let borderBox = document.createElement("div");
 						borderBox.style.padding = "10px";
@@ -113,13 +117,18 @@ let connectSocket = function(){
 					document.getElementById("toast_msg").addEventListener('click',function(event){
 						location.href="/chat/direct?sendDirectNickName="+msgFromNickName+"&sendDirectUserId="+msgFrom;
 					});
+// 					let curMessageNotiCount = parseInt(document.getElementById("message_noti_count").innerHTML);
+// 					console.log("???"+curMessageNotiCount+1);
+// 					document.getElementById("message_noti_count").innerHTML = curMessageNotiCount+1
 					setTimeout(function() {
 			 			document.getElementById("liveMessageToast").className ="toast hide";
 						}, 5000);
 					
 						
 					}
-					
+				let curMessageNotiCount = parseInt(document.getElementById("message_noti_count").innerHTML);
+				console.log("???"+curMessageNotiCount+1);
+				document.getElementById("message_noti_count").innerHTML = curMessageNotiCount+1
 			});
 		}
 		console.log("유저의 모든 채팅방 구독완료")
@@ -410,6 +419,49 @@ function insertMessageHistoryImpl(userId){
 	});
 }
 
+function updateChatContentImpl(msgTo,msgFrom){
+	console.log("IS_CHECK을 1로 변경!")
+	let url ='/chat/updatechatcontentimpl';
+	let paramObj = new Object();
+	paramObj.msgTo = msgTo;
+	paramObj.msgFrom = msgFrom;
+	
+	let headerObj = new Headers();
+	headerObj.append('content-type','application/json');
+	
+	fetch(url,{
+		method : "POST",
+		headers : headerObj,
+		body : JSON.stringify(paramObj)
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		if(text=="success"){
+			selectNotiheckChatContentImpl(msgTo);
+		}else{
+			
+		}
+	});
+}
+
+function selectNotiheckChatContentImpl(msgTo){
+	let url ='/chat/selectnoticheckchatcontentimpl?msgTo='+msgTo;
+	fetch(url,{
+		method : "GET"
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}		
+	}).then((text)=>{
+		let messageNotiCount = document.getElementById("message_noti_count");
+		let notiCheckedChatContentList = JSON.parse(text);
+		messageNotiCount.innerHTML = notiCheckedChatContentList.length;
+		
+		
+	});
+}
 
 
 </script>

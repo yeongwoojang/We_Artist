@@ -103,5 +103,20 @@ public class SearchController {
 		return searchResultList;
 	}	
 	
+	@GetMapping("selectuserprofileimpl")
+	@ResponseBody
+	public Map<String,String> selectUserProfileImpl(@RequestParam("nickName")String nickName){
+		Map<String,String> userProfile = searchService.selectUserProfile(nickName);
+		return userProfile;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

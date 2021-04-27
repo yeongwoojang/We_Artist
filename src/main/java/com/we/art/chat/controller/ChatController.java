@@ -49,6 +49,9 @@ public class ChatController {
 		List<Map<String,String>> senderList = new ArrayList<Map<String,String>>();
 		senderList = chatService.selectSenderList(userInfo.getUserId());
 		List<Map<String, Object>> lastMessageList = new ArrayList<>();
+		
+//		chatContent.msgFrom !=userInfo.userId && chatContent.isCheck==0
+				
 //		if (senderList.size() != 0) {
 //			senderList = chatService.selectSenderList(userInfo.getUserId());
 //		}
@@ -141,6 +144,25 @@ public class ChatController {
 		return senderList;
 	}
 	
+	@PostMapping("updatechatcontentimpl")
+	@ResponseBody
+	public String updateChatContentImpl(@RequestBody ChatContent chatContent) {
+		
+		int res = chatService.updateChatContent(chatContent);
+		if(res!=0) {
+			return "success";
+		}else{
+			return "failed";
+		}
+	}
+	
+	@GetMapping("selectnoticheckchatcontentimpl")
+	@ResponseBody
+	public List<ChatContent> selectNotCheckChatContent(@RequestParam("msgTo") String msgTo){
+		List<ChatContent> notiCheckedChatContentList = new ArrayList<>();
+		notiCheckedChatContentList = chatService.selectNotiCheckChatContent(msgTo);
+		return notiCheckedChatContentList;
+	}
 	
 	
 	

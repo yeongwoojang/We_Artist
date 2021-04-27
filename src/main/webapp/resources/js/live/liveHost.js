@@ -16,27 +16,41 @@ let sendMessage = () => {
 
 // 비디오,오디오 사용여부 추후 선택가능하게 변경
 const constraints = {
-	video : true,
+	video : {
+		width : 640,
+		height : 480
+	},
 	audio : false
 }
 
-let setMedia = () => {
-		//navigator.mediaDevices.getDisplayMedia(constraints)  // getDisplayMedia 사용시 해당 원하는 화면을 사용할 수 있다.
-		navigator.mediaDevices.getUserMedia(constraints)   // getUserMedia 사용시 해당 디바이스의 카메라를 사용한다
-		.then((stream) => {
-		localStream = stream;
-		localVideo.srcObject = stream;
-		for(const track of stream.getTracks()){
-			peerConnection.addTrack(track,stream);
+let setMedia = (isDisplay) => {
+		if(isDisplay){
+			navigator.mediaDevices.getDisplayMedia(constraints)
+			.then((stream) => {
+				localStream = stream;
+				localVideo.srcObject = stream;
+				for(const track of stream.getTracks()){
+					peerConnection.addTrack(track,stream);
+				}
+			})
+		}else{
+			navigator.mediaDevices.getUserMedia(constraints)   // getUserMedia 사용시 해당 디바이스의 카메라를 사용한다
+			.then((stream) => {
+				localStream = stream;
+				localVideo.srcObject = stream;
+				for(const track of stream.getTracks()){
+					peerConnection.addTrack(track,stream);
+				}
+			})	
 		}
-	})
+		//navigator.mediaDevices.getDisplayMedia(constraints)  // getDisplayMedia 사용시 해당 원하는 화면을 사용할 수 있다.
 }
 
 // conn 에 대한 이벤트 작성
 conn.onopen = () => {
 	console.log('Host Connected');
 	initialize(); //연결됬을때 실행
-	setMedia();
+	setMedia(confirm('화면공유 사용은 확인, 웹캠 사용은 취소 를 클릭하세요'));
 	send({
 		event : "user", // 후보자
         data : "test01"
@@ -145,6 +159,17 @@ let initialize = () => {
   	peerConnection.ondatachannel = (event) => {
         dataChannel = event.channel;
   	};
+	
+	window.addEventListener('beforeunload',(e)=>{
+		e.preventDefault();
+		send({
+			"event" : "bye",
+			"data" : "yes"
+		})
+		//peerConnection.close();
+		e.returnValue = 'end'; 
+		
+	})
 	
 }
 // 성공시 offer를 전송하고 실패시 메시지를 띄운다.

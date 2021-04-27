@@ -42,6 +42,11 @@ public class SearchServiceImpl implements SearchService{
 	public List<Map<String, Object>> selectBoardByName(String name) {
 		return searchRepository.selectBoardByName(name);
 	}
+
+	@Override
+	public Map<String, String> selectUserProfile(String nickName) {
+		return searchRepository.selectUserProfile(nickName);
+	}
 	
 	
 
