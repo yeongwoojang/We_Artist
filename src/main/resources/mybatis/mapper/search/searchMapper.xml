@@ -70,6 +70,10 @@
 		)
 	</select>
 	
+	<select id="selectUserProfile" resultMap="boardData">
+		SELECT F_SAVE_PATH,F_RENAME FROM TB_USER JOIN TB_FILE USING(F_IDX) WHERE NICKNAME=#{nickName}
+	</select>
+	
 		<resultMap type="map" id="boardData">
 			<result column="BD_NO" javaType="String" property="bdNo"/>
 			<result column="USER_ID" javaType="String" property="userId"/>

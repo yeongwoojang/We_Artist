@@ -14,4 +14,6 @@ public interface SearchService {
 	public List<Map<String,Object>> selectBoardByContent(String bdContent);
 	
 	public List<Map<String,Object>> selectBoardByName(String name);
+	
+	public Map<String,String> selectUserProfile(String nickName);
 }

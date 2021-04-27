@@ -143,11 +143,13 @@
   	</button>
   <div class="modal-dialog modal-lg" id="myModal">
     <div class="modal-content">
-   		<div class="p-3 d-flex justify-content-between">
-   			<div id="user_info" class="d-flex justify-content-start">
-   				<div id="user_nickname">유저이름</div>
+   		<div class="p-1 d-flex justify-content-between">
+   			<div id="user_info" class="d-flex justify-content-center align-items-center">
+   				<div id="user_profile" class="jb-a rounded-circle" style="width: 2vw;height:2vw; border: 0.1rem solid rgba(0, 0, 0, 0.1);">
+   					<img class="propic" id="picture" alt="" style=" width: 1vw;  height: 1vw; margin-left:1vw; margin-top:0.9vw;" src>
+   				</div>
+   				<div id="user_nickname" style="cursor:pointer; font-size:0.8rem;" onclick="movePersonalPage();" class="p-1">유저이름</div>
    			</div>   
-   			<div style="cursor:pointer;" onclick='movePersonalPage();'>피드 바로가기</div>
    		</div>
     	<div class="row g-0">
        		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -187,6 +189,7 @@
 	}
 	
  	 function showModal(imageLink,fIdx,nickname){
+ 		selectUserProfileImpl(nickname);
  	  carouselInner = document.querySelector(".carousel-inner");
  	  let userInfo = document.getElementById("user_nickname");
  	  userInfo.innerHTML = nickname;
@@ -208,6 +211,26 @@
 	  }
 		$('#exampleModal').modal("show");
 	}
+ 	 
+ 	 
+ 	 function selectUserProfileImpl(nickName){
+ 		 let url = "/search/selectuserprofileimpl?nickName="+nickName;
+ 		 fetch(url,{
+ 			 method :"GET"
+ 		 }).then(response=>{
+ 			 if(response.ok){
+ 				 return response.text();
+ 			 }
+ 		 }).then((text)=>{
+ 			 let userProfile = JSON.parse(text);
+ 			 let propic = document.querySelector('.propic');
+ 			 propic.setAttribute("src","/images/"+userProfile.fSavePath+"/"+userProfile.fRename);
+ 		 });
+ 			
+ 		 
+ 	 }
+ 	 
+ 	 
 
 
   </script>
