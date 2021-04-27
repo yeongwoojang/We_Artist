@@ -39,6 +39,10 @@ public class SocketHandler extends TextWebSocketHandler{
 			commandMap.put((String) data.get("data"), session.getId());
 			System.out.println("성공?? : " + data.get("data") + " : " + session.getId());
 			userList.add(commandMap);
+		}else if(data.get("event").equals("bye")) {
+			sessions.remove(session);
+			session.close();
+			System.out.println(sessions);
 		}
 		
 		

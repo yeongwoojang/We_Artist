@@ -78,7 +78,7 @@
 	        <ul>
 	          <li><a class="nav-link scrollto active fs-5" href="/search/main" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/gallery/main" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="#" style="font-family: 'Open Sans', sans-serif;">Live</a></li>
+	          <li><a class="nav-link scrollto fs-5" href="/live/guest" style="font-family: 'Open Sans', sans-serif;">Live</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/personal/personal?nickName=${userInfo.nickName}" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
 	          <c:choose>
 	          	<c:when test="${empty userInfo}">

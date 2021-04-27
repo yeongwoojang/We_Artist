@@ -56,7 +56,7 @@ public class GalleryController {
 		// 탑바에서 접속시 사용
 		if(userId.equals("main")) {
 			galleryList = galleryService.selectGalleryByRandom();	
-		}else if(!userId.equals(user.getUserId())
+		}else if(!userId.equals(user == null ? "" : user.getUserId())
 				&& galleryService.selectGalleryByUserId(userId).isEmpty()) {
 			throw new ToAlertException(ErrorCode.GALLERYISNULL);
 		}else {

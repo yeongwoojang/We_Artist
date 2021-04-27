@@ -112,6 +112,8 @@ let initialize = () => {
     };
 
     dataChannel.onclose = () => {
+		alert("해당 Live가 종료 되었습니다.");
+		changePage();
         console.log("data channel is closed");
     };
   
@@ -120,6 +122,17 @@ let initialize = () => {
   	};
 	
 	console.dir(peerConnection);
+	
+	window.addEventListener('beforeunload',(e)=>{
+		e.preventDefault();
+		send({
+			"event" : "bye",
+			"data" : "yes"
+		})
+		peerConnection.close();
+		e.returnValue = 'end';
+		
+	})
 }
 // 성공시 offer를 전송하고 실패시 메시지를 띄운다.
 let createOffer = () => {
