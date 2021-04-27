@@ -3,7 +3,12 @@
       //사용자가 입력한 아이디
       //요소의 아이디속성이 있을 경우 해당 엘리먼트를 가져다가 사용할 수 있다.
       let userId = document.getElementById("userId");
-      if(userId.value){
+      let regTypeId = /^[A-Za-z0-9+]*$/;
+      if(!(regTypeId.test(userId.value))){
+      		userId.value="";
+      	 alert("아이디가 조건에 맞지 않습니다.");
+      
+      }else if(userId.value){
          fetch("/user/idcheck?userId=" + userId.value,{
             method:"GET"
          })
@@ -18,7 +23,7 @@
                userId.value="";
             }
          })
-         
+      
       }else{
          alert("아이디를 입력하지 않으셨습니다.");
       }

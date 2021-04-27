@@ -19,28 +19,27 @@
 							    height: 14rem;
 							    border: 0.5rem solid rgba(0, 0, 0, 0.1);
 							">
-            	<c:set var="pic" value="${picture}"/>
+            	<c:set var="pic" value="${picture.files}"/>
                     <c:choose>
                     	<c:when test="${empty pic}">
-		                    <img class="mx-auto rounded-circle propic" id="picture" src="/resources/img/boyoung.jpg" alt="" style="
+		                    <img class="mx-auto propic" id="picture" src="/resources/img/boyoung.jpg" alt="" style="
 							    width: 14rem;
 							    height: 14rem;
-							    border: 0.5rem solid rgba(0, 0, 0, 0.1);
 							">
 						</c:when>
 						<c:otherwise>
-							<img class="mx-auto propic" id="picture" src="<c:url value="/images/${pic.files.fSavePath}/${pic.files.fRename}"/>" alt="" style="
+							<img class="mx-auto propic" id="picture" src="<c:url value="/images/${pic.fSavePath}/${pic.fRename}"/>" alt="" style="
 							    width: 14rem;
 							    height: 14rem;"
 							    >
 						</c:otherwise>
 					</c:choose>
 					<div class="overlay overlayFade">
-					<div class="textProPic">
-					<label for="ex_file">
-					<i class="fas fa-plus" style="color: blanchedalmond;"></i>
-					</label> 
-					</div>
+						<div class="textProPic">
+							<label for="ex_file">
+								<i class="fas fa-plus" style="color: blanchedalmond;"></i>
+							</label> 
+						</div>
 					</div>			
 			</div>
 			<p></p>
