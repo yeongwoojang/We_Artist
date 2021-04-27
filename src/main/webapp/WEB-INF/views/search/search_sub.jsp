@@ -37,7 +37,6 @@
         	</div>
         	<div class="p-3">
         		<h2>We are Artist</h2>
-        		<p>컷</p>
         	</div>
         	
         </div>
