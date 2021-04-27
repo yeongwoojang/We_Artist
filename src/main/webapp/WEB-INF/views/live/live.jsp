@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="d-flex justify-content-center">
-				<div class="w-60" style="width: 640px; height: 480px">
+				<div class="w-60" style="width: 640px; max-width:1000px; height: 480px;">
 					<video id="localVideo" autoplay muted playsinline class="position-absolute"></video>
 				</div>
 				<div class="w-50">
