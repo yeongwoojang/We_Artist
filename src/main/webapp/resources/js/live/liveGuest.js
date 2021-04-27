@@ -3,6 +3,10 @@ let conn = new WebSocket('wss://localhost:8443/socket'); // 해당 주소로 소
 let peerConnection, dataChannel; // 연결채널, 데이터 전송을 위한 채널을 연다
 let input = document.getElementById("messageInput"); // 채팅 입력받을 곳
 
+let divLive = document.querySelector('#divLive');
+let divLiveList = document.querySelector('#divLiveList');
+let divLiveClass = 'container mx-auto';
+
 let remoteStream;
 let remoteVideo = document.querySelector('#remoteVideo');
 
@@ -108,6 +112,8 @@ let initialize = () => {
     };
 
     dataChannel.onclose = () => {
+		alert("해당 Live가 종료 되었습니다.");
+		changePage();
         console.log("data channel is closed");
     };
   
@@ -116,6 +122,17 @@ let initialize = () => {
   	};
 	
 	console.dir(peerConnection);
+	
+	window.addEventListener('beforeunload',(e)=>{
+		e.preventDefault();
+		send({
+			"event" : "bye",
+			"data" : "yes"
+		})
+		//peerConnection.close();
+		e.returnValue = 'end';
+		
+	})
 }
 // 성공시 offer를 전송하고 실패시 메시지를 띄운다.
 let createOffer = () => {
@@ -129,6 +146,7 @@ let createOffer = () => {
     }, (error) => {
         alert("Error creating an offer");
     });
+	changePage();
 }
 
 let handleOffer = (offer) => {
@@ -155,6 +173,16 @@ let handleAnswer = (answer) => {
     peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
     console.log("connection established successfully!!");
 };
+
+let changePage = () => {	
+	if(divLiveList.className == 'd-none'){
+		divLive.className = 'd-none';
+		divLiveList.className = divLiveClass;
+	}else{
+		divLive.className = divLiveClass;
+		divLiveList.className = 'd-none';
+	}
+}
 
 
 

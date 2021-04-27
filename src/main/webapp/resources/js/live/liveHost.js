@@ -37,6 +37,10 @@ conn.onopen = () => {
 	console.log('Host Connected');
 	initialize(); //연결됬을때 실행
 	setMedia();
+	send({
+		event : "user", // 후보자
+        data : "test01"
+	})
 }
 
 conn.onmessage = (msg) => {

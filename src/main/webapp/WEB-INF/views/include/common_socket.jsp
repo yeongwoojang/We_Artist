@@ -31,7 +31,7 @@ window.onload = function() { //페이지의 모든 요소들이 로드되면 호
 		
 		setTimeout(function() {
 		 	directMessage();
-			}, 1000);
+			}, 500);
 	}
 
 }
@@ -45,15 +45,16 @@ let connectSocket = function(){
 		//내가 속한 모든 채팅방을 구독
 		for(let i = 0; i < myChatRoomList.length; i++){
 			stompClient.subscribe("/queue/"+myChatRoomList[i].chatRoomNo,function(response){
+				let msgInfo = JSON.parse(response.body) //넘어온 message 정보를 담고있는 json을 파싱
+				let msg = msgInfo.message;
+				let msgFrom = msgInfo.msgFrom;
+				let msgTo = msgInfo.msgTo;
+				let roomId = msgInfo.roomId;
+				let msgToNickName = msgInfo.msgToNickName;
+				let msgFromNickName = msgInfo.msgFromNickName;
 				if(currentURI.indexOf('/chat/direct')!=-1){ //만약 현제 페이지가 채팅화면 이라면
 					
-					let msgInfo = JSON.parse(response.body) //넘어온 message 정보를 담고있는 json을 파싱
-					let msg = msgInfo.message;
-					let msgFrom = msgInfo.msgFrom;
-					let msgTo = msgInfo.msgTo;
-					let roomId = msgInfo.roomId;
-					let msgToNickName = msgInfo.msgToNickName;
-					let msgFromNickName = msgInfo.msgFromNickName;
+					
 					
 					let chatRoomCard = document.querySelectorAll(".chat_room_card"); //팔로잉하고 있는 유저들의 item항목을 담고있는 div태그 리스트
 					let lastMessage = document.querySelectorAll(".last_message"); //해당 유저에게 마지막으로 받은 message를 보여 줄 div태그 리스트
@@ -102,20 +103,30 @@ let connectSocket = function(){
 						borderBox.appendChild(messageBox);
 						chatBox.appendChild(borderBox);
 						chatBox.scrollTop = chatBox.scrollHeight; 
+						
+					
 					}
 					
 				}else{
 					document.getElementById("liveMessageToast").className ="toast show";
+					document.getElementById("toast_msg").innerHTML = msgFrom+"님으로부터 메세지가 도착했습니다.";
+					document.getElementById("toast_msg").addEventListener('click',function(event){
+						location.href="/chat/direct?sendDirectNickName="+msgFromNickName+"&sendDirectUserId="+msgFrom;
+					});
 					setTimeout(function() {
 			 			document.getElementById("liveMessageToast").className ="toast hide";
 						}, 5000);
-					}	
+					
+						
+					}
+					
 			});
 		}
 		console.log("유저의 모든 채팅방 구독완료")
 		console.log("채팅용 소켓 연결 완료")
 	});	
 }
+
 
 //받은 메시지를 Controller에 전달하는 함수
 function subscribeImpl(msg,msgFrom,msgTo){
@@ -360,6 +371,43 @@ function reSetMyChatRoomList(){
             }else{
             }
         });
+}
+
+
+function selectMessageHistory(userId){
+	let url = '/communication/selectmessagehistoryimpl?userId='+ userId;
+	fetch(url,{
+		method:"GET"
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		if(text=='success'){
+			
+		}else{
+			insertMessageHistoryImpl(userId);
+		}
+	});	
+}
+
+
+function insertMessageHistoryImpl(userId){
+	let url = '/communication/insertmessagenotiimpl?userId='+ userId;
+	fetch(url,{
+		method:"GET"
+	}).then(response=>{
+		if(response.ok){
+			return response.text();
+		}
+	}).then((text)=>{
+		if(text=='success'){
+			let messageNoti = document.getElementById("message_noti");
+			messageNoti.setAttribute("style","visibility:visible");
+		}else{
+			
+		}
+	});
 }
 
 

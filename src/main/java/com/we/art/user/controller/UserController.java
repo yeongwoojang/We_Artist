@@ -232,19 +232,29 @@ public class UserController {
 
 			}
 	
-	 //로그아웃
+	    //로그아웃
+		/*	
 		@RequestMapping("/logout")
 	    public ModelAndView logout(HttpSession session) {
 	        session.invalidate();
 	        ModelAndView mv = new ModelAndView("redirect:/");
 	        return mv;
 	    }
+	    */
+
 		
 		@GetMapping("test")
 		public String test() {
 			return "user/test";
 		}
-			
-			
+
+		
+		//김선민
+		@GetMapping("/logout")
+		public String logout(@SessionAttribute("userInfo")User user,HttpSession session) {
+			session.removeAttribute("userInfo");
+			return "redirect:/";
+		}
 }
+		
 

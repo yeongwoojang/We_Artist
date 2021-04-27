@@ -12,7 +12,22 @@
 			</div>
 		</div>
 		
-		
+		<div class="position-absolute top-0 end-0">		
+			<c:choose>
+				<c:when test="${galleryUserId eq 'main'}">
+					<a href="${context}/search/main" class="btn btn-dark">Back</a>
+				</c:when>
+				<c:otherwise>
+					<div onclick="history.back()" class="btn btn-dark">Back</div>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:if test="${userInfo.userId eq galleryUserId and !empty galleryList}">
+				<a href="${context}/galleryinfo" class="btn btn-dark">
+					Setting
+				</a>
+			</c:if>
+		</div>
 	   
 	    <div class="d-none" style="width: 600px; background-color: rgba(0,0,0,0.8)" id="divTest">
 		  <img class="card-img-top" src="" alt="Card image cap" id="imgInfo">
@@ -38,7 +53,6 @@
 	<script src="${context}/resources/js/gallery/OrbitControls.js"></script>
 	<script src="${context}/resources/js/gallery/GLTFLoader.js"></script>
 	<script src="${context}/resources/js/gallery/load-image.all.min.js"></script>
-	<script src="${context}/resources/js/gallery/rotationImg.js"></script>
 	<script type='module' src="${context}/resources/js/gallery/ShowGallery.js"></script>
 </body>
 </html>
