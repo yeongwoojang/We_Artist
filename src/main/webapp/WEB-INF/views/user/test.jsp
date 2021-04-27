@@ -83,14 +83,15 @@
             </div>
             <div class="mt-3">
             <a href="${pageContext.request.contextPath}/user/findPassword" style="font-size:14px; color:#343a40;">Find ID/Password</a>
-            <a href="${pageContext.request.contextPath}/user/findPassword" style="float:right; font-size:14px; color:#343a40;">Sign Up</a>
+            <a href="${pageContext.request.contextPath}/user/findPassword" id="signUP" style="float:right; font-size:14px; color:#343a40;">Sign Up</a>
             </div>
             <div class="my-3">
               <div class="loading">Loading</div>
               <div class="error-message"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
             </div>
-            <div class="text-center"><button type="submit">Submit</button></div>
+            <div class="text-center"><button type="submit" onclick="moveClose();">Submit</button></div>
+            <div class="text-center"><input type="button" id="btn-login" value="submit"></div>
           </form>
         </div>
 
@@ -98,47 +99,52 @@
       </section>
 
 <script type="text/javascript">
-//function moveClose() {
- 	/* let objFrm = document.getElementById('frm_join');
-	objFrm.action = "${context}/user/loginimpl";
-	objFrm.submit();
-	window.opener.location.reload();
-	window.opener.location.href="${context}/search/main";
-	self.close();  */
-/* 	document.popupForm.action= '${context}/user/loginimpl';
-	document.popupForm.submit();
-	window.open("about:blank","_self").close(); */
-	/* window.opener.location.reload();
-	self.close(); */
-/*   	var comSubmit = new ComSubmit('popupForm');
 
-	$.ajax({
-	       type: "POST",
-	       url: "${context}/user/loginimpl ",
-	       data: form,      
+	$("#btn-login").click(function(){
+		
+		 let userId = document.getElementById("userId");
+		 let password = document.getElementById("password");
+	      if(userId.value){
+	         fetch("/user/pwcheck?userId=" + userId.value +"&password=" + password.value,{
+	            method:"GET"
+	         })
+	         .then(response => response.text())
+	         .then(text =>{
+	            if(text == 'success'){
+	            	var frm = $("#frm_join").serialize();
 
-	         success: function (data) {
-	        	 console.log(data);
+	            	$.ajax({
+	            	       type: "POST",
+	            	       url: "/user/loginimpl ",
+	            	       data: frm,
 
-	        }, error: function (jqXHR, textStatus, errorThrown) {
-	          alert(jqXHR + ' ' + textStatus.msg);
-	       }
+	            	         success: function (data) {
+	            	        	 console.log(data);
+	            	        	 window.opener.location.reload();
+	            	        	
+	            	        	 self.close();
 
-	});
-	 */
-	
-/* }
+	            	        }, error: function (jqXHR, textStatus, errorThrown) {
+	            	          alert(jqXHR + ' ' + textStatus.msg);
+	            	       }
 
-function reloadPage = (data)=>{
-	window.opener.location.href= data.mv;
-	self.close();
-} */
-
-document.querySelector('#frm_join').addEventListener('submit',(e)=>{
-	document.querySelector('#frm-join').submit();
-	window.opener.location.href="${context}/search/main";
-	  self.close();
+	            	});
+	            }else{
+	            	alert("비밀번호가 틀렸거나 없는 회원입니다.");
+	            }
+	         })
+	      
+	      }else{
+	         alert("아이디를 입력하지 않으셨습니다.");
+	      }
+		
 });
+	
+	$("#signUP").clcik(function(){
+		window.opener.location.href="${pageContext.request.contextPath}/user/join"
+		self.close();
+	})
+
 
 </script>
 </body>
