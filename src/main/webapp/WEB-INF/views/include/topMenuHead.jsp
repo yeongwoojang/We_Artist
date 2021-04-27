@@ -85,7 +85,7 @@
 	          		<li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">Login</a></li>
 	          	</c:when>
 	          	<c:otherwise>
-	          		<li><a class="nav-link scrollto fs-5" href="/search/main" style="font-family: 'Open Sans', sans-serif;">Logout</a></li>
+	          		<li><a class="nav-link scrollto fs-5" href="/user/logout" style="font-family: 'Open Sans', sans-serif;">Logout</a></li>
 	          	</c:otherwise>
 	          </c:choose>
 	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">Join</a></li>

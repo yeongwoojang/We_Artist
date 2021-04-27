@@ -129,7 +129,7 @@ let initialize = () => {
 			"event" : "bye",
 			"data" : "yes"
 		})
-		peerConnection.close();
+		//peerConnection.close();
 		e.returnValue = 'end';
 		
 	})
