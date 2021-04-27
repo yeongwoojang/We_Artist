@@ -62,6 +62,8 @@
              	 <c:choose>
           			<c:when test="${pageState eq 'isMine'}">
           			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="modifyProfile()" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">프로필 설정</button>
+          			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/live/host'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">Live</button>
+          			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/fileupload'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">사진 올리기</button>
           			</c:when>
           			<c:when test="${pageState eq 'isFollowed'}">
           				<button  type="button" id="btn_about_following" onclick="unfollowing()"class="btn btn-primary btn-sm mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight:400;">팔로우 끊기</button>
