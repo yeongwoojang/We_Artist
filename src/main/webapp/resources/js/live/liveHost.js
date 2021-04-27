@@ -167,7 +167,7 @@ let initialize = () => {
 			"data" : "yes"
 		})
 		//peerConnection.close();
-		e.returnValue = 'end';
+		e.returnValue = 'end'; 
 		
 	})
 	
