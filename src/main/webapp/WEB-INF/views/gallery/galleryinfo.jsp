@@ -6,7 +6,7 @@
 	<div class="card w-50 mx-auto">
 		<div class="card-header d-flex justify-content-between">
 				<div class="align-self-center">
-					Upload
+					${userInfo.userId} 
 				</div>
 				<div class="flex-inline justify-content-end">
 					<div class="btn btn-danger btn-sm" id="btn-closes" onclick="backPage('${userInfo.nickName}')">
@@ -119,7 +119,7 @@
 			</c:forEach>
 		</div>
 		<div class="card-footer">
-			<button onclick="uploadGalleryInfo()">Save</button>
+			<div class="btn btn-light" onclick="uploadGalleryInfo('${userInfo.nickName}')">Save</div>
 		</div>
 	</div>
     <div class="d-none" id="BoardList" style="background-color: rgba(255,255,255,1);">

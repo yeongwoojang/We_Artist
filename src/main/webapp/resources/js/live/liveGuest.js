@@ -88,7 +88,6 @@ let initialize = () => {
     };
 
 	peerConnection.ontrack = (event) => {
-			alert('ss');
 			console.dir(event);
 			remoteVideo.srcObject = event.streams[0];
 	};

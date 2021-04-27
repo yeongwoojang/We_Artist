@@ -3,8 +3,15 @@
 <%@ include file="/WEB-INF/views/include/topMenuHead.jsp"%>
     
 	<div class="card w-50 mx-auto text-center">
-		<div class="card-header">
-			Board Uplaod
+		<div class="card-header d-flex justify-content-between">
+			<div class="align-self-center">
+					${userInfo.userId}'s Board Upload 
+			</div>
+			<div class="flex-inline justify-content-end">
+				<a class="btn btn-danger btn-sm" id="btn-closes" href="${context}/personal/personal?nickName=${userInfo.nickName}">
+					X
+				</a> 
+			</div>
 		</div>
 		<div>
 			<form action="${context}/upload" method="post" enctype="multipart/form-data" onsubmit="return false">

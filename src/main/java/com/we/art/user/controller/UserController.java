@@ -124,6 +124,7 @@ public class UserController {
 		System.out.println(userId);
 		Map<String,Object> picture = userService.selectProPicByFIdx(fIdx);
 		model.addAttribute("picture",picture);
+		System.out.println(picture);
 		
 		return "user/profile";
 	}
@@ -160,7 +161,8 @@ public class UserController {
 	public String login() {
 		return "user/login";
 	}
-
+	
+	/* 돌리기 */
 	@PostMapping("loginimpl")
 	public String loginImpl(@ModelAttribute User user, HttpSession session,Model model) {
 		System.out.println(user);
@@ -239,6 +241,13 @@ public class UserController {
 	        return mv;
 	    }
 	    */
+
+		
+		@GetMapping("test")
+		public String test() {
+			return "user/test";
+		}
+
 		
 		//김선민
 		@GetMapping("/logout")
@@ -246,7 +255,6 @@ public class UserController {
 			session.removeAttribute("userInfo");
 			return "redirect:/";
 		}
-			
-			
 }
+		
 
