@@ -145,7 +145,6 @@
     <div class="modal-content">
    		<div class="p-3 d-flex justify-content-between">
    			<div id="user_info" class="d-flex justify-content-start">
-   				<div>프사</div>
    				<div id="user_nickname">유저이름</div>
    			</div>   
    			<div style="cursor:pointer;" onclick='movePersonalPage();'>피드 바로가기</div>

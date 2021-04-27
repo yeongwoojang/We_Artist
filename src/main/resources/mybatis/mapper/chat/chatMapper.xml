@@ -52,7 +52,15 @@
 		ON(MSG_TO=USER_ID OR MSG_FROM =USER_ID) WHERE USER_ID !=#{userId}
 	</select>
 	
+	<update id="updateChatContent">
+		UPDATE TB_CHAT_CONTENT SET IS_CHECK = 1
+		WHERE MSG_TO = #{msgTo} AND MSG_FROM = #{msgFrom} AND IS_CHECK = 0
+	</update>
 	
+	<select id="selectNotiCheckChatContent" resultType="chatContent">
+		SELECT *FROM TB_CHAT_CONTENT
+		WHERE MSG_TO = #{msgTo} AND IS_CHECK = 0
+	</select>
 	
 	
 	<resultMap type="map" id="chatContentData">
@@ -73,32 +81,3 @@
 		<result column="USER_ID" javaType="String" property="userId"/>
 	</resultMap>
 </mapper>
-<!-- 	<select id="selectLastMessageList" parameterType="map" resultType="chatContent"> -->
-<!-- 	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME -->
-<!-- 	FROM( -->
-<!--     	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME, -->
-<!--     	ROW_NUMBER() OVER(PARTITION BY CHAT_ROOM_NO ORDER BY CHAT_NO DESC) as RowIdx -->
-<!--     	FROM TB_CHAT_CONTENT WHERE MSG_TO = #{userId} -->
-<!-- 	) -->
-<!-- 	WHERE RowIdx =1 -->
-<!-- 	</select> -->
-
-
-
-
-
-
-
-<!-- 	<select id="selectLastMessageList" parameterType="map" resultType="chatContent"> -->
-<!-- 	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME -->
-<!-- 	FROM( -->
-<!--     	SELECT CHAT_ROOM_NO, CHAT_NO,MSG,MSG_TO,MSG_FROM, MSG_TIME, -->
-<!--     	ROW_NUMBER() OVER(PARTITION BY CHAT_ROOM_NO ORDER BY CHAT_NO DESC) as RowIdx -->
-<!--     	FROM TB_CHAT_CONTENT WHERE CHAT_ROOM_NO IN -->
-<!--     	<foreach collection="myChatRoomList" item="list" open="(" close=")" separator=","> -->
-<!--     	 #{list.chatRoomNo} -->
-<!--     	 </foreach> -->
-<!-- 	) -->
-<!-- 	WHERE RowIdx =1 -->
-<!-- 	</select> -->
-	

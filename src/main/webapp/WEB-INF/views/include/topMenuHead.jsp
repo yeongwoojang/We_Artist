@@ -90,7 +90,7 @@
 	          </c:choose>
 	          <li><a class="nav-link scrollto fs-5" href="/user/join" style="font-family: 'Open Sans', sans-serif;">Join</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/chat/direct" style="font-family: 'Open Sans', sans-serif;"><i class="fas fa-envelope fs-5 text-white"></i></a>
-	          	<span id="message_noti"class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1"style="visibility:hidden;"><span class="visually-hidden">unread messages</span></span>
+	          	 <span id="message_noti_count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.3vw;"></span>
 	          </li>
 			  <li style="cursor: pointer;">
 			 	 <i id="notification_icon" class="fas fa-bell fs-5 text-white"></i>

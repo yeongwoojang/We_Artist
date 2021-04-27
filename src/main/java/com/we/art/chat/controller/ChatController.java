@@ -141,6 +141,25 @@ public class ChatController {
 		return senderList;
 	}
 	
+	@PostMapping("updatechatcontentimpl")
+	@ResponseBody
+	public String updateChatContentImpl(@RequestBody ChatContent chatContent) {
+		
+		int res = chatService.updateChatContent(chatContent);
+		if(res!=0) {
+			return "success";
+		}else{
+			return "failed";
+		}
+	}
+	
+	@GetMapping("selectnoticheckchatcontentimpl")
+	@ResponseBody
+	public List<ChatContent> selectNotCheckChatContent(@RequestParam("msgTo") String msgTo){
+		List<ChatContent> notiCheckedChatContentList = new ArrayList<>();
+		notiCheckedChatContentList = chatService.selectNotiCheckChatContent(msgTo);
+		return notiCheckedChatContentList;
+	}
 	
 	
 	

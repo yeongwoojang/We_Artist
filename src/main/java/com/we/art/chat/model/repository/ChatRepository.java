@@ -39,4 +39,8 @@ public interface ChatRepository {
 	List<Map<String,Object>> selectChatContentList(ChatRoom chatRoom);
 	
 	List<Map<String,Object>> selectLastMessageList(@Param("myChatRoomList")List<ChatRoom> myChatRoomList);
+	
+	int updateChatContent(ChatContent chatContent);
+	
+	List<ChatContent> selectNotiCheckChatContent(@Param("msgTo") String msgTo);
 }
