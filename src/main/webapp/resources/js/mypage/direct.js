@@ -78,6 +78,12 @@ function enterChatRoomImpl(currentUserId,selectUser){
 				)); 		
 				
 			} 
+			let lastMessageList = document.querySelectorAll('.last_message');
+			for(let i=0;i<lastMessageList.length;i++){
+				if(lastMessageList[i].dataset.usernick==msgToNickName){
+					lastMessageList[i].setAttribute("class","last_message text-dark");
+				}
+			}
 			updateChatContentImpl(currentUserId,selectUser);
 		}else{
 			//TODO 채팅방 만들기를 실패했을 시
