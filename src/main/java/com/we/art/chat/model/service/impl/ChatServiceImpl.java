@@ -64,6 +64,19 @@ public class ChatServiceImpl implements ChatService{
 		return chatRepository.selectLastMessageList(myChatRoomList);
 	}
 
+
+	@Override
+	public int updateChatContent(ChatContent chatContent) {
+		return chatRepository.updateChatContent(chatContent);
+	}
+
+
+	@Override
+	public List<ChatContent> selectNotiCheckChatContent(String msgTo) {
+		return chatRepository.selectNotiCheckChatContent(msgTo);
+	}
+
+	
 	
 	
 	

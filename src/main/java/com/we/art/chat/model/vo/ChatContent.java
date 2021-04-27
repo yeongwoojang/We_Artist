@@ -10,6 +10,7 @@ public class ChatContent {
 	private String msgTime;
 	private String msgTo;
 	private String msgFrom;
+	private int isCheck;
 	public String getChatNo() {
 		return chatNo;
 	}
@@ -46,11 +47,20 @@ public class ChatContent {
 	public void setMsgFrom(String msgFrom) {
 		this.msgFrom = msgFrom;
 	}
+	
+	
+	public int getIsCheck() {
+		return isCheck;
+	}
+	public void setIsCheck(int isCheck) {
+		this.isCheck = isCheck;
+	}
 	@Override
 	public String toString() {
 		return "ChatContent [chatNo=" + chatNo + ", chatRoomNo=" + chatRoomNo + ", msg=" + msg + ", msgTime=" + msgTime
-				+ ", msgTo=" + msgTo + ", msgFrom=" + msgFrom + "]";
+				+ ", msgTo=" + msgTo + ", msgFrom=" + msgFrom + ", isCheck=" + isCheck + "]";
 	}
+	
 	
 	
 }

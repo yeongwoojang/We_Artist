@@ -10,7 +10,6 @@ function sendMessage() {
 		if (msg.trim()!="") {
 			drawMyChatting(msg);
 			let msgTime = getCurrentTime();
-			stompClient.send("/message", {}, JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgFromNickName' : currentUserNickName,'msgTo': selectUser,'msgToNickName' :msgToNickName ,'msgTime' : msgTime }));
 			console.dir(currentRoomId)
 			let chatBox = document.getElementById("chat_box")
 			chatBox.scrollTop = chatBox.scrollHeight; 
@@ -62,41 +61,24 @@ function enterChatRoomImpl(currentUserId,selectUser){
 			let chatBox = document.getElementById("chat_box");
 			chatBox.innerHTML = "";
 			selectChatContentListImpl(currentRoomId,currentUserId,selectUser);
-			//만약 새로 생성한 채팅방 번호라면...
+			
 			let roomNoList = new Array();
 			for(let i=0; i<myChatRoomList.length;i++){
 				roomNoList.push(myChatRoomList[i].chatRoomNo);
 			}
-			console.dir(roomNoList);
-			console.log(currentRoomId);
+			//만약 새로 생성한 채팅방 번호라면...
 			if(roomNoList.indexOf(currentRoomId<0)){
 				//내가 속한 채팅방 리스트를 다시 내려받고 
 				//채팅방 구독 리스트를 업데이트
-				console.log("채팅방 여기에 없다~")
 				stompClient.disconnect();
 				reSetMyChatRoomList();
 				//상대방에게 채팅방을 개설했다는 신호를 푸시 소켓을 통해 전송
 				stompPushClient.send("/push", {}, JSON.stringify(
 					{'fromId' : currentUserId, 'toId': selectUser, 'nickName' : null, 'bdNo' :null, 'notiMethod' : 'direct' ,'message' : null}
 				)); 		
+				
 			} 
-			let chatRoomCard = document.querySelectorAll(".chat_room_card"); //팔로잉하고 있는 유저들의 item항목을 담고있는 div태그 리스트
-			let lastMessage = document.querySelectorAll(".last_message"); //해당 유저에게 마지막으로 받은 message를 보여 줄 div태그 리스트
-			
-			for(let i =0; i< chatRoomCard.length; i++){
-						let uName = chatRoomCard[i].childNodes[1].innerHTML
-						//메세지를 보낸 유저와 팔로잉 한 유저가 일치한다면 그 유저가 보낸 메세지를 Cardview에 표시
-						if((uName==currentUserNickName || uName == msgToNickName )){
-							if(uName==currentUserNickName){
-								lastMessage[i].setAttribute("class","last_message text-dark fw-bold");
-							}else{
-								lastMessage[i].setAttribute("class","last_message text-dark");
-							}
-							lastMessage[i].innerHTML = lastMsg
-							lastMessageTime[i].innerHTML = getCurrentTime();
-						}
-					}
-			
+			updateChatContentImpl(currentUserId,selectUser);
 		}else{
 			//TODO 채팅방 만들기를 실패했을 시
 		}
@@ -127,6 +109,35 @@ function insertChatContentImpl(roomId,msg,msgFrom,msgTo,msgTime){
 		if(text=='fail'){
 			
 		}else{
+			
+			let followingUserList = document.querySelectorAll('.following_user');
+			let nickNameList = new Array();
+			for(let i =0; i<followingUserList.length;i++){
+				nickNameList[i] = followingUserList[i].innerHTML;
+				console.log("아 닉네임 : "+nickNameList[i])
+			}	
+			if(nickNameList.indexOf(msgToNickName)<0){
+				console.log("없음")
+				let senderListBox = document.getElementById("sender_list_box");
+				let newChatRoomCard = document.createElement("div");
+				newChatRoomCard.setAttribute("class","chat_room_card card p-3 position-relative mb-2 bg-light");
+				let followingUser = document.createElement("a");
+				followingUser.setAttribute("href","#");
+				followingUser.setAttribute("class","following_user text-dark mb-3 item_following_user");
+				followingUser.setAttribute("data-userid",selectUser);
+				followingUser.innerHTML = msgToNickName;		
+				let lastMessage	= document.createElement("div");
+				lastMessage.setAttribute("class","last_message text-dark");
+				let lastMessageTime = document.createElement("p");
+				lastMessageTime.setAttribute("class","last_message_time position-absolute bottom-0 end-0 p-1 fw-light");
+				lastMessageTime.setAttribute("style","margin-bottom: 0px; font-size:1px;");
+				newChatRoomCard.append(followingUser,lastMessage,lastMessageTime);
+				senderListBox.appendChild(newChatRoomCard);
+				}
+			stompClient.send("/message", {},
+			 JSON.stringify({'roomId' : currentRoomId, 'message': msg, 'msgFrom': currentUserId, 'msgFromNickName' : currentUserNickName,'msgTo': selectUser,'msgToNickName' :msgToNickName ,'msgTime' : msgTime }));
+			
+		
 		}
 	})
 }
@@ -279,12 +290,13 @@ function drawYourChatting(msg){
 		chatBox.appendChild(borderBox);
 }
 
-
+	let lastMessage = document.querySelectorAll(".last_message");
 	let followingUserItemList = document.querySelectorAll(".item_following_user")
 	for(let i=0;i<followingUserItemList.length; i++){
 		followingUserItemList[i].addEventListener("click",(e)=>{
 			if(e.target.dataset.userid==senderList[i].userId){
-			createRoomId(senderList[i]);
+				createRoomId(senderList[i]);
+			
 			}
 		});
 	}
