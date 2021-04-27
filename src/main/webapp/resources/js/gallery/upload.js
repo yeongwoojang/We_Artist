@@ -56,7 +56,7 @@ let setGalleryInfo = (bdNo,fIdx,userId,src) => {
 	document.querySelector('#BoardList').className = 'd-none';
 }
 
-let uploadGalleryInfo = () => {
+let uploadGalleryInfo = (nickName) => {
 	let headerObj = new Headers();
 
 	headerObj.append("content-type","application/json");
@@ -65,8 +65,9 @@ let uploadGalleryInfo = () => {
 		headers : headerObj,
 		body : JSON.stringify(galleryImgList)
 	})
-	.then(res => res.text)
-	.then(res => {alert(res)});
+	.then(res => {
+		location.href = location.origin + '/personal/personal?nickName=' + nickName;
+	});
 }
 
 let setGalleryImgList = (imgObj) => {
