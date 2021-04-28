@@ -22,7 +22,7 @@
             	<c:set var="pic" value="${picture.files}"/>
                     <c:choose>
                     	<c:when test="${empty pic}">
-		                    <img class="mx-auto propic" id="picture" src="/resources/img/boyoung.jpg" alt="" style="
+		                    <img class="mx-auto propic" id="picture" src="/resources/img/dummy_img.png" alt="" style="
 							    width: 14rem;
 							    height: 14rem;
 							">

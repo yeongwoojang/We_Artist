@@ -28,7 +28,7 @@ public class FileUtil {
 				fileVo.setfRename(fRename);
 				fileVo.setfSavePath(fSavePath);
 				fileDatas.add(fileVo);
-				
+				 
 				saveFile(multipartFile,fileVo);
 			}
 		}

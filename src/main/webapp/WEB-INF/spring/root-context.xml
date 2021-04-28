@@ -10,6 +10,7 @@
 	<!-- JDBC 설정 bean  -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	<!-- <property name="url" value="jdbc:oracle:thin:@weartist_medium?TNS_ADMIN=/var/lib/tomcat8/webapps/gitTest/WEB-INF/classes/Wallet_WeArtist"/>-->
 	<property name="url" value="jdbc:oracle:thin:@weartist_medium?TNS_ADMIN=C:\\code\\wallet\\Wallet_WeArtist"/>
 	<property name="username" value="admin"/>
 	<property name="password" value="Weartist0000"/>

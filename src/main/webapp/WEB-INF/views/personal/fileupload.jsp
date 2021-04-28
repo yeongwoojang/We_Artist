@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<div>
-			<form action="${context}/upload" method="post" enctype="multipart/form-data" onsubmit="return false">
+			<form action="${context}/sibal" method="post" enctype="multipart/form-data" onsubmit="return false" name="upload_form">
 				<div class="input-group input-group-lg">
 				  <input type="text" class="form-control" placeholder="Title" aria-label="Large" aria-describedby="inputGroup-sizing-sm" name="bdTitle" style="border:none">
 				</div>
