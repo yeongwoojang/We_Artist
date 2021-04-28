@@ -50,6 +50,9 @@
 	<!-- fontAwsome -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet"/>
 	
+	<!-- 구글폰트 링크 -->
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet"/>
+	
 	<!-- 검색 자동완성 js파일 -->
 	<script src="${context}/resources/js/common/autoSearch.js"></script>
 <style>

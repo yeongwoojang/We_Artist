@@ -1,4 +1,4 @@
-const tagClassName = 'mx-2 my-2 btn btn-primary';
+const tagClassName = 'mx-2 my-2 rgyPostIt';
 const addTag = document.querySelector('#add_tag');
 const addTagInput = document.querySelector('#add_tag_input');
 const addTagText = document.querySelector('#add_tag_text');

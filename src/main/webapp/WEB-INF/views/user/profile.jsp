@@ -121,27 +121,5 @@
     </section><!-- End Contact Section -->
 <script src="${context}/resources/js/user/profile.js"></script>
 
-<%-- <script type="text/javascript">
-    function ajaxFileUpload() {
-
-
-    	var userId = "<%=(String)session.getAttribute("userId")%>"
-        var form = jQuery("ajaxFrom")[0];
-        var formData = new FormData(form);
-        formData.append("userId", userId);
-        formData.append("files", jQuery("#ex_file")[0].files[0]);
-
-        jQuery.ajax({
-              url : "/user/proPic"
-            , type : "POST"
-            , processData : false
-            , contentType : false
-            , data : formData
-            , success:function(json) {
-                var obj = JSON.parse(json);
-            }
-        });
-    }
-</script> --%>
 </body>
 </html>
