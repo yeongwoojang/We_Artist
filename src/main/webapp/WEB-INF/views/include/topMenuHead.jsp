@@ -82,7 +82,7 @@
 	          <li><a class="nav-link scrollto fs-5" href="/personal/personal?nickName=${userInfo.nickName}" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
 	          <c:choose>
 	          	<c:when test="${empty userInfo}">
-	          		<li><a class="nav-link scrollto fs-5" href="/user/login" style="font-family: 'Open Sans', sans-serif;">Login</a></li>
+	          		<li><a class="nav-link scrollto fs-5" href="/user/login" onclick="window.open(this.href, '_blank', 'width=500, height=400'); return false;" style="font-family: 'Open Sans', sans-serif;">Login</a></li>
 	          	</c:when>
 	          	<c:otherwise>
 	          		<li><a class="nav-link scrollto fs-5" href="/user/logout" style="font-family: 'Open Sans', sans-serif;">Logout</a></li>
