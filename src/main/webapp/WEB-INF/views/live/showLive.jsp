@@ -48,8 +48,8 @@
 				    </div>
 				    <div class="col-md-8">
 				      <div class="card-body">
-				        <h5 class="card-title">유저 아이디 들어갈 곳</h5>
-				        <p class="card-text">유저 이메일</p>
+				        <h5 class="card-title">sunmin0406</h5>
+				        <p class="card-text">sunmin0406@naver.com</p>
 				        <p class="card-text btn" onclick="createOffer()"><small class="text-muted">Go to Live</small></p>
 				      </div>
 				    </div>

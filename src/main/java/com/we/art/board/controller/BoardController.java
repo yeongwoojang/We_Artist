@@ -39,7 +39,7 @@ public class BoardController {
 		this.communicationService = communicationService;
 	}
 	
-	@PostMapping("upload")
+	@PostMapping("/sibal")
 	public String uploadBorad(@RequestParam List<MultipartFile> files, Board board,
 			Model model) {
 		User user = (User)model.getAttribute("userInfo");
