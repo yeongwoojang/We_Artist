@@ -26,6 +26,7 @@ public interface UserService {
 	//김지연 비밀번호 찾기 시작
 
 	String findPassword(String email);
+	User checkUserForLogin(String userId, String password);
 	
 	//끝
 	

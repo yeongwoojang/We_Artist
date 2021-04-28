@@ -95,10 +95,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User selectUserForLogin(User user) {
 		User userInfo = userRepository.selectUserById(user.getUserId());
+		System.out.println(user.getPassword());
 		//회원가입좀 하겠습니다 - 장영우
-//		if(userInfo == null || !encoder.matches(user.getPassword(), userInfo.getPassword())) {
-//			return null;
-//		} 
+		//if(userInfo == null || !encoder.matches(user.getPassword(), userInfo.getPassword())) {
+		//	return null;
+		//} 
 		if(userInfo ==null) {
 			return null;
 		}
@@ -209,6 +210,20 @@ public class UserServiceImpl implements UserService {
 		return commandMap;
 	}
 	
+	
+
+	@Override
+	public User checkUserForLogin(String userId, String password) {
+		User userInfo = userRepository.selectUserById(userId);
+		//회원가입좀 하겠습니다 - 장영우
+		//if(userInfo == null || !encoder.matches(password, userInfo.getPassword())) {
+		//	return null;
+		//} 
+		if(userInfo ==null) {
+			return null;
+		}
+		return userInfo;
+	}
 
 	
 
