@@ -63,7 +63,9 @@
           			<c:when test="${pageState eq 'isMine'}">
           			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="modifyProfile()" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">프로필 설정</button>
           			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/live/host'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">Live</button>
-          			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/fileupload'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">사진 올리기</button>
+          			<!-- 밑에 팝업으로 바꿔봄 -->
+          			<!-- <button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/fileupload'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">사진 올리기</button> -->
+          			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="window.open('/fileupload2', '_blank', 'width=578, height=700, left=550, top=100'); return false;" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">사진 올리기</button>
           			</c:when>
           			<c:when test="${pageState eq 'isFollowed'}">
           				<button  type="button" id="btn_about_following" onclick="unfollowing()"class="btn btn-primary btn-sm mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight:400;">팔로우 끊기</button>
