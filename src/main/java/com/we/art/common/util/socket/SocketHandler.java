@@ -61,7 +61,7 @@ public class SocketHandler extends TextWebSocketHandler{
 	}
 	
 	public List<Map<String, String>> getUserList(){
-		return userList;
+		return this.userList;
 	}
 	
 }

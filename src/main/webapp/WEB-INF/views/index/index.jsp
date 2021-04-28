@@ -22,7 +22,7 @@
       <h1 class="mb-4 pb-0">Welcome to <br><span>We Artist</span>!</h1>
       <p class="mb-4 pb-0">Manage your portfolio easily and FREE</p>
       <a href="/user/join" class="glightbox play-btn mb-4"></a>
-      <a href="/user/login" class="about-btn scrollto"> Already signed up? <i class="far fa-grin-hearts"></i></a>
+      <a href="/user/login" onclick="window.open(this.href, '_blank', 'width=500, height=400, left=550, top=200'); return false;" class="about-btn scrollto"> Already signed up? <i class="far fa-grin-hearts"></i></a>
     </div>
   </section>
   <!-- End Hero Section -->
