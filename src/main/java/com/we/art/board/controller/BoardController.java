@@ -44,13 +44,13 @@ public class BoardController {
 			@SessionAttribute(name="userInfo", required = false)User user) {
 		
 		// board객체에 업로드한 회원의 아이디를 넣는다.
-		String userId = "test01";
-		//String userId = user.getUserId();
+		//String userId = "test01";
+		String userId = user.getUserId();
 		
 		board.setUserId(userId);
 		
 		boardService.insertBoard(board, files);
-		return "personal/personal_page";
+		return "redirect:fileupload";
 	}
 	
 	@GetMapping("fileupload")

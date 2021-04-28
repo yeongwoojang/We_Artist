@@ -30,7 +30,7 @@
 				<input type="text" id="tag" name="tag" class="d-none">
 				<label class="btn btn-primary w-100">
 					Choose file
-					<input type="file" multiple class="d-none" name="files" onchange="preview(this)">
+					<input type="file" multiple class="d-none" accept="image/*" name="files" onchange="preview(this)">
 				</label>
 				<div class="img_area mb-2 d-flex flex-wrap">
 				</div>
