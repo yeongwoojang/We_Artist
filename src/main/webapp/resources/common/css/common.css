@@ -126,4 +126,14 @@ table {
 .form-join{
 	margin-left:15%;
 }
+
+.login-submit {
+  background: #f82249;
+  border: 0;
+  padding: 10px 40px !important;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px !important;
+  cursor: pointer !important;
+}
 		
