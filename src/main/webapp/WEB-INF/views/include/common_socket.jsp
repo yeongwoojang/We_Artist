@@ -69,12 +69,10 @@ let connectSocket = function(){
 						if((uName==msgFromNickName || uName == msgToNickName )){
 							senderListBox.insertBefore(chatRoomCard[i],senderListBox.firstChild);
 							if(uName==msgFromNickName){
-								console.log("이거")
 								lastMessage[i].setAttribute("class","last_message text-dark fw-bold");
 								let curMessageNotiCount = parseInt(document.getElementById("message_noti_count").innerHTML);
 								document.getElementById("message_noti_count").innerHTML = curMessageNotiCount+1
 							}else if(uName!=msgFromNickName || document.getElementById("opponent").innerHTML==uName){
-								console.log("아니 이거")
 								lastMessage[i].setAttribute("class","last_message text-dark");
 							}
 							lastMessage[i].innerHTML = lastMsg
@@ -88,13 +86,20 @@ let connectSocket = function(){
 					let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
 					if(msgFrom!= currentUserId && chatIndex==null && roomId == currentRoomId) {
 						let lastMessages = document.querySelectorAll('.last_message');
-						for(let i = 0; i<lastMessages.length; i++){
-							console.log("for문 돈다 변경")
-							if(lastMessages[i].dataset.usernick==document.getElementById("opponent").innerHTML){
-								console.log("text-dark로 변경")
+						let followingUsers = document.querySelectorAll('.following_user');
+						for(let i=0;i<followingUsers.length; i++){
+							if(followingUsers[i].innerHTML == document.getElementById("opponent").innerHTML){
 								lastMessages[i].setAttribute("class","last_message text-dark");
 							}
 						}
+// 						for(let i = 0; i<lastMessages.length; i++){
+// 							console.log(lastMessages[i].dataset.usernick)
+// 							console.log(document.getElementById("opponent").innerHTML)
+// 							if(lastMessages[i].dataset.usernick==document.getElementById("opponent").innerHTML){
+// 								lastMessages[i].setAttribute("class","last_message text-dark");
+								
+// 							}
+// 						}
 						updateChatContentImpl(msgTo,msgFrom); //메시지를 확인했으므로 IS_CHECK를 1로 변경
 						let chatBox = document.getElementById("chat_box");
 						let borderBox = document.createElement("div");
