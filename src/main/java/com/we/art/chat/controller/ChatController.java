@@ -49,6 +49,9 @@ public class ChatController {
 		List<Map<String,String>> senderList = new ArrayList<Map<String,String>>();
 		senderList = chatService.selectSenderList(userInfo.getUserId());
 		List<Map<String, Object>> lastMessageList = new ArrayList<>();
+		
+//		chatContent.msgFrom !=userInfo.userId && chatContent.isCheck==0
+				
 //		if (senderList.size() != 0) {
 //			senderList = chatService.selectSenderList(userInfo.getUserId());
 //		}

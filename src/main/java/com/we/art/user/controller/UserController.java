@@ -98,6 +98,16 @@ public class UserController {
 		}
 		return "success";
 	}
+	
+	@GetMapping("pwcheck")
+	@ResponseBody
+	public String pwCheck(String userId, String password) {
+		System.out.println(password);
+		if(userService.checkUserForLogin(userId, password) != null) {
+			return "success";
+		}
+		return "fail";
+	}
 
 	@PostMapping("mailauth")
 	public String authenticateEmail(@Valid User persistInfo, Errors errors, HttpSession session, Model model) {
@@ -162,7 +172,7 @@ public class UserController {
 		return "user/login";
 	}
 	
-	/* 돌리기 */
+	
 	@PostMapping("loginimpl")
 	public String loginImpl(@ModelAttribute User user, HttpSession session,Model model) {
 		System.out.println(user);
