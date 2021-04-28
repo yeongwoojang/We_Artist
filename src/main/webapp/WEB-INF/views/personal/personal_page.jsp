@@ -14,7 +14,7 @@
   function overlap(id){
 	  let div = document.getElementById(id);
 	  let icon = document.createElement("i");
-	  icon.setAttribute("class","fas fa-copy position-absolute top-0 end-0 m-3 fs-3 text-white");
+	  icon.setAttribute("class","fas fa-copy position-absolute top-0 end-0 m-3 fs-3 text-warning");
 	  div.appendChild(icon)
   }
   </script>
@@ -309,8 +309,8 @@ likeUserListModal.addEventListener('hidden.bs.modal', function (event) {
 					img.setAttribute("id","content_img")
 					img.setAttribute("class","d-block w-100");
 					img.setAttribute("style","width:25rem; height:25rem; object-fit:contain;");
-					img.src="/images/2021/4/12/2cdfe272-71d5-42d5-8b59-cb4d30b6809b";
-// 					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
+// 					img.src="/images/2021/4/12/2cdfe272-71d5-42d5-8b59-cb4d30b6809b";
+					img.src = "/images/"+fileList[i].fSavePath+"/"+fileList[i].fRename;
 //					img.style="width:100%;height:100%;object-fit:cover;";
 					carouselItem.setAttribute("class","carousel-item");
 				}

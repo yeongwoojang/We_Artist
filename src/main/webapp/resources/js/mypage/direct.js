@@ -120,10 +120,8 @@ function insertChatContentImpl(roomId,msg,msgFrom,msgTo,msgTime){
 			let nickNameList = new Array();
 			for(let i =0; i<followingUserList.length;i++){
 				nickNameList[i] = followingUserList[i].innerHTML;
-				console.log("아 닉네임 : "+nickNameList[i])
 			}	
 			if(nickNameList.indexOf(msgToNickName)<0){
-				console.log("없음")
 				let senderListBox = document.getElementById("sender_list_box");
 				let newChatRoomCard = document.createElement("div");
 				newChatRoomCard.setAttribute("class","chat_room_card card p-3 position-relative mb-2 bg-light");
@@ -300,10 +298,10 @@ function drawYourChatting(msg){
 	let followingUserItemList = document.querySelectorAll(".item_following_user")
 	for(let i=0;i<followingUserItemList.length; i++){
 		followingUserItemList[i].addEventListener("click",(e)=>{
-			if(e.target.dataset.userid==senderList[i].userId){
-				createRoomId(senderList[i]);
-			
-			}
+			let obj = new Object();
+			obj.userId = e.target.dataset.userid;
+			obj.nickName = e.target.innerHTML;
+				createRoomId(obj);
 		});
 	}
 	
