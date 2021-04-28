@@ -50,6 +50,16 @@ public class ChatController {
 		senderList = chatService.selectSenderList(userInfo.getUserId());
 		List<Map<String, Object>> lastMessageList = new ArrayList<>();
 		
+//		for(int i = 0; i<senderList.size(); i++) {
+//			for(int j=0; j<lastMessageList.size();j++) {
+//				if(senderList.get(i).get("nickName").equals(lastMessageList.get(j).get("msgToNickName")) 
+//						|| senderList.get(i).get("nickName").equals(lastMessageList.get(j).get("msgFromNickName"))){
+//						senderList
+//					}
+//			}
+//			
+//		}
+		
 //		chatContent.msgFrom !=userInfo.userId && chatContent.isCheck==0
 				
 //		if (senderList.size() != 0) {
@@ -58,6 +68,7 @@ public class ChatController {
 		if (myChatRoomList.size() != 0) {
 			lastMessageList = chatService.selectLastMessageList(myChatRoomList);
 		}
+		
 		System.out.println("senderList : "+ senderList);
 		model.addAttribute("sendDirect",directUser);
 		model.addAttribute("senderList", senderList);

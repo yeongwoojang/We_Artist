@@ -30,29 +30,24 @@
 			<div id="follow_list"class="card col-4 bg-light" style="height:60vh;">
 				<div id="userId" class="card-header p-4 bg-light text-center fw-bold">${userInfo.nickName}</div> 
 				<div id="sender_list_box"class="card-body d-flex flex-column" style="width:100%;height:70vh; overflow:auto;">
-					<c:forEach var ="senderInfo" items ="${senderList}" varStatus="status">
-						<c:set var="loop_flag" value="false" />
+					<c:forEach var ="chatContent" items ="${lastMessageList}" varStatus="status">
 						<div class="chat_room_card card p-3 position-relative mb-2 bg-light">
-							<a href="#" class="following_user text-dark mb-3 item_following_user" data-userid="${senderInfo.userId}"><c:out value="${senderInfo.nickName}"></c:out></a>
-							<c:forEach var="chatContent" items="${lastMessageList}" varStatus="sts">
-								<c:if test="${chatContent.msgFrom == senderInfo.userId || chatContent.msgTo ==senderInfo.userId}">
-									<c:if test="${chatContent.msgFrom !=userInfo.userId and chatContent.isCheck eq '0'}">
-									<div class="last_message text-dark fw-bold" data-usernick='${chatContent.msgFromNickName}'><c:out value="${chatContent.msg}"></c:out></div>
-									</c:if>
-									<c:if test="${chatContent.msgFrom !=userInfo.userId and chatContent.isCheck eq '1'}">
-									<div class="last_message text-dark"  data-usernick='${chatContent.msgFromNickName}'><c:out value="${chatContent.msg}"></c:out></div>
-									</c:if>
-									<c:if test="${chatContent.msgFrom == userInfo.userId}">
-									<div class="last_message text-dark"  data-usernick='${chatContent.msgFromNickName}'><c:out value="${chatContent.msg}"></c:out></div>
-									</c:if>
-									<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px; font-size:1px;"><c:out value="${chatContent.msgTime}"></c:out></p>
-									<c:set var="loop_flag" value="true" />
-								</c:if>
-						   </c:forEach>
-						    <c:if test="${not loop_flag}">
-						   <div class="last_message text-secondary"  data-usernick='${chatContent.msgFromNickName}'></div>
-							<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px; font-size:1px;"></p>
+							<c:if test="${userInfo.userId eq chatContent.msgTo}">
+							<a href="#" class="following_user text-dark mb-3 item_following_user" data-userid="${chatContent.msgFrom}"><c:out value="${chatContent.msgFromNickName}"></c:out></a>
 							</c:if>
+							<c:if test="${userInfo.userId eq chatContent.msgFrom}">
+							<a href="#" class="following_user text-dark mb-3 item_following_user" data-userid="${chatContent.msgTo}"><c:out value="${chatContent.msgToNickName}"></c:out></a>
+							</c:if>
+								<c:if test="${chatContent.msgFrom !=userInfo.userId and chatContent.isCheck eq '0'}">
+								<div class="last_message text-dark fw-bold" data-usernick='${chatContent.msgFromNickName}'><c:out value="${chatContent.msg}"></c:out></div>
+								</c:if>
+								<c:if test="${chatContent.msgFrom !=userInfo.userId and chatContent.isCheck eq '1'}">
+								<div class="last_message text-dark"  data-usernick='${chatContent.msgFromNickName}'><c:out value="${chatContent.msg}"></c:out></div>
+								</c:if>
+								<c:if test="${chatContent.msgFrom == userInfo.userId}">
+								<div class="last_message text-dark"  data-usernick='${chatContent.msgToNickName}'><c:out value="${chatContent.msg}"></c:out></div>
+								</c:if>
+								<p class="last_message_time position-absolute bottom-0 end-0 p-1 fw-light" style="margin-bottom: 0px; font-size:1px;"><c:out value="${chatContent.msgTime}"></c:out></p>
 						</div>
 					</c:forEach>
 				</div>

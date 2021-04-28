@@ -8,6 +8,9 @@ public enum ConfigCode {
     DOMAIN("http://localhost:9898"),
     EMAIL("hphphp23@naver.com"),
     //UPLOAD_PATH("/var/lib/tomcat8/webapps/upload/"),
+=======
+    EMAIL("weartist1@naver.com"),
+>>>>>>> 7d8142ce767e92a7eec4c91137cf6f91319a5212
     UPLOAD_PATH("C:\\code\\resources\\upload\\"),
 	GALLERY_PATH("C:\\code\\resources\\gallery\\");
     public  String desc;

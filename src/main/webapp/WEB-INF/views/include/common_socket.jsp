@@ -9,7 +9,6 @@ let myChatRoomList = null;
 let tempMsgFrom = null;
 let followingList = new Array();
 window.onload = function() { //페이지의 모든 요소들이 로드되면 호출
-	
 	console.log("window.onload !")
 	currentUserId = "${userInfo.userId}"; //현재 로그인한 유저의 ID
 	currentUserNickName = "${userInfo.nickName}"; //현재 로그인한 유저의 닉네임
@@ -52,7 +51,6 @@ let connectSocket = function(){
 				let roomId = msgInfo.roomId;
 				let msgToNickName = msgInfo.msgToNickName;
 				let msgFromNickName = msgInfo.msgFromNickName;
-				console.dir(msgInfo);
 				if(currentURI.indexOf('/chat/direct')!=-1){ //만약 현제 페이지가 채팅화면 이라면
 					
 					let chatRoomCard = document.querySelectorAll(".chat_room_card"); //팔로잉하고 있는 유저들의 item항목을 담고있는 div태그 리스트
@@ -71,8 +69,12 @@ let connectSocket = function(){
 						if((uName==msgFromNickName || uName == msgToNickName )){
 							senderListBox.insertBefore(chatRoomCard[i],senderListBox.firstChild);
 							if(uName==msgFromNickName){
+								console.log("이거")
 								lastMessage[i].setAttribute("class","last_message text-dark fw-bold");
+								let curMessageNotiCount = parseInt(document.getElementById("message_noti_count").innerHTML);
+								document.getElementById("message_noti_count").innerHTML = curMessageNotiCount+1
 							}else if(uName!=msgFromNickName || document.getElementById("opponent").innerHTML==uName){
+								console.log("아니 이거")
 								lastMessage[i].setAttribute("class","last_message text-dark");
 							}
 							lastMessage[i].innerHTML = lastMsg
@@ -85,6 +87,14 @@ let connectSocket = function(){
 					
 					let chatIndex = document.getElementById("chat_index"); //유저를 선택하지 않았을 시의 채팅창 화면
 					if(msgFrom!= currentUserId && chatIndex==null && roomId == currentRoomId) {
+						let lastMessages = document.querySelectorAll('.last_message');
+						for(let i = 0; i<lastMessages.length; i++){
+							console.log("for문 돈다 변경")
+							if(lastMessages[i].dataset.usernick==document.getElementById("opponent").innerHTML){
+								console.log("text-dark로 변경")
+								lastMessages[i].setAttribute("class","last_message text-dark");
+							}
+						}
 						updateChatContentImpl(msgTo,msgFrom); //메시지를 확인했으므로 IS_CHECK를 1로 변경
 						let chatBox = document.getElementById("chat_box");
 						let borderBox = document.createElement("div");
@@ -107,28 +117,26 @@ let connectSocket = function(){
 						borderBox.appendChild(messageBox);
 						chatBox.appendChild(borderBox);
 						chatBox.scrollTop = chatBox.scrollHeight; 
-						
-					
 					}
 					
 				}else{
 					document.getElementById("liveMessageToast").className ="toast show";
-					document.getElementById("toast_msg").innerHTML = msgFrom+"님으로부터 메세지가 도착했습니다.";
+					document.getElementById("toast_msg").innerHTML = msgFromNickName+"님으로부터 메세지가 도착했습니다.";
 					document.getElementById("toast_msg").addEventListener('click',function(event){
 						location.href="/chat/direct?sendDirectNickName="+msgFromNickName+"&sendDirectUserId="+msgFrom;
 					});
-// 					let curMessageNotiCount = parseInt(document.getElementById("message_noti_count").innerHTML);
-// 					console.log("???"+curMessageNotiCount+1);
-// 					document.getElementById("message_noti_count").innerHTML = curMessageNotiCount+1
+					if(msgFrom!=currentUserId){
+						let curMessageNotiCount = parseInt(document.getElementById("message_noti_count").innerHTML);
+						document.getElementById("message_noti_count").innerHTML = curMessageNotiCount+1
+					}
 					setTimeout(function() {
 			 			document.getElementById("liveMessageToast").className ="toast hide";
 						}, 5000);
 					
 						
 					}
-				let curMessageNotiCount = parseInt(document.getElementById("message_noti_count").innerHTML);
-				console.log("???"+curMessageNotiCount+1);
-				document.getElementById("message_noti_count").innerHTML = curMessageNotiCount+1
+					
+				
 			});
 		}
 		console.log("유저의 모든 채팅방 구독완료")

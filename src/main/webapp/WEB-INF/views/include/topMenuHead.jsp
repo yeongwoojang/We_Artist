@@ -79,10 +79,12 @@
 	          <li><a class="nav-link scrollto active fs-5" href="/search/main" style="font-family: 'Open Sans', sans-serif;">Home</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/gallery/main" style="font-family: 'Open Sans', sans-serif;">Gallery</a></li>
 	          <li><a class="nav-link scrollto fs-5" href="/live/guest" style="font-family: 'Open Sans', sans-serif;">Live</a></li>
-	          <li><a class="nav-link scrollto fs-5" href="/personal/personal?nickName=${userInfo.nickName}" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
+	          <c:if test="${userInfo!=null}">
+	           <li><a class="nav-link scrollto fs-5" href="/personal/personal?nickName=${userInfo.nickName}" style="font-family: 'Open Sans', sans-serif;">MyPage</a></li>
+	          </c:if>
 	          <c:choose>
 	          	<c:when test="${empty userInfo}">
-	          		<li><a class="nav-link scrollto fs-5" href="/user/login" onclick="window.open(this.href, '_blank', 'width=500, height=400'); return false;" style="font-family: 'Open Sans', sans-serif;">Login</a></li>
+	          		<li><a class="nav-link scrollto fs-5" href="/user/login" onclick="window.open(this.href, '_blank', 'width=500, height=400, left=550, top=200'); return false;" style="font-family: 'Open Sans', sans-serif;">Login</a></li>
 	          	</c:when>
 	          	<c:otherwise>
 	          		<li><a class="nav-link scrollto fs-5" href="/user/logout" style="font-family: 'Open Sans', sans-serif;">Logout</a></li>
