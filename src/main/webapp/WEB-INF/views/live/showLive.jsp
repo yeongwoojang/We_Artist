@@ -7,7 +7,7 @@
 		<div class="d-flex card w-80 position-absolute top-30 start-50 translate-middle" style="top: 40%">
 			<div class="card-header d-flex justify-content-between">
 				<div class="align-self-center">
-					유저 아이디 넣을까
+					Live
 				</div>
 				<div class="flex-inline justify-content-end">
 					<div class="btn btn-danger btn-sm" id="btn-close" onclick="changePage()">
@@ -63,8 +63,8 @@
 				    </div>
 				    <div class="col-md-8">
 				      <div class="card-body">
-				        <h5 class="card-title">유저 아이디 들어갈 곳</h5>
-				        <p class="card-text">유저 이메일 들어갈 곳</p>
+				        <h5 class="card-title">masolfree</h5>
+				        <p class="card-text">masolfree@naver.com</p>
 				        <p class="card-text btn"><small class="text-muted">Go to Live</small></p>
 				      </div>
 				    </div>
@@ -78,8 +78,8 @@
 				    </div>
 				    <div class="col-md-8">
 				      <div class="card-body">
-				        <h5 class="card-title">유저 아이디 들어갈 곳</h5>
-				        <p class="card-text">유저 이메일 들어갈 곳</p>
+				        <h5 class="card-title">장영우</h5>
+				        <p class="card-text">hphphp23@naver.com</p>
 				        <p class="card-text btn"><small class="text-muted">Go to Live</small></p>
 				      </div>
 				    </div>
