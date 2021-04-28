@@ -55,7 +55,9 @@
 				    color: #112363;
 				    margin-top: 8px;
 				    ">
+				    <mark>
              ${sessionScope.userInfo.userId}
+             </mark>
               </div>
             </div>
           </div>
@@ -119,6 +121,7 @@
 
       </div>
     </section><!-- End Contact Section -->
+    <%@include file ="/WEB-INF/views/include/footer.jsp" %>
 <script src="${context}/resources/js/user/profile.js"></script>
 
 </body>
