@@ -82,6 +82,7 @@
         </div>
       </div>
     </section>
+    <%@include file ="/WEB-INF/views/include/footer.jsp" %>
 <script src="${context}/resources/js/user/join.js"></script>
 </body>
 </html>
