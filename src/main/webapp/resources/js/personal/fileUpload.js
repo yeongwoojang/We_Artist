@@ -81,7 +81,7 @@ let preview = (input) => {
 }
 
 let submitBtn = () => {
-	if(isTagClose()){
+	if(isTagClose()){preview(this)
 		document.querySelector('form').submit();	
 	}
 }

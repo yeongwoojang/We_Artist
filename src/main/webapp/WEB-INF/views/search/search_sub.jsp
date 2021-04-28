@@ -197,7 +197,12 @@
 		  let carouselItem = document.createElement("div");
 		  let img = document.createElement("img");
 		  img.setAttribute("class","d-block w-100 img-fluid");
-		  img.src = "/images/"+imageList[i].fSavePath+"/"+imageList[i].fRename;
+		  if(imageList[i].fSavePath!=null && imageList[i].fRename!=null){
+			  
+		  	img.src = "/images/"+imageList[i].fSavePath+"/"+imageList[i].fRename;
+		  }else{
+		  	img.src = "/resources/img/dummy_img.png";
+		  }
 //		  img.style="width:100%;height:100%;object-fit:cover;";
 		  carouselItem.appendChild(img);
 		  

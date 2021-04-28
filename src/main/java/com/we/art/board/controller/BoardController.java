@@ -41,10 +41,10 @@ public class BoardController {
 	
 	@PostMapping("upload")
 	public String uploadBorad(@RequestParam List<MultipartFile> files, Board board,
-			@SessionAttribute(name="userInfo", required = false)User user) {
-		
+			Model model) {
+		User user = (User)model.getAttribute("userInfo");
 		// board객체에 업로드한 회원의 아이디를 넣는다.
-		//String userId = "test01";
+//		String userId = "test01";
 		String userId = user.getUserId();
 		
 		board.setUserId(userId);
