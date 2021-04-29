@@ -53,11 +53,6 @@ public class BoardController {
 		return "redirect:fileupload2";
 	}
     
-    @GetMapping("/sibal")
-    public String test2() {
-        return "redirect:/user/login";
-    }
-    
 	@GetMapping("fileupload")
 	public String test() {
 		for(Map<String, Object> data:boardService.selectBoardByUserId("test01")) {
