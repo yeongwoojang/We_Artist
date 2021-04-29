@@ -52,7 +52,7 @@ public class BoardController {
 		boardService.insertBoard(board, files);
 		return "redirect:fileupload2";
 	}
-	
+    
 	@GetMapping("fileupload")
 	public String test() {
 		for(Map<String, Object> data:boardService.selectBoardByUserId("test01")) {
