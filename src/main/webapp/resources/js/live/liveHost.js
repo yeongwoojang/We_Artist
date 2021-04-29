@@ -1,5 +1,5 @@
-//let conn = new WebSocket('wss:/3.19.138.148:8443/socket'); // 해당 주소로 소켓을 연다
-let conn = new WebSocket('wss:/localhost:8443/socket'); // 해당 주소로 소켓을 연다
+let conn = new WebSocket('wss:/3.19.138.148:8443/socket'); // 해당 주소로 소켓을 연다
+//let conn = new WebSocket('wss:/localhost:8443/socket'); // 해당 주소로 소켓을 연다
 
 let peerConnection;
 let dataChannel; // 연결채널, 데이터 전송을 위한 채널을 연다

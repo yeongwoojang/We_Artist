@@ -215,13 +215,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User checkUserForLogin(String userId, String password) {
 		User userInfo = userRepository.selectUserById(userId);
-		//회원가입좀 하겠습니다 - 장영우
-		//if(userInfo == null || !encoder.matches(password, userInfo.getPassword())) {
-		//	return null;
-		//} 
-		if(userInfo ==null) {
+		if(userInfo == null || !encoder.matches(password, userInfo.getPassword())) {
 			return null;
-		}
+		} 
 		return userInfo;
 	}
 

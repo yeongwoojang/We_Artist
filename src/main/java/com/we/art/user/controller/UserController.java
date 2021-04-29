@@ -99,7 +99,7 @@ public class UserController {
 		return "success";
 	}
 	
-	@GetMapping("pwcheck")
+	@GetMapping("pwchecked")
 	@ResponseBody
 	public String pwCheck(String userId, String password) {
 		System.out.println(password);
