@@ -55,21 +55,11 @@ public class BoardController {
     
 	@GetMapping("fileupload")
 	public String test() {
-		for(Map<String, Object> data:boardService.selectBoardByUserId("test01")) {
-			System.out.println("-----------------------------------------------------");
-			System.out.println(data.get("board"));
-			System.out.println(data.get("files"));
-		}
 		return "personal/fileupload";
 	}
 	
 	@GetMapping("fileupload2")
 	public String test2() {
-		for(Map<String, Object> data:boardService.selectBoardByUserId("test01")) {
-			System.out.println("-----------------------------------------------------");
-			System.out.println(data.get("board"));
-			System.out.println(data.get("files"));
-		}
 		return "personal/fileupload2";
 	}
 	
