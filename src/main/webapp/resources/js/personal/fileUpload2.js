@@ -85,6 +85,9 @@ let submitBtn = () => {
 		console.dir(document.querySelector('form'));
 		document.querySelector('form').submit();	
 	}
+	window.opener.location.reload();
+
 }
+
 
 init();

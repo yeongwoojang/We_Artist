@@ -1,4 +1,5 @@
-let conn = new WebSocket('wss://3.19.138.148:8443/socket'); // 해당 주소로 소켓을 연다
+//let conn = new WebSocket('wss:/3.19.138.148:8443/socket'); // 해당 주소로 소켓을 연다
+let conn = new WebSocket('wss:/localhost:8443/socket'); // 해당 주소로 소켓을 연다
 
 let peerConnection, dataChannel; // 연결채널, 데이터 전송을 위한 채널을 연다
 let input = document.getElementById("messageInput"); // 채팅 입력받을 곳
@@ -60,14 +61,14 @@ let initialize = () => {
 				"url" : 'stun:stun2.1.google.com:19302'
 			},
 			{
-		    	url: 'turn:192.158.29.39:3478?transport=udp',
-				credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-				username: '28224511:1379330808'
+		    	url: 'turn:3.19.138.148:3478?transport=udp',
+				credential: 'sunmin',
+				username: 'sunmin'
 		    },
 		    {
-		      	url: 'turn:192.158.29.39:3478?transport=tcp',
-				credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-				username: '28224511:1379330808'
+		      	url: 'turn:3.19.138.148:3478?transport=tcp',
+				credential: 'sunmin',
+				username: 'sunmin'
 		    }
 		]
 	};

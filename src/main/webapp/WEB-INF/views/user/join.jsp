@@ -80,9 +80,9 @@
             <div class="text-center"><button type="submit">Submit</button></div>
           </form>
         </div>
-		<a class="nav-link scrollto fs-5" href="${context}/user/test" onclick="window.open(this.href, '_blank', 'width=500, height=400'); return false;" style="font-family: 'Open Sans', sans-serif;">test</a>
       </div>
     </section>
+    <%@include file ="/WEB-INF/views/include/footer.jsp" %>
 <script src="${context}/resources/js/user/join.js"></script>
 </body>
 </html>

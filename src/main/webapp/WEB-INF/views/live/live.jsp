@@ -6,8 +6,8 @@
 	<div class="container mx-auto">
 		<div class="d-flex card w-80 position-absolute top-30 start-50 translate-middle" style="top: 40%">
 			<div class="card-header d-flex justify-content-between">
-				<div class="align-self-center">
-					유저 아이디 넣을까
+				<div class="align-self-center" id="hostUserId">
+					${liveHostUserId}
 				</div>
 				<div class="flex-inline justify-content-end">
 					<div class="btn btn-danger btn-sm" id="btn-close" onclick="history.back()">

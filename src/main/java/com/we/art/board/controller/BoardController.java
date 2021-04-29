@@ -39,7 +39,7 @@ public class BoardController {
 		this.communicationService = communicationService;
 	}
 	
-    @PostMapping("/sibal")
+	@PostMapping("/sibal")
 	public String uploadBorad(@RequestParam List<MultipartFile> files, Board board,
 			Model model) {
 		User user = (User)model.getAttribute("userInfo");
@@ -50,7 +50,7 @@ public class BoardController {
 		board.setUserId(userId);
 		
 		boardService.insertBoard(board, files);
-        return "redirect:/fileupload";
+		return "redirect:fileupload2";
 	}
     
     @GetMapping("/sibal")
@@ -66,6 +66,16 @@ public class BoardController {
 			System.out.println(data.get("files"));
 		}
 		return "personal/fileupload";
+	}
+	
+	@GetMapping("fileupload2")
+	public String test2() {
+		for(Map<String, Object> data:boardService.selectBoardByUserId("test01")) {
+			System.out.println("-----------------------------------------------------");
+			System.out.println(data.get("board"));
+			System.out.println(data.get("files"));
+		}
+		return "personal/fileupload2";
 	}
 	
 	@GetMapping("fetchselectedboard")

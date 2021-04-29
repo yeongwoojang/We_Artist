@@ -6,14 +6,50 @@
       <div class="container">
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
+          <div class="col-lg-2 col-md-6 footer-contact">
+            <h4>Kim J.H</h4>            
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br>
-              <strong>Phone:</strong> +82 314 55488 55<br>
-              <strong>Email:</strong> w____A@artist.we<br>
+              Profile Page <br>
+              Join Page <br>
+              Login Css <br>
+              FilUplad Css <br>
+            </p>
+          </div>
+          
+          <div class="col-lg-2 col-md-6 footer-contact">
+            <h4>Jang Y.U</h4>
+            <p>
+              Chatting <br>
+              Direct Message<br>
+              PopUp<br>
+              Personal Page<br>
+              WebSocket STOMP<br>
+            </p>
+          </div>
+          
+          <div class="col-lg-2 col-md-6 footer-contact">
+            <h4>Kim S.M</h4>
+            <p>
+              Gallery Page<br>
+              Live Page<br>
+              FileUpload Page<br>
+              Three.Js <br>
+              AWS WebRtc WebSocket<br>
+            </p>
+          </div>
+                    
+          <div class="col-lg-2 col-md-2 footer-contact">
+            <h4>Kim J.Y</h4>
+            <p>
+              Login <br>
+              Index <br>
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-2 footer-contact">
+            <h4>Kim D.C</h4>
+            <p>
+             	<br>
+              	<br>
             </p>
           </div>
 

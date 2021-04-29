@@ -43,6 +43,10 @@
 	 	display:none;
 	 	}
 	 }
+	 
+	 .btn-per{
+	 	width:101px;
+	 }
   </style>
 </head>
 <body id="body">
@@ -56,34 +60,37 @@
           <div class="details">
           	<div class="d-flex align-items-center flex-column">
           		<div class="mb-3">
-	             	<p id="user" class="fs-4 text-center fw-bold my-0"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 700;">${personalUserInfo.nickName}</p>	
+	             	<mark id="user" class="fs-4 text-center fw-bold my-0"style= "font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 700;">${personalUserInfo.nickName}</mark>	
           		</div>
+          		<div id="detail_info"class="d-flex justify-content-center m-3">
+            	<div class="d-flex mr-1"><p class="text-lg" style="font-weight:bolder;">게시물&nbsp; </p><p class="text-lg">${personalBoardInfoList.size()}</p></div>
+            	<div class="d-flex mx-3"><p class="text-lg" style="cursor: pointer; font-weight:bolder;" onclick="fetchFollowingList();">팔로잉&nbsp; </p><p id="following_count"class="text-lg">${followingCount}</p></div>
+            	<div class="d-flex ml-1"><p class="text-lg" style="cursor: pointer; font-weight:bolder;" onclick="fetchFollowerList();">팔로워&nbsp; </p><p id="follower_count"class="text-lg">${followerCount}</p></div>
+            </div>
           		<div id="option"class="d-flex align-items-center">
              	 <c:choose>
           			<c:when test="${pageState eq 'isMine'}">
-          			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="modifyProfile()" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">프로필 설정</button>
-          			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/live/host'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">Live</button>
-          			<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/fileupload'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">사진 올리기</button>
+          			<button type="button" class="btn btn-dark btn-sm text-lg mx-3 btn-per" onclick="modifyProfile()" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">프로필 설정</button>
+          			<button type="button" class="btn btn-dark btn-sm text-lg mx-3 btn-per" onclick="location.href='/live/host'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">Live</button>
+          			<!-- 밑에 팝업으로 바꿔봄 -->
+          			<!-- <button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/fileupload'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">사진 올리기</button> -->
+          			<button type="button" class="btn btn-dark btn-sm text-lg mx-3 btn-per" onclick="window.open('/fileupload2', '_blank', 'width=578, height=700, left=550, top=100'); return false;" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">사진 올리기</button>
           			</c:when>
           			<c:when test="${pageState eq 'isFollowed'}">
-          				<button  type="button" id="btn_about_following" onclick="unfollowing()"class="btn btn-primary btn-sm mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight:400;">팔로우 끊기</button>
-          				<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="sendDirectMessage();" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">메세지 보내기</button>
+          				<button  type="button" id="btn_about_following" onclick="unfollowing()"class="btn btn-dark btn-sm mx-3 btn-per" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight:400;">팔로우 끊기</button>
+          				<button type="button" class="btn btn-dark btn-sm text-lg mx-3 btn-per" onclick="sendDirectMessage();" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">메세지 보내기</button>
           			</c:when>
           			<c:when test="${pageState eq 'nothing'}">
-          				<button type="button" id="btn_about_following" onclick="following()" class="btn btn-primary mx-3" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">팔로우</button>
-          				<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="sendDirectMessage();" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; ">메세지 보내기</button>
+          				<button type="button" id="btn_about_following" onclick="following()" class="btn btn-dark mx-3 btn-per" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; width:120px; height:40px;">팔로우</button>
+          				<button type="button" class="btn btn-dark btn-sm text-lg mx-3 btn-per" onclick="sendDirectMessage();" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400; ">메세지 보내기</button>
          		 	</c:when>
          		 </c:choose>
          		 
-         		 	<button type="button" class="btn btn-primary btn-sm text-lg mx-3" onclick="location.href='/gallery/${personalUserInfo.userId}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">갤러리</button>
+         		 	<button type="button" class="btn btn-dark btn-sm text-lg mx-3 btn-per" onclick="location.href='/gallery/${personalUserInfo.userId}'" style="font-family: 'Nanum Gothic', sans-serif;font-style:normal;font-weight: 400;">갤러리</button>
          		 </div>
          		 
              </div>
-            <div id="detail_info"class="d-flex justify-content-center m-3">
-            	<div class="d-flex mr-1"><p class="text-lg">게시물</p><p class="text-lg">${personalBoardInfoList.size()}</p></div>
-            	<div class="d-flex mx-3"><p class="text-lg" style="cursor: pointer;" onclick="fetchFollowingList();">팔로잉</p><p id="following_count"class="text-lg">${followingCount}</p></div>
-            	<div class="d-flex ml-1"><p class="text-lg" style="cursor: pointer;" onclick="fetchFollowerList();">팔로워</p><p id="follower_count"class="text-lg">${followerCount}</p></div>
-            </div>
+            
       	</div>
             
       </div>
