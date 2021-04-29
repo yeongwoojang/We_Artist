@@ -3,7 +3,7 @@
 		 let userId = document.getElementById("userId");
 		 let password = document.getElementById("password");
 	      if(userId.value){
-	         fetch("/user/pwcheck?userId=" + userId.value +"&password=" + password.value,{
+	         fetch("/user/pwchecked?userId=" + userId.value +"&password=" + password.value,{
 	            method:"GET"
 	         })
 	         .then(response => response.text())
