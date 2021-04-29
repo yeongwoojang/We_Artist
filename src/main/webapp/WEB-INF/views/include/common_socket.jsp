@@ -222,7 +222,6 @@ function connectPushSocket(){
 				});		
 			//</우측 하단 토스트를 띄워주기 위한 부분>
 //	 			createNewRoom(fromId,toId);
-				
 //	 			fetchNotiCount();
 				let notiBox = document.getElementById("noti_box");
 				let listGroup = document.getElementById("list_group");
